@@ -3,29 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-html,
-body {
-  min-height: 100vh;
-  padding: 0;
-  margin: 0;
-  font-family: system-ui, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -139,5 +116,21 @@ a {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .gradient-background {
+    background:
+      radial-gradient(50% 50% at 50% 50%, rgba(0, 153, 255, 0) 0%, rgba(59, 0, 87, 0.2) 100%),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.57) 0%, rgba(0, 0, 0, 0.57) 100%),
+      linear-gradient(65deg, rgba(43, 17, 91, 0.2) 13.72%, #2b1168 85.45%),
+      linear-gradient(
+        135deg,
+        rgba(56, 93, 128, 0.62) 64.35%,
+        rgba(140, 96, 170, 0.62) 73.99%,
+        rgba(109, 58, 106, 0.62) 81.22%
+      ),
+      linear-gradient(342deg, #6800cb 30.09%, #2b1369 75.85%);
   }
 }
