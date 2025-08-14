@@ -11,8 +11,8 @@ import {
   selectCount,
   selectStatus,
 } from "@/src/redux/features/counter/counterSlice";
-
 import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
+
 import styles from "./Counter.module.css";
 import { Button } from "../ui/button";
 

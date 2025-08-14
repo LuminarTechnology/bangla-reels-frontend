@@ -1,7 +1,9 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
+
 import { StoreProvider } from "./StoreProvider";
 import { Nav } from "../components/Nav";
+
 import "@/src/styles/globals.css";
 import styles from "@/src/styles/layout.module.css";
 
@@ -18,13 +20,7 @@ export default function RootLayout({ children }: Props) {
             <Nav />
 
             <header className={styles.header}>
-              <Image
-                src="/logo.svg"
-                className={styles.logo}
-                alt="logo"
-                width={100}
-                height={100}
-              />
+              <Image src="/logo.svg" className={styles.logo} alt="logo" width={100} height={100} />
             </header>
 
             <main className={styles.main}>{children}</main>
