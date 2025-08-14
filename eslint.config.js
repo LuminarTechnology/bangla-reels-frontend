@@ -94,6 +94,7 @@ export default [
       "@next/next/no-img-element": "off",
       "prettier/prettier": "off",
       "import/order": "off",
+      "@typescript-eslint/no-unused-vars": "off",
     },
   },
 ];
