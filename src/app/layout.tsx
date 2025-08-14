@@ -10,7 +10,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <StoreProvider>
       <html lang="en">
-        <body>{children}</body>
+        <body className="gradient-background min-h-screen">{children}</body>
       </html>
     </StoreProvider>
   );
