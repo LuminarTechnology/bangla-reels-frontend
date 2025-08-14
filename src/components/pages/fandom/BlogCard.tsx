@@ -22,7 +22,7 @@ const BlogCard = ({
   className,
 }: BlogCardProps) => {
     return (
-      <Card className={cn("w-full max-w-sm overflow-hidden  border-0 bg-[#0B0000]", className)}>
+      <Card className={cn("w-full max-w-sm overflow-hidden p-0 border-0 bg-[#0B0000]", className)}>
       {/* Image Section with Overlay */}
       <div className="relative aspect-square overflow-hidden rounded-t-xl">
         <Image src={backgroundImage} fill alt={title} className="h-full w-full object-center" />
