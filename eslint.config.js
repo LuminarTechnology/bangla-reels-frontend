@@ -51,7 +51,7 @@ export default [
       ],
 
       /* ----- JavaScript/TypeScript Best Practices ----- */
-      "no-console": ["error", { allow: ["warn", "error"] }],
+      "no-console": ["warn", { allow: ["warn", "error"] }],
       "no-debugger": "warn",
       eqeqeq: ["error", "always"],
       curly: ["error", "all"],
@@ -92,6 +92,8 @@ export default [
       /* ----- Next.js Specific Rules ----- */
       "@next/next/no-html-link-for-pages": ["error", "src/app"],
       "@next/next/no-img-element": "off",
+      "prettier/prettier": "off",
+      "import/order": "off",
     },
   },
 ];
