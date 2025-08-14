@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
 import Navbar from "@/src/components/shared/Navbar";
+import React, { ReactNode } from "react";
 
 interface Props {
   readonly children: ReactNode;

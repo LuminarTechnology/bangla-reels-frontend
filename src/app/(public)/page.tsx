@@ -1,4 +1,3 @@
-import { Counter } from "@/src/components/counter/Counter";
 import ContainerWrapper from "@/src/components/shared/ContainerWrapper";
 import Navbar from "@/src/components/shared/Navbar";
 import React from "react";
