@@ -10,10 +10,11 @@ import {
   incrementIfOdd,
   selectCount,
   selectStatus,
-} from "@/lib/features/counter/counterSlice";
+} from "@/src/redux/features/counter/counterSlice";
+import { useAppDispatch, useAppSelector } from "@/src/redux/hooks";
 
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import styles from "./Counter.module.css";
+import { Button } from "../ui/button";
 
 export const Counter = () => {
   const dispatch = useAppDispatch();
@@ -26,23 +27,23 @@ export const Counter = () => {
   return (
     <div>
       <div className={styles.row}>
-        <button
+        <Button
           className={styles.button}
           aria-label="Decrement value"
           onClick={() => dispatch(decrement())}
         >
           -
-        </button>
+        </Button>
         <span aria-label="Count" className={styles.value}>
           {count}
         </span>
-        <button
+        <Button
           className={styles.button}
           aria-label="Increment value"
           onClick={() => dispatch(increment())}
         >
           +
-        </button>
+        </Button>
       </div>
       <div className={styles.row}>
         <input
@@ -54,27 +55,27 @@ export const Counter = () => {
             setIncrementAmount(e.target.value);
           }}
         />
-        <button
+        <Button
           className={styles.button}
           onClick={() => dispatch(incrementByAmount(incrementValue))}
         >
           Add Amount
-        </button>
-        <button
+        </Button>
+        <Button
           className={styles.asyncButton}
           disabled={status !== "idle"}
           onClick={() => dispatch(incrementAsync(incrementValue))}
         >
           Add Async
-        </button>
-        <button
+        </Button>
+        <Button
           className={styles.button}
           onClick={() => {
             dispatch(incrementIfOdd(incrementValue));
           }}
         >
           Add If Odd
-        </button>
+        </Button>
       </div>
     </div>
   );
