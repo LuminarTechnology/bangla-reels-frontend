@@ -3,5 +3,5 @@ import Navbar from "@/src/components/common/Navbar";
 import React from "react";
 
 export default function HomePage() {
-  return <div>banner</div>;
+  return <div className="min-h-screen">banner</div>;
 }

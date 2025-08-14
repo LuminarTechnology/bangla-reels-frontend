@@ -1,3 +1,4 @@
+import Footer from "@/src/components/common/Footer";
 import Navbar from "@/src/components/common/Navbar";
 import React, { ReactNode } from "react";
 
@@ -10,6 +11,7 @@ export default function UserLayout({ children }: Props) {
     <div>
       <Navbar />
       <main>{children}</main>
+      <Footer />
     </div>
   );
 }

@@ -44,7 +44,7 @@ const Navbar = () => {
                 href={item.href}
                 className={cn(
                   "text-base font-medium duration-200",
-                  pathname === item.href ? "text-[#E83A57]" : "text-white"
+                  pathname === item.href ? "text-primary-rose" : "text-white"
                 )}
               >
                 {item.name}
@@ -64,7 +64,7 @@ const Navbar = () => {
             </Button>
 
             {/* Language Dropdown - Hidden on mobile */}
-            <div className="hidden sm:block">
+            <div className="hidden lg:block">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -92,7 +92,7 @@ const Navbar = () => {
             {/* History - Hidden on mobile */}
             <Button
               variant="ghost"
-              className="hidden sm:flex text-white hover:text-gray-100 hover:bg-transparent"
+              className="hidden lg:flex text-white hover:text-gray-100 hover:bg-transparent"
             >
               <History className="h-4 w-4" />
               History
@@ -106,7 +106,7 @@ const Navbar = () => {
                   className="text-white hover:text-gray-100 hover:bg-transparent"
                 >
                   <User className="h-4 w-4" />
-                  <span className="hidden sm:inline">User</span>
+                  <span className="hidden lg:inline">User</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-transparent">
@@ -123,7 +123,7 @@ const Navbar = () => {
             </DropdownMenu>
 
             {/* Mobile Menu */}
-            <div className="md:hidden">
+            <div className="lg:hidden">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="text-white">
