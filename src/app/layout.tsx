@@ -6,6 +6,7 @@ interface Props {
   readonly children: ReactNode;
 }
 
+
 export default function RootLayout({ children }: Props) {
   return (
     <StoreProvider>
