@@ -4,8 +4,8 @@ import React from "react";
 
 export default function HomePage() {
   return (
-    <div className="bg-[#1D1D1F] p-12">
-      <div className="grid xl:grid-cols-4 gap-5 my-10">
+    <div className="container mx-auto p-12">
+      <div className="grid xl:grid-cols-4 gap-5 my-10 items-center justify-between">
         {[1, 2, 3, 4].map((_, i) => (
           <BlogCard
             key={i}
@@ -19,7 +19,7 @@ export default function HomePage() {
         ))}
       </div>
 
-      <div className="grid xl:grid-cols-6 gap-1 my-10">
+      <div className="grid xl:grid-cols-6 gap-5 my-10 items-center mx-auto justify-center">
         {[1, 2, 3, 4, 5, 6].map((_, i) => (
           <PosterCard
             key={i}
