@@ -1,4 +1,4 @@
-import Navbar from "@/src/components/shared/Navbar";
+import Navbar from "@/src/components/common/Navbar";
 import React, { ReactNode } from "react";
 
 interface Props {

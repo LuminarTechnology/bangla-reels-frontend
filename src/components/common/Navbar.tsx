@@ -11,8 +11,12 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { cn } from "@/src/lib/utils";
 
 const Navbar = () => {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
@@ -25,23 +29,26 @@ const Navbar = () => {
 
   return (
     <ContainerWrapper>
-      <nav className="bg-slate-900 text-white border-b border-slate-800">
+      <nav className="">
         <div className="flex items-center justify-between h-16 px-4">
           {/* Logo */}
           <div className="flex items-center">
-            <h1 className="text-xl font-bold">ReelShort</h1>
+            <h1 className="text-2xl font-bold text-white">ReelShort</h1>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
                 href={item.href}
-                className="text-gray-300 hover:text-white transition-colors duration-200"
+                className={cn(
+                  "text-base font-medium duration-200",
+                  pathname === item.href ? "text-[#E83A57]" : "text-white"
+                )}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -51,7 +58,7 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="text-gray-300 hover:text-white hover:bg-slate-800"
+              className="text-gray-300 hover:text-white hover:bg-transparent"
             >
               <Search className="h-5 w-5" />
             </Button>
@@ -62,20 +69,20 @@ const Navbar = () => {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
-                    className="text-gray-300 hover:text-white hover:bg-slate-800"
+                    className="text-white hover:text-gray-100 hover:bg-transparent"
                   >
-                    <Globe className="h-4 w-4 mr-2" />
+                    <Globe className="h-4 w-4" />
                     English
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-slate-800 border-slate-700">
-                  <DropdownMenuItem className="text-white hover:bg-slate-700">
+                <DropdownMenuContent className="bg-transparent">
+                  <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
                     English
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="text-white hover:bg-slate-700">
+                  <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
                     Spanish
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="text-white hover:bg-slate-700">
+                  <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
                     French
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -85,9 +92,9 @@ const Navbar = () => {
             {/* History - Hidden on mobile */}
             <Button
               variant="ghost"
-              className="hidden sm:flex text-gray-300 hover:text-white hover:bg-slate-800"
+              className="hidden sm:flex text-white hover:text-gray-100 hover:bg-transparent"
             >
-              <History className="h-4 w-4 mr-2" />
+              <History className="h-4 w-4" />
               History
             </Button>
 
@@ -96,20 +103,20 @@ const Navbar = () => {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="text-gray-300 hover:text-white hover:bg-slate-800"
+                  className="text-white hover:text-gray-100 hover:bg-transparent"
                 >
-                  <User className="h-4 w-4 mr-2" />
-                  <span className="hidden sm:inline">Siyam</span>
+                  <User className="h-4 w-4" />
+                  <span className="hidden sm:inline">User</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-slate-800 border-slate-700">
-                <DropdownMenuItem className="text-white hover:bg-slate-700">
+              <DropdownMenuContent className="bg-transparent">
+                <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
                   Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-white hover:bg-slate-700">
+                <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
                   Settings
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-white hover:bg-slate-700">
+                <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
                   Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -119,38 +126,49 @@ const Navbar = () => {
             <div className="md:hidden">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="text-gray-300 hover:text-white hover:bg-slate-800"
-                  >
-                    <Menu className="h-5 w-5" />
+                  <Button variant="ghost" size="icon" className="text-white">
+                    <Menu className="h-6 w-6" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="bg-slate-900 border-slate-800">
+                <SheetContent
+                  side="right"
+                  className="bg-black/20 backdrop-blur-md border-l border-white/20"
+                >
                   <div className="flex flex-col space-y-4 mt-8">
                     {navItems.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         href={item.href}
-                        className="text-gray-300 hover:text-white transition-colors duration-200 py-2"
+                        className="text-white px-4 transition-colors duration-200 py-3 border-b border-gray-900 rounded-xl"
                         onClick={() => setIsOpen(false)}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                     <div className="border-t border-slate-800 pt-4">
-                      <Button
-                        variant="ghost"
-                        className="w-full justify-start text-gray-300 hover:text-white hover:bg-slate-800"
-                      >
-                        <Globe className="h-4 w-4 mr-2" />
-                        English
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        className="w-full justify-start text-gray-300 hover:text-white hover:bg-slate-800"
-                      >
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className="text-white hover:text-gray-100 hover:bg-transparent"
+                          >
+                            <Globe className="h-4 w-4" />
+                            English
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="bg-black/20 backdrop-blur-lg">
+                          <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                            English
+                          </DropdownMenuItem>
+                          <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                            Spanish
+                          </DropdownMenuItem>
+                          <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                            French
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                      <Button variant="ghost" className="w-full justify-start text-white">
                         <History className="h-4 w-4 mr-2" />
                         History
                       </Button>
