@@ -1,10 +1,13 @@
+import ContainerWrapper from "@/src/components/common/ContainerWrapper";
 import { PosterCard } from "@/src/components/common/PosterCard";
 import BlogCard from "@/src/components/pages/fandom/BlogCard";
+import Banner from "@/src/components/pages/home/banner";
 import React from "react";
 
 export default function HomePage() {
   return (
-    <div className="container mx-auto p-12">
+    <div>
+      <Banner />
       <div className="grid xl:grid-cols-4 gap-5 my-10 items-center justify-between">
         {[1, 2, 3, 4].map((_, i) => (
           <BlogCard
