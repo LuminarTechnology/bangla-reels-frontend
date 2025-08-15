@@ -1,27 +1,115 @@
-# Redux Toolkit TypeScript Example
+# Bangla Reel-Short Frontend
 
-This example shows how to integrate Next.js with [Redux Toolkit](https://redux-toolkit.js.org).
+## File Structures
+my-next-app/
+│
+├──📁 public/                      # Static assets served directly
+│ ├── images/                      # PNG, JPG, SVG assets
+│ ├── icons/                       # Favicons, app icons
+│ └── locales/                     # i18next translation files
+│ ├── en/
+│ └── bn/
+│
+├──📁src/                         # Main application source code
+│ ├──📁 app/                      # App Router
+│ │ ├── (public)/                  # Public-facing pages
+│ │ │ ├── layout.tsx
+│ │ │ └── page.tsx
+│ │ │
+│ │ ├── (contester)/               # Contester role pages
+│ │ │ ├── layout.tsx
+│ │ │ └── page.tsx
+│ │ │
+│ │ ├── (super-admin)/             # Super admin role pages
+│ │ │ ├── layout.tsx
+│ │ │ └── page.tsx
+│ │ │
+│ │ ├── dashboard/                 # Authenticated dashboard pages
+│ │ │ ├── layout.tsx
+│ │ │ └── page.tsx
+│ │ │
+│ │ ├──📁 api/                       # Next.js serverless API routes
+│ │ │ ├── auth/
+│ │ │ │ ├── login/route.ts
+│ │ │ │ └── register/route.ts
+│ │ │ ├── video/
+│ │ │ │ ├── route.ts
+│ │ │ │ └── [id]/route.ts
+│ │ │ └── health/route.ts
+│ │ │
+│ │ ├── layout.tsx                  # Global app layout
+│ │ ├── page.tsx                    # Root landing page
+│ │ ├── not-found.tsx               # 404 page
+│ │ └── StoreProvider.tsx           # Redux Provider wrapper
+│
+│ ├──📁 components/                 # Reusable UI components
+│ │ ├── ui/                         # shadcn/ui components
+│ │ ├── forms/                      # Form components (react-hook-form)
+│ │ ├── charts/                     # Chart.js / Recharts wrappers
+│ │ ├── animations/                 # Framer Motion animations
+│ │ ├── video/                      # MUX Player / video.js
+│ │ ├── icons/                      # lucide-react icon wrappers
+│ │ └── common/                     # Modals, navbars, buttons, etc.
+│ │ └── pages/                      # page-specific components.
+│
+│ ├──📁 redux/                      # Centralized Redux store
+│ │ ├── features/                   # Slices & RTK Query APIs
+│ │ │ ├── auth/
+│ │ │ │ ├── authAPI.ts
+│ │ │ │ └── authSlice.ts
+│ │ │ ├── video/
+│ │ │ │ ├── videoAPI.ts
+│ │ │ │ └── videoSlice.ts
+│ │ │ 
+│ │ ├── createAppSlice.ts            # Slice factory helper
+│ │ ├── hooks.ts                     # useAppDispatch, useAppSelector
+│ │ └── store.ts                     # Redux store setup
+│
+│ ├──📁 hooks/                       # Global reusable hooks
+│ │ ├── useAuth.ts
+│ │ ├── useLocale.ts
+│ │ └── useDebounce.ts
+│
+│ ├──📁 lib/                         # Config & third-party setup
+│ │ ├── axiosClient.ts
+│ │ ├── i18n.ts
+│ │ ├── date.ts
+│ │ ├── constants.ts
+│ │ └── utils.ts
+│
+│ ├──📁 services/                       # Non-Redux API functions
+│ │ ├── authService.ts
+│ │ ├── videoService.ts
+│ │ └── dashboardService.ts
+│
+│ ├──📁 styles/                         # Styling
+│ │ ├── globals.css
+│ │ └── tailwind.css
+│
+│ ├──📁 types/                          # TypeScript definitions
+│ │ ├── auth.d.ts
+│ │ ├── video.d.ts
+│ │ └── index.d.ts
+│
+│ ├──📁 utils/                          # Pure helper functions
+│ │ ├── dateUtils.ts
+│ │ ├── stringUtils.ts
+│ │ ├── numberUtils.ts
+│ │ └── constants.ts
+│
+│ └── middleware.ts                      # Auth guards, redirects, etc.
+│
+├── .env
+├── .eslintrc.json
+├── .prettierrc
+├── next.config.js
+├── postcss.config.js
+├── tailwind.config.js
+├── tsconfig.json
+└── package.json
 
-**Redux Toolkit**(also known as "RTK" for short) provides a standardized way to write Redux logic. It includes utilities that help simplify many common use cases, including [store setup](https://redux-toolkit.js.org/api/configureStore), [creating reducers and writing immutable update logic](https://redux-toolkit.js.org/api/createreducer), and even [creating entire "slices" of state at once](https://redux-toolkit.js.org/api/createslice). This example showcases each of these features in conjunction with Next.js.
+## Development Process Instructions
 
-## Deploy Your Own
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-redux&project-name=with-redux&repository-name=with-redux)
-
-## How to Use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-redux with-redux-app
-```
-
-```bash
-yarn create next-app --example with-redux with-redux-app
-```
-
-```bash
-pnpm create next-app --example with-redux with-redux-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+1. Before starting work, pull the latest changes from the dev-mode branch.
+2. Once your work is complete, create a Pull Request (PR) to the dev-mode branch.
+3. After testing is complete, the changes will be merged into the main branch.
