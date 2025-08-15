@@ -1,4 +1,11 @@
 # Bangla Reel-Short Frontend
+ReelShort is a short-form HD video streaming platform for vertical dramas.
+
+## Development Process Instructions
+
+1. Before starting work, pull the latest changes from the dev-mode branch.
+2. Once your work is complete, create a Pull Request (PR) to the dev-mode branch.
+3. After testing is complete, the changes will be merged into the main branch.
 
 ## File Structures
 ```
@@ -108,9 +115,5 @@ my-next-app/
 ├── tailwind.config.js
 ├── tsconfig.json
 └── package.json
-```
-## Development Process Instructions
 
-1. Before starting work, pull the latest changes from the dev-mode branch.
-2. Once your work is complete, create a Pull Request (PR) to the dev-mode branch.
-3. After testing is complete, the changes will be merged into the main branch.
+```
