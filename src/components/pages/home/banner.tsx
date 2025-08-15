@@ -69,15 +69,15 @@ const Banner: React.FC = () => {
 
   return (
     <div className="relative h-[550px] overflow-hidden bg-gray-900">
-      <div className="absolute inset-0 transition-all duration-700 ease-in-out">
+      <div className="absolute inset-0 transition-all duration-700 ease-in-out ">
         <Image
           src={movies[currentSlide].image}
           alt={movies[currentSlide].title}
           fill
           priority
-          className="object-cover"
+          className="object-cover rounded-lg"
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/20 " />
       </div>
 
       {/* Main Content */}
