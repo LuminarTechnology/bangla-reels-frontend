@@ -1,6 +1,7 @@
 # Bangla Reel-Short Frontend
 
 ## File Structures
+```
 my-next-app/
 │
 ├──📁 public/                      # Static assets served directly
@@ -107,7 +108,7 @@ my-next-app/
 ├── tailwind.config.js
 ├── tsconfig.json
 └── package.json
-
+```
 ## Development Process Instructions
 
 1. Before starting work, pull the latest changes from the dev-mode branch.
