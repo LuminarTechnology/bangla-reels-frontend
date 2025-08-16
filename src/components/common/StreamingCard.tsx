@@ -21,7 +21,7 @@ export function StreamingCard({ title, description, genres, type, imageUrl }: St
           alt={title}
           width={165}
           height={362}
-          className="w-full h-[362px] object-cover rounded-2xl"
+          className="w-full h-[362px] object-cover rounded-[8px]"
         />
         {/* Type Badge - positioned over image */}
         <Badge

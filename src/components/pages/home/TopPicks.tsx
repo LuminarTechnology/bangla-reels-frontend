@@ -5,7 +5,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "../../ui/carousel";
 import { Button } from "../../ui/button";
-import Image from "next/image";
 import { cn } from "@/src/lib/utils";
 import { PosterCard } from "../../common/PosterCard";
 
@@ -72,7 +71,11 @@ const topPicksData = [
   },
 ];
 
-export function TopPicksSlider() {
+type MovieSectionProps = {
+  sectionTitle?: string;
+};
+
+export function TopPicksSlider({ sectionTitle = "Top Picks" }: MovieSectionProps) {
   const [api, setApi] = useState<CarouselApi>();
   const autoplayPlugin = Autoplay({
     delay: 3000,
@@ -93,10 +96,10 @@ export function TopPicksSlider() {
   }, [api, autoplayPlugin]);
 
   return (
-    <div className="py-12">
+    <div className="my-12">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
-        <h2 className="text-2xl font-bold text-white">Top Picks</h2>
+        <h2 className="text-2xl font-bold text-white">{sectionTitle}</h2>
         <div className="flex items-center gap-4">
           {/* Navigation Arrows */}
           <div className="flex items-center gap-2">

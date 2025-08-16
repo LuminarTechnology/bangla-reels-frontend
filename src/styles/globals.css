@@ -144,3 +144,20 @@
       linear-gradient(342deg, #2b1369 30.44%, #6800cb 76.2%);
   }
 }
+
+.animate-fadeIn {
+  animation: fadeIn 0.7s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

@@ -93,21 +93,21 @@ const Banner: React.FC = () => {
             </h2>
           )}
 
-        <div className="flex items-center space-x-3 sm:space-x-5">
+          <div className="flex items-center space-x-3 sm:space-x-5">
             <Button size="circular" variant="danger" className="flex items-center space-x-3">
-            
               <Play size={18} className="group-hover:scale-110 transition-transform" />
-         
-          </Button> 
-          <div className="text-white text-2xl ">Watch Now</div>
-        </div>
+            </Button>
+            <div className="text-white text-2xl ">Watch Now</div>
+          </div>
         </div>
       </div>
 
       {/* Thumbnails */}
       <div className="absolute bottom-4 sm:bottom-10 w-full flex justify-center sm:justify-end items-center space-x-2 sm:space-x-3 z-20 px-2 sm:px-4">
         {/* Prev */}
-        <Button variant={"navigation"} size={"circular-sm"}
+        <Button
+          variant={"navigation"}
+          size={"circular-sm"}
           onClick={prevSlide}
           className="transition-colors hover:bg-white/70"
         >
@@ -146,32 +146,15 @@ const Banner: React.FC = () => {
         </div>
 
         {/* Next */}
-        <Button variant={"navigation"} size={"circular-sm"}
+        <Button
+          variant={"navigation"}
+          size={"circular-sm"}
           onClick={nextSlide}
           className=" transition-colors hover:bg-white/70"
         >
           <ChevronRight size={18} />
         </Button>
       </div>
-
-      <style jsx>{`
-        .animate-fadeIn {
-          animation: fadeIn 0.7s ease-in-out;
-        }
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </div>
   );
 };

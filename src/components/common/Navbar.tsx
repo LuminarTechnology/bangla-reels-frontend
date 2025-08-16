@@ -139,13 +139,13 @@ const Navbar = () => {
                       <Link
                         key={item.name}
                         href={item.href}
-                        className="text-white px-4 transition-colors duration-200 py-3 border-b border-gray-900 rounded-xl"
+                        className="text-white px-4 transition-colors duration-200 border-b border-gray-900 rounded-xl"
                         onClick={() => setIsOpen(false)}
                       >
                         {item.name}
                       </Link>
                     ))}
-                    <div className="border-t border-slate-800 pt-4">
+                    <div className="border-t border-slate-800">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button

@@ -3,11 +3,12 @@ import { StreamingCard } from "../../common/StreamingCard";
 
 const NewRelease = () => {
   return (
-    <div>
+    <div className="my-12">
       <h2 className="text-2xl font-bold text-white">New Releases</h2>
       <div className="grid xl:grid-cols-3 gap-5 my-10 items-center justify-between">
         {[1, 2, 3].map((_, i) => (
           <StreamingCard
+            key={i}
             title="Stranger Things"
             description="Stranger Things takes you to Hawkins, a small town where the strange is normal and secrets run deep. When a young boy goes missing, his friends uncover a hidden world known as the Upside Down. Along the way, they discover that friendship is the real superpower against the darkness. As minds bend and monsters rise, ordinary kids become unexpected heroes."
             genres={["Action", "Horror"]}
