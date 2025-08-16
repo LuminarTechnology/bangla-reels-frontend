@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/src/lib/utils";
+import { Button } from "../../ui/button";
 
 interface Movie {
   id: number;
@@ -92,24 +93,26 @@ const Banner: React.FC = () => {
             </h2>
           )}
 
-          <button className="flex items-center space-x-3 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all group text-sm sm:text-base">
-            <div className="bg-red-500 hover:bg-red-700 p-2 sm:p-3 rounded-full">
+        <div className="flex items-center space-x-3 sm:space-x-5">
+            <Button size="circular" variant="danger" className="flex items-center space-x-3">
+            
               <Play size={18} className="group-hover:scale-110 transition-transform" />
-            </div>
-            <span className="font-medium">Watch Now</span>
-          </button>
+         
+          </Button> 
+          <div className="text-white text-2xl ">Watch Now</div>
+        </div>
         </div>
       </div>
 
       {/* Thumbnails */}
       <div className="absolute bottom-4 sm:bottom-10 w-full flex justify-center sm:justify-end items-center space-x-2 sm:space-x-3 z-20 px-2 sm:px-4">
         {/* Prev */}
-        <button
+        <Button variant={"navigation"} size={"circular-sm"}
           onClick={prevSlide}
-          className="text-white cursor-pointer transition-colors p-1 sm:p-2 rounded-full bg-white/40 hover:bg-white/70"
+          className="transition-colors hover:bg-white/70"
         >
           <ChevronLeft size={18} />
-        </button>
+        </Button>
 
         {/* Thumbs */}
         <div className="flex space-x-2 overflow-x-auto max-w-[500px] sm:max-w-[300px] md:max-w-[400px] scrollbar-hide">
@@ -143,12 +146,12 @@ const Banner: React.FC = () => {
         </div>
 
         {/* Next */}
-        <button
+        <Button variant={"navigation"} size={"circular-sm"}
           onClick={nextSlide}
-          className="text-white cursor-pointer transition-colors p-1 sm:p-2 rounded-full bg-white/40 hover:bg-white/70"
+          className=" transition-colors hover:bg-white/70"
         >
           <ChevronRight size={18} />
-        </button>
+        </Button>
       </div>
 
       <style jsx>{`
