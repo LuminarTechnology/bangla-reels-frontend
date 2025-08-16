@@ -118,7 +118,7 @@ export function TopPicksSlider() {
             </Button>
           </div>
           {/* View All Button */}
-          <Button className="bg-[#E83A57] hover:bg-[#d12847] text-white px-6 py-2 rounded-md font-medium cursor-pointer">
+          <Button className="bg-primary-rose hover:bg-primary-rose-hover text-white px-6 py-2 rounded-md font-medium cursor-pointer">
             VIEW ALL
           </Button>
         </div>

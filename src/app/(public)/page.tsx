@@ -2,14 +2,17 @@ import ContainerWrapper from "@/src/components/common/ContainerWrapper";
 import { PosterCard } from "@/src/components/common/PosterCard";
 import BlogCard from "@/src/components/pages/fandom/BlogCard";
 import Banner from "@/src/components/pages/home/banner";
+import { StreamingCard } from "@/src/components/common/StreamingCard";
 import { TopPicksSlider } from "@/src/components/pages/home/TopPicks";
 import React from "react";
+import NewRelease from "@/src/components/pages/home/NewRelease";
 
 export default function HomePage() {
   return (
     <div>
       <Banner />
       <TopPicksSlider />
+      <NewRelease />
       <div className="grid xl:grid-cols-4 gap-5 my-10 items-center justify-between">
         {[1, 2, 3, 4].map((_, i) => (
           <BlogCard
