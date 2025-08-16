@@ -32,7 +32,7 @@ export function PosterCard({
         />
 
         <div className="absolute top-3 left-3">
-          <span className="bg-[#F3F4F6]/90 backdrop-blur-xl  text-xs font-medium px-2 py-1 rounded-[12px]">
+          <span className="bg-[#F3F4F6]/90 backdrop-blur-xl text-xs font-semibold px-2 py-1 rounded-[12px]">
             {category}
           </span>
         </div>

@@ -1,3 +1,6 @@
+import ContainerWrapper from "@/src/components/common/ContainerWrapper";
+import Footer from "@/src/components/common/Footer";
+import Navbar from "@/src/components/common/Navbar";
 import React, { ReactNode } from "react";
 
 interface Props {
@@ -5,5 +8,11 @@ interface Props {
 }
 
 export default function UserLayout({ children }: Props) {
-  return <main className="container mx-auto px-10">{children}</main>;
+  return (
+    <div>
+      <Navbar />
+      <ContainerWrapper>{children}</ContainerWrapper>
+      <Footer />
+    </div>
+  );
 }
