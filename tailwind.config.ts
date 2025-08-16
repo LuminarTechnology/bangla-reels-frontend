@@ -1,7 +1,7 @@
 import type { Config } from "tailwindcss";
 
 export const siteColors = {
-  primary: "#4F46E5", // Indigo 600
+  primary: "#E83A57", // Indigo 600
   secondary: "#6366F1", // Indigo 500
   accent: "#FBBF24", // Amber 400
   background: "#F9FAFB", // Gray 50
