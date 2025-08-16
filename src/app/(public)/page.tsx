@@ -29,7 +29,7 @@ export default function HomePage() {
           <PosterCard
             key={i}
             title="The Life List"
-            posterImage="https://www.reelshort.com/fandom/wp-content/uploads/2025/08/the-tutor-trap-cast.jpg"
+            posterImage="/images/banner/banner-5.png"
             category="TV SERIES"
           />
         ))}

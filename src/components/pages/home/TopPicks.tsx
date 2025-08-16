@@ -7,6 +7,7 @@ import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "../..
 import { Button } from "../../ui/button";
 import Image from "next/image";
 import { cn } from "@/src/lib/utils";
+import { PosterCard } from "../../common/PosterCard";
 
 const topPicksData = [
   {
@@ -51,18 +52,45 @@ const topPicksData = [
     category: "TV SERIES",
     image: "/images/banner/banner-5.png",
   },
+  {
+    id: 8,
+    title: "Lonely Planet",
+    category: "TV SERIES",
+    image: "/images/banner/banner-5.png",
+  },
+  {
+    id: 9,
+    title: "The Life List",
+    category: "Movie",
+    image: "/images/banner/banner-4.png",
+  },
+  {
+    id: 10,
+    title: "Holiday in the Wild",
+    category: "TV SERIES",
+    image: "/images/banner/banner-5.png",
+  },
 ];
 
 export function TopPicksSlider() {
   const [api, setApi] = useState<CarouselApi>();
+  const autoplayPlugin = Autoplay({
+    delay: 3000,
+    stopOnInteraction: true,
+  });
 
   useEffect(() => {
     if (!api) {
       return;
     }
 
-    // Optional: Add any additional carousel event listeners here
-  }, [api]);
+    // Stop autoplay when reaching the end
+    api.on("select", () => {
+      if (!api.canScrollNext()) {
+        autoplayPlugin.stop();
+      }
+    });
+  }, [api, autoplayPlugin]);
 
   return (
     <div className="py-12">
@@ -101,46 +129,22 @@ export function TopPicksSlider() {
         className="w-full"
         opts={{
           align: "start",
-          loop: true,
+          loop: false,
         }}
-        plugins={[
-          Autoplay({
-            delay: 3000,
-            stopOnInteraction: true,
-          }),
-        ]}
+        plugins={[autoplayPlugin]}
       >
-        <CarouselContent className="flex gap-4 ml-1">
+        <CarouselContent className="flex gap-1.5 ml-1">
           {topPicksData.map((item, idx) => (
             <CarouselItem
               key={item.id}
-              className={cn(
-                "pl-0 basis-[200px] md:basis-[250px] lg:basis-1/6",
-                idx === 0 && "pl-4"
-              )}
+              className={cn("pl-0 basis-[200px] md:basis-[250px] lg:basis-1/6")}
             >
-              <div className="group cursor-pointer">
-                {/* Card Image */}
-                <div className="relative mb-3 rounded-lg overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={300}
-                    height={280}
-                    className="w-full h-[280px] object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {/* Category Badge */}
-                  <div className="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                    {item.category}
-                  </div>
-                  {/* Plus Icon */}
-                  <div className="absolute top-2 right-2 bg-black/70 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">
-                    +
-                  </div>
-                </div>
-                {/* Card Title */}
-                <h3 className="text-white text-sm font-medium line-clamp-2">{item.title}</h3>
-              </div>
+              <PosterCard
+                key={idx}
+                title={item.title}
+                posterImage={item.image}
+                category={item.category}
+              />
             </CarouselItem>
           ))}
         </CarouselContent>
