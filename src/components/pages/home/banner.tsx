@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import Image from "next/image";
-import clsx from "clsx";
+import { cn } from "@/src/lib/utils";
 
 interface Movie {
   id: number;
@@ -46,7 +46,6 @@ const movies: Movie[] = [
 
 const Banner: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
   const thumbnailRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
@@ -68,37 +67,34 @@ const Banner: React.FC = () => {
   };
 
   return (
-    <div className="relative h-[550px] overflow-hidden bg-gray-900">
-      <div className="absolute inset-0 transition-all duration-700 ease-in-out ">
+    <div className="relative h-[350px] sm:h-[420px] md:h-[500px] lg:h-[550px] overflow-hidden bg-gray-900">
+      {/* Background */}
+      <div className="absolute inset-0 transition-all duration-700 ease-in-out">
         <Image
           src={movies[currentSlide].image}
           alt={movies[currentSlide].title}
           fill
           priority
-          className="object-cover rounded-lg"
+          className="object-cover rounded-none lg:rounded-lg"
         />
-        <div className="absolute inset-0 bg-black/20 " />
+        <div className="absolute inset-0 bg-black/30" />
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 h-full flex items-center top-32 px-8 md:px-16">
-        <div className="max-w-md animate-fadeIn">
-          <h1 className="text-white text-4xl md:text-5xl font-bold mb-2">
+      <div className="relative z-10 h-full flex items-center px-4 md:-bottom-10 sm:px-8 md:px-12 lg:px-16">
+        <div className="max-w-xs sm:max-w-md md:max-w-lg animate-fadeIn">
+          <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
             {movies[currentSlide].title}
           </h1>
           {movies[currentSlide].subtitle && (
-            <h2 className="text-white text-3xl md:text-4xl font-light mb-8">
+            <h2 className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mb-6 sm:mb-8">
               {movies[currentSlide].subtitle}
             </h2>
           )}
 
-          <button className="flex items-center space-x-3 text-white px-6 rounded-lg transition-all group">
-            <div className="bg-red-500 hover:bg-red-700 p-2 rounded-full">
-              <Play
-                size={20}
-                fill="white"
-                className="group-hover:scale-110 transition-transform "
-              />
+          <button className="flex items-center space-x-3 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-all group text-sm sm:text-base">
+            <div className="bg-red-500 hover:bg-red-700 p-2 sm:p-3 rounded-full">
+              <Play size={18} className="group-hover:scale-110 transition-transform" />
             </div>
             <span className="font-medium">Watch Now</span>
           </button>
@@ -106,28 +102,30 @@ const Banner: React.FC = () => {
       </div>
 
       {/* Thumbnails */}
-      <div className="absolute bottom-14 right-4 flex items-center space-x-3 z-20">
+      <div className="absolute bottom-4 sm:bottom-10 w-full flex justify-center sm:justify-end items-center space-x-2 sm:space-x-3 z-20 px-2 sm:px-4">
+        {/* Prev */}
         <button
           onClick={prevSlide}
-          className="text-white transition-colors p-2 rounded-full bg-white/40 hover:bg-white/70"
+          className="text-white cursor-pointer transition-colors p-1 sm:p-2 rounded-full bg-white/40 hover:bg-white/70"
         >
-          <ChevronLeft size={20} />
+          <ChevronLeft size={18} />
         </button>
 
-        <div className="flex space-x-2 overflow-x-auto max-w-[300px] scrollbar-hide">
+        {/* Thumbs */}
+        <div className="flex space-x-2 overflow-x-auto max-w-[500px] sm:max-w-[300px] md:max-w-[400px] scrollbar-hide">
           {movies.map((movie, index) => (
             <div
               key={movie.id}
               ref={(el) => (thumbnailRefs.current[index] = el)}
-              className={clsx(
+              className={cn(
                 "relative group cursor-pointer flex-shrink-0 transition-transform duration-300 rounded-lg",
                 currentSlide === index
-                  ? "border-2 border-red-500 "
+                  ? "border-2 border-red-500"
                   : "border-2 border-transparent hover:border-red-500"
               )}
               onClick={() => setCurrentSlide(index)}
             >
-              <div className="w-16 h-20 md:w-20 md:h-28 rounded-lg overflow-hidden">
+              <div className="w-14 h-18 sm:w-16 sm:h-20 md:w-20 md:h-28 rounded-lg overflow-hidden">
                 <Image
                   src={movie.image}
                   alt={movie.title}
@@ -135,19 +133,21 @@ const Banner: React.FC = () => {
                   className="object-cover rounded-lg"
                 />
               </div>
-
               <div className="absolute bottom-1 left-0 right-0 px-1">
-                <p className="text-white text-xs font-medium truncate text-center">{movie.title}</p>
+                <p className="text-white text-[10px] sm:text-xs font-medium truncate text-center">
+                  {movie.title}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
+        {/* Next */}
         <button
           onClick={nextSlide}
-          className="text-white transition-colors p-2 rounded-full bg-white/40 hover:bg-white/70"
+          className="text-white cursor-pointer transition-colors p-1 sm:p-2 rounded-full bg-white/40 hover:bg-white/70"
         >
-          <ChevronRight size={20} />
+          <ChevronRight size={18} />
         </button>
       </div>
 
