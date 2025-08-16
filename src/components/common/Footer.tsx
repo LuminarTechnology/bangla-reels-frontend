@@ -1,6 +1,7 @@
 import React from "react";
 import ContainerWrapper from "./ContainerWrapper";
 import { Facebook, Instagram, Linkedin, QrCode, Youtube } from "lucide-react";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -12,19 +13,28 @@ const Footer = () => {
             <h3 className="text-2xl font-semibold mb-4">About</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/terms-service"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Terms of Service
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/privacy-policy"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Privacy Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Link
+                  href="/contact-us"
+                  className="text-gray-300 hover:text-white transition-colors"
+                >
                   Contact Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -34,14 +44,14 @@ const Footer = () => {
             <h3 className="text-2xl font-semibold mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                   Feedback
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                   Media & Public Relations
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -50,28 +60,28 @@ const Footer = () => {
           <div>
             <h3 className="text-2xl font-semibold mb-4">Community</h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+              <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                 <Linkedin className="w-5 h-5" />
                 <span className="sr-only">LinkedIn</span>
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+              </Link>
+              <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
                 <span className="sr-only">X (Twitter)</span>
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+              </Link>
+              <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                 <Facebook className="w-5 h-5" />
                 <span className="sr-only">Facebook</span>
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+              </Link>
+              <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                 <Instagram className="w-5 h-5" />
                 <span className="sr-only">Instagram</span>
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white transition-colors">
+              </Link>
+              <Link href="#" className="text-gray-300 hover:text-white transition-colors">
                 <Youtube className="w-5 h-5" />
                 <span className="sr-only">YouTube</span>
-              </a>
+              </Link>
             </div>
           </div>
 
