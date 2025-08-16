@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import Image from "next/image";
-import clsx from "clsx";
+import { cn } from "@/src/lib/utils";
 
 interface Movie {
   id: number;
@@ -117,7 +117,7 @@ const Banner: React.FC = () => {
             <div
               key={movie.id}
               ref={(el) => (thumbnailRefs.current[index] = el)}
-              className={clsx(
+              className={cn(
                 "relative group cursor-pointer flex-shrink-0 transition-transform duration-300 rounded-lg",
                 currentSlide === index
                   ? "border-2 border-red-500"
