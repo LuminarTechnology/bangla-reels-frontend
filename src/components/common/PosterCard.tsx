@@ -32,15 +32,13 @@ export function PosterCard({
         />
 
         <div className="absolute top-3 left-3">
-          <span className="bg-[#F3F4F6]/90 backdrop-blur-xl text-xs font-semibold px-2 py-1 rounded-[12px]">
+          <span className="bg-[#F3F4F680] backdrop-blur-sm text-xs font-semibold px-2 py-1 rounded-[12px]">
             {category}
           </span>
         </div>
 
         <div className="absolute top-3 right-3">
-          <button className="bg-[#F3F4F6]/90 backdrop-blur-xl w-8 h-8 rounded-full flex items-center justify-center transform rotate-270 cursor-pointer">
-            <CopyPlus color="#0B0000" size={16} />
-          </button>
+          <Image src={"/images/icons/copy-plus.png"} alt="Copy" width={28} height={28} />
         </div>
       </div>
 
