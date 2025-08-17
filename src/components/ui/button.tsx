@@ -12,13 +12,14 @@ const buttonVariants = cva(
         default: "bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
         destructive:
           "bg-destructive text-white shadow-xs hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        danger: "bg-[#E83A57] text-white shadow-xs hover:bg-[#E83A57]/90 focus-visible:ring-red-500/20",
+        danger:
+          "bg-[#E83A57] text-white shadow-xs hover:bg-[#E83A57]/90 focus-visible:ring-red-500/20",
         outline:
           "border bg-transparent shadow-xs text-white hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
         secondary: "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         navigation: "bg-white/10 text-white hover:bg-white/20 border border-white/20",
-         filter:
+        filter:
           "bg-transparent text-white/70  hover:bg-white/10 hover:text-white data-[active=true]:bg-[#E83A57] data-[active=true]:text-white data-[active=true]:border-[#E83A57]",
         link: "text-primary underline-offset-4 hover:underline",
       },
@@ -27,7 +28,7 @@ const buttonVariants = cva(
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
-         circular: "size-12 rounded-full p-0",
+        circular: "size-12 rounded-full p-0",
         "circular-sm": "size-8 rounded-full p-0",
         "circular-lg": "size-16 rounded-full p-0",
       },
@@ -50,7 +51,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, active, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
     return (
-      <Comp data-active={active} className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />
+      <Comp
+        data-active={active}
+        className={cn(buttonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
     );
   }
 );

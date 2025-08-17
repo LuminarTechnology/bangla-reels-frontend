@@ -68,7 +68,7 @@ const Banner: React.FC = () => {
   };
 
   return (
-    <div className="relative h-[350px] sm:h-[420px] md:h-[500px] lg:h-[550px] overflow-hidden bg-gray-900">
+    <div className="relative h-[350px] overflow-hidden bg-gray-900 sm:h-[420px] md:h-[500px] lg:h-[550px]">
       {/* Background */}
       <div className="absolute inset-0 transition-all duration-700 ease-in-out">
         <Image
@@ -76,34 +76,34 @@ const Banner: React.FC = () => {
           alt={movies[currentSlide].title}
           fill
           priority
-          className="object-cover rounded-none lg:rounded-lg"
+          className="rounded-none object-cover lg:rounded-lg"
         />
         <div className="absolute inset-0 bg-black/30" />
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 h-full flex items-center px-4 md:-bottom-10 sm:px-8 md:px-12 lg:px-16">
-        <div className="max-w-xs sm:max-w-md md:max-w-lg animate-fadeIn">
-          <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
+      <div className="relative z-10 flex h-full items-center px-4 sm:px-8 md:-bottom-10 md:px-12 lg:px-16">
+        <div className="animate-fadeIn max-w-xs sm:max-w-md md:max-w-lg">
+          <h1 className="mb-2 text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">
             {movies[currentSlide].title}
           </h1>
           {movies[currentSlide].subtitle && (
-            <h2 className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mb-6 sm:mb-8">
+            <h2 className="mb-6 text-lg font-light text-white sm:mb-8 sm:text-xl md:text-2xl lg:text-3xl">
               {movies[currentSlide].subtitle}
             </h2>
           )}
 
           <div className="flex items-center space-x-3 sm:space-x-5">
             <Button size="circular" variant="danger" className="flex items-center space-x-3">
-              <Play size={18} className="group-hover:scale-110 transition-transform" />
+              <Play size={18} className="transition-transform group-hover:scale-110" />
             </Button>
-            <div className="text-white text-2xl ">Watch Now</div>
+            <div className="text-2xl text-white">Watch Now</div>
           </div>
         </div>
       </div>
 
       {/* Thumbnails */}
-      <div className="absolute bottom-4 sm:bottom-10 w-full flex justify-center sm:justify-end items-center space-x-2 sm:space-x-3 z-20 px-2 sm:px-4">
+      <div className="absolute bottom-4 z-20 flex w-full items-center justify-center space-x-2 px-2 sm:bottom-10 sm:justify-end sm:space-x-3 sm:px-4">
         {/* Prev */}
         <Button
           variant={"navigation"}
@@ -115,29 +115,29 @@ const Banner: React.FC = () => {
         </Button>
 
         {/* Thumbs */}
-        <div className="flex space-x-2 overflow-x-auto max-w-[500px] sm:max-w-[300px] md:max-w-[400px] scrollbar-hide">
+        <div className="scrollbar-hide flex max-w-[500px] space-x-2 overflow-x-auto sm:max-w-[300px] md:max-w-[400px]">
           {movies.map((movie, index) => (
             <div
               key={movie.id}
               ref={(el) => (thumbnailRefs.current[index] = el)}
               className={cn(
-                "relative group cursor-pointer flex-shrink-0 transition-transform duration-300 rounded-lg",
+                "group relative flex-shrink-0 cursor-pointer rounded-lg transition-transform duration-300",
                 currentSlide === index
-                  ? "border-2 border-red-500"
-                  : "border-2 border-transparent hover:border-red-500"
+                  ? "border-primary-500 border-2"
+                  : "hover:border-primary-500 border-2 border-transparent"
               )}
               onClick={() => setCurrentSlide(index)}
             >
-              <div className="w-14 h-18 sm:w-16 sm:h-20 md:w-20 md:h-28 rounded-lg overflow-hidden">
+              <div className="h-18 w-14 overflow-hidden rounded-lg sm:h-20 sm:w-16 md:h-28 md:w-20">
                 <Image
                   src={movie.image}
                   alt={movie.title}
                   fill
-                  className="object-cover rounded-lg"
+                  className="rounded-lg object-cover"
                 />
               </div>
-              <div className="absolute bottom-1 left-0 right-0 px-1">
-                <p className="text-white text-[10px] sm:text-xs font-medium truncate text-center">
+              <div className="absolute right-0 bottom-1 left-0 px-1">
+                <p className="truncate text-center text-[10px] font-medium text-white sm:text-xs">
                   {movie.title}
                 </p>
               </div>
@@ -150,7 +150,7 @@ const Banner: React.FC = () => {
           variant={"navigation"}
           size={"circular-sm"}
           onClick={nextSlide}
-          className=" transition-colors hover:bg-white/70"
+          className="transition-colors hover:bg-white/70"
         >
           <ChevronRight size={18} />
         </Button>
