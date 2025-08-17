@@ -5,6 +5,7 @@ import tseslint from "typescript-eslint";
 import prettierPlugin from "eslint-plugin-prettier";
 import importPlugin from "eslint-plugin-import";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
+import tailwindPlugin from "eslint-plugin-tailwindcss";
 
 /** @type {import("eslint").Linter.FlatConfig[]} */
 export default [
@@ -29,6 +30,7 @@ export default [
       import: importPlugin,
       "react-hooks": reactHooksPlugin,
       "@next/next": nextPlugin,
+      tailwindcss: tailwindPlugin,
     },
     languageOptions: {
       parserOptions: {
@@ -49,6 +51,12 @@ export default [
           printWidth: 100,
         },
       ],
+
+      /* ----- Tailwind CSS Rules ----- */
+      "tailwindcss/classnames-order": "warn", // class গুলো order রাখবে
+      "tailwindcss/no-custom-classname": "off", // custom classname allow করবে
+      "tailwindcss/no-contradicting-classname": "error", // একই element-এ conflicting class detect করবে
+      "tailwindcss/no-duplicate-classname": "error", // ডুপ্লিকেট class block করবে
 
       /* ----- JavaScript/TypeScript Best Practices ----- */
       "no-console": ["warn", { allow: ["warn", "error"] }],

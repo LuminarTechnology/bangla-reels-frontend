@@ -68,7 +68,7 @@ export default function FandomPage() {
   return (
     <div className="px-2 sm:px-4 md:px-8 lg:px-16">
       {/* Blog Grid */}
-      <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 my-10">
+      <div className="my-10 grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {currentBlogs.map((blog, i) => (
           <BlogCard
             key={i}
@@ -115,7 +115,7 @@ export default function FandomPage() {
                     }}
                     className={cn(
                       "bg-white",
-                      currentPage === page && "bg-red-500 border border-red-500 text-white"
+                      currentPage === page && "bg-primary-500 border-primary-500 border text-white"
                     )}
                   >
                     {page}
