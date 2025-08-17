@@ -115,7 +115,8 @@ export default function FandomPage() {
                     }}
                     className={cn(
                       "bg-white",
-                      currentPage === page && "bg-primary-500 border-primary-500 border text-white"
+                      currentPage === page &&
+                        "bg-primary-rose border-primary-rose border text-white"
                     )}
                   >
                     {page}

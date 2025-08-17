@@ -79,7 +79,7 @@ export default function ContactUs() {
               <label className="mb-2 block text-sm font-medium text-gray-700">Full Name</label>
               <input
                 type="text"
-                className="focus:ring-primary-500 w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2"
+                className="focus:ring-primary-rose-hover w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2"
                 placeholder="Your full name"
               />
             </div>
@@ -88,14 +88,14 @@ export default function ContactUs() {
               <label className="mb-2 block text-sm font-medium text-gray-700">Email Address</label>
               <input
                 type="email"
-                className="focus:ring-primary-500 w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2"
+                className="focus:ring-primary-rose-hover w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2"
                 placeholder="your.email@example.com"
               />
             </div>
 
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">Subject</label>
-              <select className="focus:ring-primary-500 w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2">
+              <select className="focus:ring-primary-rose-hover w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2">
                 <option>General Inquiry</option>
                 <option>Technical Support</option>
                 <option>Account Issues</option>
@@ -109,7 +109,7 @@ export default function ContactUs() {
               <label className="mb-2 block text-sm font-medium text-gray-700">Message</label>
               <textarea
                 rows={5}
-                className="focus:ring-primary-500 w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2"
+                className="focus:ring-primary-rose-hover w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-transparent focus:ring-2"
                 placeholder="Tell us how we can help you..."
               ></textarea>
             </div>
