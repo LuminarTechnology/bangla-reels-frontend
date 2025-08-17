@@ -30,14 +30,14 @@ const Navbar = () => {
   return (
     <ContainerWrapper>
       <nav className="">
-        <div className="flex items-center justify-between h-16 px-4">
+        <div className="flex h-16 items-center justify-between px-4">
           {/* Logo */}
           <div className="flex items-center">
             <h1 className="text-2xl font-bold text-white">ReelShort</h1>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden items-center space-x-8 md:flex">
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -58,7 +58,7 @@ const Navbar = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="text-gray-300 hover:text-white hover:bg-transparent"
+              className="text-gray-300 hover:bg-transparent hover:text-white"
             >
               <Search className="h-5 w-5" />
             </Button>
@@ -69,20 +69,20 @@ const Navbar = () => {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="ghost"
-                    className="text-white hover:text-gray-100 hover:bg-transparent"
+                    className="text-white hover:bg-transparent hover:text-gray-100"
                   >
                     <Globe className="h-4 w-4" />
                     English
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-transparent">
-                  <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                  <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
                     English
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                  <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
                     Spanish
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                  <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
                     French
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -90,33 +90,35 @@ const Navbar = () => {
             </div>
 
             {/* History - Hidden on mobile */}
-            <Button
-              variant="ghost"
-              className="hidden lg:flex text-white hover:text-gray-100 hover:bg-transparent"
-            >
-              <History className="h-4 w-4" />
-              History
-            </Button>
+            <Link href={"/dashboard/history"}>
+              <Button
+                variant="ghost"
+                className="hidden text-white hover:bg-transparent hover:text-gray-100 lg:flex"
+              >
+                <History className="h-4 w-4" />
+                History
+              </Button>
+            </Link>
 
             {/* User Profile */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="text-white hover:text-gray-100 hover:bg-transparent"
+                  className="text-white hover:bg-transparent hover:text-gray-100"
                 >
                   <User className="h-4 w-4" />
                   <span className="hidden lg:inline">User</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-transparent">
-                <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
                   Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
                   Settings
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
                   Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -132,14 +134,14 @@ const Navbar = () => {
                 </SheetTrigger>
                 <SheetContent
                   side="right"
-                  className="bg-black/20 backdrop-blur-md border-l border-white/20"
+                  className="border-l border-white/20 bg-black/20 backdrop-blur-md"
                 >
-                  <div className="flex flex-col space-y-4 mt-8">
+                  <div className="mt-8 flex flex-col space-y-4">
                     {navItems.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
-                        className="text-white px-4 transition-colors duration-200 border-b border-gray-900 rounded-xl"
+                        className="rounded-xl border-b border-gray-900 px-4 text-white transition-colors duration-200"
                         onClick={() => setIsOpen(false)}
                       >
                         {item.name}
@@ -150,26 +152,26 @@ const Navbar = () => {
                         <DropdownMenuTrigger asChild>
                           <Button
                             variant="ghost"
-                            className="text-white hover:text-gray-100 hover:bg-transparent"
+                            className="text-white hover:bg-transparent hover:text-gray-100"
                           >
                             <Globe className="h-4 w-4" />
                             English
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="bg-black/20 backdrop-blur-lg">
-                          <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                          <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
                             English
                           </DropdownMenuItem>
-                          <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                          <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
                             Spanish
                           </DropdownMenuItem>
-                          <DropdownMenuItem className="text-white hover:text-gray-100 hover:bg-transparent">
+                          <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
                             French
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                       <Button variant="ghost" className="w-full justify-start text-white">
-                        <History className="h-4 w-4 mr-2" />
+                        <History className="mr-2 h-4 w-4" />
                         History
                       </Button>
                     </div>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/src/lib/utils";
@@ -59,13 +59,18 @@ const Banner: React.FC = () => {
     }
   }, [currentSlide]);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % movies.length);
-  };
+  }, [movies.length]);
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + movies.length) % movies.length);
-  };
+  const prevSlide = useCallback(() => {
+    setCurrentSlide((prev) => (prev === 0 ? movies.length - 1 : prev - 1));
+  }, [movies.length]);
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 10000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
 
   return (
     <div className="relative h-[350px] overflow-hidden bg-gray-900 sm:h-[420px] md:h-[500px] lg:h-[550px]">
@@ -123,8 +128,8 @@ const Banner: React.FC = () => {
               className={cn(
                 "group relative flex-shrink-0 cursor-pointer rounded-lg transition-transform duration-300",
                 currentSlide === index
-                  ? "border-primary-500 border-2"
-                  : "hover:border-primary-500 border-2 border-transparent"
+                  ? "border-primary-rose border-2"
+                  : "hover:border-primary-rose-hover border-2 border-transparent"
               )}
               onClick={() => setCurrentSlide(index)}
             >
