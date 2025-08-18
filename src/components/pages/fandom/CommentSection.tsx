@@ -31,7 +31,7 @@ const CommentSection = () => {
   });
 
   const onSubmit = (data: CommentFormData) => {
-    console.log("Form Submitted ✅", data);
+    // console.log("Form Submitted ✅", data);
     reset(); // clear form after submit
   };
 

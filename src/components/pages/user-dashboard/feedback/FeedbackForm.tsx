@@ -52,7 +52,7 @@ const FeedbackForm: React.FC = () => {
   const onSubmit = async (data: FeedbackFormData) => {
     try {
       // Simulate form submission
-      console.log("Form submitted:", data);
+      // console.log("Form submitted:", data);
       await new Promise((resolve) => setTimeout(resolve, 1000));
       alert("Feedback submitted successfully!");
     } catch (error) {
