@@ -75,7 +75,7 @@ export default function EpisodeSelection({
           <button
             key={range}
             onClick={() => setActiveRange(range)}
-            className={` mb-2 text-sm font-medium transition-colors ${
+            className={` mb-2 text-sm font-medium transition-colors cursor-pointer ${
               activeRange === range ? "text-primary-rose" : " text-[#B3B1B0] "
             }`}
           >

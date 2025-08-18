@@ -17,11 +17,11 @@ const defaultVideo = {
 const page = () => {
     return (
         <div className='p-6'>
-            <div className='flex gap-4 h-screen'>
+            <div className='flex flex-col md:flex-row gap-4 h-screen'>
                 {/* Video Player */}
                 <div className='bg-black flex-1 relative'>
-                    <div className="absolute top-4 left-4 z-10  " >
-              <button className="text-white text-3xl font-semibold flex items-center cursor-pointer">
+                    <div className="absolute top-4 left-4 z-10 hidden md:block" >
+              <button className="text-white   text-3xl font-semibold flex items-center cursor-pointer">
                 <ChevronLeft size={30} className="mr-1 text-3xl" />
                 {defaultVideo.title}
                 
@@ -49,7 +49,7 @@ const page = () => {
                 </div>
 
                 {/* Sidebar */}
-                <div className='w-96 overflow-y-auto pb-8'>
+                <div className='md:w-96 overflow-y-auto pb-8'>
      <div className='h-full'>
                        <div className=' inline-block'>
   <h1 className="text-primary-rose text-2xl font-bold">Details</h1>
