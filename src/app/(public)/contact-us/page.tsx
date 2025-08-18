@@ -3,7 +3,7 @@ import React from "react";
 
 export default function ContactUs() {
   return (
-    <div className="my-12">
+    <div className="my-10">
       <div className="grid gap-8 md:grid-cols-2">
         <div>
           <h2 className="mb-6 text-2xl font-bold text-white">Get in Touch</h2>
