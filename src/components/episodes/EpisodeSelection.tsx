@@ -61,7 +61,7 @@ export default function EpisodeSelection({
             <Switch
             checked={autoPlay}
             onCheckedChange={handleAutoPlayChange}
-            className="data-[state=checked]:bg-primary-rose"
+            className="data-[state=checked]:bg-primary-rose cursor-pointer"
           />
         </div>
       </div>
