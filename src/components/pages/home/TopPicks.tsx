@@ -96,9 +96,9 @@ export function TopPicksSlider({ sectionTitle = "Top Picks" }: MovieSectionProps
   }, [api, autoplayPlugin]);
 
   return (
-    <div className="my-12">
+    <div className="my-10">
       {/* Header */}
-      <div className="flex items-center justify-between mb-8">
+      <div className="mb-8 flex items-center justify-between">
         <h2 className="text-2xl font-bold text-white">{sectionTitle}</h2>
         <div className="flex items-center gap-4">
           {/* Navigation Arrows */}
@@ -107,7 +107,7 @@ export function TopPicksSlider({ sectionTitle = "Top Picks" }: MovieSectionProps
               variant="ghost"
               size="icon"
               onClick={() => api?.scrollPrev()}
-              className="text-white bg-[#2C2C2C] rounded-full cursor-pointer"
+              className="cursor-pointer rounded-full bg-[#2C2C2C] text-white"
             >
               <ChevronLeft className="h-6 w-6" />
             </Button>
@@ -115,13 +115,13 @@ export function TopPicksSlider({ sectionTitle = "Top Picks" }: MovieSectionProps
               variant="ghost"
               size="icon"
               onClick={() => api?.scrollNext()}
-              className="text-white bg-[#2C2C2C] rounded-full cursor-pointer"
+              className="cursor-pointer rounded-full bg-[#2C2C2C] text-white"
             >
               <ChevronRight className="h-6 w-6" />
             </Button>
           </div>
           {/* View All Button */}
-          <Button className="bg-primary-rose hover:bg-primary-rose-hover text-white px-6 py-2 rounded-md font-medium cursor-pointer">
+          <Button className="bg-primary-rose hover:bg-primary-rose-hover cursor-pointer rounded-md px-6 py-2 font-medium text-white">
             VIEW ALL
           </Button>
         </div>
@@ -136,11 +136,11 @@ export function TopPicksSlider({ sectionTitle = "Top Picks" }: MovieSectionProps
         }}
         plugins={[autoplayPlugin]}
       >
-        <CarouselContent className="flex gap-1.5 ml-1">
+        <CarouselContent className="ml-1 flex gap-1.5">
           {topPicksData.map((item, idx) => (
             <CarouselItem
               key={item.id}
-              className={cn("pl-0 basis-[200px] md:basis-[250px] lg:basis-1/6")}
+              className={cn("basis-[200px] pl-0 md:basis-[250px] lg:basis-1/6")}
             >
               <PosterCard
                 key={idx}

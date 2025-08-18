@@ -1,6 +1,6 @@
 import ContainerWrapper from "@/src/components/common/ContainerWrapper";
 import { PosterCard } from "@/src/components/common/PosterCard";
-import BlogCard from "@/src/components/pages/fandom/BlogCard";
+import BlogCard from "@/src/components/pages/fandom/FandomCard";
 import Banner from "@/src/components/pages/home/banner";
 import { StreamingCard } from "@/src/components/common/StreamingCard";
 import { TopPicksSlider } from "@/src/components/pages/home/TopPicks";

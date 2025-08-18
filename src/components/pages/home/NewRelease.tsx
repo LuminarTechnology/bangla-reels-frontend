@@ -3,9 +3,9 @@ import { StreamingCard } from "../../common/StreamingCard";
 
 const NewRelease = () => {
   return (
-    <div className="my-12">
+    <div className="my-10">
       <h2 className="text-2xl font-bold text-white">New Releases</h2>
-      <div className="grid xl:grid-cols-3 gap-5 my-10 items-center justify-between">
+      <div className="my-10 grid items-center justify-between gap-5 xl:grid-cols-3">
         {[1, 2, 3].map((_, i) => (
           <StreamingCard
             key={i}
