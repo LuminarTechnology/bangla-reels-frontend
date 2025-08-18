@@ -3,6 +3,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { MessageCircle } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { commentSchema } from "@/src/schema/commentSchema.schema";
 
 type CommentFormData = {
   comment: string;
@@ -18,7 +20,15 @@ const CommentSection = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<CommentFormData>();
+  } = useForm<CommentFormData>({
+    resolver: zodResolver(commentSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      comment: "",
+      website: "",
+    },
+  });
 
   const onSubmit = (data: CommentFormData) => {
     console.log("Form Submitted ✅", data);
