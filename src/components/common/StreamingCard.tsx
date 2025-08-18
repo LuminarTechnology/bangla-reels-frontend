@@ -36,7 +36,7 @@ export function StreamingCard({ title, description, genres, type, imageUrl }: St
       <div className="w-4/7 space-y-4">
         <h3 className="text-xl font-bold text-white leading-tight">{title}</h3>
 
-        <div className="absolute top-3 right-3">
+        <div className="absolute top-3 right-3 cursor-pointer">
           <Image src={"/images/icons/copy-plus.png"} alt="Copy" width={32} height={32} />
         </div>
 
