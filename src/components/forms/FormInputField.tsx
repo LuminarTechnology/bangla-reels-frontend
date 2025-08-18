@@ -17,6 +17,8 @@ type FormInputFieldProps = {
   as?: "input" | "textarea";
   disabled?: boolean;
   description?: string;
+  required?: boolean;
+  className?: string;
 };
 
 export function FormInputField({
@@ -27,7 +29,9 @@ export function FormInputField({
   type = "text",
   as = "input",
   disabled = false,
+  // required = false,
   description,
+  className,
 }: FormInputFieldProps) {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -35,9 +39,16 @@ export function FormInputField({
     <Controller
       name={name}
       control={control}
+      // rules={{
+      //   required: label ? `${label} is required` : "This field is required",
+      // }}
       render={({ field, fieldState: { error } }) => (
         <div className="space-y-2">
-          {label && <Label htmlFor={name}>{label}</Label>}
+          {label && (
+            <Label htmlFor={name} className="mb-2 block text-sm font-medium text-white">
+              {label}
+            </Label>
+          )}
 
           <div className="relative">
             {as === "textarea" ? (
@@ -46,7 +57,14 @@ export function FormInputField({
                 placeholder={placeholder}
                 disabled={disabled}
                 {...field}
-                className={cn(error && "border-red-500")}
+                className={cn(
+                  className
+                    ? className
+                    : "h-32 w-full resize-none rounded-lg border px-3 py-2 text-gray-300 placeholder-gray-500 focus:outline-none",
+                  error
+                    ? "border-red-500 pr-10 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                    : "border-[#726E6E] bg-[#141414] focus:border-transparent focus:ring-2 focus:ring-rose-500"
+                )}
               />
             ) : (
               <Input
@@ -54,8 +72,14 @@ export function FormInputField({
                 placeholder={placeholder}
                 type={type === "password" ? (showPassword ? "text" : "password") : type}
                 disabled={disabled}
+                // required={required}
                 {...field}
-                className={cn(error && "border-red-500 pr-10")}
+                className={cn(
+                  "w-full resize-none rounded-lg border px-3 py-2 text-gray-300 placeholder-gray-500 focus:outline-none",
+                  error
+                    ? "border-red-500 pr-10 focus:border-red-500 focus:ring-1 focus:ring-red-500"
+                    : "border-[#726E6E] bg-[#141414] focus:border-transparent focus:ring-2 focus:ring-rose-500"
+                )}
               />
             )}
 
