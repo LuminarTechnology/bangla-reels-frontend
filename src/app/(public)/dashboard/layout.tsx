@@ -3,13 +3,26 @@
 import { cn } from "@/src/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { History, LogOut, LayoutDashboard, Wallet, List } from "lucide-react";
+import {
+  History,
+  LogOut,
+  LayoutDashboard,
+  Wallet,
+  List,
+  Settings,
+  MessageSquare,
+  AppWindow,
+  FileText,
+} from "lucide-react";
 
 const sidebarItems = [
   { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
   { name: "Wallet & Coins", href: "/dashboard/wallet", icon: Wallet },
   { name: "History", href: "/dashboard/history", icon: History },
   { name: "My List", href: "/dashboard/my-list", icon: List },
+  { name: "Settings", href: "/dashboard/settings", icon: Settings },
+  { name: "Feedback", href: "/dashboard/feedback", icon: MessageSquare },
+  { name: "App", href: "/dashboard/app", icon: AppWindow },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
