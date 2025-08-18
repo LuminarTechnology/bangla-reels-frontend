@@ -62,8 +62,7 @@ const ThumbnailCard = ({genres, description, isShowRightIcon=false}: ThumbnailCa
           </div>
 
 
-            <p className='text-[#B3B1B0] text-sm'>{description?.slice(0, 100)}...</p>
-
+            {description && <p className='text-[#B3B1B0] text-sm'>{description?.slice(0, 100)}...</p>}
         </div>
       </div>
     );

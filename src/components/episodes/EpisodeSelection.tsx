@@ -70,7 +70,7 @@ export default function EpisodeSelection({
       <p className="text-[#B3B1B0] text-base mb-4">{totalEpisodes} Episodes • Finished</p>
 
       {/* Range selector */}
-      <div className="flex gap-2 mb-4">
+      <div className="flex gap-4 mb-4">
         {ranges.map((range) => (
           <button
             key={range}
