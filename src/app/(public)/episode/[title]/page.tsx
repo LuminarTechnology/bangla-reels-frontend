@@ -49,7 +49,7 @@ const page = () => {
                 </div>
 
                 {/* Sidebar */}
-                <div className='md:w-96 overflow-y-auto pb-8'>
+                <div className='md:w-96 overflow-y-auto scrollbar-hide pb-8'>
      <div className='h-full'>
                        <div className=' inline-block'>
   <h1 className="text-primary-rose text-2xl font-bold">Details</h1>
