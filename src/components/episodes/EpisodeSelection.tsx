@@ -119,7 +119,7 @@ export default function EpisodeSelection({
       {currentEpisodes.length > 15 && (
         <button
           onClick={() => setShowMore(!showMore)}
-          className="flex items-center gap-2 text-white text-sm cursor-pointer transition-colors mb-4"
+          className="flex items-center gap-2  text-white text-sm cursor-pointer transition-colors mb-4 hover:text-blue-300"
         >
           <span>{showMore ? "See less" : "See more"}</span>
           <ChevronDown className={`w-4 h-4 transition-transform ${showMore ? "rotate-180" : ""}`} />
