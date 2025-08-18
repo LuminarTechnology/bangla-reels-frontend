@@ -3,14 +3,13 @@
 import { cn } from "@/src/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { History, Settings, FileText, LogOut, MailOpen } from "lucide-react";
+import { History, LogOut, LayoutDashboard, Wallet, List } from "lucide-react";
 
 const sidebarItems = [
+  { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
+  { name: "Wallet & Coins", href: "/dashboard/wallet", icon: Wallet },
   { name: "History", href: "/dashboard/history", icon: History },
-  { name: "Settings", href: "/dashboard/settings", icon: Settings },
-  { name: "Feedback", href: "/dashboard/feedback", icon: MailOpen },
-  // { name: "App", href: "/dashboard/app", icon: AppWindow },
-  { name: "Terms of service", href: "/dashboard/terms", icon: FileText },
+  { name: "My List", href: "/dashboard/my-list", icon: List },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -36,8 +35,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a5720] hover:text-red-900",
-                  pathname === item.href && "bg-[#e83a5720] text-red-900"
+                  "flex items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-900",
+                  pathname === item.href && "bg-[#e83a570f] text-red-900"
                 )}
               >
                 <Icon className="h-5 w-5" />
@@ -50,7 +49,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="mt-auto">
           <Link
             href="/logout"
-            className="flex items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a5715] hover:text-red-900"
+            className="flex items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-900"
           >
             <LogOut className="h-5 w-5" />
             Log Out
