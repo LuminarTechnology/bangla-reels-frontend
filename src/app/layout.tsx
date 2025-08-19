@@ -1,6 +1,21 @@
 import type { ReactNode } from "react";
 import { StoreProvider } from "./StoreProvider";
 import "@/src/styles/globals.css";
+import { Metadata } from "next";
+import { siteConfig } from "../config/site";
+import { cn } from "../lib/utils";
+import { fontSans } from "../config/fonts";
+
+export const metadata: Metadata = {
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 interface Props {
   readonly children: ReactNode;
@@ -8,10 +23,10 @@ interface Props {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <StoreProvider>
-      <html lang="en">
-        <body>{children}</body>
-      </html>
-    </StoreProvider>
+    <html lang="en" suppressHydrationWarning={false}>
+      <body className={cn("gradient-background min-h-screen", fontSans.variable)}>
+        <StoreProvider>{children}</StoreProvider>
+      </body>
+    </html>
   );
 }

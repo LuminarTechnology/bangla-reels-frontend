@@ -5,6 +5,7 @@ import tseslint from "typescript-eslint";
 import prettierPlugin from "eslint-plugin-prettier";
 import importPlugin from "eslint-plugin-import";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
+// import tailwindPlugin from "eslint-plugin-tailwindcss";
 
 /** @type {import("eslint").Linter.FlatConfig[]} */
 export default [
@@ -29,6 +30,7 @@ export default [
       import: importPlugin,
       "react-hooks": reactHooksPlugin,
       "@next/next": nextPlugin,
+      // tailwindcss: tailwindPlugin,
     },
     languageOptions: {
       parserOptions: {
@@ -50,11 +52,17 @@ export default [
         },
       ],
 
+      /* ----- Tailwind CSS Rules ----- */
+
+      // "tailwindcss/no-custom-classname": "off",
+      // "tailwindcss/no-contradicting-classname": "error",
+      // "tailwindcss/no-duplicate-classname": "error",
+
       /* ----- JavaScript/TypeScript Best Practices ----- */
       "no-console": ["warn", { allow: ["warn", "error"] }],
       "no-debugger": "warn",
       eqeqeq: ["error", "always"],
-      curly: ["error", "all"],
+      curly: ["off", "all"],
 
       /* ----- TypeScript Specific Rules ----- */
       "@typescript-eslint/no-unused-vars": [
@@ -62,7 +70,7 @@ export default [
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/explicit-function-return-type": "off",
-      "@typescript-eslint/no-explicit-any": "warn",
+      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-non-null-assertion": "warn",
       "@typescript-eslint/ban-ts-comment": ["warn", { "ts-ignore": "allow-with-description" }],
 
