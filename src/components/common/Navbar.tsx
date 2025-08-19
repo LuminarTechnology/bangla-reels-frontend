@@ -14,6 +14,9 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/src/lib/utils";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
+import Image from "next/image";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -27,6 +30,26 @@ const Navbar = () => {
     { name: "Desktop", href: "/desktop" },
   ];
 
+  const historyItems = [
+    {
+      id: 1,
+      title: "Collateral Hearts to gone",
+      episode: "Played to Episode 1",
+      thumbnail: "/images/Poster 4.png",
+    },
+    {
+      id: 2,
+      title: "Collateral Hearts to gone",
+      episode: "Played to Episode 1",
+      thumbnail: "/images/Poster 4.png",
+    },
+    {
+      id: 3,
+      title: "Collateral Hearts to gone",
+      episode: "Played to Episode 1",
+      thumbnail: "/images/Poster 4.png",
+    },
+  ]
   return (
     <ContainerWrapper>
       <nav className="">
@@ -90,7 +113,7 @@ const Navbar = () => {
             </div>
 
             {/* History - Hidden on mobile */}
-            <Link href={"/dashboard/history"}>
+            {/* <Link href={"/dashboard/history"}>
               <Button
                 variant="ghost"
                 className="hidden text-white hover:bg-transparent hover:text-gray-100 lg:flex"
@@ -98,7 +121,72 @@ const Navbar = () => {
                 <History className="h-4 w-4" />
                 History
               </Button>
-            </Link>
+            </Link> */}
+
+             <div className="hidden lg:block">
+              <HoverCard openDelay={100} closeDelay={300}>
+                <HoverCardTrigger asChild>
+                  <Button variant="ghost" className="text-white hover:bg-transparent hover:text-gray-100">
+                    <History className="h-4 w-4" />
+                    History
+                  </Button>
+                </HoverCardTrigger>
+                <HoverCardContent className="w-70 bg-[#16151A] border-none p-0 rounded-2xl " align="end" sideOffset={8}>
+                  <div className="p-4">
+                  
+                    <Tabs defaultValue="history" className="w-full">
+                      <TabsList className="grid w-full grid-cols-2 bg-transparent border-none mb-4 ">
+                        <TabsTrigger
+                          value="history"
+                          className="text-white data-[state=active]:bg-transparent  border-0 !border-none ring-0 focus:ring-0 data-[state=active]:text-[#E83A57] hover:text-primary-rose-hover cursor-pointer"
+                        >
+                          History
+                        </TabsTrigger>
+                        <TabsTrigger
+                          value="mylist"
+                          className="text-white data-[state=active]:bg-transparent  border-0 !border-none ring-0 focus:ring-0 data-[state=active]:text-[#E83A57] hover:text-primary-rose-hover cursor-pointer"
+                        >
+                          My list
+                        </TabsTrigger>
+                      </TabsList>
+                      <TabsContent value="history" className="space-y-3">
+                        {historyItems.map((item) => (
+                          <div
+                            key={item.id}
+                            className="flex  space-x-3 p-2 rounded-lg hover:bg-gray-800 cursor-pointer"
+                          >
+                            <div className="relative">
+                              <Image
+                              src={item.thumbnail || "/placeholder.svg"}
+                              alt={item.title}
+                              width={69}
+                              height={93}
+                              className="w-[69px] h-[93px] rounded object-cover"
+                            />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="text-white text-xl font-bold ">{item.title}</h3>
+                              <p className="text-[#B3B1B0] text-base">{item.episode}</p>
+                            </div>
+                          </div>
+                        ))}
+                        <div className="pt-2 flex justify-center">
+                          <button className="text-primary-rose text-sm font-medium hover:text-primary-rose-hover flex items-center">
+                            More
+                            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </button>
+                        </div>
+                      </TabsContent>
+                      <TabsContent value="mylist" className="text-center py-8">
+                        <p className="text-gray-400 text-sm">Your list is empty</p>
+                      </TabsContent>
+                    </Tabs>
+                  </div>
+                </HoverCardContent>
+              </HoverCard>
+            </div>
 
             {/* User Profile */}
             <DropdownMenu>
