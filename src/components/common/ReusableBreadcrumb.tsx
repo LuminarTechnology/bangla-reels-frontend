@@ -26,13 +26,13 @@ const ReusableBreadcrumb: React.FC<ReusableBreadcrumbProps> = ({ items }) => {
             <BreadcrumbItem>
               {item.href ? (
                 <BreadcrumbLink
-                  className="text-sm text-white/70 hover:text-red-700"
+                  className="text-sm font-medium text-white/70 hover:text-red-700"
                   href={item.href}
                 >
                   {item.label}
                 </BreadcrumbLink>
               ) : (
-                <BreadcrumbPage className="text-sm text-white/70 hover:text-red-700">
+                <BreadcrumbPage className="font-medium text-white hover:text-red-600">
                   {item.label}
                 </BreadcrumbPage>
               )}
