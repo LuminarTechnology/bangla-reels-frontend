@@ -83,11 +83,8 @@ const EpisodeList = () => {
         )}
 
         {displayedEpisodes.map((episode, index) => (
-          <Link href={`/episode/${episode.number}`}>
-            <button
-              key={index}
-              className="rounded border border-gray-600/30 bg-gray-800/50 px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:border-red-500/50 hover:bg-red-700/50 hover:text-white"
-            >
+          <Link href={`/episode/${episode.number}`} key={index}>
+            <button className="rounded border border-gray-600/30 bg-gray-800/50 px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:border-red-500/50 hover:bg-red-700/50 hover:text-white">
               {episode.number}
             </button>
           </Link>

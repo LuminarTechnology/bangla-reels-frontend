@@ -1,16 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Pagination,
-  PaginationContent,
-  PaginationItem,
-  PaginationLink,
-  PaginationPrevious,
-  PaginationNext,
-  PaginationEllipsis,
-} from "@/src/components/ui/pagination";
-import { cn } from "@/src/lib/utils";
 import FandomCard from "./FandomCard";
+import { ReusablePagination } from "../../common/ReusablePagination";
 
 const fakeBlogs = [
   {
@@ -81,75 +72,12 @@ const Blog = () => {
         ))}
       </div>
 
-      {/* Shadcn Pagination */}
-      <Pagination>
-        <PaginationContent>
-          {/* Previous Button - hide if currentPage === 1 */}
-          {currentPage > 1 && (
-            <PaginationItem>
-              <PaginationPrevious
-                className="cursor-pointer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handlePageChange(currentPage - 1);
-                }}
-              />
-            </PaginationItem>
-          )}
-
-          {/* Page Numbers + Ellipsis */}
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-            if (
-              page === 1 ||
-              page === totalPages ||
-              (page >= currentPage - 1 && page <= currentPage + 1)
-            ) {
-              return (
-                <PaginationItem key={page}>
-                  <PaginationLink
-                    isActive={currentPage === page}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handlePageChange(page);
-                    }}
-                    className={cn(
-                      "bg-white",
-                      currentPage === page &&
-                        "bg-primary-rose border-primary-rose border text-white"
-                    )}
-                  >
-                    {page}
-                  </PaginationLink>
-                </PaginationItem>
-              );
-            } else if (
-              (page === 2 && currentPage > 3) ||
-              (page === totalPages - 1 && currentPage < totalPages - 2)
-            ) {
-              return (
-                <PaginationItem key={`ellipsis-${page}`}>
-                  <PaginationEllipsis />
-                </PaginationItem>
-              );
-            }
-            return null;
-          })}
-
-          {/* Next Button - hide if currentPage === totalPages */}
-
-          {currentPage < totalPages && (
-            <PaginationItem>
-              <PaginationNext
-                className="cursor-pointer"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handlePageChange(currentPage + 1);
-                }}
-              />
-            </PaginationItem>
-          )}
-        </PaginationContent>
-      </Pagination>
+      {/* Pagination */}
+      <ReusablePagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 };
