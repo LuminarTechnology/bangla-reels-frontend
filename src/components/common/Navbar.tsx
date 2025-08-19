@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ContainerWrapper from "./ContainerWrapper";
 import { Button } from "../ui/button";
-import { Globe, History, Menu, Search, User } from "lucide-react";
+import { CircleUser, Globe, History, Menu, Search, Smartphone, User } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +14,10 @@ import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/src/lib/utils";
+import HistoryButton from "../pages/home/HistoryButton";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
+import CategoryPopup from "../pages/home/CategoryPopup";
+import LanguagePopup from "../pages/home/LanguagePopup";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -23,9 +27,9 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "Categories", href: "/categories" },
     { name: "Fandom", href: "/fandom" },
-    { name: "Contest", href: "#" },
-    { name: "App", href: "/app" },
+    { name: "App", href: "/app", icon: <Smartphone className="size-4" /> },
     { name: "Desktop", href: "/desktop" },
+    { name: "Contest", href: "/contest" },
   ];
 
   return (
@@ -33,24 +37,46 @@ const Navbar = () => {
       <nav className="">
         <div className="flex h-16 items-center justify-between px-4">
           {/* Logo */}
-          <div className="flex items-center">
-            <h1 className="text-2xl font-bold text-white">ReelShort</h1>
-          </div>
+          <div className="flex items-center justify-between space-x-16">
+            <div>
+              <h1 className="text-2xl font-bold text-white">ReelShort</h1>
+            </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden items-center space-x-8 md:flex">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "text-base font-medium duration-200",
-                  pathname === item.href ? "text-primary-rose" : "text-white"
-                )}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {/* Desktop Navigation */}
+            <div className="hidden items-center space-x-8 pt-2.5 md:flex">
+              {navItems.map((item) => {
+                if (item.name === "Categories") {
+                  return (
+                    <CategoryPopup
+                      key={item.name}
+                      itemName={item.name}
+                      isCategory={pathname === item.href}
+                    />
+                  );
+                }
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={cn(
+                      "flex flex-col items-center text-base font-medium duration-200",
+                      pathname === item.href ? "text-primary-rose" : "text-white"
+                    )}
+                  >
+                    <div className="flex items-center gap-1.5">
+                      <span>{item?.icon}</span>
+                      {item.name}
+                    </div>
+                    <span
+                      className={cn(
+                        "mt-1 size-1 rounded-full",
+                        pathname === item.href ? "bg-primary-rose" : "invisible"
+                      )}
+                    ></span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
           {/* Right Side Items */}
@@ -66,40 +92,14 @@ const Navbar = () => {
 
             {/* Language Dropdown - Hidden on mobile */}
             <div className="hidden lg:block">
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    className="text-white hover:bg-transparent hover:text-gray-100"
-                  >
-                    <Globe className="h-4 w-4" />
-                    English
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-transparent">
-                  <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
-                    English
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
-                    Spanish
-                  </DropdownMenuItem>
-                  <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
-                    French
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <LanguagePopup />
             </div>
 
             {/* History - Hidden on mobile */}
-            <Link href={"/dashboard/history"}>
-              <Button
-                variant="ghost"
-                className="hidden text-white hover:bg-transparent hover:text-gray-100 lg:flex"
-              >
-                <History className="h-4 w-4" />
-                History
-              </Button>
-            </Link>
+
+            <div className="hidden lg:block">
+              <HistoryButton />
+            </div>
 
             {/* User Profile */}
             <DropdownMenu>
@@ -108,8 +108,10 @@ const Navbar = () => {
                   variant="ghost"
                   className="text-white hover:bg-transparent hover:text-gray-100"
                 >
-                  <User className="h-4 w-4" />
-                  <span className="hidden lg:inline">User</span>
+                  <div className="flex items-center space-x-2">
+                    <span className="hidden lg:inline">User</span>
+                    <CircleUser size={24} className="size-6" />
+                  </div>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-transparent">

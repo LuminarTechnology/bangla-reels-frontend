@@ -1,10 +1,12 @@
-import { Button } from '@/src/components/ui/button';
+
 import { ChevronLeft } from 'lucide-react';
 import React from 'react';
 import MuxPlayer from '@mux/mux-player-react';
-import DetailsCard from '@/src/components/episodes/DetailsCard';
-import EpisodeSelection from '@/src/components/episodes/EpisodeSelection';
-import YouMayLike from '@/src/components/episodes/YouMayLike';
+import DetailsCard from '@/src/components/pages/episodes/DetailsCard';
+import EpisodeSelection from '@/src/components/pages/episodes/EpisodeSelection';
+import YouMayLike from '@/src/components/pages/episodes/YouMayLike';
+import ReusableBreadcrumb from '@/src/components/common/ReusableBreadcrumb';
+
 const defaultVideo = {
   title:"The Island",
   episode: "episode 01",
@@ -19,14 +21,14 @@ const page = () => {
         <div className='p-6'>
             <div className='flex flex-col md:flex-row gap-4 h-screen'>
                 {/* Video Player */}
-                <div className='bg-black flex-1 relative'>
-                    <div className="absolute top-4 left-4 z-10 hidden md:block" >
+                <div className='bg-black flex-1 relative group'>
+                    <div className="absolute top-3 -left-1 z-10 hidden  group-hover:block group-hover:delay-1000" >
               <button className="text-white   text-3xl font-semibold flex items-center cursor-pointer">
-                <ChevronLeft size={30} className="mr-1 text-3xl" />
-                {defaultVideo.title}
+                <ChevronLeft size={32} className="mr-1 text-3xl" />
+                {/* {defaultVideo.title} */}
                 
               </button>
-              <div className="ml-8 text-xl text-white">{defaultVideo.episode}</div>
+              {/* <div className="ml-8 text-xl text-white">{defaultVideo.episode}</div> */}
             </div>
 
 <div className="relative w-full h-full ">
@@ -35,12 +37,17 @@ const page = () => {
               metadata={{
                 video_id: "video-id-123456",
                 video_title: `${defaultVideo.title} - ${defaultVideo.episode}`,
+                
               }}
               streamType="on-demand"
+              title={`${defaultVideo.title} - ${defaultVideo.episode}`}
+              accentColor='#E83A57'
+              
               style={{
                 height: "100%",
                 // width: "100%",
-               
+                objectFit: "cover",
+                
               }}
               className=" h-full"
             />
@@ -48,8 +55,11 @@ const page = () => {
             
                 </div>
 
+
+                
                 {/* Sidebar */}
                 <div className='md:w-96 overflow-y-auto scrollbar-hide pb-8'>
+                  <ReusableBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Episode", href: "/episode" }, { label: "Player", href: "" }]} />
      <div className='h-full'>
                        <div className=' inline-block'>
   <h1 className="text-primary-rose text-2xl font-bold">Details</h1>

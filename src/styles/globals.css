@@ -161,3 +161,26 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
+
+
+/* Mux Player Styles */
+mux-player {
+  --seek-backward-button: none;
+  --seek-forward-button: none;
+  
+}
+
+
+mux-player::part(video) {
+  -webkit-text-fill-color: red;
+  -webkit-text-stroke: 1px blue;
+}
+
+mux-player::part(title) {
+  font-size: 30px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  margin-left: 14px;
+  margin-top:8px
+}
+

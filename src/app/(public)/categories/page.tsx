@@ -1,9 +1,12 @@
 import { PosterCard } from "@/src/components/common/PosterCard";
+import ReusableBreadcrumb from "@/src/components/common/ReusableBreadcrumb";
 import FilterCategoryButtons from "@/src/components/pages/categories/FilterCategoryButtons";
 
 export default async function CategoriesPage() {
   return (
     <div className="p-6">
+
+      <ReusableBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Categories", href: "/categories" }]} />
       <FilterCategoryButtons />
 
       <div className="mt-6 space-y-4">
