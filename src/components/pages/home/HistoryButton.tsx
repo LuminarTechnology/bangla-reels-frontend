@@ -76,7 +76,10 @@ const HistoryButton = () => {
               </Button>
             </Link>
                 </HoverCardTrigger>
-                <HoverCardContent className="w-70 bg-[#16151A] border-none p-0 rounded-2xl " align="end" sideOffset={8}>
+                <HoverCardContent className="w-70 bg-[#16151A] border-none p-0 rounded-2xl 
+                
+                before:content-[''] before:absolute before:-top-2 before:right-5 before:-translate-x-1/2 before:w-0 before:h-0 before:border-l-8 before:border-r-8 before:border-b-8 before:border-l-transparent before:border-r-transparent before:border-b-[#16151A]
+                " align="end" sideOffset={8}>
                   <div className="p-4">
                   
                     <Tabs defaultValue="history" className="w-full">

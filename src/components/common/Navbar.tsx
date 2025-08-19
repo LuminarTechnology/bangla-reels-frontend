@@ -15,6 +15,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/src/lib/utils";
 import HistoryButton from "../pages/home/HistoryButton";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
 
 
 const Navbar = () => {
@@ -29,6 +30,12 @@ const Navbar = () => {
     { name: "Desktop", href: "/desktop" },
   ];
 
+  const categories = [
+    { name: "Actors", href: "/categories" },
+    { name: "Actresses", href: "/categories" },
+    { name: "Identities", href: "/categories" },
+    { name: "Story Beats", href: "/categories" },
+  ]
 
   return (
     <ContainerWrapper>
@@ -41,18 +48,66 @@ const Navbar = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden items-center space-x-8 md:flex">
-            {navItems.map((item) => (
-              <Link
+            {navItems.map((item) => {
+                if (item.name === "Categories") {
+                return (
+                  <HoverCard key={item.name} openDelay={100} closeDelay={300}>
+                    <HoverCardTrigger asChild>
+                      <button
+                        className={cn(
+                          "text-base font-medium duration-200 flex flex-col items-center cursor-pointer",
+                          pathname === item.href ? "text-primary-rose" : "text-white",
+                        )}
+                      >
+                        {item.name}
+                         <span
+      className={cn(
+        "size-1 rounded-full mt-1",
+        pathname === item.href ? "bg-primary-rose" : "invisible"
+      )}
+    ></span>
+                      </button>
+                    </HoverCardTrigger>
+                    <HoverCardContent
+                      className="w-48 bg-[#16151A] rounded-2xl border-none p-0 shadow-xl relative before:content-[''] before:absolute before:-top-2 before:left-1/2 before:-translate-x-1/2 before:w-0 before:h-0 before:border-l-8 before:border-r-8 before:border-b-8 before:border-l-transparent before:border-r-transparent before:border-b-[#16151A]"
+                      align="center"
+                      sideOffset={8}
+                    >
+                      <div className="py-2">
+                        {categories.map((category) => (
+                          <Link
+                            key={category.name}
+                            href={category.href}
+                            className="block px-4 py-3 text-white text-sm hover:bg-gray-800 transition-colors"
+                          >
+                            {category.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </HoverCardContent>
+                  </HoverCard>
+                )
+              }
+              return (
+                <Link
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "text-base font-medium duration-200",
+                  "text-base font-medium duration-200 flex flex-col items-center",
                   pathname === item.href ? "text-primary-rose" : "text-white"
                 )}
               >
                 {item.name}
+                   <span
+      className={cn(
+        "size-1 rounded-full mt-1",
+        pathname === item.href ? "bg-primary-rose" : "invisible"
+      )}
+    ></span>
+
               </Link>
-            ))}
+              )
+})}
           </div>
 
           {/* Right Side Items */}
