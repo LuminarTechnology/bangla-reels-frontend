@@ -1,7 +1,8 @@
 import { ChevronRight, Forward, SquarePlay } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
-import { Button } from '../ui/button';
+import { Button } from '../../ui/button';
+
 
 
 interface ThumbnailCardProps {

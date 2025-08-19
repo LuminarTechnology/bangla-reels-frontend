@@ -1,10 +1,12 @@
-import { Button } from '@/src/components/ui/button';
+
 import { ChevronLeft } from 'lucide-react';
 import React from 'react';
 import MuxPlayer from '@mux/mux-player-react';
-import DetailsCard from '@/src/components/episodes/DetailsCard';
-import EpisodeSelection from '@/src/components/episodes/EpisodeSelection';
-import YouMayLike from '@/src/components/episodes/YouMayLike';
+import DetailsCard from '@/src/components/pages/episodes/DetailsCard';
+import EpisodeSelection from '@/src/components/pages/episodes/EpisodeSelection';
+import YouMayLike from '@/src/components/pages/episodes/YouMayLike';
+import ReusableBreadcrumb from '@/src/components/common/ReusableBreadcrumb';
+
 const defaultVideo = {
   title:"The Island",
   episode: "episode 01",
@@ -53,8 +55,11 @@ const page = () => {
             
                 </div>
 
+
+                
                 {/* Sidebar */}
                 <div className='md:w-96 overflow-y-auto scrollbar-hide pb-8'>
+                  <ReusableBreadcrumb items={[{ label: "Home", href: "/" }, { label: "Episode", href: "/episode" }, { label: "Player", href: "" }]} />
      <div className='h-full'>
                        <div className=' inline-block'>
   <h1 className="text-primary-rose text-2xl font-bold">Details</h1>

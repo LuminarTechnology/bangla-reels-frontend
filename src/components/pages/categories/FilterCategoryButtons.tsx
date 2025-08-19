@@ -27,9 +27,9 @@ const FilterCategoryButtons = () => {
   const [activeSort, setActiveSort] = useState("Popular")
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-6 mt-6">
       {/* Main Categories Section */}
-      <div className="space-y-3">
+      <div className="space-y-3 ">
        
         <div className="flex flex-wrap gap-2 border-b border-gray-100 pb-4">
           {mainCategories.map((category) => (
