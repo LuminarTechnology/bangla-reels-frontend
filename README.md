@@ -10,14 +10,15 @@ ReelShort is a short-form HD video streaming platform for vertical dramas.
 
 2. **Code Quality**
    - Write **meaningful commits** (e.g., `feat: add video player with autoplay`, `fix: resolve navbar responsive issue`).
-   - Write **meaningful PR descriptions** (include context, screenshots if UI-related, steps to test).
+   - Write **meaningful PR descriptions** (include context, steps to test).
    - Follow **clean code principles** and try to keep components **small & reusable**.
    - Use **TypeScript strictly** to avoid runtime issues.
    - Run **lint & format** before committing (`eslint`, `prettier`).
+   - **File length guideline:** Try to keep a single file under 150–200 lines for readability and maintainability.
 
 3. **Collaboration**
    - If a new library/technology is required, discuss with the **team** before adding it.
-   - Keep **consistent naming conventions** across components, hooks, utils, and styles.
+   - Keep **consistent naming conventions** across components, hooks, libs, services, redux, utils, and styles.
    - Always update documentation when adding/removing features.
 
 ## File Structures

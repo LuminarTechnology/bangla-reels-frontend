@@ -13,20 +13,20 @@ interface StreamingCardProps {
 
 export function StreamingCard({ title, description, genres, type, imageUrl }: StreamingCardProps) {
   return (
-    <div className="relative w-full bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden shadow-2xl border flex gap-4 p-4">
+    <div className="relative flex w-full gap-4 overflow-hidden rounded-2xl border bg-white/10 p-4 shadow-2xl backdrop-blur-sm">
       {/* Poster Image */}
-      <div className="w-3/7 relative">
+      <div className="relative w-3/7">
         <Image
           src={imageUrl}
           alt={title}
           width={165}
           height={362}
-          className="w-full h-[362px] object-cover rounded-[8px]"
+          className="h-[362px] w-full rounded-[8px] object-cover"
         />
         {/* Type Badge - positioned over image */}
         <Badge
           variant="secondary"
-          className="absolute top-3 left-3 bg-slate-800/90 text-white border-0 text-xs font-medium backdrop-blur-sm"
+          className="absolute top-3 left-3 border-0 bg-slate-800/90 text-xs font-medium text-white backdrop-blur-sm"
         >
           {type}
         </Badge>
@@ -34,28 +34,28 @@ export function StreamingCard({ title, description, genres, type, imageUrl }: St
 
       {/* Content Section */}
       <div className="w-4/7 space-y-4">
-        <h3 className="text-xl font-bold text-white leading-tight">{title}</h3>
+        <h3 className="text-xl leading-tight font-bold text-white">{title}</h3>
 
         <div className="absolute top-3 right-3 cursor-pointer">
-          <Image src={"/images/icons/copy-plus.png"} alt="Copy" width={32} height={32} />
+          <Image src={"/icons/copy-plus.png"} alt="Copy" width={32} height={32} />
         </div>
 
-        <p className="text-slate-300 text-sm leading-relaxed line-clamp-10">{description}</p>
+        <p className="line-clamp-10 text-sm leading-relaxed text-slate-300">{description}</p>
 
         <div className="flex flex-wrap gap-1.5">
           {genres.map((genre, index) => (
             <Badge
               key={index}
               variant="outline"
-              className="text-xs text-slate-300 border-slate-600 bg-slate-800/50 hover:bg-slate-700/50"
+              className="border-slate-600 bg-slate-800/50 text-xs text-slate-300 hover:bg-slate-700/50"
             >
               {genre}
             </Badge>
           ))}
         </div>
 
-        <Button className="w-full bg-primary-rose hover:bg-primary-rose-hover text-white font-semibold py-2.5 rounded-lg transition-all duration-200 transform hover:scale-105">
-          <Play className="w-4 h-4 mr-2 fill-current" />
+        <Button className="bg-primary-rose hover:bg-primary-rose-hover w-full transform rounded-lg py-2.5 font-semibold text-white transition-all duration-200 hover:scale-105">
+          <Play className="mr-2 h-4 w-4 fill-current" />
           PLAY
         </Button>
       </div>
