@@ -61,11 +61,11 @@ const Banner: React.FC = () => {
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % movies.length);
-  }, [movies.length]);
+  }, []);
 
   const prevSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev === 0 ? movies.length - 1 : prev - 1));
-  }, [movies.length]);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(nextSlide, 10000);

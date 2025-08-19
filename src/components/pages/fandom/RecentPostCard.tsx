@@ -18,8 +18,8 @@ const RecentPostCard = ({ image, title, date }: RecentPostCardProps) => {
         className="rounded object-cover"
       />
       <div>
-        <h4 className="text-sm leading-tight font-medium text-gray-900">{title}</h4>
-        <p className="mt-1 text-xs text-gray-500">{date}</p>
+        <h4 className="text-sm leading-tight font-medium text-gray-100">{title}</h4>
+        <p className="mt-1 text-xs text-gray-200">{date}</p>
       </div>
     </div>
   );

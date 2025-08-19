@@ -35,7 +35,7 @@ export default function OverviewPage() {
   const recommended = new Array(7).fill(null);
 
   return (
-    <div className="h-screen w-full space-y-8 overflow-y-auto rounded-xl bg-[#111] p-6 sm:p-8">
+    <div className="">
       <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
         <div>
           <h1 className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">

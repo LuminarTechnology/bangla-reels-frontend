@@ -3,6 +3,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { MessageCircle } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { commentSchema } from "@/src/schema/commentSchema.schema";
+import { FormInputField } from "../../forms/FormInputField";
 
 type CommentFormData = {
   comment: string;
@@ -18,87 +21,69 @@ const CommentSection = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<CommentFormData>();
+    control,
+  } = useForm<CommentFormData>({
+    resolver: zodResolver(commentSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      comment: "",
+      website: "",
+    },
+  });
 
   const onSubmit = (data: CommentFormData) => {
-    console.log("Form Submitted ✅", data);
+    // console.log("Form Submitted ✅", data);
     reset(); // clear form after submit
   };
 
   return (
-    <div className="mt-8 rounded-lg bg-white p-6 shadow-sm">
-      <h3 className="mb-6 flex items-center text-xl font-bold text-gray-900">
+    <div className="mt-8 rounded-lg bg-black p-6 shadow-sm">
+      <h3 className="mb-6 flex items-center text-xl font-bold text-gray-50">
         <MessageCircle className="mr-2 h-5 w-5" />
         Leave a Reply
       </h3>
 
-      <p className="mb-6 text-sm text-gray-600">
+      <p className="mb-6 text-sm text-gray-300">
         Your email address will not be published. Required fields are marked *
       </p>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Comment */}
-        <div>
-          <label htmlFor="comment" className="mb-2 block font-medium text-gray-700">
-            Comment *
-          </label>
-          <textarea
-            id="comment"
-            {...register("comment", { required: "Comment is required" })}
-            rows={6}
-            className="resize-vertical w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-red-500 focus:outline-none"
-            placeholder="Write your comment here..."
-          />
-          {errors.comment && <p className="text-sm text-red-500">{errors.comment.message}</p>}
-        </div>
+        <FormInputField
+          name="comment"
+          control={control}
+          label="Comment"
+          placeholder="Enter your comment"
+          as="textarea"
+        />
 
         {/* Name & Email */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <div>
-            <label htmlFor="name" className="mb-2 block font-medium text-gray-700">
-              Name *
-            </label>
-            <input
-              type="text"
-              id="name"
-              {...register("name", { required: "Name is required" })}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-red-500 focus:outline-none"
-              placeholder="Your name"
-            />
-            {errors.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="email" className="mb-2 block font-medium text-gray-700">
-              Email *
-            </label>
-            <input
-              type="email"
-              id="email"
-              {...register("email", {
-                required: "Email is required",
-                pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" },
-              })}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-red-500 focus:outline-none"
-              placeholder="your.email@example.com"
-            />
-            {errors.email && <p className="text-sm text-red-500">{errors.email.message}</p>}
-          </div>
+          <FormInputField
+            name="name"
+            control={control}
+            label="Name"
+            placeholder="Enter your name"
+            type="text"
+          />
+          <FormInputField
+            name="email"
+            control={control}
+            label="Email"
+            placeholder="Enter your email"
+            type="email"
+          />
         </div>
 
         {/* Website */}
-        <div>
-          <label htmlFor="website" className="mb-2 block font-medium text-gray-700">
-            Website
-          </label>
-          <input
-            type="url"
-            id="website"
-            {...register("website")}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-red-500 focus:outline-none"
-            placeholder="https://yourwebsite.com"
-          />
-        </div>
+        <FormInputField
+          name="website"
+          control={control}
+          label="Website"
+          placeholder="Enter your website"
+          type="text"
+        />
 
         {/* Save Info */}
         <div className="flex items-center">
@@ -108,7 +93,7 @@ const CommentSection = () => {
             {...register("saveInfo")}
             className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-red-600 focus:ring-2 focus:ring-red-500"
           />
-          <label htmlFor="saveInfo" className="ml-2 text-sm text-gray-700">
+          <label htmlFor="saveInfo" className="ml-2 text-sm text-gray-300">
             Save my name, email, and website in this browser for the next time I comment.
           </label>
         </div>

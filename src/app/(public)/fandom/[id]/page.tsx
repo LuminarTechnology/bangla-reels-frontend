@@ -10,15 +10,15 @@ const FandomDetailsPage = () => {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Main Content */}
           <div className="lg:col-span-2">
-            <article className="overflow-hidden rounded-lg bg-white shadow-sm">
+            <article className="overflow-hidden rounded-lg bg-black shadow-sm">
               {/* Header */}
               <div className="border-b border-gray-200 p-6">
                 <div className="mb-3 text-sm font-medium text-red-500">Top Movie Stories</div>
-                <h1 className="mb-4 text-3xl leading-tight font-bold text-gray-900 lg:text-4xl">
+                <h1 className="mb-4 text-3xl leading-tight font-bold text-gray-50 lg:text-4xl">
                   I Must Avenge The Pain I Suffered In My Last Life: Arianna Taylor's Vows In Reborn
                   To Love Mr. Right Movie
                 </h1>
-                <div className="flex items-center space-x-4 text-sm text-gray-500">
+                <div className="flex items-center space-x-4 text-sm text-gray-200">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-4 w-4" />
                     <span>2025-08-15</span>
@@ -52,7 +52,7 @@ const FandomDetailsPage = () => {
               {/* Article Content */}
               <div className="p-6">
                 <div className="prose prose-lg max-w-none">
-                  <p className="mb-6 leading-relaxed text-gray-700">
+                  <p className="mb-6 leading-relaxed text-gray-100">
                     Arianna of{" "}
                     <span className="cursor-pointer text-red-500 underline">
                       Reborn To Love Mr. Right
@@ -60,7 +60,7 @@ const FandomDetailsPage = () => {
                     movie promises I Must Avenge The Pain I Suffered In My Last Life!
                   </p>
 
-                  <p className="mb-6 leading-relaxed text-gray-700">
+                  <p className="mb-6 leading-relaxed text-gray-100">
                     The highly anticipated drama series brings viewers into a world of second
                     chances, revenge, and unexpected romance. Following Arianna Taylor's journey as
                     she navigates her reborn life with the memories and pain of her previous
@@ -68,14 +68,14 @@ const FandomDetailsPage = () => {
                     love to heal even the deepest wounds.
                   </p>
 
-                  <p className="mb-6 leading-relaxed text-gray-700">
+                  <p className="mb-6 leading-relaxed text-gray-100">
                     Set against a backdrop of high school drama and complex relationships, "Reborn
                     To Love Mr. Right" showcases how past experiences can shape our present choices.
                     Arianna's determination to right the wrongs of her past life creates compelling
                     storylines filled with emotional depth and surprising twists.
                   </p>
 
-                  <p className="mb-6 leading-relaxed text-gray-700">
+                  <p className="mb-6 leading-relaxed text-gray-100">
                     The movie features exceptional performances from a talented cast, bringing
                     authenticity to each character's journey. From moments of intense drama to
                     heartwarming romantic scenes, the film delivers a complete emotional experience
@@ -83,7 +83,7 @@ const FandomDetailsPage = () => {
                     storytelling.
                   </p>
 
-                  <p className="leading-relaxed text-gray-700">
+                  <p className="leading-relaxed text-gray-100">
                     As Arianna confronts those who wronged her in the past while discovering new
                     love in the present, viewers are taken on an emotional rollercoaster that
                     explores the complexity of human relationships and the possibility of redemption
