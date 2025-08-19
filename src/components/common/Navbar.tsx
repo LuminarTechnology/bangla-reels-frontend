@@ -50,6 +50,27 @@ const Navbar = () => {
       thumbnail: "/images/Poster 4.png",
     },
   ]
+
+  const myListItems = [
+    {
+      id: 1,
+      title: "My List Item 1",
+      episode: "My List Episode 1",
+      thumbnail: "/images/Poster 4.png",
+    },
+    {
+      id: 2,
+      title: "My List Item 2",
+      episode: "My List Episode 2",
+      thumbnail: "/images/Poster 4.png",
+    },
+    {
+      id: 3,
+      title: "My List Item 3",
+      episode: "My List Episode 3",
+      thumbnail: "/images/Poster 4.png",
+    },
+  ]
   return (
     <ContainerWrapper>
       <nav className="">
@@ -150,7 +171,7 @@ const Navbar = () => {
                         </TabsTrigger>
                       </TabsList>
                       <TabsContent value="history" className="space-y-3">
-                        {historyItems.map((item) => (
+                        {historyItems.length === 0 ? <p className="text-gray-400 text-sm">No history items found</p> : historyItems.map((item) => (
                           <div
                             key={item.id}
                             className="flex  space-x-3 p-2 rounded-lg hover:bg-gray-800 cursor-pointer"
@@ -171,16 +192,44 @@ const Navbar = () => {
                           </div>
                         ))}
                         <div className="pt-2 flex justify-center">
-                          <button className="text-primary-rose text-sm font-medium hover:text-primary-rose-hover flex items-center">
+                          <Link href={`/history`} className="text-primary-rose text-sm font-medium hover:text-primary-rose-hover flex items-center">
                             More
                             <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
-                          </button>
+                          </Link>
                         </div>
                       </TabsContent>
                       <TabsContent value="mylist" className="text-center py-8">
-                        <p className="text-gray-400 text-sm">Your list is empty</p>
+                          {myListItems?.length === 0 ? <p className="text-gray-400 text-sm">No my list items found</p> : myListItems.map((item) => (
+                          <div
+                            key={item.id}
+                            className="flex  space-x-3 p-2 rounded-lg hover:bg-gray-800 cursor-pointer"
+                          >
+                            <div className="relative">
+                              <Image
+                              src={item.thumbnail || "/placeholder.svg"}
+                              alt={item.title}
+                              width={69}
+                              height={93}
+                              className="w-[69px] h-[93px] rounded object-cover"
+                            />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <h3 className="text-white text-xl font-bold ">{item.title}</h3>
+                              <p className="text-[#B3B1B0] text-base">{item.episode}</p>
+                            </div>
+                          </div>
+                        ))}
+
+                        <div className="pt-2 flex justify-center">
+                          <Link href={`/history`} className="text-primary-rose text-sm font-medium hover:text-primary-rose-hover flex items-center">
+                            More
+                            <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                            </svg>
+                          </Link>
+                        </div>
                       </TabsContent>
                     </Tabs>
                   </div>
