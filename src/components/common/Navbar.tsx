@@ -23,6 +23,7 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "Categories", href: "/categories" },
     { name: "Fandom", href: "/fandom" },
+    { name: "Contest", href: "#" },
     { name: "App", href: "/app" },
     { name: "Desktop", href: "/desktop" },
   ];
