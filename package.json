@@ -5,6 +5,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "tsc": "set NODE_OPTIONS=--max-old-space-size=4096 && tsc",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "format": "prettier --write ."
   },
