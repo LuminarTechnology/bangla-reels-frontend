@@ -8,7 +8,8 @@ interface HistoryContentProps {
         id: number,
         title: string,
         episode: number,
-        thumbnail: string
+        thumbnail: string,
+        watchedProgress?: number
     }[],
     tabName: string,
     link:string
@@ -26,9 +27,10 @@ const HistoryContent = ({historyItems, tabName, link}: HistoryContentProps) => {
              : historyItems.slice(0, 3).map((item) => (
                           <div
                             key={item.id}
-                            className="flex  space-x-3 p-2 rounded-lg hover:bg-gray-900 cursor-pointer"
+                            className="relative  p-2 rounded-xl hover:bg-gray-900 cursor-pointer"
                           >
-                            <div className="relative">
+                            <div className="flex space-x-3">
+                              <div className="relative">
                               <Image
                               src={item.thumbnail || "/placeholder.svg"}
                               alt={item.title}
@@ -41,6 +43,13 @@ const HistoryContent = ({historyItems, tabName, link}: HistoryContentProps) => {
                               <h3 className="text-white text-xl font-bold ">{item.title}</h3>
                               <p className="text-[#B3B1B0] text-base">Played to Episode {item.episode}</p>
                             </div>
+                            </div>
+
+                             {item?.watchedProgress && item.watchedProgress > 0 && (
+            <div className="absolute bottom-1 left-1.5 h-1 w-full bg-gray-600">
+              <div className="h-1 bg-red-500" style={{ width: `${item.watchedProgress}%` }} />
+            </div>
+          )}
                           </div>
                         ))}
                        {historyItems.length >0 && (
