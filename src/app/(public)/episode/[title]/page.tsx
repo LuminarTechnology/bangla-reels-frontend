@@ -1,35 +1,35 @@
-import { Button } from '@/src/components/ui/button';
-import { ChevronLeft } from 'lucide-react';
-import React from 'react';
-import MuxPlayer from '@mux/mux-player-react';
-import DetailsCard from '@/src/components/episodes/DetailsCard';
-import EpisodeSelection from '@/src/components/episodes/EpisodeSelection';
-import YouMayLike from '@/src/components/episodes/YouMayLike';
-const defaultVideo = {
-  title:"The Island",
-  episode: "episode 01",
-  description: "Stranded! Three years ago, in Maldives, a small town where the danger is beyond and covers six cities. When a young boy goes missing, his friends discover a hidden world known as The Upside Down. Alongside the boy, they discover that everything in this small town has become unexpected heroes.",
-  playbackId: "OEGkD6ypFq1C02Rfoxpz2gjwERmDXNHNZITW6LylLFB4",
-  genres: ["Action", "Horrible"]
-}
+import { ChevronLeft } from "lucide-react";
+import React from "react";
+import MuxPlayer from "@mux/mux-player-react";
+import DetailsCard from "@/src/components/pages/episodes/DetailsCard";
+import EpisodeSelection from "@/src/components/pages/episodes/EpisodeSelection";
+import YouMayLike from "@/src/components/pages/episodes/YouMayLike";
+import ReusableBreadcrumb from "@/src/components/common/ReusableBreadcrumb";
 
+const defaultVideo = {
+  title: "The Island",
+  episode: "episode 01",
+  description:
+    "Stranded! Three years ago, in Maldives, a small town where the danger is beyond and covers six cities. When a young boy goes missing, his friends discover a hidden world known as The Upside Down. Alongside the boy, they discover that everything in this small town has become unexpected heroes.",
+  playbackId: "OEGkD6ypFq1C02Rfoxpz2gjwERmDXNHNZITW6LylLFB4",
+  genres: ["Action", "Horrible"],
+};
 
 const page = () => {
-    return (
-        <div className='p-6'>
-            <div className='flex flex-col md:flex-row gap-4 h-screen'>
-                {/* Video Player */}
-                <div className='bg-black flex-1 relative'>
-                    <div className="absolute top-4 left-4 z-10 hidden md:block" >
-              <button className="text-white   text-3xl font-semibold flex items-center cursor-pointer">
-                <ChevronLeft size={30} className="mr-1 text-3xl" />
-                {defaultVideo.title}
-                
-              </button>
-              <div className="ml-8 text-xl text-white">{defaultVideo.episode}</div>
-            </div>
+  return (
+    <div className="p-6">
+      <div className="flex h-screen flex-col gap-4 md:flex-row">
+        {/* Video Player */}
+        <div className="group relative flex-1 bg-black">
+          <div className="absolute top-3 -left-1 z-10 hidden group-hover:block group-hover:delay-1000">
+            <button className="flex cursor-pointer items-center text-3xl font-semibold text-white">
+              <ChevronLeft size={32} className="mr-1 text-3xl" />
+              {/* {defaultVideo.title} */}
+            </button>
+            {/* <div className="ml-8 text-xl text-white">{defaultVideo.episode}</div> */}
+          </div>
 
-<div className="relative w-full h-full ">
+          <div className="relative h-full w-full">
             <MuxPlayer
               playbackId={defaultVideo.playbackId}
               metadata={{
@@ -37,35 +37,43 @@ const page = () => {
                 video_title: `${defaultVideo.title} - ${defaultVideo.episode}`,
               }}
               streamType="on-demand"
+              title={`${defaultVideo.title} - ${defaultVideo.episode}`}
+              accentColor="#E83A57"
               style={{
                 height: "100%",
                 // width: "100%",
-               
+                objectFit: "cover",
               }}
-              className=" h-full"
+              className="h-full"
             />
           </div>
-            
-                </div>
-
-                {/* Sidebar */}
-                <div className='md:w-96 overflow-y-auto scrollbar-hide pb-8'>
-     <div className='h-full'>
-                       <div className=' inline-block'>
-  <h1 className="text-primary-rose text-2xl font-bold">Details</h1>
-  <div className="bg-primary-rose mx-auto w-10 h-[3px] mt-1"></div>
-</div>
-
-<DetailsCard description={defaultVideo.description} genres={defaultVideo.genres} />
-
-<EpisodeSelection/>
-
-<YouMayLike />
-     </div>
-                </div>
-            </div>
         </div>
-    );
+
+        {/* Sidebar */}
+        <div className="scrollbar-hide overflow-y-auto pb-8 md:w-96">
+          <ReusableBreadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Collateral Hearts", href: "/movies/Collateral Hearts" },
+              { label: "Episode" },
+            ]}
+          />
+          <div className="h-full">
+            <div className="inline-block">
+              <h1 className="text-primary-rose text-2xl font-bold">Details</h1>
+              <div className="bg-primary-rose mx-auto mt-1 h-[3px] w-10"></div>
+            </div>
+
+            <DetailsCard description={defaultVideo.description} genres={defaultVideo.genres} />
+
+            <EpisodeSelection />
+
+            <YouMayLike />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default page;

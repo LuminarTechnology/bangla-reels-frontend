@@ -2,9 +2,10 @@
 
 import { useState } from "react"
 import { ChevronDown, Gem } from "lucide-react"
-import { Switch } from "../ui/switch"
-import { Label } from "../ui/label"
+
 import Image from "next/image"
+import { Label } from "../../ui/label"
+import { Switch } from "../../ui/switch"
 
 interface EpisodeSelectionProps {
   totalEpisodes?: number
