@@ -3,10 +3,12 @@ name: TypeScript Check
 on:
   push:
     branches:
-      - master
+      - main
+      - dev-mode
   pull_request:
     branches:
-      - master
+      - main
+      -dev-mode
 
 jobs:
   tsc:
