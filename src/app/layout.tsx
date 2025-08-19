@@ -23,7 +23,7 @@ interface Props {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning={false}>
       <body className={cn("gradient-background min-h-screen", fontSans.variable)}>
         <StoreProvider>{children}</StoreProvider>
       </body>

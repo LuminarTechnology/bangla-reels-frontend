@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Card } from "../ui/card";
 import { CopyPlus } from "lucide-react";
 import { cn } from "@/src/lib/utils";
+import Link from "next/link";
 
 interface PosterCardProps {
   title: string;
@@ -19,11 +20,12 @@ export function PosterCard({
   return (
     <Card
       className={cn(
-        "bg-transparent max-w-[200px] border-none overflow-hidden group cursor-pointer p-0 gap-0 shadow-none",
+        "bg-transparent max-w-[200px] border-none overflow-hidden group  p-0 gap-0 shadow-none",
         className
       )}
     >
-      <div className="relative aspect-[4/5] overflow-hidden rounded-[8px]">
+      <Link href={`/episode/${title}`}>
+      <div className="relative aspect-[4/5] overflow-hidden rounded-[8px] cursor-pointer">
         <Image
           src={posterImage}
           alt={title}
@@ -47,6 +49,7 @@ export function PosterCard({
           {title}
         </h3>
       </div>
+      </Link>
     </Card>
   );
 }
