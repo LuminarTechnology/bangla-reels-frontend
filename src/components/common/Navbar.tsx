@@ -17,6 +17,7 @@ import { cn } from "@/src/lib/utils";
 import HistoryButton from "../pages/home/HistoryButton";
 import CategoryPopup from "../pages/home/CategoryPopup";
 import LanguagePopup from "../pages/home/LanguagePopup";
+import UserButton from "../pages/home/UserButton";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -98,7 +99,7 @@ const Navbar = () => {
             </div>
 
             {/* User Profile */}
-            <DropdownMenu>
+            {/* <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
@@ -121,8 +122,8 @@ const Navbar = () => {
                   Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
-
+            </DropdownMenu> */}
+            <UserButton />
             {/* Mobile Menu */}
             <div className="lg:hidden">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
