@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ContainerWrapper from "./ContainerWrapper";
 import { Button } from "../ui/button";
-import { CircleUser, Globe, History, Menu, Search, Smartphone, User } from "lucide-react";
+import { CircleUser, Globe, History, Menu, Search } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +15,6 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cn } from "@/src/lib/utils";
 import HistoryButton from "../pages/home/HistoryButton";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
 import CategoryPopup from "../pages/home/CategoryPopup";
 import LanguagePopup from "../pages/home/LanguagePopup";
 
@@ -27,8 +26,8 @@ const Navbar = () => {
     { name: "Home", href: "/" },
     { name: "Categories", href: "/categories" },
     { name: "Fandom", href: "/fandom" },
-    { name: "App", href: "/app", icon: <Smartphone className="size-4" /> },
-    { name: "Desktop", href: "/desktop" },
+    // { name: "App", href: "/app", icon: <Smartphone className="size-4" /> },
+    // { name: "Desktop", href: "/desktop" },
     { name: "Contest", href: "/contest" },
   ];
 
@@ -38,9 +37,9 @@ const Navbar = () => {
         <div className="flex h-16 items-center justify-between px-4">
           {/* Logo */}
           <div className="flex items-center justify-between space-x-16">
-            <div>
+            <Link href={"/"}>
               <h1 className="text-2xl font-bold text-white">ReelShort</h1>
-            </div>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden items-center space-x-8 pt-2.5 md:flex">
@@ -63,10 +62,7 @@ const Navbar = () => {
                       pathname === item.href ? "text-primary-rose" : "text-white"
                     )}
                   >
-                    <div className="flex items-center gap-1.5">
-                      <span>{item?.icon}</span>
-                      {item.name}
-                    </div>
+                    <div className="flex items-center gap-1.5">{item.name}</div>
                     <span
                       className={cn(
                         "mt-1 size-1 rounded-full",

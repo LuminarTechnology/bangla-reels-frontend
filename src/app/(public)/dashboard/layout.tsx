@@ -3,22 +3,12 @@
 import { cn } from "@/src/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  History,
-  LogOut,
-  LayoutDashboard,
-  Wallet,
-  List,
-  Settings,
-  MessageSquare,
-  AppWindow,
-  FileText,
-} from "lucide-react";
+import { History, LogOut, LayoutDashboard, List, MessageSquare, AwardIcon } from "lucide-react";
 import LogoutModal from "@/src/components/common/LogoutModal";
 
 const sidebarItems = [
   { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Subscription & Rewards", href: "/dashboard/wallet", icon: Wallet },
+  { name: "Subscription & Rewards", href: "/dashboard/subscription-rewards", icon: AwardIcon },
   { name: "My List", href: "/dashboard/my-list", icon: List },
   { name: "History", href: "/dashboard/history", icon: History },
   { name: "Feedback", href: "/dashboard/feedback", icon: MessageSquare },
