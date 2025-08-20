@@ -50,7 +50,7 @@ export default function OverviewPage() {
       </div>
 
       {/* Stats Section */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="my-6 grid grid-cols-1 gap-6 md:grid-cols-3">
         {stats.map((stat, i) => (
           <div key={i} className="group relative">
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-rose-500/20 to-blue-500/20 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100" />
@@ -98,7 +98,7 @@ export default function OverviewPage() {
         </div>
       </div>
 
-      <div className="rounded-2xl border border-gray-700/50 bg-gray-800/30 p-6 backdrop-blur-sm">
+      <div className="mt-6 rounded-2xl border border-gray-700/50 bg-gray-800/30 p-6 backdrop-blur-sm">
         <div className="mb-6 flex items-center justify-between">
           <h3 className="text-xl font-bold text-white">Recent Activity</h3>
           <button className="text-sm font-medium text-rose-500 transition-colors hover:text-rose-300">
