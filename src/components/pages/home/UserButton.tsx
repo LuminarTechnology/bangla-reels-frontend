@@ -4,15 +4,16 @@ import { Button } from "../../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { User } from "lucide-react";
 import { Separator } from "../../ui/separator";
+import Link from "next/link";
 
 const UserButton = () => {
   const user = false;
   return (
-    <div className="flex items-center space-x-4">
+    <Link href={"/dashboard"} className="flex items-center space-x-4">
       <HoverCard openDelay={0} closeDelay={100}>
         <HoverCardTrigger asChild>
-          <Button variant="ghost" size="sm" className="relative h-10 w-10 rounded-full">
-            <Avatar className="h-8 w-8">
+          <Button variant="ghost" size="sm" className="relative size-8 rounded-full ">
+            <Avatar className="size-8">
               <AvatarImage src="/placeholder-user.jpg" alt="User" />
               <AvatarFallback>
                 <User className="size-4" />
@@ -64,7 +65,7 @@ const UserButton = () => {
           </div>
         </HoverCardContent>
       </HoverCard>
-    </div>
+    </Link>
   );
 };
 
