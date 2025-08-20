@@ -140,6 +140,9 @@ my-next-app/
   - [Tailwind CSS](https://tailwindcss.com/) → Styling
   - [Shadcn/UI](https://ui.shadcn.com/) → Pre-built UI components
 
+  - **Slider & Carousel**
+  - [Swiper.js](https://swiperjs.com/) → Slider library 
+
 - **Forms & Validation**
   - [React Hook Form](https://react-hook-form.com/) → Form handling
   - [Zod](https://zod.dev/) → Schema validation
