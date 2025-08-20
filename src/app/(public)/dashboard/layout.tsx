@@ -3,33 +3,22 @@
 import { cn } from "@/src/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  History,
-  LogOut,
-  LayoutDashboard,
-  Wallet,
-  List,
-  Settings,
-  MessageSquare,
-  AppWindow,
-  FileText,
-} from "lucide-react";
+import { History, LogOut, LayoutDashboard, List, MessageSquare, AwardIcon } from "lucide-react";
+import LogoutModal from "@/src/components/common/LogoutModal";
 
 const sidebarItems = [
   { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
-  { name: "Wallet & Coins", href: "/dashboard/wallet", icon: Wallet },
-  { name: "History", href: "/dashboard/history", icon: History },
+  { name: "Subscription & Rewards", href: "/dashboard/subscription-rewards", icon: AwardIcon },
   { name: "My List", href: "/dashboard/my-list", icon: List },
+  { name: "History", href: "/dashboard/history", icon: History },
   { name: "Feedback", href: "/dashboard/feedback", icon: MessageSquare },
-  { name: "App", href: "/dashboard/app", icon: AppWindow },
-  { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <div className="flex h-screen gap-5 text-white">
+    <div className="flex h-[calc(100vh-50px)] gap-5 text-white">
       {/* Sidebar */}
       <aside className="flex w-80 flex-col rounded-xl border-r border-gray-800 bg-[#111] p-4">
         <div className="flex items-center gap-3 p-3">
@@ -48,8 +37,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-900",
-                  pathname === item.href && "bg-[#e83a570f] text-red-900"
+                  "flex items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-500",
+                  pathname === item.href && "bg-[#e83a570f] text-red-500"
                 )}
               >
                 <Icon className="h-5 w-5" />
@@ -60,18 +49,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </nav>
 
         <div className="mt-auto">
-          <Link
-            href="/logout"
-            className="flex items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-900"
-          >
-            <LogOut className="h-5 w-5" />
-            Log Out
-          </Link>
+          <LogoutModal
+            button={
+              <button className="bg-primary-rose hover:bg-primary-rose-hover flex w-full items-center gap-3 rounded-xl px-3 py-3 transition">
+                <LogOut className="h-5 w-5" />
+                Log Out
+              </button>
+            }
+          />
         </div>
       </aside>
 
       {/* Main Content */}
-      <main className="h-screen w-full flex-1 space-y-8 overflow-y-auto rounded-xl bg-[#111] p-6 sm:p-8">
+      <main className="w-full flex-1 space-y-8 overflow-y-auto rounded-xl bg-[#111] p-6 sm:p-8">
         {children}
       </main>
     </div>

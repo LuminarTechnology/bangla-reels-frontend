@@ -172,6 +172,9 @@ my-next-app/
   - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
   - [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/) → Code quality & formatting
 
+- **Alert & Toast**
+  - [Sonner](https://npmjs.com/package/sonner)
+
 ---
 
 ## ✅ Best Practices
