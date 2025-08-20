@@ -1,9 +1,8 @@
-import React from "react";
+"use client";
+import { useRouter } from "next/navigation";
 
-export default function SuperAdminDashboard() {
-  return (
-    <div>
-      <h1>This is super admin dashboard</h1>
-    </div>
-  );
+export default function SuperAdminPage() {
+  const router = useRouter();
+
+  router.push("/super-admin/login");
 }
