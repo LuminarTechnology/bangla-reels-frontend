@@ -14,6 +14,7 @@ import {
   AppWindow,
   FileText,
 } from "lucide-react";
+import LogoutModal from "@/src/components/common/LogoutModal";
 
 const sidebarItems = [
   { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
@@ -58,13 +59,14 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </nav>
 
         <div className="mt-auto">
-          <Link
-            href="/logout"
-            className="bg-primary-rose hover:bg-primary-rose-hover flex items-center gap-3 rounded-xl px-3 py-3 transition"
-          >
-            <LogOut className="h-5 w-5" />
-            Log Out
-          </Link>
+          <LogoutModal
+            button={
+              <button className="bg-primary-rose hover:bg-primary-rose-hover flex w-full items-center gap-3 rounded-xl px-3 py-3 transition">
+                <LogOut className="h-5 w-5" />
+                Log Out
+              </button>
+            }
+          />
         </div>
       </aside>
 
