@@ -1,0 +1,81 @@
+"use client";
+import React, { useState } from "react";
+import { User, Menu, X } from "lucide-react";
+import Link from "next/link";
+
+const AdminAuthNavbar = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  return (
+    <nav className="bg-gray-950 text-white shadow-lg">
+      <div className="mx-auto max-w-full px-8">
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <h1 className="text-xl font-bold text-white">ReelShort</h1>
+            </div>
+          </div>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-4">
+              {/* Navigation items can be added here */}
+            </div>
+          </div>
+
+          {/* Desktop Login */}
+          <div className="hidden md:block">
+            <div className="ml-4 flex items-center md:ml-6">
+              <Link
+                href={"/super-admin"}
+                className="flex items-center space-x-2 rounded-md bg-gray-800 px-3 py-2 text-sm font-medium text-gray-300 transition-colors duration-200 hover:bg-gray-700 hover:text-white"
+              >
+                <User className="h-4 w-4" />
+                <span>Login</span>
+              </Link>
+            </div>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMobileMenu}
+              className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 transition-colors duration-200 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
+              aria-expanded="false"
+            >
+              <span className="sr-only">Open main menu</span>
+              {isMobileMenuOpen ? (
+                <X className="block h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="block h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <div className={`md:hidden ${isMobileMenuOpen ? "block" : "hidden"}`}>
+        <div className="space-y-1 bg-gray-800 px-2 pt-2 pb-3 sm:px-3">
+          {/* Mobile navigation items can be added here */}
+
+          {/* Mobile Login */}
+          <Link
+            href={"/super-admin/login"}
+            className="block w-full items-center space-x-2 rounded-md px-3 py-2 text-left text-base font-medium text-gray-300 transition-colors duration-200 hover:bg-gray-700 hover:text-white"
+          >
+            <User className="h-4 w-4" />
+            <span>Login</span>
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default AdminAuthNavbar;

@@ -10,7 +10,7 @@ interface Props {
 
 export default function UserLayout({ children }: Props) {
   return (
-    <div>
+    <div className="gradient-background">
       <Toaster position="top-right" richColors />
       <Navbar />
       <ContainerWrapper>{children}</ContainerWrapper>
