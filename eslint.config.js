@@ -103,6 +103,7 @@ export default [
       "prettier/prettier": "off",
       "import/order": "off",
       "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-non-null-assertion": "off",
     },
   },
 ];

@@ -1,9 +1,5 @@
-import React from "react";
+import { redirect } from "next/navigation";
 
-export default function SuperAdminDashboard() {
-  return (
-    <div>
-      <h1>This is super admin dashboard</h1>
-    </div>
-  );
+export default function SuperAdminPage() {
+  redirect("/super-admin/login");
 }
