@@ -7,7 +7,7 @@ interface Props {
 
 export default function SuperAdminLoginLayout({ children }: Props) {
   return (
-    <main className="container mx-auto px-10">
+    <main>
       <AdminAuthNavbar />
       {children}
     </main>
