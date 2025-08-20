@@ -34,8 +34,10 @@ export default function AdminSidebar() {
                 <button
                   onClick={() => toggleMenu(item.title)}
                   className={cn(
-                    "flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-gray-800",
-                    isOpen ? "bg-gray-800 text-white" : "text-gray-300 hover:text-white"
+                    "flex w-full cursor-pointer items-center justify-between px-3 py-3 text-sm font-medium transition-colors hover:bg-[#080200]",
+                    isOpen
+                      ? "rounded-full bg-[#080200] text-white"
+                      : "rounded-lg text-gray-300 hover:text-white"
                   )}
                 >
                   <div className="flex items-center space-x-3">
@@ -58,10 +60,10 @@ export default function AdminSidebar() {
                           key={child.href}
                           href={child.href}
                           className={cn(
-                            "block rounded-lg px-3 py-2 text-sm transition-colors hover:bg-gray-700",
+                            "block px-3 py-3 text-sm transition-colors hover:bg-[#080200]",
                             childActive
-                              ? "bg-gray-700 text-white"
-                              : "text-gray-400 hover:text-white"
+                              ? "rounded-full bg-[#080200] text-white"
+                              : "rounded-lg text-gray-400 hover:text-white"
                           )}
                         >
                           {child.title}
@@ -79,7 +81,7 @@ export default function AdminSidebar() {
               key={item.href}
               href={item.href!}
               className={cn(
-                "flex items-center space-x-3 px-3 py-4 text-sm font-medium transition-colors hover:bg-[#080200]",
+                "flex items-center space-x-3 px-3 py-3 text-sm font-medium transition-colors hover:bg-[#080200]",
                 isActive
                   ? "rounded-full bg-[#080200] text-white"
                   : "rounded-lg text-gray-300 hover:text-white"
@@ -96,7 +98,7 @@ export default function AdminSidebar() {
       <div className="p-3">
         <Link
           href="/signout"
-          className="flex items-center space-x-3 rounded-lg px-3 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-600 hover:text-white"
+          className="flex items-center space-x-3 rounded-lg px-3 py-3 text-sm font-medium text-red-400 transition-colors hover:bg-red-600 hover:text-white"
         >
           <LogOut className="h-5 w-5" />
           <span>Sign Out</span>
