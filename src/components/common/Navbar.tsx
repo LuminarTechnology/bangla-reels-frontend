@@ -18,6 +18,7 @@ import HistoryButton from "../pages/home/HistoryButton";
 import CategoryPopup from "../pages/home/CategoryPopup";
 import LanguagePopup from "../pages/home/LanguagePopup";
 import UserButton from "../pages/home/UserButton";
+import SearchBarPopup from "../pages/home/SearchBarPopup";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -79,14 +80,15 @@ const Navbar = () => {
           {/* Right Side Items */}
           <div className="flex items-center space-x-4">
             {/* Search Icon */}
-            <Button
+            {/* <Button
               variant="ghost"
               size="icon"
               className="text-gray-300 hover:bg-transparent hover:text-white"
             >
               <Search className="h-5 w-5" />
-            </Button>
+            </Button> */}
 
+            <SearchBarPopup />
             {/* Language Dropdown - Hidden on mobile */}
             <div className="hidden lg:block">
               <LanguagePopup />
