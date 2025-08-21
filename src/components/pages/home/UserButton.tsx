@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { User } from "lucide-react";
 import { Separator } from "../../ui/separator";
 import Link from "next/link";
+import LoginModal from "../../modals/Login";
 
 const UserButton = () => {
   const user = false;
@@ -41,9 +42,8 @@ const UserButton = () => {
                   <p className="text-sm text-[#B3B1B0]">UID 47846465</p>
                 </div>
               </div>
-              <Button variant="outline" size="sm" className="text-xs">
-                {user ? "Log out" : "Log in"}
-              </Button>
+              <LoginModal/>
+              
             </div>
 
             {/* Coins and Bonus */}
