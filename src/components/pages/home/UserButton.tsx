@@ -1,26 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../../ui/hover-card";
 import { Button } from "../../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { User } from "lucide-react";
 import { Separator } from "../../ui/separator";
 import Link from "next/link";
+import LoginModal from "../../modals/LoginModal";
 
 const UserButton = () => {
+  const [loginDialogOpen, setLoginDialogOpen] = useState(false);
   const user = false;
   return (
     <div>
       <HoverCard openDelay={0} closeDelay={100}>
         <HoverCardTrigger asChild>
           <Link href={"/dashboard"} className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm" className="relative size-8 rounded-full">
-            <Avatar className="size-8">
-              <AvatarImage src="/placeholder-user.jpg" alt="User" />
-              <AvatarFallback>
-                <User className="size-4" />
-              </AvatarFallback>
-            </Avatar>
-          </Button>
+            <Button variant="ghost" size="sm" className="relative size-8 rounded-full">
+              <Avatar className="size-8">
+                <AvatarImage src="/placeholder-user.jpg" alt="User" />
+                <AvatarFallback>
+                  <User className="size-4" />
+                </AvatarFallback>
+              </Avatar>
+            </Button>
           </Link>
         </HoverCardTrigger>
         <HoverCardContent
@@ -43,6 +45,9 @@ const UserButton = () => {
                   <p className="text-sm text-[#B3B1B0]">UID 47846465</p>
                 </div>
               </div>
+              <Button onClick={()=>setLoginDialogOpen(true)} variant="outline" size="sm" className="text-xs">
+                {user ? "Log out" : "Log in"}
+              </Button>
             </div>
 
             {/* Coins and Bonus */}
@@ -64,6 +69,11 @@ const UserButton = () => {
           </div>
         </HoverCardContent>
       </HoverCard>
+      <LoginModal
+        open={loginDialogOpen}
+        onOpenChange={setLoginDialogOpen}
+        onFormSubmit={() => setLoginDialogOpen(false)}
+      />
     </div>
   );
 };
