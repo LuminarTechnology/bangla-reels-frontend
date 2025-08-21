@@ -22,7 +22,7 @@ export const LoginFormCard: React.FC<LoginFormCardProps> = ({ onClose }) => {
   });
 
   const onSubmit = (data: LoginFormData) => {
-    console.log("Login Data:", data);
+    // console.log("Login Data:", data);
     // 🔐 Call your API here
     if (onClose) onClose();
   };
