@@ -1,13 +1,16 @@
 "use client";
-
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogOut, ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/src/lib/utils";
-import { sidebarItems } from "@/src/constants/SuperAdminSidebarItems";
+import { SidebarItem } from "@/src/types/DashboardSidebarItems.type";
 
-export default function AdminSidebar() {
+type DashboardSidebarProps = {
+  sidebarItems: SidebarItem[];
+};
+
+export default function DashboardSidebar({ sidebarItems }: DashboardSidebarProps) {
   const pathname = usePathname();
   const [openMenus, setOpenMenus] = useState<{ [key: string]: boolean }>({});
 
