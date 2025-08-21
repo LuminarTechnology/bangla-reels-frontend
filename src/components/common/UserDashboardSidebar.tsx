@@ -6,8 +6,8 @@ import { cn } from "@/src/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserDashboardSidebarItems } from "@/src/constants/UserDashboardSidebarItems";
-import LoginModal from "../modals/LoginModal";
-import { Button } from "../ui/button";
+// import LoginModal from "../modals/LoginModal";
+// import { Button } from "../ui/button";
 
 const UserDashboardSidebar = () => {
   const pathname = usePathname();
@@ -21,13 +21,13 @@ const UserDashboardSidebar = () => {
           <p className="text-xs text-gray-400">UID: 496496</p>
         </div>
 
-        <LoginModal
+        {/* <LoginModal
           TriggerButton={
             <Button variant="outline" size="sm" className="text-xs">
               {user ? "Log out" : "Log in"}
             </Button>
           }
-        />
+        /> */}
       </div>
 
       <nav className="mt-6 flex flex-col gap-2">
