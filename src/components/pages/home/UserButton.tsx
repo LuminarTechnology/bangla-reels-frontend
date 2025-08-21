@@ -13,7 +13,7 @@ const UserButton = () => {
     <Link href={"/dashboard"} className="flex items-center space-x-4">
       <HoverCard openDelay={0} closeDelay={100}>
         <HoverCardTrigger asChild>
-          <Button variant="ghost" size="sm" className="relative size-8 rounded-full ">
+          <Button variant="ghost" size="sm" className="relative size-8 rounded-full">
             <Avatar className="size-8">
               <AvatarImage src="/placeholder-user.jpg" alt="User" />
               <AvatarFallback>
@@ -42,8 +42,17 @@ const UserButton = () => {
                   <p className="text-sm text-[#B3B1B0]">UID 47846465</p>
                 </div>
               </div>
-              <LoginModal/>
-              
+              <LoginModal TriggerButton={
+                (
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="text-xs"
+                  >
+                    {user ? "Log out" : "Log in"}
+                  </Button>
+                )
+              }/>
             </div>
 
             {/* Coins and Bonus */}

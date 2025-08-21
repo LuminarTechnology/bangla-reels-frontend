@@ -18,7 +18,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar"
 import { User, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
-export default function LoginModal() {
+interface LoginModalProps {
+  TriggerButton: React.ReactNode;
+}
+
+export default function LoginModal({TriggerButton}:LoginModalProps) {
   const user = false;
   const [isOpen, setIsOpen] = useState(false);
 
@@ -40,9 +44,7 @@ export default function LoginModal() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button onClick={() => setIsOpen(true)} variant="outline" size="sm" className="text-xs">
-          {user ? "Log out" : "Log in"}
-        </Button>
+        {TriggerButton}
       </DialogTrigger>
       <DialogContent 
         onInteractOutside={(e) => {
@@ -102,8 +104,7 @@ export default function LoginModal() {
           </div>
         </div>
 
-        <div className="flex items-center justify-center">
-          {/* Login Card */}
+        {/* Login Card */}
           <div className="w-full max-w-md rounded-lg shadow-lg">
             <form onSubmit={(e) => {
               e.preventDefault();
@@ -149,7 +150,6 @@ export default function LoginModal() {
               </Button>
             </form>
           </div>
-        </div>
       </DialogContent>
     </Dialog>
   );
