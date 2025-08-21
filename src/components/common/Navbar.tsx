@@ -3,7 +3,7 @@
 import { useState } from "react";
 import ContainerWrapper from "./ContainerWrapper";
 import { Button } from "../ui/button";
-import { CircleUser, Globe, History, Menu, Search } from "lucide-react";
+import { Globe, History, Menu } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -81,7 +81,7 @@ const Navbar = () => {
           {/* Right Side Items */}
           <div className="flex items-center space-x-4">
             {/* Search Icon */}
-            
+
             <SearchBarPopup />
 
             {/* Download APP */}
@@ -98,33 +98,8 @@ const Navbar = () => {
             </div>
 
             {/* User Profile */}
-            {/* <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="text-white hover:bg-transparent hover:text-gray-100"
-                >
-                  <div className="flex items-center space-x-2">
-                    <span className="hidden lg:inline">User</span>
-                    <CircleUser size={24} className="size-6" />
-                  </div>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-transparent">
-                <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
-                  Settings
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu> */}
             <UserButton />
 
-            
             {/* Mobile Menu */}
             <div className="lg:hidden">
               <Sheet open={isOpen} onOpenChange={setIsOpen}>

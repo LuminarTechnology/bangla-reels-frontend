@@ -1,4 +1,4 @@
-import AdminAuthNavbar from "@/src/components/common/super-admin/AdminAuthNavbar";
+import AdminAuthNavbar from "@/src/components/pages/super-admin/AdminAuthNavbar";
 import React, { ReactNode } from "react";
 
 interface Props {
