@@ -20,13 +20,6 @@ const DashboardMetrics = () => {
           <MetricCard key={index} {...metric} />
         ))}
       </div>
-
-      {/* Bottom row - 2 metrics */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {bottomRowMetrics.map((metric, index) => (
-          <MetricCard key={`bottom-${index}`} {...metric} />
-        ))}
-      </div> */}
     </div>
     );
 };
