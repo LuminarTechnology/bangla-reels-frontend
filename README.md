@@ -73,6 +73,7 @@ my-next-app/
 │ │ ├── icons/                      # lucide-react icon wrappers
 │ │ └── common/                     # Modals, navbars, buttons, etc.
 │ │ └── pages/                      # page-specific components.
+│ │ └── modal/                      # only for modals and dialog.
 │
 │ ├──📁 redux/                      # Centralized Redux store
 │ │ ├── features/                   # Slices & RTK Query APIs
@@ -91,6 +92,12 @@ my-next-app/
 │ │ ├── useAuth.ts
 │ │ ├── useLocale.ts
 │ │ └── useDebounce.ts
+|
+│ ├──📁 constants/                   # Global reusable constants (e.g., sidebar items, roles, API endpoints)
+│ │ ├── items.ts
+|
+│ ├──📁 schema/                      # zod schema for form validation
+│ │ ├── loginSchema.ts
 │
 │ ├──📁 lib/                         # Config & third-party setup
 │ │ ├── axiosClient.ts
