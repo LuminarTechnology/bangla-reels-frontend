@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { LineChart, Line, BarChart, Bar, ResponsiveContainer } from "recharts";
+import { LineChart, Line, BarChart, Bar, ResponsiveContainer, Tooltip } from "recharts";
 import { TrendingDown, TrendingUp, MoreHorizontal } from "lucide-react";
 import RevenueChart from "./RevenueChart";
 
@@ -58,10 +58,18 @@ const AnalyticsDashboard = () => {
             <div className="h-32 w-1/2">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={profitData}>
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "white",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      fontSize: "12px",
+                    }}
+                  />
                   <Line
                     type="monotone"
                     dataKey="previous"
-                    stroke="#d1d5db"
+                    stroke="oklch(0.704 0.191 22.216)"
                     strokeWidth={2}
                     dot={false}
                   />
@@ -102,8 +110,16 @@ const AnalyticsDashboard = () => {
             <div className="h-32 w-1/2">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={revenuePerVisitorData} barCategoryGap="20%">
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "white",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: "8px",
+                      fontSize: "12px",
+                    }}
+                  />
                   <Bar dataKey="previous" fill="#3b82f6" radius={[2, 2, 0, 0]} />
-                  <Bar dataKey="current" fill="#e5e7eb" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="current" fill="oklch(0.704 0.191 22.216)" radius={[2, 2, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
