@@ -1,34 +1,25 @@
-"use client";
-
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginFormData, loginSchema } from "@/src/schema/loginSchema.schema";
+import React from "react";
 import { LoginFormCard } from "@/src/components/modals/LoginFormCard";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/src/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 import { User, ChevronDown } from "lucide-react";
 import Image from "next/image";
 
 interface LoginModalProps {
-  TriggerButton: React.ReactNode;
+  open: boolean;
+  onOpenChange: any;
+  onFormSubmit: () => void;
 }
 
-export default function LoginModal({TriggerButton}:LoginModalProps) {
-  const user = false;
-  const [isOpen, setIsOpen] = useState(false);
+export default function LoginModal({open, onOpenChange, onFormSubmit}:LoginModalProps) {
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        {TriggerButton}
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="min-w-[521px] rounded-2xl border-none bg-[#0B0000] p-9">
         <DialogHeader className="gap-3">
           <DialogTitle className="text-center text-2xl font-bold text-white">Login</DialogTitle>
@@ -83,7 +74,7 @@ export default function LoginModal({TriggerButton}:LoginModalProps) {
           </div>
         </div>
 
-        <LoginFormCard onClose={() => setIsOpen(false)} />
+        <LoginFormCard onClose={onFormSubmit} />
       </DialogContent>
     </Dialog>
   );
