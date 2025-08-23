@@ -12,8 +12,22 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
 import Image from "next/image";
 import { transactions, episodes } from "@/src/constants/SubscriptionItems";
+import { EpisodeAndTransactionTable } from "@/src/components/tables/EpisodeAndTransactionTable";
 
 export default function WalletPage() {
+  const transactionColumns = [
+    { key: "amount", label: "Amount" },
+    { key: "coins", label: "Coins" },
+    { key: "trading", label: "Trading" },
+    { key: "tradingHours", label: "Trading Hours" },
+  ];
+
+  const episodeColumns = [
+    { key: "title", label: "Title" },
+    { key: "series", label: "Series" },
+    { key: "unlockedAt", label: "Unlocked at" },
+    { key: "status", label: "Status" },
+  ];
   return (
     <>
       <Card className="mb-5 rounded-2xl border-0 bg-[#16151A] p-6 text-white">
@@ -74,88 +88,12 @@ export default function WalletPage() {
         </TabsList>
         <TabsContent value="transactions" className="mt-0">
           <div className="overflow-x-auto">
-            <Table className="mt-5 rounded-lg bg-[#16151A]">
-              <TableHeader>
-                <TableRow className="border-[#0B0000] hover:bg-gray-800">
-                  <TableHead className="py-3 text-center text-base font-semibold text-white">
-                    Amount
-                  </TableHead>
-                  <TableHead className="py-3 text-center text-base font-semibold text-white">
-                    Coins
-                  </TableHead>
-                  <TableHead className="py-3 text-center text-base font-semibold text-white">
-                    Trading
-                  </TableHead>
-                  <TableHead className="py-3 text-center text-base font-semibold text-white">
-                    Trading Hours
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {transactions.map((transaction, index) => (
-                  <TableRow
-                    key={index}
-                    className="border-[#0B0000] transition-colors hover:bg-gray-800"
-                  >
-                    <TableCell className="py-3 text-center text-base text-white">
-                      {transaction.amount}
-                    </TableCell>
-                    <TableCell className="py-3 text-center text-base text-white">
-                      {transaction.coins}
-                    </TableCell>
-                    <TableCell className="py-3 text-center text-base text-white">
-                      {transaction.trading}
-                    </TableCell>
-                    <TableCell className="py-3 text-center text-base text-white">
-                      {transaction.tradingHours}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <EpisodeAndTransactionTable columns={transactionColumns} data={transactions} />
           </div>
         </TabsContent>
         <TabsContent value="episodes" className="mt-0">
           <div className="overflow-x-auto">
-            <Table className="mt-5 rounded-lg bg-[#16151A]">
-              <TableHeader>
-                <TableRow className="border-[#0B0000] hover:bg-gray-800">
-                  <TableHead className="py-3 text-center text-base font-semibold text-white">
-                    Title
-                  </TableHead>
-                  <TableHead className="py-3 text-center text-base font-semibold text-white">
-                    Series
-                  </TableHead>
-                  <TableHead className="py-3 text-center text-base font-semibold text-white">
-                    Unlocked at
-                  </TableHead>
-                  <TableHead className="py-3 text-center text-base font-semibold text-white">
-                    Status
-                  </TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {episodes.map((episode, index) => (
-                  <TableRow
-                    key={index}
-                    className="border-[#0B0000] transition-colors hover:bg-gray-800"
-                  >
-                    <TableCell className="py-3 text-center text-base text-white">
-                      {episode.title}
-                    </TableCell>
-                    <TableCell className="py-3 text-center text-base text-white">
-                      {episode.series}
-                    </TableCell>
-                    <TableCell className="py-3 text-center text-base text-white">
-                      {episode.unlockedAt}
-                    </TableCell>
-                    <TableCell className="py-3 text-center text-base text-white">
-                      {episode.status}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <EpisodeAndTransactionTable columns={episodeColumns} data={episodes} />
           </div>
         </TabsContent>
       </Tabs>
