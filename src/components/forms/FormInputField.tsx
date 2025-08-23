@@ -33,6 +33,7 @@ type FormInputFieldProps = {
   required?: boolean;
   className?: string;
   colorScheme?: ColorScheme;
+  defaultValue?: string | number | undefined;
 };
 
 export function FormInputField({
@@ -45,6 +46,7 @@ export function FormInputField({
   disabled = false,
   description,
   className,
+  defaultValue = "",
   colorScheme = {
     background: "bg-gray-950",
     text: "text-white",
@@ -63,6 +65,7 @@ export function FormInputField({
     <Controller
       name={name}
       control={control}
+      defaultValue={defaultValue}
       render={({ field, fieldState: { error } }) => (
         <div className="space-y-2">
           {label && (
