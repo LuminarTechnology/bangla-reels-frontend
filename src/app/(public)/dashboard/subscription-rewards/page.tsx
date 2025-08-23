@@ -1,18 +1,10 @@
 import { Button } from "@/src/components/ui/button";
 import { Card } from "@/src/components/ui/card";
 import { Separator } from "@/src/components/ui/separator";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/src/components/ui/table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
 import Image from "next/image";
 import { transactions, episodes } from "@/src/constants/SubscriptionItems";
-import { EpisodeAndTransactionTable } from "@/src/components/tables/EpisodeAndTransactionTable";
+import { EpisodeAndTransactionTable } from "@/src/components/pages/user-dashboard/subscription-rewards/EpisodeAndTransactionTable";
 
 export default function WalletPage() {
   const transactionColumns = [
