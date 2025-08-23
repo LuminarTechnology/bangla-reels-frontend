@@ -171,7 +171,7 @@ const columns: TableColumn<UserData>[] = [
     label: "Info",
     width: "w-16",
     render: () => (
-      <Button variant="ghost" size="sm" className="hover:bg-blue-50 hover:text-blue-800">
+      <Button variant="ghost" size="sm" className="hover:text-blue-800">
         View
       </Button>
     ),
@@ -181,7 +181,7 @@ const columns: TableColumn<UserData>[] = [
     label: "History",
     width: "w-16",
     render: () => (
-      <Button variant="ghost" size="sm" className="hover:bg-blue-50 hover:text-blue-800">
+      <Button variant="ghost" size="sm" className="hover:text-blue-800">
         View
       </Button>
     ),
@@ -245,7 +245,6 @@ export function CategoriesTable() {
     setShowTodayOnly(!showTodayOnly);
   };
 
- 
   return (
     <div>
       <ReusableTable
