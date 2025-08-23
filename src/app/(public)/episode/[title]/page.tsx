@@ -54,7 +54,7 @@ const page = () => {
           <ReusableBreadcrumb
             items={[
               { label: "Home", href: "/" },
-              { label: "Collateral Hearts", href: "/movies/Collateral Hearts" },
+              { label: "Collateral Hearts", href: "/movie/Collateral Hearts" },
               { label: "Episode" },
             ]}
           />

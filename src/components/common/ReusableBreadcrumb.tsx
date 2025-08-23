@@ -1,6 +1,4 @@
-'use client'
 import React from "react";
-import { usePathname } from "next/navigation";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -20,8 +18,6 @@ interface ReusableBreadcrumbProps {
 }
 
 const ReusableBreadcrumb: React.FC<ReusableBreadcrumbProps> = ({ items }) => {
-    const pathname = usePathname();
-    const movieName = pathname ? decodeURIComponent(pathname.split('/').pop() || '') : null; 
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -31,7 +27,7 @@ const ReusableBreadcrumb: React.FC<ReusableBreadcrumbProps> = ({ items }) => {
               {item.href ? (
                 <BreadcrumbLink
                   className="text-sm font-medium text-white/70 hover:text-red-700"
-                  href={`/movie/${movieName}`}
+                  href={item.href}
                 >
                   {item.label}
                 </BreadcrumbLink>

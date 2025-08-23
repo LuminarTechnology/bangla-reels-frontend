@@ -17,7 +17,6 @@ interface Movie {
   title: string;
   image: string;
   subtitle?: string;
-  link?: string;
 }
 
 const movies: Movie[] = [
@@ -26,35 +25,30 @@ const movies: Movie[] = [
     title: "John Wick 4",
     subtitle: "The Story of Survival",
     image: "/images/banner/banner-1.jpg",
-    link: 'episode'
   },
   {
     id: 2,
     title: "The Life List",
     subtitle: "Thrilling Adventure",
     image: "/images/banner/banner-2.png",
-    link: 'episode'
   },
   {
     id: 3,
     title: "Holiday in the Wild",
     subtitle: "Unleash the Action",
     image: "/images/banner/banner-3.png",
-    link: 'episode'
   },
   {
     id: 4,
     title: "Lonely Planet",
     subtitle: "The Untold Journey",
     image: "/images/banner/banner-4.png",
-    link: 'episode'
   },
   {
     id: 5,
     title: "DAY WITH MY WIFE",
     subtitle: "Romance & Comedy",
     image: "/images/banner/banner-5.png",
-    link: 'episode'
   },
 ];
 
@@ -83,7 +77,7 @@ const Banner: React.FC = () => {
         {movies.map((movie, index) => (
           <SwiperSlide key={movie.id}>
             {/* Background */}
-            <Link href={`/${movie?.link}/${movie.title}`}>
+            <Link href="episode/john-wick-4">
               <div className="relative h-full w-full">
                 <Image
                   src={movie.image}
@@ -120,7 +114,6 @@ const Banner: React.FC = () => {
                 </div>
               </div>
             </Link>
-
           </SwiperSlide>
         ))}
       </Swiper>

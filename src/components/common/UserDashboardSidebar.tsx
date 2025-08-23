@@ -1,38 +1,36 @@
 "use client";
 import React from "react";
 import LogoutModal from "@/src/components/modals/LogoutModal";
-import { Copy, LogOut, User } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserDashboardSidebarItems } from "@/src/constants/UserDashboardSidebarItems";
-import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
+// import LoginModal from "../modals/LoginModal";
+// import { Button } from "../ui/button";
 
 const UserDashboardSidebar = () => {
   const pathname = usePathname();
   const user = false;
   return (
-    <aside className="flex h-fit w-[28%] flex-col gap-4 rounded-2xl bg-[#0B0000] p-6">
-      {/* User details */}
-      <div className="flex items-center gap-4 p-4">
-        {/* User Avatar */}
-        <Avatar className="size-20 border-2 border-white">
-          <AvatarImage src="/placeholder-user.jpg" alt="Guest" />
-          <AvatarFallback className="bg-gray-600">
-            <User className="size-16 text-white" />
-          </AvatarFallback>
-        </Avatar>
-        {/* User Name & ID */}
-        <div className="space-y-2">
-          <p className="font-semibold text-2xl">Siyam Ahmed</p>
-          <p className="flex items-center gap-2 text-base text-[#B3B1B0]">
-            <span>UID: 496496</span>
-            <Copy strokeWidth={1} className="size-4 cursor-pointer text-[#B3B1B0] active:text-white transition" />
-          </p>
+    <aside className="flex w-80 flex-col rounded-xl border-r border-gray-800 bg-[#111] p-4">
+      <div className="flex items-center gap-3 p-3">
+        <img src="/profile.jpg" alt="Profile" className="h-12 w-12 rounded-full border" />
+        <div>
+          <p className="font-semibold">Siyam Ahmed</p>
+          <p className="text-xs text-gray-400">UID: 496496</p>
         </div>
+
+        {/* <LoginModal
+          TriggerButton={
+            <Button variant="outline" size="sm" className="text-xs">
+              {user ? "Log out" : "Log in"}
+            </Button>
+          }
+        /> */}
       </div>
-      {/* Dashboard routs */}
-      <nav className="flex flex-col gap-2">
+
+      <nav className="mt-6 flex flex-col gap-2">
         {UserDashboardSidebarItems.map((item) => {
           const Icon = item.icon;
           return (
@@ -40,22 +38,22 @@ const UserDashboardSidebar = () => {
               key={item.name}
               href={item.href}
               className={cn(
-                "flex items-center gap-2 text-xl text-[#FFFAFA] rounded-md p-4 transition hover:bg-[#E83A5714] hover:text-primary-rose active:scale-[0.97]",
-                pathname === item.href && "bg-[#E83A5714] text-primary-rose"
+                "flex items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-500",
+                pathname === item.href && "bg-[#e83a570f] text-red-500"
               )}
             >
-              <Icon strokeWidth={1} className="size-6" />
+              <Icon className="h-5 w-5" />
               {item.name}
             </Link>
           );
         })}
       </nav>
-      {/* Log out */}
+
       <div className="mt-auto">
         <LogoutModal
           button={
-            <button className="flex w-fit items-center gap-3 bg-primary-rose rounded-xl py-3 px-6 font-semibold text-base transition hover:bg-primary-rose-hover active:scale-[0.97]">
-              <LogOut className="h-5 w-5 scale-x-[-1]" />
+            <button className="bg-primary-rose hover:bg-primary-rose-hover flex w-full items-center gap-3 rounded-xl px-3 py-3 transition">
+              <LogOut className="h-5 w-5" />
               Log Out
             </button>
           }

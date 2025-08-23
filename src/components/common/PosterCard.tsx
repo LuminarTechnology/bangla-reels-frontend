@@ -41,7 +41,7 @@ export function PosterCard({
             className="object-cover"
           />
           <div className="absolute inset-0 flex items-center justify-center bg-black/60 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className='bg-[#180a32] p-4 rounded-full'>
+            <div className='bg-primary-rose p-4 rounded-full'>
               <Play />
             </div>
           </div>
@@ -79,8 +79,8 @@ export function PosterCard({
         </div>
       </Link>
       {/* Copy Button */}
-      <div className="absolute top-3 right-3 cursor-pointer bg-[#F3F4F680] transition p-2 rounded-full backdrop-blur-[2px] active:bg-[#a8a8a880]">
-        <Image src={"/icons/copy-plus.png"} alt="Copy" width={14} height={14} className="size-3.5" />
+      <div className="absolute top-3 right-3 cursor-pointer transition">
+        <Image src={"/icons/copy-plus.png"} alt="Copy" width={28} height={28} />
       </div>
     </Card>
   );
