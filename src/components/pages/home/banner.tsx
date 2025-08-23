@@ -10,6 +10,7 @@ import { Button } from "../../ui/button";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import Link from "next/link";
 
 interface Movie {
   id: number;
@@ -76,41 +77,43 @@ const Banner: React.FC = () => {
         {movies.map((movie, index) => (
           <SwiperSlide key={movie.id}>
             {/* Background */}
-            <div className="relative h-full w-full">
-              <Image
-                src={movie.image}
-                alt={movie.title}
-                fill
-                priority={index === 0}
-                className="rounded-none object-cover lg:rounded-lg"
-              />
-              <div className="absolute inset-0 bg-black/30" />
+            <Link href="episode/john-wick-4">
+              <div className="relative h-full w-full">
+                <Image
+                  src={movie.image}
+                  alt={movie.title}
+                  fill
+                  priority={index === 0}
+                  className="rounded-none object-cover lg:rounded-lg"
+                />
+                <div className="absolute inset-0 bg-black/30" />
 
-              {/* Content */}
-              <div className="relative z-10 flex h-full items-center px-4 sm:px-8 md:-bottom-10 md:px-12 lg:px-16">
-                <div className="animate-fadeIn max-w-xs sm:max-w-md md:max-w-lg">
-                  <h1 className="mb-2 text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">
-                    {movie.title}
-                  </h1>
-                  {movie.subtitle && (
-                    <h2 className="mb-6 text-lg font-light text-white sm:mb-8 sm:text-xl md:text-2xl lg:text-3xl">
-                      {movie.subtitle}
-                    </h2>
-                  )}
+                {/* Content */}
+                <div className="relative z-10 flex h-full items-center px-4 sm:px-8 md:-bottom-10 md:px-12 lg:px-16">
+                  <div className="animate-fadeIn max-w-xs sm:max-w-md md:max-w-lg">
+                    <h1 className="mb-2 text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">
+                      {movie.title}
+                    </h1>
+                    {movie.subtitle && (
+                      <h2 className="mb-6 text-lg font-light text-white sm:mb-8 sm:text-xl md:text-2xl lg:text-3xl">
+                        {movie.subtitle}
+                      </h2>
+                    )}
 
-                  <div className="flex items-center space-x-3 sm:space-x-5">
-                    <Button
-                      size="circular"
-                      variant="danger"
-                      className="flex items-center space-x-3"
-                    >
-                      <Play size={18} className="transition-transform group-hover:scale-110" />
-                    </Button>
-                    <div className="text-2xl text-white">Watch Now</div>
+                    <div className="flex items-center space-x-3 sm:space-x-5">
+                      <Button
+                        size="circular"
+                        variant="danger"
+                        className="flex items-center space-x-3"
+                      >
+                        <Play size={18} className="transition-transform group-hover:scale-110" />
+                      </Button>
+                      <div className="text-2xl text-white">Watch Now</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
           </SwiperSlide>
         ))}
       </Swiper>
