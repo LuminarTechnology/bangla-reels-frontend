@@ -1,5 +1,5 @@
 "use client";
-import { LayoutDashboard, Users, FileText, Package, Award, Settings, User } from "lucide-react";
+import { LayoutDashboard, Users, FileText, Package, Award, Settings, User, List } from "lucide-react";
 
 export const SuperAdminSidebarItems = [
   {
@@ -17,6 +17,7 @@ export const SuperAdminSidebarItems = [
     icon: FileText,
     children: [
       { title: "All Films", href: "/films" },
+      { title: "Film Category", href: "/super-admin/dashboard/category", icon: <List />},
       { title: "Add New", href: "/films/add" },
     ],
   },
