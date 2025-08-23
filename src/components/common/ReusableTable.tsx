@@ -1,42 +1,58 @@
-"use client"
+"use client";
 
-import { ReusableTableProps, TableAction, TableColumn, TableHeaderConfig } from '@/src/types/reusableTable';
-import { Calendar, MoreHorizontal, Search } from 'lucide-react';
-import React from 'react';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '../ui/dropdown-menu';
+import {
+  ReusableTableProps,
+  TableAction,
+  TableColumn,
+  TableHeaderConfig,
+} from "@/src/types/reusableTable";
+import { Calendar, MoreHorizontal, Search } from "lucide-react";
+import React from "react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
 
-
-
-
-const TableHeader = ({ config,
-     searchValue,
+const TableHeader = ({
+  config,
+  searchValue,
   onSearchChange,
-  onDateFilterClick, }: { config: TableHeaderConfig,  searchValue?: string
-  onSearchChange?: (value: string) => void
-  onDateFilterClick?: () => void })=>{
- return (
-     <div className="flex items-center justify-between p-6 ">
+  onDateFilterClick,
+}: {
+  config: TableHeaderConfig;
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
+  onDateFilterClick?: () => void;
+}) => {
+  return (
+    <div className="flex items-center justify-between p-6">
       <h1 className="text-2xl font-semibold text-[#242424]">{config.title}</h1>
 
       <div className="flex items-center gap-4">
         {config.showSearch && (
-          <div className="relative bg-[#F9F9F9] rounded-[50px]">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+          <div className="relative rounded-[50px] bg-[#F9F9F9]">
+            <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
             <Input
               type="text"
               placeholder={config.searchPlaceholder || "Search"}
               value={searchValue || ""}
               onChange={(e) => onSearchChange?.(e.target.value)}
-              className="pl-10 w-64 h-9  rounded-[50px]"
+              className="h-9 w-64 rounded-[50px] pl-10"
             />
           </div>
         )}
 
         {config.showDateFilter && (
-          <Button onClick={onDateFilterClick} variant="outline" className="h-9 px-4 border-gray-300 text-[#4E4E4E] bg-[#F9F9F9]">
-            <Calendar className="h-4 w-4 mr-2" />
+          <Button
+            onClick={onDateFilterClick}
+            variant="outline"
+            className="h-9 border-gray-300 bg-[#F9F9F9] px-4 text-[#4E4E4E]"
+          >
+            <Calendar className="mr-2 h-4 w-4" />
             Today
           </Button>
         )}
@@ -44,10 +60,7 @@ const TableHeader = ({ config,
         {config.actions?.map((action, index) => (
           <Button
             key={index}
-            
-            className={`h-9 px-4 rounded-[50px] 
-                 "bg-black text-white hover:bg-gray-800"
-            `}
+            className={`"bg-black hover:bg-gray-800" h-9 rounded-[50px] px-4 text-white`}
             onClick={action.onClick}
           >
             {action.icon && <span className="mr-2">{action.icon}</span>}
@@ -56,8 +69,8 @@ const TableHeader = ({ config,
         ))}
       </div>
     </div>
- )
-}
+  );
+};
 
 const TableRow = <T,>({
   row,
@@ -71,9 +84,15 @@ const TableRow = <T,>({
   onRowClick?: (row: T) => void;
 }) => {
   return (
-    <tr className={` hover:bg-gray-50 ${onRowClick ? "cursor-pointer" : ""}`} onClick={() => onRowClick?.(row)}>
-    {columns.map((column) => (
-        <td key={column.key} className={`px-6 py-4 whitespace-nowrap ${column.width ? column.width : ""}`}>
+    <tr
+      className={`hover:bg-gray-50 ${onRowClick ? "cursor-pointer" : ""}`}
+      onClick={() => onRowClick?.(row)}
+    >
+      {columns.map((column) => (
+        <td
+          key={column.key}
+          className={`px-6 py-4 whitespace-nowrap ${column.width ? column.width : ""}`}
+        >
           {column.render ? column.render((row as any)[column.key], row) : (row as any)[column.key]}
         </td>
       ))}
@@ -90,8 +109,8 @@ const TableRow = <T,>({
                 <DropdownMenuItem
                   key={index}
                   onClick={(e) => {
-                    e.stopPropagation()
-                    action.onClick(row)
+                    e.stopPropagation();
+                    action.onClick(row);
                   }}
                   className={action.variant === "destructive" ? "text-red-600" : ""}
                 >
@@ -102,11 +121,9 @@ const TableRow = <T,>({
           </DropdownMenu>
         </td>
       )}
-
     </tr>
-  )
-}
-
+  );
+};
 
 const ReusableTable = <T,>({
   data,
@@ -115,38 +132,47 @@ const ReusableTable = <T,>({
   actions,
   onRowClick,
   className = "",
- searchValue,
+  searchValue,
   onSearchChange,
   onDateFilterClick,
 }: ReusableTableProps<T>) => {
   return (
-    <div className={`w-full max-w-7xl mx-auto rounded-2xl bg-white shadow-sm ${className}`}>
+    <div className={`mx-auto rounded-2xl bg-white shadow-sm ${className}`}>
       {/* Table Header */}
-        <TableHeader config={headerConfig} searchValue={searchValue}
+      <TableHeader
+        config={headerConfig}
+        searchValue={searchValue}
         onSearchChange={onSearchChange}
-        onDateFilterClick={onDateFilterClick}/>
-        <div className="overflow-x-auto  px-4">
-        <table className="w-full  ">
-          <thead className="bg-[#16151A] rounded-t-2xl">
+        onDateFilterClick={onDateFilterClick}
+      />
+      <div className="overflow-x-auto px-4">
+        <table className="w-full">
+          <thead className="rounded-t-2xl bg-[#16151A]">
             <tr>
               {columns.map((column) => (
                 <th
                   key={column.key}
-                  className={`px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider ${column.width || ""}`}
+                  className={`px-6 py-3 text-left text-xs font-medium tracking-wider text-white uppercase ${column.width || ""}`}
                 >
                   {column.label}
                 </th>
               ))}
               {actions && actions.length > 0 && (
-                <th className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider w-16">
+                <th className="w-16 px-6 py-3 text-left text-xs font-medium tracking-wider text-white uppercase">
                   Action
                 </th>
               )}
             </tr>
           </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
+          <tbody className="divide-y divide-gray-200 bg-white">
             {data.map((row, index) => (
-              <TableRow key={index} row={row} columns={columns} actions={actions} onRowClick={onRowClick} />
+              <TableRow
+                key={index}
+                row={row}
+                columns={columns}
+                actions={actions}
+                onRowClick={onRowClick}
+              />
             ))}
           </tbody>
         </table>

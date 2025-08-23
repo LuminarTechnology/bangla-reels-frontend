@@ -15,6 +15,9 @@ ReelShort is a short-form HD video streaming platform for vertical dramas.
    - Use **TypeScript strictly** to avoid runtime issues.
    - Run **lint & format** before committing (`eslint`, `prettier`).
    - **File length guideline:** Try to keep a single file under 150–200 lines for readability and maintainability. If needed discuss with the **team** before adding it.
+   - **Maintain File Structure** Please make sure the file structure follows the existing project convention. If you face any difficulties understanding the file structure, let me know so we can clarify it together.
+   - **Logging** Comment out or remove any unnecessary console.log statements before final submission.
+   - **ESLint Issues** Fix any ESLint warnings or errors reported to ensure code quality and consistency across the project.
 
 3. **Collaboration**
    - If a new library/technology is required, discuss with the **team** before adding it.
