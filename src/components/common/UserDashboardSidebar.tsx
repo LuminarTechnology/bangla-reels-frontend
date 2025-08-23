@@ -20,14 +20,6 @@ const UserDashboardSidebar = () => {
           <p className="font-semibold">Siyam Ahmed</p>
           <p className="text-xs text-gray-400">UID: 496496</p>
         </div>
-
-        {/* <LoginModal
-          TriggerButton={
-            <Button variant="outline" size="sm" className="text-xs">
-              {user ? "Log out" : "Log in"}
-            </Button>
-          }
-        /> */}
       </div>
 
       <nav className="mt-6 flex flex-col gap-2">
