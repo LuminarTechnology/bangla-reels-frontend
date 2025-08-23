@@ -202,7 +202,7 @@ const columns: TableColumn<EpisodeListData>[] = [
 ];
 
 const headerConfig: TableHeaderConfig = {
-  title: "Episode List",
+  title: "List of Episodes",
   showSearch: true,
   searchPlaceholder: "Search",
   showDateFilter: true,
