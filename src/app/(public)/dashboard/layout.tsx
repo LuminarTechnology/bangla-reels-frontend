@@ -2,12 +2,12 @@ import UserDashboardSidebar from "@/src/components/common/UserDashboardSidebar";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-[calc(100vh-50px)] gap-5 text-white">
+    <div className="flex my-10 gap-6 text-white">
       {/* Sidebar */}
       <UserDashboardSidebar />
 
       {/* Main Content */}
-      <main className="w-full flex-1 space-y-8 overflow-y-auto rounded-xl bg-[#111] p-6 sm:p-8">
+      <main className="flex-1 rounded-2xl bg-[#0B0000] p-6">
         {children}
       </main>
     </div>

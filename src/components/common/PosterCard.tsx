@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Card } from "../ui/card";
 import { cn } from "@/src/lib/utils";
 import Link from "next/link";
+import { Play } from "lucide-react";
 
 interface PosterCardProps {
   title: string;
@@ -27,7 +28,7 @@ export function PosterCard({
   return (
     <Card
       className={cn(
-        "group max-w-[200px] gap-0 overflow-hidden border-none bg-transparent p-0 shadow-none",
+        "relative group max-w-[250px] gap-0 overflow-hidden border-none bg-transparent p-0 shadow-none",
         className
       )}
     >
@@ -37,14 +38,18 @@ export function PosterCard({
             src={posterImage}
             alt={title}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            className="object-cover"
           />
-
+          <div className="absolute inset-0 flex items-center justify-center bg-black/60 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+            <div className='bg-[#180a32] p-4 rounded-full'>
+              <Play />
+            </div>
+          </div>
           {/* Category Badge */}
           <div className="absolute top-3 left-3">
-            <span className="rounded-[12px] bg-[#f3f4f6c3] px-2 py-1 text-xs font-semibold backdrop-blur-sm">
+            <p className="rounded-[12px] bg-[#F3F4F680] px-3 py-1.5 text-xs text-gray-900 font-semibold backdrop-blur-[2px]">
               {category}
-            </span>
+            </p>
           </div>
 
           {/* Duration Badge */}
@@ -56,10 +61,6 @@ export function PosterCard({
             </div>
           )} */}
 
-          {/* Copy Icon */}
-          <div className="absolute top-3 right-3">
-            <Image src={"/icons/copy-plus.png"} alt="Copy" width={28} height={28} />
-          </div>
 
           {/* Watched Progress Bar */}
           {watchedProgress > 0 && (
@@ -71,12 +72,16 @@ export function PosterCard({
 
         {/* Title & Episodes */}
         <div className="px-1 pt-3">
-          <h3 className="text-xl leading-tight font-bold text-white transition-colors group-hover:text-purple-300">
+          <h3 className="text-xl leading-tight font-bold text-[#FFFAFA]">
             {title}
           </h3>
           {episodes && <p className="mt-1 text-sm text-gray-400">{episodes}</p>}
         </div>
       </Link>
+      {/* Copy Button */}
+      <div className="absolute top-3 right-3 cursor-pointer bg-[#F3F4F680] transition p-2 rounded-full backdrop-blur-[2px] active:bg-[#a8a8a880]">
+        <Image src={"/icons/copy-plus.png"} alt="Copy" width={14} height={14} className="size-3.5" />
+      </div>
     </Card>
   );
 }

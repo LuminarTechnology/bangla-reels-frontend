@@ -10,12 +10,14 @@ import { Button } from "../../ui/button";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import Link from "next/link";
 
 interface Movie {
   id: number;
   title: string;
   image: string;
   subtitle?: string;
+  link?: string;
 }
 
 const movies: Movie[] = [
@@ -24,30 +26,35 @@ const movies: Movie[] = [
     title: "John Wick 4",
     subtitle: "The Story of Survival",
     image: "/images/banner/banner-1.jpg",
+    link: 'episode'
   },
   {
     id: 2,
     title: "The Life List",
     subtitle: "Thrilling Adventure",
     image: "/images/banner/banner-2.png",
+    link: 'episode'
   },
   {
     id: 3,
     title: "Holiday in the Wild",
     subtitle: "Unleash the Action",
     image: "/images/banner/banner-3.png",
+    link: 'episode'
   },
   {
     id: 4,
     title: "Lonely Planet",
     subtitle: "The Untold Journey",
     image: "/images/banner/banner-4.png",
+    link: 'episode'
   },
   {
     id: 5,
     title: "DAY WITH MY WIFE",
     subtitle: "Romance & Comedy",
     image: "/images/banner/banner-5.png",
+    link: 'episode'
   },
 ];
 
@@ -76,41 +83,44 @@ const Banner: React.FC = () => {
         {movies.map((movie, index) => (
           <SwiperSlide key={movie.id}>
             {/* Background */}
-            <div className="relative h-full w-full">
-              <Image
-                src={movie.image}
-                alt={movie.title}
-                fill
-                priority={index === 0}
-                className="rounded-none object-cover lg:rounded-lg"
-              />
-              <div className="absolute inset-0 bg-black/30" />
+            <Link href={`/${movie?.link}/${movie.title}`}>
+              <div className="relative h-full w-full">
+                <Image
+                  src={movie.image}
+                  alt={movie.title}
+                  fill
+                  priority={index === 0}
+                  className="rounded-none object-cover lg:rounded-lg"
+                />
+                <div className="absolute inset-0 bg-black/30" />
 
-              {/* Content */}
-              <div className="relative z-10 flex h-full items-center px-4 sm:px-8 md:-bottom-10 md:px-12 lg:px-16">
-                <div className="animate-fadeIn max-w-xs sm:max-w-md md:max-w-lg">
-                  <h1 className="mb-2 text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">
-                    {movie.title}
-                  </h1>
-                  {movie.subtitle && (
-                    <h2 className="mb-6 text-lg font-light text-white sm:mb-8 sm:text-xl md:text-2xl lg:text-3xl">
-                      {movie.subtitle}
-                    </h2>
-                  )}
+                {/* Content */}
+                <div className="relative z-10 flex h-full items-center px-4 sm:px-8 md:-bottom-10 md:px-12 lg:px-16">
+                  <div className="animate-fadeIn max-w-xs sm:max-w-md md:max-w-lg">
+                    <h1 className="mb-2 text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">
+                      {movie.title}
+                    </h1>
+                    {movie.subtitle && (
+                      <h2 className="mb-6 text-lg font-light text-white sm:mb-8 sm:text-xl md:text-2xl lg:text-3xl">
+                        {movie.subtitle}
+                      </h2>
+                    )}
 
-                  <div className="flex items-center space-x-3 sm:space-x-5">
-                    <Button
-                      size="circular"
-                      variant="danger"
-                      className="flex items-center space-x-3"
-                    >
-                      <Play size={18} className="transition-transform group-hover:scale-110" />
-                    </Button>
-                    <div className="text-2xl text-white">Watch Now</div>
+                    <div className="flex items-center space-x-3 sm:space-x-5">
+                      <Button
+                        size="circular"
+                        variant="danger"
+                        className="flex items-center space-x-3"
+                      >
+                        <Play size={18} className="transition-transform group-hover:scale-110" />
+                      </Button>
+                      <div className="text-2xl text-white">Watch Now</div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Link>
+
           </SwiperSlide>
         ))}
       </Swiper>
