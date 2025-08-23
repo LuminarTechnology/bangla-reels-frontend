@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <UserDashboardSidebar />
 
       {/* Main Content */}
-      <main className="w-full flex-1 space-y-8 overflow-y-auto rounded-xl bg-[#111] p-6 sm:p-8">
+      <main className="w-full flex-1 space-y-8 overflow-y-auto rounded-2xl bg-[#0B0000] p-6 sm:p-8">
         {children}
       </main>
     </div>

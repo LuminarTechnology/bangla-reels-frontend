@@ -44,6 +44,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.62.0",
     "react-redux": "^9.1.0",
+    "recharts": "^3.1.2",
     "sonner": "^2.0.7",
     "swiper": "^11.2.10",
     "tailwind-merge": "^3.3.1",

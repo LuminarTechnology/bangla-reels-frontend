@@ -29,10 +29,7 @@ export const LoginFormCard: React.FC<LoginFormCardProps> = ({ onClose }) => {
 
   return (
     <div className="w-full max-w-md rounded-lg shadow-lg">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="space-y-4"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Email */}
         <FormInputField
           name="email"

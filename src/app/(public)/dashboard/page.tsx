@@ -1,5 +1,5 @@
 import { PosterCard } from "@/src/components/common/PosterCard";
-import { Wallet, History, BookmarkPlus } from "lucide-react";
+import { Wallet, ClockFading, BookmarkPlus } from "lucide-react";
 
 const stats = [
   {
@@ -16,7 +16,7 @@ const stats = [
     value: "45",
     unit: "Episodes",
     color: "bg-gradient-to-r from-blue-400 to-rose-500",
-    icon: History,
+    icon: ClockFading,
     change: "+8 this week",
     changeType: "neutral",
   },
@@ -31,62 +31,61 @@ const stats = [
   },
 ];
 
+const recentActivity = [
+  { action: "Completed", title: "The Life List - Episode 12", time: "2 hours ago" },
+  { action: "Added to list", title: "Midnight Chronicles", time: "1 day ago" },
+  { action: "Started watching", title: "Urban Legends - Episode 1", time: "3 days ago" },
+]
+
 export default function OverviewPage() {
   const recommended = new Array(7).fill(null);
 
   return (
-    <div className="">
-      <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
-        <div>
-          <h1 className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
-            Welcome back! 👋
+    <div className="flex flex-col gap-4">
+      <div className="flex justify-between">
+        <div className="space-y-2">
+          <h1 className="text-[#FFFAFA] text-3xl font-semibold">
+            Welcome back!
           </h1>
-          <p className="mt-2 text-gray-400">Ready to continue your entertainment journey?</p>
+          <p className="text-[#B3B1B0] text-base">Ready to continue your entertainment journey?</p>
         </div>
-        <div className="text-right">
-          <p className="text-sm text-gray-400">Last activity</p>
+        <div className="text-right space-y-2">
+          <p className="text-sm text-[#B3B1B0]">Last activity</p>
           <p className="font-medium text-white">2 hours ago</p>
         </div>
       </div>
 
       {/* Stats Section */}
-      <div className="my-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div className="flex gap-4 justify-between">
         {stats.map((stat, i) => (
-          <div key={i} className="group relative">
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-rose-500/20 to-blue-500/20 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-100" />
-            <div className="relative rounded-2xl border border-gray-700/50 bg-gray-800/50 p-6 backdrop-blur-sm transition-all duration-300 hover:border-gray-600/50">
-              <div className="mb-4 flex items-start justify-between">
-                <div className={`p-3 ${stat.color} rounded-xl shadow-lg`}>
-                  <stat.icon className="h-6 w-6 text-white" />
-                </div>
-                <div
-                  className={`rounded-full px-2 py-1 text-xs ${
-                    stat.changeType === "positive"
-                      ? "bg-rose-500/20 text-rose-400"
-                      : "bg-gray-500/20 text-gray-400"
-                  }`}
-                >
-                  {stat.change}
-                </div>
+          <div key={i} className="w-full relative rounded-2xl bg-[#16151A] px-6 py-7">
+            <div className="flex flex-col gap-3 justify-between">
+              <div className="bg-[#E83A57] w-fit p-1.5 rounded-md">
+                <stat.icon strokeWidth="1.25" className="size-7 text-[#FFFAFA]" />
+              </div>
+              <div className="flex items-baseline space-x-2">
+                <span className="text-3xl font-semibold text-[#FFFAFA]">{stat.value}</span>
+                <span className="text-sm text-[#B3B1B0]">{stat.unit}</span>
               </div>
               <div className="space-y-1">
-                <div className="flex items-baseline space-x-2">
-                  <span className="text-2xl font-bold text-white md:text-3xl">{stat.value}</span>
-                  <span className="text-sm text-gray-400">{stat.unit}</span>
-                </div>
-                <p className="text-sm text-gray-400">{stat.title}</p>
+                <p className="text-sm text-[#B3B1B0]">{stat.title}</p>
               </div>
+            </div>
+            <div
+              className="absolute top-2.5 right-2.5 bg-[#B3B1B033] text-xs text-white rounded-md px-2 py-1"
+            >
+              {stat.change}
             </div>
           </div>
         ))}
       </div>
 
+      {/* Recommend movies section */}
       <div>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Recommended for You</h2>
-          <button className="text-sm text-rose-500 hover:underline">View All</button>
+        <div className="mb-4">
+          <h2 className="text-2xl font-semibold">Recommended for You</h2>
         </div>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4">
           {recommended.map((_, i) => (
             <PosterCard
               key={i}
@@ -98,30 +97,27 @@ export default function OverviewPage() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-gray-700/50 bg-gray-800/30 p-6 backdrop-blur-sm">
+      {/* Recent Activity */}
+      <div className="mt-2 rounded-2xl bg-[#16151A] p-6">
         <div className="mb-6 flex items-center justify-between">
-          <h3 className="text-xl font-bold text-white">Recent Activity</h3>
-          <button className="text-sm font-medium text-rose-500 transition-colors hover:text-rose-300">
+          <h3 className="text-2xl font-semibold text-[#FFFAFA]">Recent Activity</h3>
+          <button className="text-xs text-primary-rose cursor-pointer active:underline">
             View all activity
           </button>
         </div>
         <div className="space-y-4">
-          {[
-            { action: "Completed", title: "The Life List - Episode 12", time: "2 hours ago" },
-            { action: "Added to list", title: "Midnight Chronicles", time: "1 day ago" },
-            { action: "Started watching", title: "Urban Legends - Episode 1", time: "3 days ago" },
-          ].map((activity, i) => (
+          {recentActivity.map((activity, i) => (
             <div
               key={i}
-              className="flex items-center space-x-4 rounded-xl p-3 transition-colors hover:bg-gray-700/30"
+              className="flex items-center space-x-4 rounded-xl"
             >
-              <div className="h-2 w-2 rounded-full bg-rose-500"></div>
-              <div className="flex-1">
-                <p className="text-sm text-white">
-                  <span className="font-medium text-rose-500">{activity.action}</span>{" "}
-                  {activity.title}
+              <div className="size-2.5 rounded-full bg-primary-rose mb-3"></div>
+              <div className="flex-1 space-y-1">
+                <p className="text-sm text-white space-x-1.5">
+                  <span className="text-base text-primary-rose">{activity.action}</span>
+                  <span>{activity.title}</span>
                 </p>
-                <p className="text-xs text-gray-400">{activity.time}</p>
+                <p className="text-xs text-[#B3B1B0]">{activity.time}</p>
               </div>
             </div>
           ))}
