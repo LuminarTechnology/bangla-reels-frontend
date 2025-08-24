@@ -131,7 +131,7 @@ export function FormFileUploadField<
   return (
     <div className={`space-y-2 ${className}`}>
       {label && (
-        <Label className="text-sm font-medium">
+        <Label className="text-sm text-[#242424] font-medium">
           {label}
           {required && <span className="text-red-500 ml-1">*</span>}
         </Label>

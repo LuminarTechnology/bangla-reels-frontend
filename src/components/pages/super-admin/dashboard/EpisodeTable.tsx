@@ -4,9 +4,10 @@ import ReusableTable from "@/src/components/common/ReusableTable";
 import { Switch } from "@/src/components/ui/switch";
 import { TableAction, TableColumn, TableHeaderConfig } from "@/src/types/reusableTable";
 import { Plus } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
+import { AddAndEditEpisodeModal } from "./AddAndEditEpisodeModal";
 
-interface EpisodeListData {
+export interface EpisodeListData {
   id: string;
   no: string;
   videoImage: string;
@@ -201,7 +202,35 @@ const columns: TableColumn<EpisodeListData>[] = [
   },
 ];
 
-const headerConfig: TableHeaderConfig = {
+
+const EpisodeTable = () => {
+    const [episodeListData, setEpisodeListData] = useState<EpisodeListData[]>(initialEpisodeListData)
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalMode, setModalMode] = useState<"add" | "edit">("add")
+  const [selectedEpisode, setSelectedEpisode] = useState<EpisodeListData | undefined>()
+
+    const handleAddEpisode = () => {
+    setModalMode("add")
+    setSelectedEpisode(undefined)
+    setModalOpen(true)
+  }
+
+  const handleEditEpisode = (episode: EpisodeListData) => {
+    setModalMode("edit")
+    setSelectedEpisode(episode)
+    setModalOpen(true)
+  }
+
+  const handleModalSubmit = (data: any) => {
+    if (modalMode === "add") {
+      
+      
+    } else if (modalMode === "edit" && selectedEpisode) {
+      
+    }
+  }
+
+  const headerConfig: TableHeaderConfig = {
   title: "List of Episodes",
   showSearch: true,
   searchPlaceholder: "Search",
@@ -211,7 +240,7 @@ const headerConfig: TableHeaderConfig = {
       label: "New",
       variant: "default",
       icon: <Plus className="h-4 w-4" />,
-      onClick: () => console.log("Add new episode"),
+      onClick: handleAddEpisode,
     },
   ],
 };
@@ -223,7 +252,7 @@ const actions: TableAction<EpisodeListData>[] = [
   },
   {
     label: "Edit",
-    onClick: (episode) => console.log("Edit episode:", episode.id),
+    onClick: handleEditEpisode,
   },
   {
     label: "Delete",
@@ -231,16 +260,24 @@ const actions: TableAction<EpisodeListData>[] = [
     onClick: (episode) => console.log("Delete episode:", episode.id),
   },
 ];
-const EpisodeTable = () => {
   return (
-    <div>
+    <>
       <ReusableTable
         data={initialEpisodeListData}
         columns={columns}
         headerConfig={headerConfig}
         actions={actions}
       />
-    </div>
+
+      <AddAndEditEpisodeModal
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+        mode={modalMode}
+        episodeData={selectedEpisode}
+        onSave={handleModalSubmit}
+      
+      />
+    </>
   );
 };
 
