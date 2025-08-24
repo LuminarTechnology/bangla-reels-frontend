@@ -6,10 +6,11 @@ import { User } from "lucide-react";
 import { Separator } from "../../ui/separator";
 import Link from "next/link";
 import LoginModal from "../../modals/LoginModal";
+import { useUser } from "@clerk/nextjs";
 
 const UserButton = () => {
   const [loginDialogOpen, setLoginDialogOpen] = useState(false);
-  const user = false;
+  const { user, isSignedIn } = useUser();
   return (
     <div>
       <HoverCard openDelay={0} closeDelay={100}>
@@ -17,7 +18,7 @@ const UserButton = () => {
           <Link href={"/dashboard"} className="flex items-center space-x-4">
             <Button variant="ghost" size="sm" className="relative size-8 rounded-full">
               <Avatar className="size-8">
-                <AvatarImage src="/placeholder-user.jpg" alt="User" />
+                <AvatarImage src={user?.imageUrl} alt={user?.fullName || "user"} />
                 <AvatarFallback>
                   <User className="size-4" />
                 </AvatarFallback>
@@ -35,24 +36,22 @@ const UserButton = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src="/placeholder-user.jpg" alt="Guest" />
+                  <AvatarImage src={user?.imageUrl} alt={user?.fullName || "Guest"} />
                   <AvatarFallback className="bg-gray-600">
                     <User className="h-4 w-4 text-white" />
                   </AvatarFallback>
                 </Avatar>
                 <div>
                   <p className="font-medium text-white">Guest</p>
-                  <p className="text-sm text-[#B3B1B0]">UID 47846465</p>
                 </div>
               </div>
-              <Button
-                onClick={() => setLoginDialogOpen(true)}
-                variant="outline"
-                size="sm"
-                className="text-xs"
-              >
-                {user ? "Log out" : "Log in"}
-              </Button>
+              {!isSignedIn && (
+                <Link href={"/sign-in"}>
+                  <Button variant="outline" size="sm" className="text-xs">
+                    Log in
+                  </Button>
+                </Link>
+              )}
             </div>
 
             {/* Coins and Bonus */}
@@ -68,17 +67,19 @@ const UserButton = () => {
             </div>
 
             {/* Top Up Button */}
-            <Button variant="danger" className="w-full" size="sm">
-              Top Up
-            </Button>
+            <Link href={"/dashboard/top-up"}>
+              <Button variant="danger" className="w-full" size="sm">
+                Top Up
+              </Button>
+            </Link>
           </div>
         </HoverCardContent>
       </HoverCard>
-      <LoginModal
+      {/* <LoginModal
         open={loginDialogOpen}
         onOpenChange={setLoginDialogOpen}
         onFormSubmit={() => setLoginDialogOpen(false)}
-      />
+      /> */}
     </div>
   );
 };
