@@ -198,7 +198,7 @@ const headerConfig: TableHeaderConfig = {
   actions: [
     {
       label: "New",
-      onClick: () => console.log("New clicked"),
+      onClick: () => console.warn("New clicked"),
       variant: "default",
       icon: <Plus className="h-4 w-4" />,
     },
@@ -208,11 +208,11 @@ const headerConfig: TableHeaderConfig = {
 const actions: TableAction<UserData>[] = [
   {
     label: "Edit",
-    onClick: (row) => console.log("Edit", row),
+    onClick: (row) => console.warn("Edit", row),
   },
   {
     label: "Delete",
-    onClick: (row) => console.log("Delete", row),
+    onClick: (row) => console.warn("Delete", row),
     variant: "destructive",
   },
 ];
@@ -253,7 +253,7 @@ export function CategoriesTable() {
         columns={columns}
         headerConfig={headerConfig}
         actions={actions}
-        onRowClick={(row) => console.log("Row clicked", row)}
+        onRowClick={(row) => console.warn("Row clicked", row)}
         searchValue={searchValue}
         onSearchChange={setSearchValue}
         onDateFilterClick={handleDateFilterClick}

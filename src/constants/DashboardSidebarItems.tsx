@@ -20,7 +20,7 @@ export const SuperAdminSidebarItems = [
   },
   {
     title: "User",
-    href: "/users",
+    href: "/super-admin/dashboard/user",
     icon: Users,
   },
   {

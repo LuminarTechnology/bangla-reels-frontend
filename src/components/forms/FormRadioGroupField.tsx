@@ -11,6 +11,7 @@ type FormRadioGroupFieldProps = {
   label?: string;
   options: { label: string; value: string | number }[];
   disabled?: boolean;
+ className?:string;
 };
 
 export function FormRadioGroupField({
@@ -19,6 +20,7 @@ export function FormRadioGroupField({
   label,
   options,
   disabled,
+  className = "flex flex-col space-y-2"
 }: FormRadioGroupFieldProps) {
   return (
     <Controller
@@ -29,7 +31,7 @@ export function FormRadioGroupField({
           {label && <Label>{label}</Label>}
           <RadioGroup
             {...field}
-            className="flex flex-col space-y-2"
+            className={className}
             disabled={disabled}
             onValueChange={field.onChange}
           >
