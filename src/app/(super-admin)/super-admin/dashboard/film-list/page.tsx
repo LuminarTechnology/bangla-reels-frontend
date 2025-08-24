@@ -1,9 +1,9 @@
-import FilmTable from "../../../../../components/pages/super-admin/dashboard/FilmTable";
+import FilmTable from "../../../../../components/pages/super-admin/film-list/FilmTable";
 
-export default async function Page(){
-    return (
-        <div>
-            <FilmTable/>
-        </div>
-    )
+export default async function Page() {
+  return (
+    <div>
+      <FilmTable />
+    </div>
+  );
 }

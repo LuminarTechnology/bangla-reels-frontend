@@ -8,6 +8,7 @@ type FormToggleSwitchFieldProps = {
   control: Control<any>;
   label?: string;
   disabled?: boolean;
+  labelClassName?:string
 };
 
 export function FormToggleSwitchField({
@@ -15,6 +16,7 @@ export function FormToggleSwitchField({
   control,
   label,
   disabled,
+  labelClassName,
 }: FormToggleSwitchFieldProps) {
   return (
     <Controller
@@ -22,7 +24,7 @@ export function FormToggleSwitchField({
       control={control}
       render={({ field, fieldState: { error } }) => (
         <div className="space-y-2">
-          <label className="flex items-center space-x-2">
+          <label className={`flex items-center space-x-2 ${labelClassName}`}>
             <Switch
               {...field}
               checked={field.value}
