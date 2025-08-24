@@ -27,7 +27,7 @@ const MembershipCard = ({
   onClick,
   className = ""
 }: MembershipCardProps) => {
-  console.log(isSelected);
+  
   return (
     <Card 
       onClick={onClick}

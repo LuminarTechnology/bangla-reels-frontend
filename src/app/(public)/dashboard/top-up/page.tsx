@@ -2,10 +2,16 @@
 import CoinCard from "@/src/components/pages/user-dashboard/top-up/CoinCard";
 import MembershipCard from "@/src/components/pages/user-dashboard/top-up/MembershipCard";
 import { Button } from "@/src/components/ui/button";
-import { coinCards, membershipCards, paymentMethods } from "@/src/constants/TopUp";
+import { coinCards, membershipCards, paymentMethods, topUpDetails } from "@/src/constants/TopUp";
 import PaymentMethodCard from "@/src/components/pages/user-dashboard/top-up/PaymentMethodCard";
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@radix-ui/react-accordion";
 
 const TopUp = () => {
   const [selectedMembership, setSelectedMembership] = useState<number | null>(null);
@@ -16,10 +22,10 @@ const TopUp = () => {
     const selectedData = {
       membership: selectedMembership !== null ? membershipCards[selectedMembership] : null,
       coinCard: selectedCoin !== null ? coinCards[selectedCoin] : null,
-      paymentMethod: selectedPayment ? paymentMethods.find(p => p.id === selectedPayment) : null
+      paymentMethod: selectedPayment ? paymentMethods.find((p) => p.id === selectedPayment) : null,
     };
-    
-    // console.log("Selected data:", selectedData);
+
+    console.log("Selected data:", selectedData);
     // Handle the selected data here
   };
 
@@ -30,20 +36,20 @@ const TopUp = () => {
         <p>ID: 6568541632</p>
       </div>
       <h2 className="text-2xl font-semibold">Top Up</h2>
-      <section className="grid grid-cols-2 gap-5">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
         {membershipCards.map((card, index) => (
-          <MembershipCard 
-            key={index} 
-            {...card} 
+          <MembershipCard
+            key={index}
+            {...card}
             isSelected={selectedMembership === index}
             onClick={() => {
               setSelectedMembership(selectedMembership === index ? null : index);
               setSelectedCoin(null); // Clear coin selection when membership is selected
-            }}  
+            }}
           />
         ))}
       </section>
-      <section className="grid grid-cols-4 gap-5">
+      <section className="grid grid-cols-2 md:grid-cols-4 gap-5">
         {coinCards.map((card, index) => (
           <CoinCard
             key={index}
@@ -74,14 +80,65 @@ const TopUp = () => {
           ))}
         </div>
       </section>
-      <div className="flex items-center gap-2 text-primary-rose text-base font-semibold cursor-pointer">More <ChevronDown className=""/></div>
+
+      <Accordion type="single" collapsible className="w-full" defaultValue="">
+        <AccordionItem value="item-1">
+          <AccordionTrigger>
+            <div className="text-primary-rose flex cursor-pointer items-center gap-2 text-base font-semibold">
+              More <ChevronDown className="" />
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-4">
+            <div className="space-y-6 text-[#B3B1B0]">
+              {/* Rewards Section */}
+              <div>
+                <h2 className="text-xl font-semibold">Rewards & Free Coins</h2>
+                <ul className="mt-4 list-inside list-none space-y-1">
+                  {topUpDetails.rewards_and_free_coins.map((item, index) => (
+                    <li key={index} className="ml-8 text-xl">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Tips Section */}
+              <div>
+                <h2 className="text-xl font-semibold">Tips</h2>
+                <ul className="mt-2 list-inside list-none space-y-3">
+                  {topUpDetails.tips.map((tip, index) => (
+                    <li key={index} className="text-xl">
+                      {typeof tip === "string" ? (
+                        tip
+                      ) : (
+                        <div className="space-y-1">
+                          <div>{tip.title}</div>
+                          <ul className="ml-8 list-inside list-none">
+                            {tip.packages.map((pkg, i) => (
+                              <li key={i}>
+                                {pkg.coins} Coins → ${pkg.price}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
       <div className="flex items-center justify-center">
         <Button
           variant="danger"
           className="w-[400px] rounded-2xl p-6 text-base font-semibold"
           size="sm"
           onClick={handlePayNow}
-          disabled={(!selectedMembership && selectedMembership !== 0) && (!selectedCoin && selectedCoin !== 0)}
+          disabled={
+            !selectedMembership && selectedMembership !== 0 && !selectedCoin && selectedCoin !== 0
+          }
         >
           <p>Pay Now</p>
         </Button>
