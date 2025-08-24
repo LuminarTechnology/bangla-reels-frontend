@@ -198,7 +198,7 @@ const headerConfig: TableHeaderConfig = {
   actions: [
     {
       label: "New",
-      onClick: () => console.log("New clicked"),
+      onClick: () => console.warn("New clicked"),
       variant: "default",
       icon: <Plus className="h-4 w-4" />,
     },
@@ -253,7 +253,7 @@ export function CategoriesTable() {
         columns={columns}
         headerConfig={headerConfig}
         actions={actions}
-        onRowClick={(row) => console.log("Row clicked", row)}
+        onRowClick={(row) => console.warn("Row clicked", row)}
         searchValue={searchValue}
         onSearchChange={setSearchValue}
         onDateFilterClick={handleDateFilterClick}

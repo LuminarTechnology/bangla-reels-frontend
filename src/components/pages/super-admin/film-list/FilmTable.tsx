@@ -176,10 +176,9 @@ const FilmTable = () => {
     if (modalMode === "add") {
       // Set Film Data
       // TODO: handle letter
-    
     } else if (modalMode === "edit" && editingEpisode) {
       // update film data
-       // TODO: handle letter
+      // TODO: handle letter
     }
     setEditingEpisode(null);
   };

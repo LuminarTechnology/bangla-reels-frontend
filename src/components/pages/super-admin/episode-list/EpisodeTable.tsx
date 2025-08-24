@@ -202,64 +202,62 @@ const columns: TableColumn<EpisodeListData>[] = [
   },
 ];
 
-
 const EpisodeTable = () => {
-    // const [episodeListData, setEpisodeListData] = useState<EpisodeListData[]>(initialEpisodeListData)
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalMode, setModalMode] = useState<"add" | "edit">("add")
-  const [selectedEpisode, setSelectedEpisode] = useState<EpisodeListData | undefined>()
+  // const [episodeListData, setEpisodeListData] = useState<EpisodeListData[]>(initialEpisodeListData)
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<"add" | "edit">("add");
+  const [selectedEpisode, setSelectedEpisode] = useState<EpisodeListData | undefined>();
 
-    const handleAddEpisode = () => {
-    setModalMode("add")
-    setSelectedEpisode(undefined)
-    setModalOpen(true)
-  }
+  const handleAddEpisode = () => {
+    setModalMode("add");
+    setSelectedEpisode(undefined);
+    setModalOpen(true);
+  };
 
   const handleEditEpisode = (episode: EpisodeListData) => {
-    setModalMode("edit")
-    setSelectedEpisode(episode)
-    setModalOpen(true)
-  }
+    setModalMode("edit");
+    setSelectedEpisode(episode);
+    setModalOpen(true);
+  };
 
   const handleModalSubmit = (data: any) => {
     if (modalMode === "add") {
-       // TODO: handle letter
-      
+      // TODO: handle letter
     } else if (modalMode === "edit" && selectedEpisode) {
-       // TODO: handle letter
+      // TODO: handle letter
     }
-  }
+  };
 
   const headerConfig: TableHeaderConfig = {
-  title: "List of Episodes",
-  showSearch: true,
-  searchPlaceholder: "Search",
-  showDateFilter: true,
-  actions: [
-    {
-      label: "New",
-      variant: "default",
-      icon: <Plus className="h-4 w-4" />,
-      onClick: handleAddEpisode,
-    },
-  ],
-};
+    title: "List of Episodes",
+    showSearch: true,
+    searchPlaceholder: "Search",
+    showDateFilter: true,
+    actions: [
+      {
+        label: "New",
+        variant: "default",
+        icon: <Plus className="h-4 w-4" />,
+        onClick: handleAddEpisode,
+      },
+    ],
+  };
 
-const actions: TableAction<EpisodeListData>[] = [
-  {
-    label: "View",
-    onClick: (episode) => console.warn("View episode:", episode.id),
-  },
-  {
-    label: "Edit",
-    onClick: handleEditEpisode,
-  },
-  {
-    label: "Delete",
-    variant: "destructive",
-    onClick: (episode) => console.warn("Delete episode:", episode.id),
-  },
-];
+  const actions: TableAction<EpisodeListData>[] = [
+    {
+      label: "View",
+      onClick: (episode) => console.warn("View episode:", episode.id),
+    },
+    {
+      label: "Edit",
+      onClick: handleEditEpisode,
+    },
+    {
+      label: "Delete",
+      variant: "destructive",
+      onClick: (episode) => console.warn("Delete episode:", episode.id),
+    },
+  ];
   return (
     <>
       <ReusableTable
@@ -275,7 +273,6 @@ const actions: TableAction<EpisodeListData>[] = [
         mode={modalMode}
         episodeData={selectedEpisode}
         onSave={handleModalSubmit}
-      
       />
     </>
   );
