@@ -12,6 +12,7 @@ type FormSelectFieldProps = {
   options: { label: string; value: string | number }[];
   placeholder?: string;
   disabled?: boolean;
+  className?:string
 };
 
 export function FormSelectField({
@@ -21,6 +22,7 @@ export function FormSelectField({
   options,
   placeholder,
   disabled,
+  className,
 }: FormSelectFieldProps) {
   return (
     <Controller
@@ -30,7 +32,7 @@ export function FormSelectField({
         <div className="space-y-2">
           {label && <Label htmlFor={name}>{label}</Label>}
           <Select {...field} disabled={disabled}>
-            <SelectTrigger className={`w-full ${error ? "border-red-500" : ""}`}>
+            <SelectTrigger className={`w-full ${className} ${error ? "border-red-500" : ""}`}>
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
             <SelectContent>
