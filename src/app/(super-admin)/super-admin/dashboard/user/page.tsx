@@ -1,4 +1,4 @@
-import { UsersTable } from "../../../../../components/pages/super-admin/dashboard/UsersTable";
+import { UsersTable } from "../../../../../components/pages/super-admin/user/UsersTable";
 
 export default async function Page() {
   return (
