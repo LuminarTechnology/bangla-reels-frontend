@@ -35,8 +35,8 @@ const TopUp = () => {
         <p>Balance: 0</p>
         <p>ID: 6568541632</p>
       </div>
-      <h2 className="text-2xl font-semibold mt-6">Top Up</h2>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+      <h2 className="mt-6 text-2xl font-semibold">Top Up</h2>
+      <section className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
         {membershipCards.map((card, index) => (
           <MembershipCard
             key={index}
@@ -49,7 +49,7 @@ const TopUp = () => {
           />
         ))}
       </section>
-      <section className="flex flex-wrap items-center justify-start gap-5 mt-8">
+      <section className="mt-8 grid items-center justify-start gap-5 md:grid-cols-3 xl:grid-cols-4">
         {coinCards.map((card, index) => (
           <CoinCard
             key={index}
@@ -65,7 +65,7 @@ const TopUp = () => {
           />
         ))}
       </section>
-      <Accordion type="single" collapsible className="w-full my-6" defaultValue="">
+      <Accordion type="single" collapsible className="my-6 w-full" defaultValue="">
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className="text-primary-rose flex cursor-pointer items-center gap-2 text-base font-semibold">

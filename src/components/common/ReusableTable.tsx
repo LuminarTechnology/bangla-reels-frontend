@@ -6,7 +6,7 @@ import {
   TableColumn,
   TableHeaderConfig,
 } from "@/src/types/reusableTable";
-import { Calendar, MoreHorizontal, Search } from "lucide-react";
+import { Calendar, MoreHorizontal, Search, Settings2 } from "lucide-react";
 import React from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -20,11 +20,13 @@ import {
 const TableHeader = ({
   config,
   searchValue,
+  allFilterActions,
   onSearchChange,
   onDateFilterClick,
 }: {
   config: TableHeaderConfig;
   searchValue?: string;
+  allFilterActions?: TableAction[];
   onSearchChange?: (value: string) => void;
   onDateFilterClick?: () => void;
 }) => {
@@ -44,6 +46,31 @@ const TableHeader = ({
               className="h-9 w-64 rounded-[50px] pl-10"
             />
           </div>
+        )}
+
+        {allFilterActions && allFilterActions.length > 0 && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="bg-[#F9F9F9] text-[#4E4E4E] rounded-3xl w-28 h-9">
+                  Filter
+                  <Settings2 className="mr-2 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="space-y-1">
+                {allFilterActions.map((action, index) => (
+                  <DropdownMenuItem
+                    key={index}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      action.onClick('');
+                    }}
+                    className={"font-semibold px-4 text-base text-[#242424]"}
+                  >
+                    {action.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
         )}
 
         {config.showDateFilter && (
@@ -130,6 +157,7 @@ const ReusableTable = <T,>({
   columns,
   headerConfig,
   actions,
+  allFilterActions,
   onRowClick,
   className = "",
   searchValue,
@@ -142,6 +170,7 @@ const ReusableTable = <T,>({
       <TableHeader
         config={headerConfig}
         searchValue={searchValue}
+        allFilterActions={allFilterActions}
         onSearchChange={onSearchChange}
         onDateFilterClick={onDateFilterClick}
       />

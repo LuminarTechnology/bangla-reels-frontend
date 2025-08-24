@@ -6,20 +6,43 @@ import { cn } from "@/src/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserDashboardSidebarItems } from "@/src/constants/UserDashboardSidebarItems";
+import { SignOutButton, useUser } from "@clerk/nextjs";
+import { Button } from "../ui/button";
 // import LoginModal from "../modals/LoginModal";
 // import { Button } from "../ui/button";
 
 const UserDashboardSidebar = () => {
   const pathname = usePathname();
-  const user = false;
+  const { user, isSignedIn } = useUser();
+
   return (
     <aside className="flex w-80 flex-col rounded-xl border-r border-gray-800 bg-[#111] p-4">
       <div className="flex items-center gap-3 p-3">
-        <img src="/profile.jpg" alt="Profile" className="h-12 w-12 rounded-full border" />
-        <div>
-          <p className="font-semibold">Siyam Ahmed</p>
-          <p className="text-xs text-gray-400">UID: 496496</p>
-        </div>
+        {isSignedIn ? (
+          <Link href={"/profile"}>
+            <img src={user.imageUrl} alt="Profile" className="h-12 w-12 rounded-full border" />
+          </Link>
+        ) : (
+          <img src="/profile.jpg" alt="Profile" className="h-12 w-12 rounded-full border" />
+        )}
+
+        {isSignedIn ? (
+          <div>
+            <p className="font-semibold">{user?.fullName}</p>
+            <p className="text-xs text-gray-400">{user?.emailAddresses?.[0].emailAddress}</p>
+          </div>
+        ) : (
+          <div>
+            <p className="font-semibold">Guest</p>
+          </div>
+        )}
+        {!isSignedIn && (
+          <Link href={"/sign-in"}>
+            <Button variant="outline" size="sm" className="text-xs">
+              Log in
+            </Button>
+          </Link>
+        )}
       </div>
 
       <nav className="mt-6 flex flex-col gap-2">
@@ -42,9 +65,17 @@ const UserDashboardSidebar = () => {
       </nav>
 
       <div className="mt-auto">
-        <LogoutModal
+        {/* <LogoutModal
           button={
             <button className="bg-primary-rose hover:bg-primary-rose-hover flex w-full items-center gap-3 rounded-xl px-3 py-3 transition">
+              <LogOut className="h-5 w-5" />
+              Log Out
+            </button>
+          }
+        /> */}
+        <SignOutButton
+          children={
+            <button className="bg-primary-rose hover:bg-primary-rose-hover flex w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-3 transition">
               <LogOut className="h-5 w-5" />
               Log Out
             </button>
