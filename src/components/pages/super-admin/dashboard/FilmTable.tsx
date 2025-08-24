@@ -335,7 +335,7 @@ const FilmTable = () => {
       category: editingEpisode.category,
       description: editingEpisode.description,
       maxAdsForFreeView: editingEpisode.maxAdsForFreeView.toString(),
-      photo: null,
+      poster: null,
       banner: null,
       isBanner: editingEpisode.isBanner,
       isTrending: editingEpisode.isTrending,
