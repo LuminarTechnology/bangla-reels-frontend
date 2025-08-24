@@ -29,7 +29,7 @@ export function FormSelectField({
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <div className="space-y-2">
+        <div className="space-y-4">
           {label && <Label htmlFor={name}>{label}</Label>}
           <Select {...field} disabled={disabled}>
             <SelectTrigger className={`w-full ${className} ${error ? "border-red-500" : ""}`}>

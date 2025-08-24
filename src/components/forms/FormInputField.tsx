@@ -85,8 +85,8 @@ export function FormInputField({
                 disabled={disabled}
                 {...field}
                 className={cn(
-                  className,
                   "h-32 w-full resize-none rounded-lg px-3 py-4 focus:outline-none",
+                  className,
                   colorScheme.background,
                   colorScheme.text,
                   colorScheme.placeholder,

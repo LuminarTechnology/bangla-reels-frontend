@@ -2,33 +2,18 @@
 
 import { Button } from "@/src/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/src/components/ui/dialog";
-import { Input } from "@/src/components/ui/input";
-import { Label } from "@/src/components/ui/label";
-import * as z from "zod"
-import { RadioGroup, RadioGroupItem } from "@/src/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/src/components/ui/select";
-import { Switch } from "@/src/components/ui/switch";
-import { Textarea } from "@/src/components/ui/textarea";
+import * as z from "zod";
 
 
-import { useEffect, useState } from "react";
+
+import { useEffect} from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormRadioGroupField } from "@/src/components/forms/FormRadioGroupField";
 import { FormInputField } from "@/src/components/forms/FormInputField";
-import { ImageUploadField } from "@/src/components/forms/ImageUploadField";
 import { FormToggleSwitchField } from "@/src/components/forms/FormToggleSwitchField";
 import { FormSelectField } from "@/src/components/forms/FormSelectField";
 import { FormFileUploadField } from "@/src/components/forms/FormFileUploadField";
-
-
 
 interface FilmModalProps {
   open: boolean;
@@ -63,7 +48,7 @@ const filmSchema = z.object({
   isBanner: z.boolean(),
   isTrending: z.boolean(),
   isActive: z.boolean(),
-})
+});
 const defaultFormData: FilmFormData = {
   type: "WEB SERIES",
   name: "",
@@ -78,7 +63,7 @@ const defaultFormData: FilmFormData = {
 };
 
 const AddAndEditFilmModal = ({ open, mode, onOpenChange, onSave, initialData }: FilmModalProps) => {
-    const {
+  const {
     control,
     handleSubmit,
     reset,
@@ -86,7 +71,7 @@ const AddAndEditFilmModal = ({ open, mode, onOpenChange, onSave, initialData }: 
   } = useForm<FilmFormData>({
     resolver: zodResolver(filmSchema),
     defaultValues: defaultFormData,
-  })
+  });
 
   useEffect(() => {
     if (mode === "edit" && initialData) {
@@ -96,37 +81,34 @@ const AddAndEditFilmModal = ({ open, mode, onOpenChange, onSave, initialData }: 
     }
   }, [mode, initialData, open]);
 
-
-
-   const onSubmit = (data: FilmFormData) => {
-    onSave(data)
-    onOpenChange(false)
+  const onSubmit = (data: FilmFormData) => {
+    onSave(data);
+    onOpenChange(false);
     if (mode === "add") {
-      reset(defaultFormData)
+      reset(defaultFormData);
     }
-  }
+  };
 
   const handleCancel = () => {
-    onOpenChange(false)
+    onOpenChange(false);
     if (mode === "add") {
-      reset(defaultFormData)
+      reset(defaultFormData);
     }
-  }
+  };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}  >
-      <DialogContent className="w-3xl sm:max-w-[800px] h-[90vh] max-h-[600px] p-0 m-4 flex flex-col [&>button]:rounded-full [&>button]:border [&>button]:border-gray-800 [&>button]:p-[2px] ">
-        <DialogHeader className="px-4 sm:px-6 py-4  flex-shrink-0 ">
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="m-4 flex h-[90vh] max-h-[600px] w-3xl flex-col p-0 sm:max-w-[800px] [&>button]:rounded-full [&>button]:border-2 [&>button]:border-gray-800 [&>button]:p-[2px]">
+        <DialogHeader className="flex-shrink-0 px-4 py-4 sm:px-6">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-lg font-medium">
               {mode === "add" ? "Add Film List" : "Edit Film List"}
             </DialogTitle>
-            
           </div>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col flex-1 min-h-0">
-          <div className="px-4 sm:px-6 py-4 space-y-4 sm:space-y-6 overflow-y-auto flex-1 min-h-0">
+        <form onSubmit={handleSubmit(onSubmit)} className="flex min-h-0 flex-1 flex-col">
+          <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-4 sm:space-y-6 sm:px-6">
             <FormRadioGroupField
               name="type"
               control={control}
@@ -138,7 +120,7 @@ const AddAndEditFilmModal = ({ open, mode, onOpenChange, onSave, initialData }: 
               ]}
             />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <FormInputField
                 name="name"
                 control={control}
@@ -157,16 +139,19 @@ const AddAndEditFilmModal = ({ open, mode, onOpenChange, onSave, initialData }: 
                   errorText: "text-red-500",
                 }}
               />
-            
 
-                <FormSelectField
+              <FormSelectField
                 name="category"
                 control={control}
                 label="Category"
-                placeholder="Select category"
-                options={[{label: "Action", value:"action"}, {label: "Drama", value:"drama"}, {label: "Comedy", value:"comedy"}]}
-                className="h-9 "
-                />
+                placeholder="Select Category"
+                options={[
+                  { label: "Action", value: "action" },
+                  { label: "Drama", value: "drama" },
+                  { label: "Comedy", value: "comedy" },
+                ]}
+                className="rounded-2xl"
+              />
             </div>
 
             <FormInputField
@@ -208,9 +193,8 @@ const AddAndEditFilmModal = ({ open, mode, onOpenChange, onSave, initialData }: 
               }}
             />
 
-          
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-             <FormFileUploadField
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <FormFileUploadField
                 name="poster"
                 control={control}
                 label="Poster"
@@ -229,22 +213,40 @@ const AddAndEditFilmModal = ({ open, mode, onOpenChange, onSave, initialData }: 
             </div>
 
             <div className="space-y-4">
-              <FormToggleSwitchField name="isBanner" control={control} label="Is Banner" labelClassName="flex-row-reverse justify-between"/>
-              <FormToggleSwitchField name="isTrending" control={control} label="Is Trending" labelClassName="flex-row-reverse justify-between"/>
-              <FormToggleSwitchField name="isActive" control={control} label="Is Active" labelClassName="flex-row-reverse justify-between"/>
+              <FormToggleSwitchField
+                name="isBanner"
+                control={control}
+                label="Is Banner"
+                labelClassName="flex-row-reverse justify-between"
+              />
+              <FormToggleSwitchField
+                name="isTrending"
+                control={control}
+                label="Is Trending"
+                labelClassName="flex-row-reverse justify-between"
+              />
+              <FormToggleSwitchField
+                name="isActive"
+                control={control}
+                label="Is Active"
+                labelClassName="flex-row-reverse justify-between"
+              />
             </div>
           </div>
 
-          <div className="px-4 sm:px-6 py-4 border-t flex flex-col sm:flex-row gap-3 flex-shrink-0">
+          <div className="flex flex-shrink-0 flex-col gap-3 border-t px-4 py-4 sm:flex-row sm:px-6">
             <Button
               type="button"
               variant="ghost"
               onClick={handleCancel}
-              className="flex-1 border rounded-2xl  order-2 sm:order-1"
+              className="order-2 flex-1 rounded-2xl border sm:order-1"
             >
               Cancel
             </Button>
-            <Button type="submit" className="flex-1 bg-black  rounded-2xl hover:bg-gray-800 order-1 sm:order-2">
+            <Button
+              type="submit"
+              className="order-1 flex-1 rounded-2xl bg-black hover:bg-gray-800 sm:order-2"
+            >
               {mode === "add" ? "Save" : "Update"}
             </Button>
           </div>
