@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/ta
 import Image from "next/image";
 import { transactions, episodes } from "@/src/constants/SubscriptionItems";
 import { EpisodeAndTransactionTable } from "@/src/components/pages/user-dashboard/subscription-rewards/EpisodeAndTransactionTable";
+import Link from "next/link";
 
 export default function WalletPage() {
   const transactionColumns = [
@@ -31,9 +32,11 @@ export default function WalletPage() {
           <p className="text-base font-semibold">
             <span className="text-2xl">0</span> Reward Coins
           </p>
-          <Button variant="danger" className="rounded-2xl p-6 text-base font-semibold" size="sm">
-            <p>Top Up</p>
-          </Button>
+          <Link href="/dashboard/top-up">
+            <Button variant="danger" className="rounded-2xl p-6 text-base font-semibold" size="sm">
+              <p>Top Up</p>
+            </Button>
+          </Link>
         </div>
       </Card>
       <Card className="mb-5 rounded-2xl border-0 bg-[#FECBAA] p-6">
