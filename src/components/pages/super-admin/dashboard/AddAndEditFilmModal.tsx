@@ -4,9 +4,7 @@ import { Button } from "@/src/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/src/components/ui/dialog";
 import * as z from "zod";
 
-
-
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormRadioGroupField } from "@/src/components/forms/FormRadioGroupField";
@@ -23,19 +21,7 @@ interface FilmModalProps {
   initialData?: FilmFormData;
 }
 
-export interface FilmFormData {
-  id?: string;
-  type: "WEB SERIES" | "MOVIES";
-  name: string;
-  category: string;
-  description: string;
-  maxAdsForFreeView: string;
-  poster: File | null;
-  banner: File | null;
-  isBanner: boolean;
-  isTrending: boolean;
-  isActive: boolean;
-}
+
 
 const filmSchema = z.object({
   type: z.enum(["WEB SERIES", "MOVIES"]),
@@ -49,6 +35,20 @@ const filmSchema = z.object({
   isTrending: z.boolean(),
   isActive: z.boolean(),
 });
+
+export interface FilmFormData {
+  id?: string;
+  type: "WEB SERIES" | "MOVIES";
+  name: string;
+  category: string;
+  description: string;
+  maxAdsForFreeView: string;
+  poster: File | null;
+  banner: File | null;
+  isBanner: boolean;
+  isTrending: boolean;
+  isActive: boolean;
+}
 const defaultFormData: FilmFormData = {
   type: "WEB SERIES",
   name: "",
@@ -74,12 +74,12 @@ const AddAndEditFilmModal = ({ open, mode, onOpenChange, onSave, initialData }: 
   });
 
   useEffect(() => {
-    if (mode === "edit" && initialData) {
+    if (open && mode === "edit" && initialData) {
       reset(initialData);
-    } else {
+    } else if(open && mode === "add") {
       reset(defaultFormData);
     }
-  }, [mode, initialData, open]);
+  }, [mode, initialData, open, reset]);
 
   const onSubmit = (data: FilmFormData) => {
     onSave(data);

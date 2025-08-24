@@ -161,7 +161,7 @@ const initialFilmsData: FilmData[] = [
 ];
 
 const FilmTable = () => {
-  const [episodesData, setEpisodesData] = useState<FilmData[]>(initialFilmsData);
+  // const [episodesData, setEpisodesData] = useState<FilmData[]>(initialFilmsData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [editingEpisode, setEditingEpisode] = useState<FilmData | null>(null);
@@ -175,8 +175,11 @@ const FilmTable = () => {
   const handleAddFilm = (filmData: FilmFormData) => {
     if (modalMode === "add") {
       // Set Film Data
+      // TODO: handle letter
+    
     } else if (modalMode === "edit" && editingEpisode) {
       // update film data
+       // TODO: handle letter
     }
     setEditingEpisode(null);
   };
@@ -317,11 +320,11 @@ const FilmTable = () => {
     },
     {
       label: "Delete",
-      onClick: (episode) => console.log("Delete episode:", episode.id),
+      onClick: (episode) => console.warn("Delete episode:", episode.id),
     },
     {
       label: "Add Episode",
-      onClick: (episode) => console.log("Add episode:", episode.id),
+      onClick: (episode) => console.warn("Add episode:", episode.id),
     },
   ];
 

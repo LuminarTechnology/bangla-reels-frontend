@@ -208,11 +208,11 @@ const headerConfig: TableHeaderConfig = {
 const actions: TableAction<UserData>[] = [
   {
     label: "Edit",
-    onClick: (row) => console.log("Edit", row),
+    onClick: (row) => console.warn("Edit", row),
   },
   {
     label: "Delete",
-    onClick: (row) => console.log("Delete", row),
+    onClick: (row) => console.warn("Delete", row),
     variant: "destructive",
   },
 ];

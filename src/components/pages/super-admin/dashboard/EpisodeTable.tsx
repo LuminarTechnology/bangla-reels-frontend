@@ -204,7 +204,7 @@ const columns: TableColumn<EpisodeListData>[] = [
 
 
 const EpisodeTable = () => {
-    const [episodeListData, setEpisodeListData] = useState<EpisodeListData[]>(initialEpisodeListData)
+    // const [episodeListData, setEpisodeListData] = useState<EpisodeListData[]>(initialEpisodeListData)
   const [modalOpen, setModalOpen] = useState(false)
   const [modalMode, setModalMode] = useState<"add" | "edit">("add")
   const [selectedEpisode, setSelectedEpisode] = useState<EpisodeListData | undefined>()
@@ -223,10 +223,10 @@ const EpisodeTable = () => {
 
   const handleModalSubmit = (data: any) => {
     if (modalMode === "add") {
-      
+       // TODO: handle letter
       
     } else if (modalMode === "edit" && selectedEpisode) {
-      
+       // TODO: handle letter
     }
   }
 
@@ -248,7 +248,7 @@ const EpisodeTable = () => {
 const actions: TableAction<EpisodeListData>[] = [
   {
     label: "View",
-    onClick: (episode) => console.log("View episode:", episode.id),
+    onClick: (episode) => console.warn("View episode:", episode.id),
   },
   {
     label: "Edit",
@@ -257,7 +257,7 @@ const actions: TableAction<EpisodeListData>[] = [
   {
     label: "Delete",
     variant: "destructive",
-    onClick: (episode) => console.log("Delete episode:", episode.id),
+    onClick: (episode) => console.warn("Delete episode:", episode.id),
   },
 ];
   return (

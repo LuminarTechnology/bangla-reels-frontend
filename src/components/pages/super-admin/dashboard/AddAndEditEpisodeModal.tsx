@@ -53,13 +53,14 @@ export function AddAndEditEpisodeModal({ open, onOpenChange, mode, episodeData, 
         video: null,
       })
     }
-  }, [open, mode, episodeData])
+  }, [open, mode, episodeData, reset])
 
 
   
   const onSubmit = (data: EpisodeFormData) => {
     onSave(data)
     onOpenChange(false)
+    
    reset()
   }
 
