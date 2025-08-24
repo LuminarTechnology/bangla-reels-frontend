@@ -24,7 +24,7 @@ const CoinCard: React.FC<CoinCardProps> = ({
     <div>
       <Card
         onClick={onClick}
-        className={`hover:border-primary-rose gap-1 rounded-2xl border-[#7A7A7A] bg-[#0B0000] px-6 py-5 text-white hover:bg-[#7e00000c] ${className} ${isSelected ? "border-primary-rose bg-[#7e00000c]" : ""}`}
+        className={`min-w-[221px] cursor-pointer hover:border-primary-rose gap-1 rounded-2xl border-[#7A7A7A] bg-[#0B0000] px-3 sm:px-6 py-3 sm:py-5 text-white hover:bg-[#7e00000c] ${className} ${isSelected ? "border-primary-rose bg-[#7e00000c]" : ""}`}
       >
         <div className="flex items-center gap-2">
           <Image src="/icons/coin.png" alt="coin-icon" width={24} height={24} />

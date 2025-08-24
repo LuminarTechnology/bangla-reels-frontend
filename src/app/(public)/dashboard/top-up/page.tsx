@@ -25,18 +25,18 @@ const TopUp = () => {
       paymentMethod: selectedPayment ? paymentMethods.find((p) => p.id === selectedPayment) : null,
     };
 
-    console.log("Selected data:", selectedData);
+    // console.log("Selected data:", selectedData);
     // Handle the selected data here
   };
 
   return (
-    <>
+    <main className="">
       <div className="flex gap-6 text-sm">
         <p>Balance: 0</p>
         <p>ID: 6568541632</p>
       </div>
-      <h2 className="text-2xl font-semibold">Top Up</h2>
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <h2 className="text-2xl font-semibold mt-6">Top Up</h2>
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
         {membershipCards.map((card, index) => (
           <MembershipCard
             key={index}
@@ -49,7 +49,7 @@ const TopUp = () => {
           />
         ))}
       </section>
-      <section className="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <section className="flex flex-wrap items-center justify-start gap-5 mt-8">
         {coinCards.map((card, index) => (
           <CoinCard
             key={index}
@@ -65,23 +65,7 @@ const TopUp = () => {
           />
         ))}
       </section>
-      <section>
-        <h4 className="pb-4 text-2xl font-semibold">Payment Method</h4>
-        <div className="flex items-center justify-start gap-4">
-          {paymentMethods.map((method) => (
-            <PaymentMethodCard
-              key={method.id}
-              icon={method.icon}
-              iconAlt={method.iconAlt}
-              label={method.label}
-              isSelected={selectedPayment === method.id}
-              onClick={() => setSelectedPayment(selectedPayment === method.id ? null : method.id)}
-            />
-          ))}
-        </div>
-      </section>
-
-      <Accordion type="single" collapsible className="w-full" defaultValue="">
+      <Accordion type="single" collapsible className="w-full my-6" defaultValue="">
         <AccordionItem value="item-1">
           <AccordionTrigger>
             <div className="text-primary-rose flex cursor-pointer items-center gap-2 text-base font-semibold">
@@ -130,7 +114,22 @@ const TopUp = () => {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <div className="flex items-center justify-center">
+      <section>
+        <h4 className="pb-4 text-2xl font-semibold">Payment Method</h4>
+        <div className="flex items-center justify-start gap-4">
+          {paymentMethods.map((method) => (
+            <PaymentMethodCard
+              key={method.id}
+              icon={method.icon}
+              iconAlt={method.iconAlt}
+              label={method.label}
+              isSelected={selectedPayment === method.id}
+              onClick={() => setSelectedPayment(selectedPayment === method.id ? null : method.id)}
+            />
+          ))}
+        </div>
+      </section>
+      <div className="mt-9 flex items-center justify-center">
         <Button
           variant="danger"
           className="w-[400px] rounded-2xl p-6 text-base font-semibold"
@@ -143,7 +142,7 @@ const TopUp = () => {
           <p>Pay Now</p>
         </Button>
       </div>
-    </>
+    </main>
   );
 };
 
