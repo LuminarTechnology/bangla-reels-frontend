@@ -85,7 +85,9 @@ const Navbar = () => {
             <SearchBarPopup />
 
             {/* Download APP */}
-            <AppDownloadPopup />
+            <div className="hidden sm:block">
+              <AppDownloadPopup />
+            </div>
             {/* Language Dropdown - Hidden on mobile */}
             <div className="hidden lg:block">
               <LanguagePopup />

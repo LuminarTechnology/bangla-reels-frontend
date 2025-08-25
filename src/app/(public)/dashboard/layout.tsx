@@ -13,7 +13,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="flex h-[calc(100vh-50px)] gap-5 text-white">
       <button
-        className="sm:hidden fixed top-4 left-4 z-10 p-2 bg-[#0B0000] rounded-md"
+        className="sm:hidden fixed top-4 right-4 z-10 p-2 bg-[#0B0000] rounded-md"
         onClick={toggleSidebar}
         aria-label="Toggle sidebar"
       >
@@ -22,8 +22,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       {/* Sidebar */}
       <div
-        className={`fixed sm:static top-0 -left-20 transform transition-transform duration-300 ease-in-out z-30
-          ${isSidebarOpen ? 'translate-x-20' : '-translate-x-full'} sm:translate-x-0`}
+        className={`fixed sm:static top-0 transform transition-transform duration-500 ease-in-out z-30
+          ${isSidebarOpen ? 'right-0' : 'translate-x-[40rem]'} sm:translate-x-0`}
       >
         <UserDashboardSidebar toggleSidebar={toggleSidebar} />
       </div>
