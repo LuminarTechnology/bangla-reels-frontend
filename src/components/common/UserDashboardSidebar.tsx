@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import LogoutModal from "@/src/components/modals/LogoutModal";
-import { LogOut } from "lucide-react";
+import { LogOut, X } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -93,6 +93,7 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
           }
         />
       </div>
+
     </aside>
   );
 };

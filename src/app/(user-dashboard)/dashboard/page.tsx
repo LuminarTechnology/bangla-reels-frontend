@@ -44,19 +44,19 @@ export default function OverviewPage() {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between">
         <div className="space-y-2">
-          <h1 className="text-[#FFFAFA] text-3xl font-semibold">
+          <h1 className="text-[#FFFAFA] text-xl sm:text-3xl font-semibold">
             Welcome back!
           </h1>
-          <p className="text-[#B3B1B0] text-base">Ready to continue your entertainment journey?</p>
+          <p className="text-[#B3B1B0] text-sm sm:text-base">Ready to continue your entertainment journey?</p>
         </div>
         <div className="text-right space-y-2">
-          <p className="text-sm text-[#B3B1B0]">Last activity</p>
-          <p className="font-medium text-white">2 hours ago</p>
+          <p className="text-xs sm:text-sm text-[#B3B1B0]">Last activity</p>
+          <p className="text-xs sm:text-base font-medium text-white">2 hours ago</p>
         </div>
       </div>
 
       {/* Stats Section */}
-      <div className="flex gap-4 justify-between">
+      <div className="flex flex-col sm:flex-row gap-4 justify-between">
         {stats.map((stat, i) => (
           <div key={i} className="w-full relative rounded-2xl bg-[#16151A] px-6 py-7">
             <div className="flex flex-col gap-3 justify-between">
