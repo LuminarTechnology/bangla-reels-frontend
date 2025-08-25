@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import LogoutModal from "@/src/components/modals/LogoutModal";
-import { LogOut } from "lucide-react";
+import { LogOut, X } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,12 +11,16 @@ import { Button } from "../ui/button";
 // import LoginModal from "../modals/LoginModal";
 // import { Button } from "../ui/button";
 
-const UserDashboardSidebar = () => {
+interface UserDashboardSidebarProps {
+  toggleSidebar?: () => void;
+}
+
+const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({ toggleSidebar }) => {
   const pathname = usePathname();
   const { user, isSignedIn } = useUser();
 
   return (
-    <aside className="flex w-80 flex-col rounded-xl border-r border-gray-800 bg-[#111] p-4">
+    <aside className="flex relative w-80 h-screen sm:h-full flex-col sm:rounded-xl border-r border-gray-800 bg-[#111] p-4">
       <div className="flex items-center gap-3 p-3">
         {isSignedIn ? (
           <Link href={"/profile"}>
@@ -56,6 +60,7 @@ const UserDashboardSidebar = () => {
                 "flex items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-500",
                 pathname === item.href && "bg-[#e83a570f] text-red-500"
               )}
+              onClick={toggleSidebar}
             >
               <Icon className="h-5 w-5" />
               {item.name}
@@ -82,6 +87,16 @@ const UserDashboardSidebar = () => {
           }
         />
       </div>
+
+      {toggleSidebar && (
+        <button
+          className="sm:hidden absolute right-2 p-2 rounded-md hover:bg-[#2a2a2a]"
+          onClick={toggleSidebar}
+          aria-label="Close sidebar"
+        >
+          <X className="size-6" />
+        </button>
+      )}
     </aside>
   );
 };
