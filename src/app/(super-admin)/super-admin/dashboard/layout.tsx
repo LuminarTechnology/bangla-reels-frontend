@@ -15,9 +15,6 @@ export default function SuperAdminDashboardLayout({ children }: Props) {
       
         {/* Main Content */}
         <div className="flex flex-1 flex-col overflow-hidden">
-          <header className="md:hidden">
-            <MobileSidebarTrigger sidebarItems={SuperAdminSidebarItems} />
-          </header>
           {/* Navbar */}
           <DashboardNavbar />
 
