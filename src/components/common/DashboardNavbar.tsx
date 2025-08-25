@@ -6,6 +6,8 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { MobileSidebarTrigger } from "./DashboardSidebar";
+import { SuperAdminSidebarItems } from "@/src/constants/DashboardSidebarItems";
 
 interface NavbarProps {
   userName?: string;
@@ -14,19 +16,20 @@ interface NavbarProps {
 
 export default function DashboardNavbar({ userName = "Saiful", userAvatar }: NavbarProps) {
   return (
-    <header className="border-b bg-white p-4">
-      <div className="flex items-center justify-between rounded-xl bg-gray-100 p-4">
-        <div></div>
+    <header className="border-b bg-white p-2 md:p-4">
+      <div className="flex items-center justify-between rounded-xl bg-gray-100 p-2 md:p-4">
+        <div className="hidden md:block"></div>
 
         {/* Right side */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 md:space-x-4">
+          <MobileSidebarTrigger sidebarItems={SuperAdminSidebarItems} />
           {/* Search */}
           <div className="relative">
             <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 rounded-full text-gray-700" />
             <Input
               type="search"
               placeholder="Search"
-              className="w-80 rounded-full bg-gray-200 pr-4 pl-10 text-gray-700"
+              className="w-full md:w-80 rounded-full bg-gray-200 pr-4 pl-10 text-gray-700"
             />
           </div>
           {/* Notifications */}

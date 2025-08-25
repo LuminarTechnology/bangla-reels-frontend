@@ -38,7 +38,7 @@ const revenueComparisonData = [
 const RevenueChart = () => {
   return (
     <div className="mt-6 rounded-lg border bg-white p-6 shadow-sm">
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex flex-col md:flex-row items-center justify-between">
         <div>
           <h3 className="mb-1 text-lg font-semibold text-gray-700">Revenue Generated</h3>
           <p className="text-sm text-gray-500">
@@ -46,7 +46,7 @@ const RevenueChart = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col md:flex-row  items-start md:items-center gap-4 mt-2 md:mt-0">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <div className="h-3 w-3 rounded-full bg-blue-400"></div>
