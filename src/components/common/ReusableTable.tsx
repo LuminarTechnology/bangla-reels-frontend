@@ -31,10 +31,10 @@ const TableHeader = ({
   onDateFilterClick?: () => void;
 }) => {
   return (
-    <div className="flex items-center justify-between p-6">
-      <h1 className="text-2xl font-semibold text-[#242424]">{config.title}</h1>
+    <div className="flex flex-col md:items-center justify-between p-3 md:flex-row md:p-6">
+      <h1 className="mb-3 text-2xl font-semibold text-[#242424] md:mb-0">{config.title}</h1>
 
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-4">
         {config.showSearch && (
           <div className="relative rounded-[50px] bg-[#F9F9F9]">
             <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transform text-gray-400" />
@@ -43,43 +43,47 @@ const TableHeader = ({
               placeholder={config.searchPlaceholder || "Search"}
               value={searchValue || ""}
               onChange={(e) => onSearchChange?.(e.target.value)}
-              className="h-9 w-64 rounded-[50px] pl-10"
+              className="h-9 w-full rounded-[50px] pl-10 md:w-64"
             />
           </div>
         )}
 
         {allFilterActions && allFilterActions.length > 0 && (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="sm" className="bg-[#F9F9F9] text-[#4E4E4E] rounded-3xl w-28 h-9">
-                  Filter
-                  <Settings2 className="mr-2 h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="space-y-1">
-                {allFilterActions.map((action, index) => (
-                  <DropdownMenuItem
-                    key={index}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      action.onClick('');
-                    }}
-                    className={"font-semibold px-4 text-base text-[#242424]"}
-                  >
-                    {action.label}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-9 w-9 md:rounded-3xl bg-[#F9F9F9] text-[#4E4E4E] md:w-28"
+              >
+                <span className="hidden md:inline">Filter</span>
+                <Settings2 className="h-4 w-4 md:mr-2" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="space-y-1">
+              {allFilterActions.map((action, index) => (
+                <DropdownMenuItem
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    action.onClick("");
+                  }}
+                  className={"px-4 text-base font-semibold text-[#242424]"}
+                >
+                  {action.label}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         )}
 
         {config.showDateFilter && (
           <Button
             onClick={onDateFilterClick}
             variant="outline"
-            className="h-9 border-gray-300 bg-[#F9F9F9] px-4 text-[#4E4E4E]"
+            className="h-9 border-gray-300 bg-[#F9F9F9] px-2 md:px-4 text-[#4E4E4E]"
           >
-            <Calendar className="mr-2 h-4 w-4" />
+            <Calendar className="hidden md:block mr-2 h-4 w-4" />
             Today
           </Button>
         )}
@@ -87,11 +91,11 @@ const TableHeader = ({
         {config.actions?.map((action, index) => (
           <Button
             key={index}
-            className={`"bg-black hover:bg-gray-800" h-9 rounded-[50px] px-4 text-white`}
+            className={`"bg-black hover:bg-gray-800" h-9 md:rounded-[50px] px-2 md:px-4 text-white`}
             onClick={action.onClick}
           >
-            {action.icon && <span className="mr-2">{action.icon}</span>}
-            {action.label}
+            {action.icon && <span className="md:mr-2">{action.icon}</span>}
+            <span className="hidden md:block">{action.label}</span>
           </Button>
         ))}
       </div>
