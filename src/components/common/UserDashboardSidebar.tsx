@@ -11,11 +11,8 @@ import { Button } from "../ui/button";
 // import LoginModal from "../modals/LoginModal";
 // import { Button } from "../ui/button";
 
-interface UserDashboardSidebarProps {
-  toggleSidebar?: () => void;
-}
 
-const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({ toggleSidebar }) => {
+const UserDashboardSidebar = () => {
   const pathname = usePathname();
   const { user, isSignedIn } = useUser();
 
@@ -60,7 +57,6 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({ toggleSideb
                 "flex items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-500",
                 pathname === item.href && "bg-[#e83a570f] text-red-500"
               )}
-              onClick={toggleSidebar}
             >
               <Icon className="h-5 w-5" />
               {item.name}
@@ -88,15 +84,6 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({ toggleSideb
         />
       </div>
 
-      {toggleSidebar && (
-        <button
-          className="sm:hidden absolute right-2 p-2 rounded-md hover:bg-[#2a2a2a]"
-          onClick={toggleSidebar}
-          aria-label="Close sidebar"
-        >
-          <X className="size-6" />
-        </button>
-      )}
     </aside>
   );
 };

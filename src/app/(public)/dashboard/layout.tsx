@@ -25,7 +25,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         className={`fixed sm:static top-0 transform transition-transform duration-500 ease-in-out z-30
           ${isSidebarOpen ? 'right-0' : 'translate-x-[40rem]'} sm:translate-x-0`}
       >
-        <UserDashboardSidebar toggleSidebar={toggleSidebar} />
+        <UserDashboardSidebar />
       </div>
 
       {isSidebarOpen && (
