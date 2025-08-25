@@ -11,12 +11,23 @@ import { Button } from "../ui/button";
 // import LoginModal from "../modals/LoginModal";
 // import { Button } from "../ui/button";
 
-const UserDashboardSidebar = () => {
+type UserDashboardSidebarProps = {
+  background?: string;
+};
+
+const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
+  background = "bg-[#111]",
+}) => {
   const pathname = usePathname();
   const { user, isSignedIn } = useUser();
 
   return (
-    <aside className="flex w-80 flex-col rounded-xl border-r border-gray-800 bg-[#111] p-4">
+    <aside
+      className={cn(
+        "flex h-screen w-80 flex-col rounded-xl border-r border-gray-800 p-4",
+        background
+      )}
+    >
       <div className="flex items-center gap-3 p-3">
         {isSignedIn ? (
           <Link href={"/profile"}>
