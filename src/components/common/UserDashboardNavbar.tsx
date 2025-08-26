@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactElement, useState } from "react";
+import { useState } from "react";
 import ContainerWrapper from "./ContainerWrapper";
 import { Button } from "../ui/button";
 import { Globe, History, Menu } from "lucide-react";
@@ -21,79 +21,23 @@ import UserButton from "../pages/home/UserButton";
 import SearchBarPopup from "../pages/home/SearchBarPopup";
 import AppDownloadPopup from "../pages/home/AppDownloadPopup";
 
-const navItems = [
-  { name: "Home", href: "/" },
-  { name: "Categories", href: "/categories" },
-  { name: "Fandom", href: "/fandom" },
-  // { name: "App", href: "/app", icon: <Smartphone className="size-4" /> },
-  // { name: "Desktop", href: "/desktop" },
-  { name: "Contest", href: "/contest" },
-];
-
-interface UserDashboardSidebarProps {
-  background?: string;
-  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-type NavbarProps = {
-  mobileDashboard?: ReactElement<UserDashboardSidebarProps>;
-};
-
-const Navbar: React.FC<NavbarProps> = ({ mobileDashboard }) => {
+const UserDashboardNavbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  const mobileNavbar = () => {
-    return (
-      <div>
-        <div className="mt-8 flex flex-col space-y-4">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className="px-4 text-white transition-colors duration-200"
-              onClick={() => setIsOpen(false)}
-            >
-              {item.name}
-            </Link>
-          ))}
-          <div>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="text-white hover:bg-transparent hover:text-gray-100"
-                >
-                  <Globe className="h-4 w-4" />
-                  English
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-black/20 backdrop-blur-lg">
-                <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
-                  English
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
-                  Spanish
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
-                  French
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            <Button variant="ghost" className="w-full justify-start text-white">
-              <History className="mr-2 h-4 w-4" />
-              History
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  };
+  const navItems = [
+    { name: "Home", href: "/" },
+    { name: "Categories", href: "/categories" },
+    { name: "Fandom", href: "/fandom" },
+    // { name: "App", href: "/app", icon: <Smartphone className="size-4" /> },
+    // { name: "Desktop", href: "/desktop" },
+    { name: "Contest", href: "/contest" },
+  ];
 
   return (
     <ContainerWrapper>
       <nav className="">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 items-center justify-between px-4">
           {/* Logo */}
           <div className="flex items-center justify-between space-x-16">
             <Link href={"/"}>
@@ -141,9 +85,7 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard }) => {
             <SearchBarPopup />
 
             {/* Download APP */}
-            <div>
-              <AppDownloadPopup />
-            </div>
+            <AppDownloadPopup />
             {/* Language Dropdown - Hidden on mobile */}
             <div className="hidden lg:block">
               <LanguagePopup />
@@ -168,11 +110,48 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard }) => {
                 </SheetTrigger>
                 <SheetContent
                   side="right"
-                  className="border-l border-white/20 bg-black/20 text-white backdrop-blur-md"
+                  className="border-l border-white/20 bg-black/20 backdrop-blur-md"
                 >
-                  {mobileDashboard
-                    ? React.cloneElement(mobileDashboard, { setIsOpen })
-                    : mobileNavbar()}
+                  <div className="mt-8 flex flex-col space-y-4">
+                    {navItems.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        className="rounded-xl border-b border-gray-900 px-4 text-white transition-colors duration-200"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                    <div className="border-t border-slate-800">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            className="text-white hover:bg-transparent hover:text-gray-100"
+                          >
+                            <Globe className="h-4 w-4" />
+                            English
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="bg-black/20 backdrop-blur-lg">
+                          <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
+                            English
+                          </DropdownMenuItem>
+                          <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
+                            Spanish
+                          </DropdownMenuItem>
+                          <DropdownMenuItem className="text-white hover:bg-transparent hover:text-gray-100">
+                            French
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                      <Button variant="ghost" className="w-full justify-start text-white">
+                        <History className="mr-2 h-4 w-4" />
+                        History
+                      </Button>
+                    </div>
+                  </div>
                 </SheetContent>
               </Sheet>
             </div>
@@ -183,4 +162,4 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard }) => {
   );
 };
 
-export default Navbar;
+export default UserDashboardNavbar;

@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import DashboardSidebar from "@/src/components/common/DashboardSidebar";
+import DashboardSidebar, { MobileSidebarTrigger } from "@/src/components/common/DashboardSidebar";
 import DashboardNavbar from "@/src/components/common/DashboardNavbar";
 import { ContestantSidebarItems } from "@/src/constants/DashboardSidebarItems";
 
@@ -15,6 +15,9 @@ export default function ContestantDashboardLayout({ children }: Props) {
 
       {/* Main Content */}
       <div className="flex flex-1 flex-col overflow-hidden">
+        <header className="md:hidden">
+          <MobileSidebarTrigger sidebarItems={ContestantSidebarItems} />
+        </header>
         {/* Navbar */}
         <DashboardNavbar />
 

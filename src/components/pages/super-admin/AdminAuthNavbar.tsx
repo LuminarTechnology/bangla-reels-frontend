@@ -29,7 +29,7 @@ const AdminAuthNavbar = () => {
           </div>
 
           {/* Desktop Login */}
-          <div className="hidden md:block">
+          <div className="">
             <div className="ml-4 flex items-center md:ml-6">
               <Link
                 href={"/super-admin"}
@@ -41,21 +41,6 @@ const AdminAuthNavbar = () => {
             </div>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMobileMenu}
-              className="inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 transition-colors duration-200 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-none"
-              aria-expanded="false"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isMobileMenuOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
-          </div>
         </div>
       </div>
 
