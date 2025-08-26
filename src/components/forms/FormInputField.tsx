@@ -45,6 +45,7 @@ export function FormInputField({
   as = "input",
   disabled = false,
   description,
+  required,
   className,
   defaultValue = "",
   colorScheme = {
@@ -73,7 +74,10 @@ export function FormInputField({
               htmlFor={name}
               className={cn("mb-2 block text-sm font-medium", colorScheme.label)}
             >
-              {label}
+              <p className="relative inline">
+                {label}
+                {required && <span className="absolute -right-2 -top-1 text-base text-red-500">*</span>}
+              </p>
             </Label>
           )}
 
