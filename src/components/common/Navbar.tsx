@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import ContainerWrapper from "./ContainerWrapper";
 import { Button } from "../ui/button";
 import { Globe, History, Menu } from "lucide-react";
@@ -30,8 +30,13 @@ const navItems = [
   { name: "Contest", href: "/contest" },
 ];
 
+interface UserDashboardSidebarProps {
+  background?: string;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 type NavbarProps = {
-  mobileDashboard?: React.ReactNode;
+  mobileDashboard?: ReactElement<UserDashboardSidebarProps>;
 };
 
 const Navbar: React.FC<NavbarProps> = ({ mobileDashboard }) => {
@@ -40,19 +45,19 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard }) => {
 
   const mobileNavbar = () => {
     return (
-      <div className="border-l border-white/20 bg-black/20 backdrop-blur-md">
+      <div>
         <div className="mt-8 flex flex-col space-y-4">
           {navItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="rounded-xl border-b border-gray-900 px-4 text-white transition-colors duration-200"
+              className="px-4 text-white transition-colors duration-200"
               onClick={() => setIsOpen(false)}
             >
               {item.name}
             </Link>
           ))}
-          <div className="border-t border-slate-800">
+          <div>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -136,7 +141,9 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard }) => {
             <SearchBarPopup />
 
             {/* Download APP */}
-            <AppDownloadPopup />
+            <div className="hidden sm:block">
+              <AppDownloadPopup />
+            </div>
             {/* Language Dropdown - Hidden on mobile */}
             <div className="hidden lg:block">
               <LanguagePopup />
@@ -159,8 +166,8 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard }) => {
                     <Menu className="h-6 w-6" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="h-screen">
-                  {mobileDashboard ? mobileDashboard : mobileNavbar()}
+                <SheetContent side="right" className="border-l text-white border-white/20 bg-black/20 backdrop-blur-md">
+                  {mobileDashboard ? React.cloneElement(mobileDashboard, { setIsOpen }) : mobileNavbar()}
                 </SheetContent>
               </Sheet>
             </div>
