@@ -38,7 +38,8 @@ export const SuperAdminSidebarItems = [
     icon: Package,
     children: [
       { title: "Coin Plan", href: "/super-admin/dashboard/coin-plan" },
-      { title: "Create Package", href: "/packages/create" },
+      {title: "VIP Plan", href: "/super-admin/dashboard/vip-plan"},
+      { title: "Order History", href: "/packages/order-history" },
     ],
   },
   {
