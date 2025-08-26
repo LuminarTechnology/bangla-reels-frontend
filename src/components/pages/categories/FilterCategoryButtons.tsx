@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "../../ui/button"
-import { cn } from "@/src/lib/utils"
+import { useState } from "react";
+import { Button } from "../../ui/button";
+import { cn } from "@/src/lib/utils";
 
-const mainCategories = ["Actors", "Actress", "Identities", "Story Beats"]
+const mainCategories = ["Actors", "Actress", "Identities", "Story Beats"];
 
 const typeCategories = [
   "All",
@@ -17,37 +17,35 @@ const typeCategories = [
   "WarGod",
   "Mafia",
   "SweetLove",
-]
+];
 
-const sortOptions = ["Popular", "Latest"]
+const sortOptions = ["Popular", "Latest"];
 
 const FilterCategoryButtons = () => {
-  const [activeCategory, setActiveCategory] = useState("Actors")
-  const [activeType, setActiveType] = useState("All")
-  const [activeSort, setActiveSort] = useState("Popular")
+  const [activeCategory, setActiveCategory] = useState("Actors");
+  const [activeType, setActiveType] = useState("All");
+  const [activeSort, setActiveSort] = useState("Popular");
 
   return (
-    <div className="w-full space-y-6 mt-6">
+    <div className="mt-6 w-full space-y-6">
       {/* Main Categories Section */}
-      <div className="space-y-3 ">
-       
+      <div className="space-y-3">
         <div className="flex flex-wrap gap-2 border-b border-gray-100 pb-4">
           {mainCategories.map((category) => (
             <Button
               key={category}
-              variant="outline"
+              variant="filter"
               size="sm"
               active={activeCategory === category}
               onClick={() => setActiveCategory(category)}
-              className={
-                cn("px-4 py-2 border-none hover:bg-transparent hover:text-primary-rose text-xl", 
-                  category === activeCategory ? "text-primary-rose" : "text-white"
-                )
-              }
+              className={cn(
+                "px-4 py-2 text-xl transition-colors",
+                activeCategory === category
+                  ? "bg-primary-rose text-white"
+                  : "bg-transparent text-gray-300 hover:bg-gray-700 hover:text-white"
+              )}
             >
               {category}
-
-            
             </Button>
           ))}
         </div>
@@ -55,7 +53,7 @@ const FilterCategoryButtons = () => {
 
       {/* Type Section */}
       <div className="space-y-3">
-        <h3 className="text-white text-sm font-medium">
+        <h3 className="text-sm font-medium text-white">
           {activeCategory === "Actors"
             ? "Actor Types"
             : activeCategory === "Actress"
@@ -82,7 +80,7 @@ const FilterCategoryButtons = () => {
 
       {/* Sort by Section */}
       <div className="space-y-3">
-        <h3 className="text-white text-sm font-medium">Sort by</h3>
+        <h3 className="text-sm font-medium text-white">Sort by</h3>
         <div className="flex gap-2">
           {sortOptions.map((option) => (
             <Button
@@ -99,7 +97,7 @@ const FilterCategoryButtons = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FilterCategoryButtons
+export default FilterCategoryButtons;
