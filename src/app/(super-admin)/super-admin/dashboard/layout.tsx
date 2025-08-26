@@ -1,8 +1,8 @@
 import DashboardNavbar from "@/src/components/common/DashboardNavbar";
 import DashboardSidebar, { MobileSidebarTrigger } from "@/src/components/common/DashboardSidebar";
 import { SuperAdminSidebarItems } from "@/src/constants/DashboardSidebarItems";
-import { checkRole } from "@/src/utils/roles";
-import { redirect } from "next/navigation";
+// import { hasRole } from "@/src/utils/roles";
+// import { redirect } from "next/navigation";
 import React, { ReactNode } from "react";
 
 interface Props {
@@ -11,10 +11,10 @@ interface Props {
 
 export default async function SuperAdminDashboardLayout({ children }: Props) {
   // Protect the page from users who are not admins
-  const isAdmin = await checkRole("super-admin");
-  if (!isAdmin) {
-    redirect("/sign-in");
-  }
+  // const isAdmin = await hasRole("super-admin");
+  // if (!isAdmin) {
+  //   redirect("/sign-in");
+  // }
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}

@@ -1,7 +1,9 @@
 import { auth } from "@clerk/nextjs/server";
 import { Roles } from "../types/globals";
 
-export const checkRole = async (role: Roles) => {
+export async function hasRole(requiredRole: Roles) {
   const { sessionClaims } = await auth();
-  return sessionClaims?.metadata.role === role;
-};
+  const roles = sessionClaims?.metadata?.roles || [];
+
+  return Array.isArray(roles) && roles.includes(requiredRole);
+}

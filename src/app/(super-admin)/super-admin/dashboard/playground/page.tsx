@@ -1,13 +1,13 @@
-import { checkRole } from "@/src/utils/roles";
 import { clerkClient } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { SearchUsers } from "../../SearchUsers";
-import { removeRole, setRole } from "../../../_actions";
+import { removeRole, setRole } from "../../../../actions/clerk-role-manage";
+import { hasRole } from "@/src/utils/roles";
 
 export default async function AdminDashboard(params: {
   searchParams: Promise<{ search?: string }>;
 }) {
-  if (!checkRole("super-admin")) {
+  if (!hasRole("super-admin")) {
     redirect("/sign-in");
   }
 

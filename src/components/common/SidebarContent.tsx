@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { LogOut, ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 import { SidebarItem } from "@/src/types/DashboardSidebarItems.type";
+import { SignOutButton } from "@clerk/nextjs";
 
 type SidebarContentProps = {
   sidebarItems: SidebarItem[];
@@ -106,14 +107,14 @@ export function SidebarContent({ sidebarItems, onItemClick }: SidebarContentProp
 
       {/* Sign Out (fixed bottom) */}
       <div className="p-3">
-        <Link
-          href="/signout"
-          onClick={handleItemClick}
-          className="flex items-center space-x-3 rounded-lg px-3 py-3 text-sm font-medium text-red-400 transition-colors hover:bg-red-600 hover:text-white"
-        >
-          <LogOut className="h-5 w-5" />
-          <span>Sign Out</span>
-        </Link>
+        <SignOutButton
+          children={
+            <button className="flex w-full items-center space-x-3 rounded-lg px-3 py-3 text-sm font-medium text-red-400 transition-colors hover:bg-red-600 hover:text-white">
+              <LogOut className="h-5 w-5" />
+              Log Out
+            </button>
+          }
+        />
       </div>
     </>
   );

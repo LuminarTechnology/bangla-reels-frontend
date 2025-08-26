@@ -10,6 +10,7 @@ import {
   List,
   FilePlay,
   Video,
+  Home,
 } from "lucide-react";
 
 export const SuperAdminSidebarItems = [
@@ -55,6 +56,11 @@ export const SuperAdminSidebarItems = [
     href: "/profile",
     icon: User,
   },
+  {
+    title: "Home",
+    href: "/",
+    icon: Home,
+  },
 ];
 
 export const ContestantSidebarItems = [
@@ -93,5 +99,10 @@ export const ContestantSidebarItems = [
     title: "Profile",
     href: "/profile",
     icon: User,
+  },
+  {
+    title: "Home",
+    href: "/",
+    icon: Home,
   },
 ];
