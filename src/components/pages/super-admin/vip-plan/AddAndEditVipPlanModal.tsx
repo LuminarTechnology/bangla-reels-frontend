@@ -11,11 +11,12 @@ import {
 import { Button } from '@/src/components/ui/button';
 import { FormInputField } from '@/src/components/forms/FormInputField';
 import { FormToggleSwitchField } from '@/src/components/forms/FormToggleSwitchField';
+import { FormSelectField } from '@/src/components/forms/FormSelectField';
 
 // Schema validation
 const vipPlanSchema = z.object({
   name: z.string().min(1, 'Plan name is required'),
-  tags: z.string().min(1, 'Tags is required'),
+  tags: z.string().min(1, 'Tags are required'),
   price: z.string().min(1, 'Price is required'),
   offerPrice: z.string().min(1, 'Offer price is required'),
   validity: z.string().min(1, 'Validity is required'),
@@ -96,7 +97,7 @@ const AddAndEditVipPlanModal: React.FC<VipPlanModalProps> = ({
             {modalTitle}
           </DialogTitle>
         </DialogHeader>
-        
+
         <div className="space-y-6 mt-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormInputField
@@ -108,10 +109,10 @@ const AddAndEditVipPlanModal: React.FC<VipPlanModalProps> = ({
               className="rounded-3xl"
               colorScheme={inputColorScheme}
             />
-            
+
             <FormInputField
               control={control}
-              name="productKey"
+              name="tags"
               label="Tags"
               required={true}
               placeholder="Premium"
@@ -130,7 +131,7 @@ const AddAndEditVipPlanModal: React.FC<VipPlanModalProps> = ({
               className="rounded-3xl"
               colorScheme={inputColorScheme}
             />
-            
+
             <FormInputField
               control={control}
               name="offerPrice"
@@ -153,16 +154,18 @@ const AddAndEditVipPlanModal: React.FC<VipPlanModalProps> = ({
               colorScheme={inputColorScheme}
               type="number"
             />
-            
-            <FormInputField
+
+            <FormSelectField
               control={control}
               name="validityType"
               label="Validity Type"
-              required={true}
               placeholder="Months"
-              className="rounded-3xl"
-              colorScheme={inputColorScheme}
-              type="number"
+              options={[
+                { label: "Months", value: "months" },
+                { label: "Year", value: "year" },
+                { label: "Life time", value: "lifeTime" },
+              ]}
+              className="rounded-3xl py-5 border-gray-300"
             />
           </div>
 
@@ -183,7 +186,7 @@ const AddAndEditVipPlanModal: React.FC<VipPlanModalProps> = ({
             >
               Cancel
             </Button>
-            
+
             <Button
               type="button"
               onClick={handleSubmit(handleFormSubmit)}
