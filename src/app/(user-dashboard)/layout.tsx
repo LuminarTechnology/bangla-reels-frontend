@@ -1,4 +1,5 @@
 import ContainerWrapper from "@/src/components/common/ContainerWrapper";
+import Footer from "@/src/components/common/Footer";
 import Navbar from "@/src/components/common/Navbar";
 import UserDashboardSidebar from "@/src/components/common/UserDashboardSidebar";
 
@@ -11,9 +12,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         />
       </div>
       <ContainerWrapper>
-        <div className="flex h-screen gap-5 text-white">
+        <div className="flex h-[calc(100vh-64px)] gap-5 text-white">
           {/* Sidebar */}
-          <UserDashboardSidebar />
+          <div className="hidden sm:block">
+            <UserDashboardSidebar />
+          </div>
 
           {/* Main Content */}
           <main className="w-full flex-1 space-y-8 overflow-y-auto rounded-2xl bg-[#0B0000] p-6 sm:p-8">
@@ -21,6 +24,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </main>
         </div>
       </ContainerWrapper>
+      <Footer/>
     </div>
   );
 }
