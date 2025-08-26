@@ -1,11 +1,9 @@
-import React from 'react';
+import VipPlanTable from "@/src/components/pages/super-admin/vip-plan/VipPlanTable";
 
-const page = () => {
+export default async function Page() {
   return (
     <div>
-      Vip plan
+      <VipPlanTable/>
     </div>
   );
-};
-
-export default page;
+}
