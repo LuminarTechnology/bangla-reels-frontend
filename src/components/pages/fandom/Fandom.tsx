@@ -56,9 +56,9 @@ const Blog = () => {
   const handlePageChange = (page: number) => setCurrentPage(page);
 
   return (
-    <div>
+    <div className="my-4 md:my-8">
       {/* Blog Grid */}
-      <div className="my-10 grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {currentBlogs.map((blog, i) => (
           <FandomCard
             key={i}

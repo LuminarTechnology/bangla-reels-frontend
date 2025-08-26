@@ -6,7 +6,7 @@ interface Props {
 }
 
 const ContainerWrapper = ({ children }: Props) => {
-  return <div className={cn("max-w-[1440px] mx-auto px-4")}>{children}</div>;
+  return <div className={cn("mx-auto max-w-[1440px] px-2 md:px-4")}>{children}</div>;
 };
 
 export default ContainerWrapper;

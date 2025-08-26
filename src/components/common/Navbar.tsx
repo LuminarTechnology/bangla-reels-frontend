@@ -93,7 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard }) => {
   return (
     <ContainerWrapper>
       <nav className="">
-        <div className="flex h-16 items-center justify-between px-4">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center justify-between space-x-16">
             <Link href={"/"}>
@@ -141,7 +141,7 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard }) => {
             <SearchBarPopup />
 
             {/* Download APP */}
-            <div className="hidden sm:block">
+            <div>
               <AppDownloadPopup />
             </div>
             {/* Language Dropdown - Hidden on mobile */}
@@ -166,8 +166,13 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard }) => {
                     <Menu className="h-6 w-6" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right" className="border-l text-white border-white/20 bg-black/20 backdrop-blur-md">
-                  {mobileDashboard ? React.cloneElement(mobileDashboard, { setIsOpen }) : mobileNavbar()}
+                <SheetContent
+                  side="right"
+                  className="border-l border-white/20 bg-black/20 text-white backdrop-blur-md"
+                >
+                  {mobileDashboard
+                    ? React.cloneElement(mobileDashboard, { setIsOpen })
+                    : mobileNavbar()}
                 </SheetContent>
               </Sheet>
             </div>

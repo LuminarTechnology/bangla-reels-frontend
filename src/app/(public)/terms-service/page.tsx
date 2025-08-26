@@ -2,7 +2,7 @@ import React from "react";
 
 export default function TermsAndServicePage() {
   return (
-    <div className="my-10">
+    <div className="my-4 md:my-8">
       <div className="prose prose-lg max-w-none">
         <section className="mb-8">
           <h2 className="mb-4 text-2xl font-bold text-white">1. Acceptance of Terms</h2>

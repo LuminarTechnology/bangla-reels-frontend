@@ -4,7 +4,7 @@ import FilterCategoryButtons from "@/src/components/pages/categories/FilterCateg
 
 export default async function CategoriesPage() {
   return (
-    <div className="p-6">
+    <div className="my-4 md:my-8">
       <ReusableBreadcrumb
         items={[
           { label: "Home", href: "/" },

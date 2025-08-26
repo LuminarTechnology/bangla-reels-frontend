@@ -34,7 +34,7 @@ const tags = [
 
 const MovieDetailsMainSection = () => {
   return (
-    <div className="px-6 pb-8">
+    <div className="pb-8">
       <div className="flex flex-col gap-8 lg:flex-row">
         <Image
           src={"/images/banner/banner-1.jpg"}

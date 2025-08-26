@@ -5,10 +5,10 @@ import ReusableBreadcrumb from "@/src/components/common/ReusableBreadcrumb";
 
 const MoviesDetailsPage = () => {
   return (
-    <div className="min-h-screen">
+    <div className="my-4 min-h-screen md:my-8">
       {/* Navigation */}
 
-      <nav className="p-6">
+      <nav className="">
         <ReusableBreadcrumb items={[{ label: "Home", href: "/" }, { label: "John Wick 4" }]} />
       </nav>
 
