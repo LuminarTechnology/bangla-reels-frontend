@@ -25,7 +25,7 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
   return (
     <aside
       className={cn(
-        "h-full w-80 flex-col rounded-xl border-r border-gray-800 p-4",
+        "h-full w-80 flex-col rounded-xl sm:border-r sm:border-gray-800 p-4",
         background, "flex"
       )}>
       <div className="flex items-center gap-3 p-3">
