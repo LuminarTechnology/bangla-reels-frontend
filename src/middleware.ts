@@ -29,15 +29,17 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
 
   const roles: Roles[] = sessionClaims?.metadata?.roles as Roles[] | [];
 
-  // Protect all routes starting with `/super-admin/dashboard`
-  // if (isAdminRoute(req) && !roles?.includes("super-admin")) {
-  //   const url = new URL("/sign-in", req.url);
-  //   return NextResponse.redirect(url);
-  // }
+  if (process.env.NODE_ENV === "production") {
+    // Protect all routes starting with `/super-admin/dashboard`
+    if (isAdminRoute(req) && !roles?.includes("super-admin")) {
+      const url = new URL("/sign-in", req.url);
+      return NextResponse.redirect(url);
+    }
 
-  // if (!isPublicRoute(req)) {
-  //   await auth.protect();
-  // }
+    if (!isPublicRoute(req)) {
+      await auth.protect();
+    }
+  }
 
   return NextResponse.next();
 });

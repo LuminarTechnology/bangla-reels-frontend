@@ -8,13 +8,10 @@ import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { MobileSidebarTrigger } from "./DashboardSidebar";
 import { SuperAdminSidebarItems } from "@/src/constants/DashboardSidebarItems";
+import { useUser } from "@clerk/nextjs";
 
-interface NavbarProps {
-  userName?: string;
-  userAvatar?: string;
-}
-
-export default function DashboardNavbar({ userName = "Saiful", userAvatar }: NavbarProps) {
+export default function DashboardNavbar() {
+  const { user } = useUser();
   return (
     <header className="border-b bg-white p-2 md:p-4">
       <div className="flex items-center justify-between rounded-xl bg-gray-100 p-2 md:p-4">
@@ -29,7 +26,7 @@ export default function DashboardNavbar({ userName = "Saiful", userAvatar }: Nav
             <Input
               type="search"
               placeholder="Search"
-              className="w-full md:w-80 rounded-full bg-gray-200 pr-4 pl-10 text-gray-700"
+              className="w-full rounded-full bg-gray-200 pr-4 pl-10 text-gray-700 md:w-80"
             />
           </div>
           {/* Notifications */}
@@ -40,10 +37,12 @@ export default function DashboardNavbar({ userName = "Saiful", userAvatar }: Nav
 
           {/* User Menu */}
           <div className="flex items-center space-x-2">
-            <span className="text-sm font-medium">{userName}</span>
+            <span className="text-sm font-medium">{user?.fullName || "Guest"}</span>
             <Avatar className="h-8 w-8 bg-gray-600 shadow">
-              <AvatarImage src={userAvatar} alt={userName} />
-              <AvatarFallback>{userName.charAt(0).toUpperCase()}</AvatarFallback>
+              <AvatarImage src={user?.imageUrl} alt={user?.fullName || "user"} />
+              <AvatarFallback>
+                {user?.fullName ? user?.fullName.charAt(0).toUpperCase() : "G"}
+              </AvatarFallback>
             </Avatar>
           </div>
         </div>
