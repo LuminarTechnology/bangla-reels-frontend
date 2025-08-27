@@ -45,7 +45,9 @@ export const topUpDetails = {
     "Watch 1 Ad = 10 Coins",
     "Daily Login = 5 Coins",
     "Invite a Friend = 20 Coins",
-    "Complete Special Tasks = Bonus Coins"
+    "Win a Daily Challenge = 15 Coins",
+    "Weekly Top Player = 100 Coins",
+    "Share on Social Media = 10 Coins",
   ],
   tips: [
     {
@@ -55,15 +57,14 @@ export const topUpDetails = {
         { coins: 100, price: 2 },
         { coins: 500, price: 8 },
         { coins: 1000, price: 15 },
-        { coins: 2000, price: 25 }
-      ]
+        { coins: 2000, price: 25 },
+      ],
     },
     "2. Reelshort features both free and paid content for everyone.",
     "3. Paid content can be unlocked using coins or by subscribing to a membership. Membership-only content can only be accessed after subscribing to a membership.",
     "4. Both the coins and the reward coins will never expire.",
     "5. Coins will be used first when unlocking episodes. If the amount is insufficient, reward coins will automatically be used.",
     "6. During the subscription period, you will have unlimited access to all the series on DramaBox.",
-    "7. If you have any other questions, please reach out to our online customer service via 'Profile' → 'Help & feedback'."
-  ]
+    "7. If you have any other questions, please reach out to our online customer service via 'Profile' → 'Help & feedback'.",
+  ],
 };
-
