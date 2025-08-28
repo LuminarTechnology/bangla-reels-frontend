@@ -1,4 +1,3 @@
-import CoinHistoryTable from "@/src/components/pages/super-admin/order-history/CoinHistoryTable"
 import OrderHistoryTabs from "@/src/components/pages/super-admin/order-history/OrderHistoryTabs"
 
 const VipPlanPage = () => {
