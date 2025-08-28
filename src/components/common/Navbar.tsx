@@ -15,6 +15,7 @@ import UserButton from "../pages/home/UserButton";
 import SearchBarPopup from "../pages/home/SearchBarPopup";
 import AppDownloadPopup from "../pages/home/AppDownloadPopup";
 import { useTranslations } from "next-intl";
+import LanguageDropdown from "./LanguageDropdown";
 
 const navItems = [
   { key: "home", href: "/" },
@@ -53,7 +54,7 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard, currentLang }) => {
             </Link>
           ))}
           <div>
-            <LanguagePopup currentLang={currentLang} />
+            <LanguageDropdown currentLang={currentLang} />
             <Button variant="ghost" className="w-full justify-start text-white">
               <History className="mr-2 h-4 w-4" />
               {t("history")}
