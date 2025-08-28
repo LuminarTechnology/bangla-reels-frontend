@@ -6,9 +6,9 @@ import Link from "next/link";
 const LanguagePopup = () => {
   const languages = [
     { id: 1, name: "English", code: "en" },
-    { id: 2, name: "বাংলা (Bengali)", code: "bn" },
-    { id: 3, name: "Español", code: "es" },
-    { id: 4, name: "Latin", code: "la" },
+    { id: 2, name: "Español", code: "es" },
+    { id: 3, name: "Latin", code: "la" },
+    { id: 4, name: "বাংলা (Bengali)", code: "bn" },
   ];
 
   return (
