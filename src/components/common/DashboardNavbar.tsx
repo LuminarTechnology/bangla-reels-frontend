@@ -4,7 +4,6 @@ import React from "react";
 import { Search, Bell } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { MobileSidebarTrigger } from "./DashboardSidebar";
 import { SuperAdminSidebarItems } from "@/src/constants/DashboardSidebarItems";
@@ -29,7 +28,7 @@ export default function DashboardNavbar({ userName = "Saiful", userAvatar }: Nav
             <Input
               type="search"
               placeholder="Search"
-              className="w-full md:w-80 rounded-full bg-gray-200 pr-4 pl-10 text-gray-700"
+              className="w-full rounded-full bg-gray-200 pr-4 pl-10 text-gray-700 md:w-80"
             />
           </div>
           {/* Notifications */}

@@ -12,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@radix-ui/react-accordion";
+import RewardCard from "@/src/components/pages/user-dashboard/top-up/RewardCard";
 
 const TopUp = () => {
   const [selectedMembership, setSelectedMembership] = useState<number | null>(null);
@@ -65,6 +66,14 @@ const TopUp = () => {
           />
         ))}
       </section>
+      <div className="mx-auto rounded-2xl py-6 text-white shadow-lg">
+        <h2 className="mb-6 text-2xl font-semibold">Rewards & Free Coins</h2>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          {topUpDetails.rewards_and_free_coins.map((reward, index) => (
+            <RewardCard index={index} text={reward} />
+          ))}
+        </div>
+      </div>
       <Accordion type="single" collapsible className="my-6 w-full" defaultValue="">
         <AccordionItem value="item-1">
           <AccordionTrigger>
@@ -72,20 +81,8 @@ const TopUp = () => {
               More <ChevronDown className="" />
             </div>
           </AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-4">
+          <AccordionContent className="mt-4 flex flex-col gap-4">
             <div className="space-y-6 text-[#B3B1B0]">
-              {/* Rewards Section */}
-              <div>
-                <h2 className="text-xl font-semibold">Rewards & Free Coins</h2>
-                <ul className="mt-4 list-inside list-none space-y-1">
-                  {topUpDetails.rewards_and_free_coins.map((item, index) => (
-                    <li key={index} className="ml-8 text-xl">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
               {/* Tips Section */}
               <div>
                 <h2 className="text-xl font-semibold">Tips</h2>
