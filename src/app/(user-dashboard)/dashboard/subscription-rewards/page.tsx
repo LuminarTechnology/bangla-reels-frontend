@@ -7,7 +7,7 @@ import { transactions, episodes } from "@/src/constants/SubscriptionItems";
 import { EpisodeAndTransactionTable } from "@/src/components/pages/user-dashboard/subscription-rewards/EpisodeAndTransactionTable";
 import Link from "next/link";
 
-export default function WalletPage() {
+export default function SubscriptionRewards() {
   const transactionColumns = [
     { key: "amount", label: "Amount" },
     { key: "coins", label: "Coins" },

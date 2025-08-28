@@ -6,7 +6,8 @@ export interface TableColumn <T = any>{
     width?:string
     render?: (value:any, row:T)=>React.ReactNode
     sortable?:boolean
-
+    cellAlign?: 'left' | 'center' | 'right';
+    headerAlign?: 'left' | 'center' | 'right';
 }
 
 export interface AllFilterAction<T = any>{

@@ -15,7 +15,7 @@ const defaultVideo = {
   genres: ["Action", "Horrible"],
 };
 
-const page = () => {
+const EpisodePage = () => {
   return (
     <div className="my-4 flex h-screen flex-col gap-4 md:my-8 md:flex-row">
       {/* Video Player */}
@@ -74,4 +74,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default EpisodePage;

@@ -1,5 +1,5 @@
 import DashboardNavbar from "@/src/components/common/DashboardNavbar";
-import DashboardSidebar, { MobileSidebarTrigger } from "@/src/components/common/DashboardSidebar";
+import DashboardSidebar from "@/src/components/common/DashboardSidebar";
 import { SuperAdminSidebarItems } from "@/src/constants/DashboardSidebarItems";
 // import { hasRole } from "@/src/utils/roles";
 // import { redirect } from "next/navigation";

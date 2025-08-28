@@ -134,7 +134,7 @@ const columns: TableColumn<UserData>[] = [
   {
     key: "name",
     label: "User Name",
-    width: "w-48",
+    width: "w-48 text-start",
     render: (value, row) => (
       <div className="flex items-center">
         <Avatar className="mr-3 h-8 w-8">
