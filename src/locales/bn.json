@@ -1,0 +1,16 @@
+{
+  "Navbar": {
+    "home": "হোম",
+    "categories": "ক্যাটেগরিজ",
+    "fandom": "ফ্যানডম",
+    "contest": "প্রতিযোগিতা",
+    "history": "ইতিহাস",
+    "app": "অ্যাপ"
+  },
+  "Footer": {
+    "copyright": "সর্বস্বত্ব সংরক্ষিত।"
+  },
+  "HomePage": {
+    "title": "হোম"
+  }
+}

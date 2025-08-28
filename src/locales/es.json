@@ -1,0 +1,16 @@
+{
+  "Navbar": {
+    "home": "Inicio",
+    "categories": "Categorías",
+    "fandom": "Afición",
+    "contest": "Concurso",
+    "history": "Historial",
+    "app": "Aplicación"
+  },
+  "Footer": {
+    "copyright": "All rights reserved."
+  },
+  "HomePage": {
+    "title": "Home"
+  }
+}

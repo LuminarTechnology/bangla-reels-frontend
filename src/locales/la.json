@@ -1,0 +1,16 @@
+{
+  "Navbar": {
+    "home": "Domus",
+    "categories": "Categoriae",
+    "fandom": "Studium",
+    "contest": "Certamen",
+    "history": "Historia",
+    "app": "Applicatio"
+  },
+  "Footer": {
+    "copyright": "All rights reserved."
+  },
+  "HomePage": {
+    "title": "Home"
+  }
+}
