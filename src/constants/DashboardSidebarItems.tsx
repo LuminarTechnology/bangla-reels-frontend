@@ -49,7 +49,7 @@ export const SuperAdminSidebarItems = [
   },
   {
     title: "Setting",
-    href: "/settings",
+    href: "/super-admin/dashboard/setting",
     icon: Settings,
   },
   {

@@ -6,17 +6,9 @@ import Link from "next/link";
 const LanguagePopup = () => {
   const languages = [
     { id: 1, name: "English", code: "en" },
-    { id: 2, name: "Português", code: "pt" },
     { id: 3, name: "Español", code: "es" },
-    { id: 4, name: "Deutsch", code: "de" },
-    { id: 5, name: "Français", code: "fr" },
-    { id: 6, name: "日本語 (Japanese)", code: "ja" },
-    { id: 7, name: "한국어 (Korean)", code: "ko" },
     { id: 8, name: "ภาษาไทย (Thai)", code: "th" },
-    { id: 9, name: "Русскⷣ (Russian)", code: "ru" },
-    { id: 10, name: "Bahasa Indonesia", code: "id" },
-    { id: 11, name: "繁體中文 (Traditional Chinese)", code: "zh-TW" },
-    { id: 12, name: "العربية (Arabic)", code: "ar" },
+    { id: 13, name: "বাংলা (Bengali)", code: "bn" }
   ];
 
   return (
