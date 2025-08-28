@@ -44,7 +44,7 @@ export const SuperAdminSidebarItems = [
   },
   {
     title: "Reward",
-    href: "/rewards",
+    href: "/super-admin/dashboard/reward",
     icon: Award,
   },
   {
