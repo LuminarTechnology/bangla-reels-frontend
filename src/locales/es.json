@@ -7,10 +7,16 @@
     "history": "Historial",
     "app": "Aplicación"
   },
+  "HomePage": {
+    "topPicks": "Selecciones Principales",
+    "new-release": "Nuevo Lanzamiento",
+    "love-at-first-side": "Amor a Primera Vista",
+    "tortured-love": "Amor Torturado",
+    "second-chance": "Segunda Oportunidad",
+    "btn": "Ver Todo",
+    "play": "Reproducir"
+  },
   "Footer": {
     "copyright": "All rights reserved."
-  },
-  "HomePage": {
-    "title": "Home"
   }
 }

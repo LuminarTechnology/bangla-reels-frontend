@@ -26,7 +26,11 @@ export default async function UserLayout({ children, params }: Props) {
       <div className="gradient-background">
         <Toaster position="top-right" richColors />
         <Navbar currentLang={lang} />
-        <ContainerWrapper>{children}</ContainerWrapper>
+        <ContainerWrapper>
+          <NextIntlClientProvider locale={lang} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </ContainerWrapper>
         <Footer />
       </div>
     </NextIntlClientProvider>

@@ -7,10 +7,16 @@
     "history": "ইতিহাস",
     "app": "অ্যাপ"
   },
+  "HomePage": {
+    "topPicks": "সেরা পছন্দসমূহ",
+    "new-release": "নতুন রিলিজ",
+    "love-at-first-side": "প্রথম দৃষ্টিতে ভালোবাসা",
+    "tortured-love": "যন্ত্রণা ভরা ভালোবাসা",
+    "second-chance": "দ্বিতীয় সুযোগ",
+    "btn": "সব দেখুন",
+    "play": "চলুন দেখুন"
+  },
   "Footer": {
     "copyright": "সর্বস্বত্ব সংরক্ষিত।"
-  },
-  "HomePage": {
-    "title": "হোম"
   }
 }

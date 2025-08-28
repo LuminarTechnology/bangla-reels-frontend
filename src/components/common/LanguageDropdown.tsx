@@ -11,11 +11,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { DialogTitle } from "../ui/dialog";
+import { useLocale } from "@/src/hooks/useLocale";
 
 const LanguageDropdown = ({ currentLang }: { currentLang: string }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const { changeLocale } = useLocale();
 
   const languages = [
     { id: 1, name: "English", code: "en" },
@@ -35,6 +37,7 @@ const LanguageDropdown = ({ currentLang }: { currentLang: string }) => {
 
     const newPath = "/" + segments.join("/");
     router.push(newPath);
+    changeLocale(code);
   };
 
   return (

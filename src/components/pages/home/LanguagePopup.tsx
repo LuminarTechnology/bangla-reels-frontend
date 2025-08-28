@@ -4,10 +4,12 @@ import { Globe } from "lucide-react";
 import { Button } from "../../ui/button";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../../ui/hover-card";
 import { usePathname, useRouter } from "next/navigation";
+import { useLocale } from "@/src/hooks/useLocale";
 
 const LanguagePopup = ({ currentLang }: { currentLang: string }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { changeLocale } = useLocale();
 
   const languages = [
     { id: 1, name: "English", code: "en" },
@@ -26,6 +28,7 @@ const LanguagePopup = ({ currentLang }: { currentLang: string }) => {
     }
     const newPath = "/" + segments.join("/");
     router.push(newPath);
+    changeLocale(code);
   };
 
   return (
