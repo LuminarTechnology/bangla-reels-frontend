@@ -37,7 +37,7 @@ export default function RootLayout({ children }: Props) {
         baseTheme: dark,
       }}
     >
-      <html lang="en" suppressHydrationWarning={true}>
+      <html suppressHydrationWarning={true}>
         <body className={cn("min-h-screen", fontSans.variable)} suppressHydrationWarning>
           <StoreProvider>{children}</StoreProvider>
         </body>
