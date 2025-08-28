@@ -35,9 +35,6 @@ const FandomCard = ({
         <CardContent className="space-y-3 p-4 text-white">
           <time className="text-sm text-[#B3B1B0]">{date}</time>
           <h3 className="my-3 h-14 text-xl font-semibold">{headline}</h3>
-          <p className="h-32 text-xl">
-            {description.length > 100 ? description.slice(0, 100) : description}
-          </p>
         </CardContent>
       </Card>
     </Link>
