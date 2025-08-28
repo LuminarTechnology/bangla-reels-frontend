@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
 import { Separator } from "@/src/components/ui/separator";
 import AdsCoin from "./AdsCoin";
-import DailyCoin from "./DailyCoin";
+// import DailyCoin from "./DailyCoin";
 
 const tabs = [
   {
@@ -9,11 +9,11 @@ const tabs = [
     value: "ads-coin",
     content: <AdsCoin />,
   },
-  {
-    name: "Daily Coin",
-    value: "daily-coin",
-    content: <DailyCoin />,
-  },
+  // {
+  //   name: "Daily Coin",
+  //   value: "daily-coin",
+  //   content: <DailyCoin />,
+  // },
 ];
 
 export default function RewardTabs() {

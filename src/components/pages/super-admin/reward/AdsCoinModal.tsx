@@ -61,7 +61,7 @@ const AdsCoinModal: React.FC<AdsCoinModalProps> = ({
   };
 
   const modalTitle = mode === 'add' ? 'Add Ads Coin Reward' : 'Edit Ads Coin Reward';
-  const submitButtonText = mode === 'add' ? 'Save' : 'Update';
+  const submitButtonText = mode === 'add' ? 'Submit' : 'Update';
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
