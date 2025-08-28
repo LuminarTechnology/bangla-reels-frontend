@@ -3,16 +3,14 @@ import Image from "next/image";
 import { Button } from "@/src/components/ui/button";
 import { ChevronsRight, Info, Share, ListFilter } from "lucide-react";
 
-import bannerImage from "../../../../public/images/contest/contestBanner.jpg";
-
 const ContestBanner = () => {
   return (
     
     <section className="relative mb-6 md:mb-8 h-64 sm:h-80 lg:h-96 w-full overflow-hidden rounded-xl">
       <Image
-        src={bannerImage}
+        src='/images/contest/contestBanner.jpg'
         alt="Short video contest banner"
-        placeholder="blur"
+        
         quality={100}
         fill
         className="object-cover"

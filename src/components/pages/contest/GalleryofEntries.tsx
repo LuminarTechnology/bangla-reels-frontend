@@ -4,47 +4,164 @@ import Image from "next/image";
 
 import { Eye, Heart, MessageSquare } from "lucide-react";
 
-import CardPoster from "../../../../public/images/contest/GalleryofContestcardPoster.png";
+interface Entry {
+  id: number;
+  title: string;
+  tags: string;
+  authorName: string;
+  authorAvatar: string;
+  description: string;
+  views: string;
+  likes: string;
+  comments: string;
+  poster: string;
+}
 
-import cardAvatar from "../../../../public/images/contest/avatar.jpg";
-
-// Mock data for the gallery entries (no changes needed here)
-
-const entriesData = [
+const entriesData: Entry[] = [
   {
-    id: 1, title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
+    id: 1,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
   },
   {
-    id: 2, title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
+    id: 2,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
   },
   {
-    id: 3, title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
-  },{
-    id: 4 , title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
-  },{
-    id: 5, title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
-  },{
-    id: 6, title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
-  },{
-    id: 7, title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
-  },{
-    id: 8, title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
+    id: 3,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
   },
   {
-    id: 9, title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
+    id: 4,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
   },
   {
-    id: 10, title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
+    id: 5,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
   },
   {
-    id: 111, title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
+    id: 6,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
   },
   {
-    id: 12, title: "Forever After, Never Again to born", tags: "Love After Divorce, Heiress",authorName: "Tom Konkle", authorAvatar: cardAvatar, description: "Based on true events, in our darkest of times, the Tickle Mons...",views: "866k", likes: "866k", comments: "866k", poster: CardPoster,
+    id: 7,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
   },
-  
-
-  
+  {
+    id: 8,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
+  },
+  {
+    id: 9,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
+  },
+  {
+    id: 10,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
+  },
+  {
+    id: 11,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
+  },
+  {
+    id: 12,
+    title: "Forever After, Never Again to born",
+    tags: "Love After Divorce, Heiress",
+    authorName: "Tom Konkle",
+    authorAvatar: "/images/contest/avatar.jpg",
+    description: "Based on true events, in our darkest of times, the Tickle Mons...",
+    views: "866k",
+    likes: "866k",
+    comments: "866k",
+    poster: "/images/contest/GalleryofContestcardPoster.png",
+  },
 ];
 
 const GalleryofEntries = () => {
@@ -66,7 +183,6 @@ const GalleryofEntries = () => {
                 alt={entry.title}
                 fill
                 className="rounded-lg object-cover"
-                placeholder="blur"
               />
             </div>
 
