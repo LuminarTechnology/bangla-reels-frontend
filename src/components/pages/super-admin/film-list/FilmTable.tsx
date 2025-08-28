@@ -198,7 +198,7 @@ const FilmTable = () => {
     {
       key: "image",
       label: "Image",
-      width: "w-20",
+      width: "w-20 text-start",
       render: (value) => (
         <div className="h-12 w-12 flex-shrink-0">
           <img

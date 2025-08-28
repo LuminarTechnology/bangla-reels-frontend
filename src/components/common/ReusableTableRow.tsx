@@ -30,7 +30,7 @@ export const ReusableTableRow = <T,>({
       {columns.map((column) => (
         <td
           key={column.key}
-          className={`px-6 py-4 whitespace-nowrap ${column.width ? column.width : ""}`}
+          className={`text-center px-6 py-4 whitespace-nowrap ${column.width ? column.width : ""}`}
         >
           {column.render ? column.render((row as any)[column.key], row) : (row as any)[column.key]}
         </td>
