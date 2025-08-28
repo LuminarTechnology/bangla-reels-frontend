@@ -2,29 +2,48 @@ import ContainerWrapper from "@/src/components/common/ContainerWrapper";
 import Footer from "@/src/components/common/Footer";
 import Navbar from "@/src/components/common/Navbar";
 import UserDashboardSidebar from "@/src/components/common/UserDashboardSidebar";
+import { NextIntlClientProvider } from "next-intl";
+import { notFound } from "next/navigation";
+import { ReactNode } from "react";
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+interface Props {
+  readonly children: ReactNode;
+  readonly params: Promise<{ lang: string }>;
+}
+
+export default async function DashboardLayout({ children, params }: Props) {
+  const { lang } = await params;
+  let messages;
+
+  try {
+    messages = (await import(`@/src/locales/${lang}.json`)).default;
+  } catch {
+    notFound();
+  }
   return (
-    <div className="gradient-background">
-      <div>
-        <Navbar
-          mobileDashboard={<UserDashboardSidebar background="bg-transparent md:hidden block" />}
-        />
-      </div>
-      <ContainerWrapper>
-        <div className="flex h-[calc(100vh-64px)] gap-5 text-white">
-          {/* Sidebar */}
-          <div className="hidden sm:block">
-            <UserDashboardSidebar />
-          </div>
-
-          {/* Main Content */}
-          <main className="w-full flex-1 space-y-8 overflow-y-auto rounded-2xl bg-[#0B0000] p-6 sm:p-8">
-            {children}
-          </main>
+    <NextIntlClientProvider locale={lang} messages={messages}>
+      <div className="gradient-background">
+        <div>
+          <Navbar
+            mobileDashboard={<UserDashboardSidebar background="bg-transparent md:hidden block" />}
+            currentLang={lang}
+          />
         </div>
-      </ContainerWrapper>
-      <Footer/>
-    </div>
+        <ContainerWrapper>
+          <div className="flex h-[calc(100vh-64px)] gap-5 text-white">
+            {/* Sidebar */}
+            <div className="hidden sm:block">
+              <UserDashboardSidebar />
+            </div>
+
+            {/* Main Content */}
+            <main className="w-full flex-1 space-y-8 overflow-y-auto rounded-2xl bg-[#0B0000] p-6 sm:p-8">
+              {children}
+            </main>
+          </div>
+        </ContainerWrapper>
+        <Footer />
+      </div>
+    </NextIntlClientProvider>
   );
 }
