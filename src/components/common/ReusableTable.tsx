@@ -122,13 +122,13 @@ const TableRow = <T,>({
       {columns.map((column) => (
         <td
           key={column.key}
-          className={`px-6 py-4 whitespace-nowrap ${column.width ? column.width : ""}`}
+          className={`text-center px-6 py-4 whitespace-nowrap ${column.width ? column.width : ""}`}
         >
           {column.render ? column.render((row as any)[column.key], row) : (row as any)[column.key]}
         </td>
       ))}
       {actions && actions.length > 0 && (
-        <td className="px-6 py-4 whitespace-nowrap">
+        <td className="px-6 py-4 whitespace-nowrap flex items-center justify-center">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
@@ -180,18 +180,18 @@ const ReusableTable = <T,>({
       />
       <div className="overflow-x-auto px-4">
         <table className="w-full">
-          <thead className="rounded-t-2xl bg-[#16151A]">
+          <thead className="bg-[#16151A]">
             <tr>
-              {columns.map((column) => (
+              {columns.map((column, index) => (
                 <th
                   key={column.key}
-                  className={`px-6 py-3 text-left text-xs font-medium tracking-wider text-white uppercase ${column.width || ""}`}
+                  className={`px-6 py-3 text-center text-xs font-medium tracking-wider text-white uppercase ${column.width || ""} ${index === 0 ? "rounded-tl-lg" : ""} ${index === columns.length -1 && (!actions || actions.length === 0 ? "rounded-tr-lg" : "")}`}
                 >
                   {column.label}
                 </th>
               ))}
               {actions && actions.length > 0 && (
-                <th className="w-16 px-6 py-3 text-left text-xs font-medium tracking-wider text-white uppercase">
+                <th className="w-16 px-6 py-3 text-center text-xs font-medium tracking-wider text-white uppercase rounded-tr-lg">
                   Action
                 </th>
               )}
