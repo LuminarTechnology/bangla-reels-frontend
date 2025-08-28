@@ -88,7 +88,7 @@ const UserDashboardNavbar = () => {
             <AppDownloadPopup />
             {/* Language Dropdown - Hidden on mobile */}
             <div className="hidden lg:block">
-              <LanguagePopup />
+              <LanguagePopup currentLang="en" />
             </div>
 
             {/* History - Hidden on mobile */}
