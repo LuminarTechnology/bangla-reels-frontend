@@ -1,0 +1,22 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "categories": "Categories",
+    "fandom": "Fandom",
+    "contest": "Contest",
+    "history": "History",
+    "app": "App"
+  },
+  "HomePage": {
+    "topPicks": "Top Picks",
+    "new-release": "New Release",
+    "love-at-first-side": "Love at First Side",
+    "tortured-love": "Tortured Love",
+    "second-chance": "Second Chance",
+    "btn": "View All",
+    "play": "Play"
+  },
+  "Footer": {
+    "copyright": "All rights reserved."
+  }
+}

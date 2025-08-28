@@ -1,10 +1,12 @@
 import React from "react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../../ui/hover-card";
 import { Button } from "../../ui/button";
-import {  QrCode, Smartphone } from "lucide-react";
+import { QrCode, Smartphone } from "lucide-react";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 const AppDownloadPopup = () => {
+  const t = useTranslations("Navbar");
   return (
     <HoverCard openDelay={0} closeDelay={100}>
       <HoverCardTrigger asChild>
@@ -14,7 +16,7 @@ const AppDownloadPopup = () => {
           className="h-10 w-10 rounded-full text-white hover:bg-transparent hover:text-gray-100"
         >
           <Smartphone className="h-4 w-4" />
-          App
+          {t("app")}
         </Button>
       </HoverCardTrigger>
       <HoverCardContent
@@ -32,7 +34,7 @@ const AppDownloadPopup = () => {
 
             {/* Download Icons and Text */}
             <div className="flex flex-col items-start space-y-2">
-              <div className="flex items-center  gap-1 text-gray-300">
+              <div className="flex items-center gap-1 text-gray-300">
                 <div className="relative">
                   <Image
                     src="/icons/playstore.png"
@@ -58,7 +60,7 @@ const AppDownloadPopup = () => {
 
           {/* QR Code */}
           <div className="rounded bg-white p-2">
-            <div className=" h-30 w-30 items-center ">
+            <div className="h-30 w-30 items-center">
               <QrCode className="h-30 w-30 text-gray-400" />
             </div>
           </div>

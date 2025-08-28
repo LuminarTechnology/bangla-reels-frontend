@@ -1,19 +1,30 @@
 import React from "react";
 import { StreamingCard } from "../../common/StreamingCard";
+import { useLocale } from "@/src/hooks/useLocale";
+import { TLang, TStreamingData } from "@/src/types/globals";
+import { StreamingData } from "@/src/constants/homePage";
 
-const NewRelease = () => {
+type NewReleaseProps = {
+  sectionTitle: string;
+  play: string;
+};
+
+const NewRelease: React.FC<NewReleaseProps> = ({ sectionTitle, play }) => {
+  const { locale } = useLocale() as { locale: TLang };
+
   return (
     <div className="my-10">
-      <h2 className="text-2xl font-bold text-white">New Releases</h2>
+      <h2 className="text-2xl font-bold text-white">{sectionTitle}</h2>
       <div className="my-10 grid items-center justify-between gap-5 xl:grid-cols-3">
-        {[1, 2, 3].map((_, i) => (
+        {StreamingData.map((newData, i) => (
           <StreamingCard
             key={i}
-            title="Stranger Things"
-            description="Stranger Things takes you to Hawkins, a small town where the strange is normal and secrets run deep. When a young boy goes missing, his friends uncover a hidden world known as the Upside Down. Along the way, they discover that friendship is the real superpower against the darkness. As minds bend and monsters rise, ordinary kids become unexpected heroes."
-            genres={["Action", "Horror"]}
-            type="TV SERIES"
+            title={newData.title[locale]}
+            description={newData.description[locale]}
+            genres={newData.genres[locale]}
+            type={newData.type[locale]}
             imageUrl="/images/new-release-1.jpg"
+            play={play}
           />
         ))}
       </div>

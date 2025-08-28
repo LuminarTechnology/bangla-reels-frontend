@@ -7,9 +7,11 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "../../ui/hover-ca
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs";
 import HistoryContent from "./HistoryContent";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const HistoryButton = () => {
   const router = useRouter();
+  const t = useTranslations("Navbar");
   const historyItems = [
     {
       id: 1,
@@ -75,7 +77,7 @@ const HistoryButton = () => {
             className="hidden gap-1 text-white hover:bg-transparent hover:text-gray-100 lg:flex"
           >
             <History className="h-4 w-4" />
-            History
+            {t("history")}
           </Button>
         </Link>
       </HoverCardTrigger>

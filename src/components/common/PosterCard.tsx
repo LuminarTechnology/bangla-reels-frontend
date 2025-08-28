@@ -7,7 +7,7 @@ import { Play } from "lucide-react";
 interface PosterCardProps {
   title: string;
   posterImage: string;
-  category?: string;
+  category?: any;
   duration?: string; // optional duration
   watchedProgress?: number; // 0 to 100
   episodes?: string; // EP1 / EP71
@@ -28,26 +28,21 @@ export function PosterCard({
   return (
     <Card
       className={cn(
-        "relative group max-w-[250px] gap-0 overflow-hidden border-none bg-transparent p-0 shadow-none",
+        "group relative max-w-[250px] gap-0 overflow-hidden border-none bg-transparent p-0 shadow-none",
         className
       )}
     >
       <Link href={`/${link}/${title}`}>
         <div className="relative aspect-[4/5] cursor-pointer overflow-hidden rounded-[8px]">
-          <Image
-            src={posterImage}
-            alt={title}
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 flex items-center justify-center bg-black/60 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className='bg-primary-rose p-4 rounded-full'>
+          <Image src={posterImage} alt={title} fill className="object-cover" />
+          <div className="absolute inset-0 flex items-center justify-center bg-black/60 text-lg font-bold text-white opacity-0 transition-opacity group-hover:opacity-100">
+            <div className="bg-primary-rose rounded-full p-4">
               <Play />
             </div>
           </div>
           {/* Category Badge */}
           <div className="absolute top-3 left-3">
-            <p className="rounded-[12px] bg-[#F3F4F680] px-3 py-1.5 text-xs text-gray-900 font-semibold backdrop-blur-[2px]">
+            <p className="rounded-[12px] bg-[#F3F4F680] px-3 py-1.5 text-xs font-semibold text-gray-900 backdrop-blur-[2px]">
               {category}
             </p>
           </div>
@@ -61,7 +56,6 @@ export function PosterCard({
             </div>
           )} */}
 
-
           {/* Watched Progress Bar */}
           {watchedProgress > 0 && (
             <div className="absolute bottom-0 left-0 h-1 w-full bg-gray-600">
@@ -72,9 +66,7 @@ export function PosterCard({
 
         {/* Title & Episodes */}
         <div className="px-1 pt-3">
-          <h3 className="text-xl leading-tight font-bold text-[#FFFAFA]">
-            {title}
-          </h3>
+          <h3 className="text-xl leading-tight font-bold text-[#FFFAFA]">{title}</h3>
           {episodes && <p className="mt-1 text-sm text-gray-400">{episodes}</p>}
         </div>
       </Link>

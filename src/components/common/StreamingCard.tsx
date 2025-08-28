@@ -4,14 +4,22 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 
 interface StreamingCardProps {
-  title: string;
-  description: string;
+  title: any;
+  description: any;
   genres: string[];
   type: string;
   imageUrl: string;
+  play: string;
 }
 
-export function StreamingCard({ title, description, genres, type, imageUrl }: StreamingCardProps) {
+export function StreamingCard({
+  title,
+  description,
+  genres,
+  type,
+  imageUrl,
+  play,
+}: StreamingCardProps) {
   return (
     <div className="relative flex w-full gap-4 overflow-hidden rounded-2xl border bg-white/10 p-4 shadow-2xl backdrop-blur-sm">
       {/* Poster Image */}
@@ -56,7 +64,7 @@ export function StreamingCard({ title, description, genres, type, imageUrl }: St
 
         <Button className="bg-primary-rose hover:bg-primary-rose-hover w-full transform rounded-lg py-2.5 font-semibold text-white transition-all duration-200 hover:scale-105">
           <Play className="mr-2 h-4 w-4 fill-current" />
-          PLAY
+          {play}
         </Button>
       </div>
     </div>

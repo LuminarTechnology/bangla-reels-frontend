@@ -1,8 +1,8 @@
 import { clerkClient } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { SearchUsers } from "../../SearchUsers";
-import { removeRole, setRole } from "../../../../actions/clerk-role-manage";
 import { hasRole } from "@/src/utils/roles";
+import { removeRole, setRole } from "@/src/app/actions/clerk-role-manage";
 
 export default async function AdminDashboard(params: {
   searchParams: Promise<{ search?: string }>;
