@@ -12,18 +12,13 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import Link from "next/link";
 import { banners } from "@/src/constants/homePage";
-import { useLocale } from "@/src/hooks/useLocale";
+import { useLocale } from "@/src/app/LocaleProvider";
 import { TLang } from "@/src/types/globals";
-
-interface Movie {
-  id: number;
-  title: string;
-  image: string;
-  subtitle?: string;
-}
+import { useTranslations } from "next-intl";
 
 const Banner: React.FC = () => {
-  const { locale } = useLocale() as { locale: TLang };
+  const { lang } = useLocale() as { lang: TLang };
+  const t = useTranslations("HomePage");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const mainSwiperRef = useRef<{ swiper: SwiperType } | null>(null);
@@ -52,7 +47,7 @@ const Banner: React.FC = () => {
               <div className="relative h-full w-full">
                 <Image
                   src={movie.image}
-                  alt={movie.title[locale]}
+                  alt={movie.title[lang]}
                   fill
                   priority={index === 0}
                   className="rounded-none object-cover lg:rounded-lg"
@@ -63,11 +58,11 @@ const Banner: React.FC = () => {
                 <div className="relative z-10 flex h-full items-center px-4 sm:px-8 md:-bottom-10 md:px-12 lg:px-16">
                   <div className="animate-fadeIn max-w-xs sm:max-w-md md:max-w-lg">
                     <h1 className="mb-2 text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">
-                      {movie.title[locale]}
+                      {movie.title[lang]}
                     </h1>
                     {movie.subtitle && (
                       <h2 className="mb-6 text-lg font-light text-white sm:mb-8 sm:text-xl md:text-2xl lg:text-3xl">
-                        {movie.subtitle[locale]}
+                        {movie.subtitle[lang]}
                       </h2>
                     )}
 
@@ -79,7 +74,7 @@ const Banner: React.FC = () => {
                       >
                         <Play size={18} className="transition-transform group-hover:scale-110" />
                       </Button>
-                      <div className="text-2xl text-white">Watch Now</div>
+                      <div className="text-2xl text-white">{t("bannerBtn")}</div>
                     </div>
                   </div>
                 </div>
@@ -125,14 +120,14 @@ const Banner: React.FC = () => {
                 <div className="relative h-18 w-14 overflow-hidden rounded-lg sm:h-20 sm:w-16 md:h-28 md:w-20">
                   <Image
                     src={movie.image}
-                    alt={movie.title[locale]}
+                    alt={movie.title[lang]}
                     fill
                     className="rounded-lg object-cover"
                   />
                 </div>
                 <div className="absolute right-0 bottom-1 left-0 px-1">
                   <p className="truncate text-center text-[10px] font-medium text-white sm:text-xs">
-                    {movie.title[locale]}
+                    {movie.title[lang]}
                   </p>
                 </div>
               </div>

@@ -113,6 +113,12 @@ my-next-app/
 │ │ ├── authService.ts
 │ │ ├── videoService.ts
 │ │ └── dashboardService.ts
+| |
+│ ├──📁 locales/                      # Localization json file
+│ │ ├── bn.json                        # Bangla localization static UI data
+│ │ ├── en.json                        # English localization static UI data
+│ │ ├── es.json                        # Spanish localization static UI data 
+│ │ └── la.json                        # Latin localization static UI data
 │
 │ ├──📁 styles/                         # Styling
 │ │ ├── globals.css
@@ -141,6 +147,73 @@ my-next-app/
 └── package.json
 
 ```
+
+🌍 Localization Guidelines
+
+```
+📂 Folder Structure
+locales/
+ ├── en.json   # English
+ ├── bn.json   # Bangla
+ ├── es.json   # Spanish
+ ├── la.json   # Latin
+```
+
+Each file follows the same structure so translations remain consistent.
+
+```
+📖 Example JSON (en.json)
+{
+  "Navbar": {
+    "home": "Home",
+    "categories": "Categories",
+    "fandom": "Fandom",
+    "contest": "Contest",
+    "history": "History",
+    "app": "App"
+  },
+  "Footer": {
+    "community": "Community",
+    "download": "Download",
+    "about": "About",
+    "support": "Support",
+    "terms-service": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "contact-us": "Contact Us",
+    "feedback": "Feedback",
+    "media-relation": "Media and Public Relation",
+    "copyright": "Copyright © 2025 Crazy Maple Studio Inc. All rights reserved."
+  },
+  "HomePage": {
+    "topPicks": "Top Picks",
+    "new-release": "New Release",
+    "love-at-first-side": "Love at First Side",
+    "tortured-love": "Tortured Love",
+    "second-chance": "Second Chance",
+    "btn": "View All",
+    "play": "Play",
+    "bannerBtn": "Watch Now"
+  }
+}
+```
+
+Save file as xx.json
+
+- bn.json → Bangla
+- en.json → English
+- es.json → Spanish
+- la.json → Latin
+
+Update i18n config (if required)
+
+If using Next.js next-intl register the new locale inside your config.js.
+
+**Best Practices**
+
+- Keep keys identical across all files (Navbar.home, Footer.community, etc.).
+- Never remove keys from one language only.
+- For missing translations, fallback will be English (en.json).
+- Always run a JSON validator to avoid syntax errors.
 
 ## 🛠️ Technologies Used
 
