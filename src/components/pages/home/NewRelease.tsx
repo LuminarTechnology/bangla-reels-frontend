@@ -1,7 +1,7 @@
 import React from "react";
 import { StreamingCard } from "../../common/StreamingCard";
-import { useLocale } from "@/src/hooks/useLocale";
-import { TLang, TStreamingData } from "@/src/types/globals";
+import { useLocale } from "@/src/app/LocaleProvider";
+import { TLang } from "@/src/types/globals";
 import { StreamingData } from "@/src/constants/homePage";
 
 type NewReleaseProps = {
@@ -10,7 +10,7 @@ type NewReleaseProps = {
 };
 
 const NewRelease: React.FC<NewReleaseProps> = ({ sectionTitle, play }) => {
-  const { locale } = useLocale() as { locale: TLang };
+  const { lang } = useLocale() as { lang: TLang };
 
   return (
     <div className="my-10">
@@ -19,10 +19,10 @@ const NewRelease: React.FC<NewReleaseProps> = ({ sectionTitle, play }) => {
         {StreamingData.map((newData, i) => (
           <StreamingCard
             key={i}
-            title={newData.title[locale]}
-            description={newData.description[locale]}
-            genres={newData.genres[locale]}
-            type={newData.type[locale]}
+            title={newData.title[lang]}
+            description={newData.description[lang]}
+            genres={newData.genres[lang]}
+            type={newData.type[lang]}
             imageUrl="/images/new-release-1.jpg"
             play={play}
           />

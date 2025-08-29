@@ -71,15 +71,13 @@ const HistoryButton = () => {
   return (
     <HoverCard openDelay={100} closeDelay={300}>
       <HoverCardTrigger asChild>
-        <Link href={"/dashboard/history"}>
-          <Button
-            variant="ghost"
-            className="hidden gap-1 text-white hover:bg-transparent hover:text-gray-100 lg:flex"
-          >
-            <History className="h-4 w-4" />
-            {t("history")}
-          </Button>
-        </Link>
+        <Button
+          variant="ghost"
+          className="hidden gap-1 text-white hover:bg-transparent hover:text-gray-100 lg:flex"
+        >
+          <History className="h-4 w-4" />
+          {t("history")}
+        </Button>
       </HoverCardTrigger>
       <HoverCardContent
         className="w-70 rounded-2xl border-none bg-[#16151A] p-0 before:absolute before:-top-2 before:right-5 before:h-0 before:w-0 before:-translate-x-1/2 before:border-r-8 before:border-b-8 before:border-l-8 before:border-r-transparent before:border-b-[#16151A] before:border-l-transparent before:content-['']"

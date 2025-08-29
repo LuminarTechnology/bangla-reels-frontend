@@ -23,6 +23,7 @@ import AppDownloadPopup from "../pages/home/AppDownloadPopup";
 
 const UserDashboardNavbar = () => {
   const pathname = usePathname();
+  const strippedPath = pathname.replace(/^\/(en|bn|es|la)(?=\/|$)/, "") || "/";
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
@@ -52,7 +53,7 @@ const UserDashboardNavbar = () => {
                     <CategoryPopup
                       key={item.name}
                       itemName={item.name}
-                      isCategory={pathname === item.href}
+                      isCategory={strippedPath === item.href}
                     />
                   );
                 }
@@ -62,14 +63,14 @@ const UserDashboardNavbar = () => {
                     href={item.href}
                     className={cn(
                       "flex flex-col items-center text-base font-medium duration-200",
-                      pathname === item.href ? "text-primary-rose" : "text-white"
+                      strippedPath === item.href ? "text-primary-rose" : "text-white"
                     )}
                   >
                     <div className="flex items-center gap-1.5">{item.name}</div>
                     <span
                       className={cn(
                         "mt-1 size-1 rounded-full",
-                        pathname === item.href ? "bg-primary-rose" : "invisible"
+                        strippedPath === item.href ? "bg-primary-rose" : "invisible"
                       )}
                     ></span>
                   </Link>

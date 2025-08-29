@@ -2,6 +2,8 @@ import React from "react";
 import EpisodeList from "./EpisodeList";
 import { Play, Download, Heart, SquarePlay } from "lucide-react";
 import Image from "next/image";
+import { Button } from "../../ui/button";
+import Link from "next/link";
 
 const tags = [
   "Female",
@@ -78,14 +80,17 @@ const MovieDetailsMainSection = () => {
           </div>
 
           <div className="mb-8 flex gap-4">
-            <button className="flex items-center gap-2 rounded-lg bg-red-600 px-6 py-3 font-medium text-white transition-colors hover:bg-red-700">
-              <Play className="h-5 w-5 fill-current" />
-              Go Watching
-            </button>
-            <button className="flex items-center gap-2 rounded-lg border border-gray-600/50 bg-gray-700/50 px-6 py-3 font-medium text-white transition-colors hover:bg-gray-600/50">
+            <Link href={"/episode/john-wick"}>
+              <Button className="flex cursor-pointer items-center gap-2 rounded-lg bg-red-600 px-6 py-3 font-medium text-white transition-colors hover:bg-red-700">
+                <Play className="h-5 w-5 fill-current" />
+                Go Watching
+              </Button>
+            </Link>
+
+            <Button className="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-600/50 bg-gray-700/50 px-6 py-3 font-medium text-white transition-colors hover:bg-gray-600/50">
               <Download className="h-5 w-5" />
               Download
-            </button>
+            </Button>
           </div>
         </div>
       </div>

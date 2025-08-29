@@ -11,13 +11,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import { DialogTitle } from "../ui/dialog";
-import { useLocale } from "@/src/hooks/useLocale";
+import { useLocale } from "@/src/app/LocaleProvider";
 
 const LanguageDropdown = ({ currentLang }: { currentLang: string }) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const { changeLocale } = useLocale();
+  const { changeLang } = useLocale();
 
   const languages = [
     { id: 1, name: "English", code: "en" },
@@ -30,14 +30,14 @@ const LanguageDropdown = ({ currentLang }: { currentLang: string }) => {
     const segments = pathname.split("/").filter(Boolean);
 
     if (segments.length > 0 && languages.some((l) => l.code === segments[0])) {
-      segments[0] = code; // replace current lang
+      segments[0] = code;
     } else {
-      segments.unshift(code); // add lang if missing
+      segments.unshift(code);
     }
 
     const newPath = "/" + segments.join("/");
     router.push(newPath);
-    changeLocale(code);
+    changeLang(code);
   };
 
   return (
@@ -53,7 +53,7 @@ const LanguageDropdown = ({ currentLang }: { currentLang: string }) => {
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.id}
-            className="text-white hover:bg-transparent hover:text-gray-100"
+            className="cursor-pointer text-white hover:bg-transparent hover:text-gray-100"
             onClick={() => handleLanguageChange(language.code)}
           >
             {language.name}

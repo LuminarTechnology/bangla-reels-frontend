@@ -14,6 +14,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { LocaleProvider } from "./LocaleProvider";
 
 export const metadata: Metadata = {
   title: {

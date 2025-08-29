@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import React, { ReactNode } from "react";
 import { Toaster } from "sonner";
+import { LocaleProvider } from "../../LocaleProvider";
 
 interface Props {
   readonly children: ReactNode;
@@ -23,16 +24,18 @@ export default async function UserLayout({ children, params }: Props) {
 
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
-      <div className="gradient-background">
-        <Toaster position="top-right" richColors />
-        <Navbar currentLang={lang} />
-        <ContainerWrapper>
-          <NextIntlClientProvider locale={lang} messages={messages}>
-            {children}
-          </NextIntlClientProvider>
-        </ContainerWrapper>
-        <Footer />
-      </div>
+      <LocaleProvider routeLang={lang}>
+        <div className="gradient-background">
+          <Toaster position="top-right" richColors />
+          <Navbar currentLang={lang} />
+          <ContainerWrapper>
+            <NextIntlClientProvider locale={lang} messages={messages}>
+              {children}
+            </NextIntlClientProvider>
+          </ContainerWrapper>
+          <Footer />
+        </div>
+      </LocaleProvider>
     </NextIntlClientProvider>
   );
 }

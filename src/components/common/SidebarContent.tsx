@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogOut, ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/src/lib/utils";
-import { SidebarItem } from "@/src/types/DashboardSidebarItems.type";
+import { SidebarItem } from "@/src/types/DashboardSidebarItems";
 import { SignOutButton } from "@clerk/nextjs";
 
 type SidebarContentProps = {
@@ -14,6 +14,7 @@ type SidebarContentProps = {
 
 export function SidebarContent({ sidebarItems, onItemClick }: SidebarContentProps) {
   const pathname = usePathname();
+  const strippedPath = pathname.replace(/^\/(en|bn|es|la)(?=\/|$)/, "") || "/";
   const [openMenus, setOpenMenus] = useState<{ [key: string]: boolean }>({});
 
   const toggleMenu = (title: string) => {
@@ -34,7 +35,7 @@ export function SidebarContent({ sidebarItems, onItemClick }: SidebarContentProp
       {/* Navigation */}
       <nav className="flex-1 space-y-1 px-3 py-4">
         {sidebarItems.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive = strippedPath === item.href;
 
           if (item.children) {
             const isOpen = openMenus[item.title];
@@ -63,7 +64,7 @@ export function SidebarContent({ sidebarItems, onItemClick }: SidebarContentProp
                 {isOpen && (
                   <div className="mt-1 ml-8 space-y-1">
                     {item.children.map((child) => {
-                      const childActive = pathname === child.href;
+                      const childActive = strippedPath === child.href;
                       return (
                         <Link
                           key={child.href}
@@ -109,7 +110,7 @@ export function SidebarContent({ sidebarItems, onItemClick }: SidebarContentProp
       <div className="p-3">
         <SignOutButton
           children={
-            <button className="flex w-full items-center space-x-3 rounded-lg px-3 py-3 text-sm font-medium text-red-400 transition-colors hover:bg-red-600 hover:text-white">
+            <button className="flex w-full cursor-pointer items-center space-x-3 rounded-lg px-3 py-3 text-sm font-medium text-red-400 transition-colors hover:bg-red-600 hover:text-white">
               <LogOut className="h-5 w-5" />
               Log Out
             </button>
