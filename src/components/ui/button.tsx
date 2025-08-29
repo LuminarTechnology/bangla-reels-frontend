@@ -40,6 +40,16 @@ const buttonVariants = cva(
   }
 );
 
+export const statusVariants = cva("font-semibold", {
+  variants: {
+    status: {
+      Approved: "text-green-500",
+      Pending: "text-yellow-500",
+      Rejected: "text-red-500",
+    },
+  },
+});
+
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
