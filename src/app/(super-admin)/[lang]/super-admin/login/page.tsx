@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale } from "@/src/app/LocaleProvider";
 import { SignIn } from "@clerk/nextjs";
 import React from "react";
 // import { useForm } from "react-hook-form";
@@ -9,6 +10,7 @@ import React from "react";
 // import { FormInputField } from "@/src/components/forms/FormInputField";
 
 export default function SuperAdminDashboard() {
+  const { lang } = useLocale();
   // const {
   //   handleSubmit,
   //   formState: { isSubmitting },
@@ -27,11 +29,11 @@ export default function SuperAdminDashboard() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <SignIn
-        path="/super-admin/login"
+        path={`/${lang}/super-admin/login`}
         routing="path"
-        signUpUrl="/sign-up"
-        afterSignInUrl="/super-admin/dashboard"
-        fallbackRedirectUrl="/super-admin/dashboard"
+        signUpUrl={`/${lang}/sign-up`}
+        afterSignInUrl={`/${lang}/super-admin/dashboard`}
+        fallbackRedirectUrl={`/${lang}/super-admin/dashboard`}
         appearance={{
           elements: { card: "shadow-none border-none" },
         }}

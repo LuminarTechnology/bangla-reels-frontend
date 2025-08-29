@@ -34,7 +34,7 @@ const intlMiddleware = createIntlMiddleware({
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {
   const { sessionClaims } = await auth();
-
+  const lang = req.cookies.get("locale")?.value || "en";
   const roles: Roles[] = sessionClaims?.metadata?.roles as Roles[] | [];
 
   // ✅ First, run locale handling
@@ -42,14 +42,13 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
   if (intlResponse) return intlResponse;
 
   // Protect all routes starting with `/super-admin/dashboard`
-  // if (isAdminRoute(req) && !roles?.includes("super-admin")) {
-  //   const url = new URL("/sign-in", req.url);
-  //   return NextResponse.redirect(url);
-  // }
+  if (isAdminRoute(req) && !roles?.includes("super-admin")) {
+    const url = new URL(`/${lang}/super-admin/login`, req.url);
+    return NextResponse.redirect(url);
+  }
 
-    if (!isPublicRoute(req)) {
-      await auth.protect();
-    }
+  if (!isPublicRoute(req)) {
+    await auth.protect();
   }
 
   return NextResponse.next();
@@ -57,9 +56,9 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
+    // Match everything under a language prefix
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
+    // Always run for API routes (without lang prefix, or you can duplicate if you want /en/api too)
     "/(api|trpc)(.*)",
   ],
 };
