@@ -2,6 +2,7 @@
 import { getEpisodeNumber } from "@/src/utils/getEpisodeNumber";
 import Link from "next/link";
 import React, { useState } from "react";
+import { Button } from "../../ui/button";
 
 const episodes = [
   { number: "Trailer", active: false },
@@ -58,7 +59,7 @@ const EpisodeList = () => {
       {/* Episode Range Selector */}
       <div className="mb-6 flex flex-wrap gap-4">
         {ranges.map((range, idx) => (
-          <button
+          <Button
             key={idx}
             onClick={() => setActiveRange(idx)}
             className={`pb-1 font-medium transition-colors ${
@@ -68,25 +69,25 @@ const EpisodeList = () => {
             }`}
           >
             {range.start}-{range.end}
-          </button>
+          </Button>
         ))}
       </div>
 
       {/* Episodes Grid */}
       <div className="grid grid-cols-5 gap-2 sm:grid-cols-8 md:grid-cols-10 lg:grid-cols-12 xl:grid-cols-15">
         {activeRange === 0 && (
-          <Link href={`/episode/trailer`}>
-            <button className="rounded border border-gray-600/30 bg-gray-800/50 px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:border-red-500/50 hover:bg-red-700/50 hover:text-white">
+          <Link href={`/episode/john-wick?trailer`}>
+            <Button className="cursor-pointer rounded border border-gray-600/30 bg-gray-800/50 px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:border-red-500/50 hover:bg-red-700/50 hover:text-white">
               Trailer
-            </button>
+            </Button>
           </Link>
         )}
 
         {displayedEpisodes.map((episode, index) => (
-          <Link href={`/episode/${episode.number}`} key={index}>
-            <button className="rounded border border-gray-600/30 bg-gray-800/50 px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:border-red-500/50 hover:bg-red-700/50 hover:text-white">
+          <Link href={`/episode/john-wick?${episode.number}`} key={index}>
+            <Button className="cursor-pointer rounded border border-gray-600/30 bg-gray-800/50 px-3 py-2 text-sm font-medium text-white/80 transition-colors hover:border-red-500/50 hover:bg-red-700/50 hover:text-white">
               {episode.number}
-            </button>
+            </Button>
           </Link>
         ))}
       </div>
