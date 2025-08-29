@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import LogoutModal from "@/src/components/modals/LogoutModal";
-import { LogOut, X } from "lucide-react";
+import { LogOut, User, X } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserDashboardSidebarItems } from "@/src/constants/UserDashboardSidebarItems";
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { Button } from "../ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 // import LoginModal from "../modals/LoginModal";
 // import { Button } from "../ui/button";
 
@@ -17,24 +18,30 @@ interface UserDashboardSidebarProps {
 }
 
 const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
-  background = "bg-[#111]", setIsOpen
+  background = "bg-[#111]",
+  setIsOpen,
 }) => {
   const pathname = usePathname();
+  const strippedPath = pathname.replace(/^\/(en|bn|es|la)(?=\/|$)/, "") || "/";
   const { user, isSignedIn } = useUser();
 
   return (
     <aside
       className={cn(
-        "h-full w-80 flex-col rounded-xl sm:border-r sm:border-gray-800 p-4",
-        background, "flex"
-      )}>
+        "h-full w-80 flex-col rounded-xl p-4 sm:border-r sm:border-gray-800",
+        background,
+        "flex"
+      )}
+    >
       <div className="flex items-center gap-3 p-3">
         {isSignedIn ? (
           <Link href={"/profile"}>
             <img src={user.imageUrl} alt="Profile" className="h-12 w-12 rounded-full border" />
           </Link>
         ) : (
-          <img src="/profile.jpg" alt="Profile" className="h-12 w-12 rounded-full border" />
+          <Button variant="ghost" size="sm" className="relative size-8 rounded-full bg-white">
+            <User className="size-4 text-black" />
+          </Button>
         )}
 
         {isSignedIn ? (
@@ -64,8 +71,8 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
               key={item.name}
               href={item.href}
               className={cn(
-                "flex items-center w-[90%] sm:w-full gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-500",
-                pathname === item.href && "bg-[#e83a570f] text-red-500"
+                "flex w-[90%] items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-500 sm:w-full",
+                strippedPath === item.href && "bg-[#e83a570f] text-red-500"
               )}
               onClick={() => setIsOpen && setIsOpen(false)}
             >
@@ -87,14 +94,13 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
         /> */}
         <SignOutButton
           children={
-            <button className="bg-primary-rose hover:bg-primary-rose-hover flex w-[90%] sm:w-full cursor-pointer items-center gap-3 rounded-xl px-3 py-3 transition">
+            <button className="bg-primary-rose hover:bg-primary-rose-hover flex w-[90%] cursor-pointer items-center gap-3 rounded-xl px-3 py-3 transition sm:w-full">
               <LogOut className="h-5 w-5" />
               Log Out
             </button>
           }
         />
       </div>
-
     </aside>
   );
 };
