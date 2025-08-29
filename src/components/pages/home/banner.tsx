@@ -11,48 +11,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import Link from "next/link";
-
-interface Movie {
-  id: number;
-  title: string;
-  image: string;
-  subtitle?: string;
-}
-
-const movies: Movie[] = [
-  {
-    id: 1,
-    title: "John Wick 4",
-    subtitle: "The Story of Survival",
-    image: "/images/banner/banner-1.jpg",
-  },
-  {
-    id: 2,
-    title: "The Life List",
-    subtitle: "Thrilling Adventure",
-    image: "/images/banner/banner-2.png",
-  },
-  {
-    id: 3,
-    title: "Holiday in the Wild",
-    subtitle: "Unleash the Action",
-    image: "/images/banner/banner-3.png",
-  },
-  {
-    id: 4,
-    title: "Lonely Planet",
-    subtitle: "The Untold Journey",
-    image: "/images/banner/banner-4.png",
-  },
-  {
-    id: 5,
-    title: "DAY WITH MY WIFE",
-    subtitle: "Romance & Comedy",
-    image: "/images/banner/banner-5.png",
-  },
-];
+import { banners } from "@/src/constants/homePage";
+import { useLocale } from "@/src/app/LocaleProvider";
+import { TLang } from "@/src/types/globals";
+import { useTranslations } from "next-intl";
 
 const Banner: React.FC = () => {
+  const { lang } = useLocale() as { lang: TLang };
+  const t = useTranslations("HomePage");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const mainSwiperRef = useRef<{ swiper: SwiperType } | null>(null);
@@ -74,14 +40,14 @@ const Banner: React.FC = () => {
         onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex)}
         className="h-full w-full"
       >
-        {movies.map((movie, index) => (
+        {banners.map((movie, index) => (
           <SwiperSlide key={movie.id}>
             {/* Background */}
             <Link href="episode/john-wick-4">
               <div className="relative h-full w-full">
                 <Image
                   src={movie.image}
-                  alt={movie.title}
+                  alt={movie.title[lang]}
                   fill
                   priority={index === 0}
                   className="rounded-none object-cover lg:rounded-lg"
@@ -92,11 +58,11 @@ const Banner: React.FC = () => {
                 <div className="relative z-10 flex h-full items-center px-4 sm:px-8 md:-bottom-10 md:px-12 lg:px-16">
                   <div className="animate-fadeIn max-w-xs sm:max-w-md md:max-w-lg">
                     <h1 className="mb-2 text-2xl font-bold text-white sm:text-3xl md:text-4xl lg:text-5xl">
-                      {movie.title}
+                      {movie.title[lang]}
                     </h1>
                     {movie.subtitle && (
                       <h2 className="mb-6 text-lg font-light text-white sm:mb-8 sm:text-xl md:text-2xl lg:text-3xl">
-                        {movie.subtitle}
+                        {movie.subtitle[lang]}
                       </h2>
                     )}
 
@@ -108,7 +74,7 @@ const Banner: React.FC = () => {
                       >
                         <Play size={18} className="transition-transform group-hover:scale-110" />
                       </Button>
-                      <div className="text-2xl text-white">Watch Now</div>
+                      <div className="text-2xl text-white">{t("bannerBtn")}</div>
                     </div>
                   </div>
                 </div>
@@ -140,7 +106,7 @@ const Banner: React.FC = () => {
           watchSlidesProgress={true}
           className="max-w-[500px] sm:max-w-[300px] md:max-w-[400px]"
         >
-          {movies.map((movie, index) => (
+          {banners.map((movie, index) => (
             <SwiperSlide key={movie.id} className="!w-auto">
               <div
                 className={cn(
@@ -154,14 +120,14 @@ const Banner: React.FC = () => {
                 <div className="relative h-18 w-14 overflow-hidden rounded-lg sm:h-20 sm:w-16 md:h-28 md:w-20">
                   <Image
                     src={movie.image}
-                    alt={movie.title}
+                    alt={movie.title[lang]}
                     fill
                     className="rounded-lg object-cover"
                   />
                 </div>
                 <div className="absolute right-0 bottom-1 left-0 px-1">
                   <p className="truncate text-center text-[10px] font-medium text-white sm:text-xs">
-                    {movie.title}
+                    {movie.title[lang]}
                   </p>
                 </div>
               </div>

@@ -9,3 +9,5 @@ declare global {
     };
   }
 }
+
+export type TLang = "en" | "bn" | "es" | "la";

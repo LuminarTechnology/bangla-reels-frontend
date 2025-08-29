@@ -2,6 +2,7 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { Roles } from "./types/globals";
+import createIntlMiddleware from "next-intl/middleware";
 
 const isAdminRoute = createRouteMatcher(["/super-admin/dashboard(.*)"]);
 
@@ -24,17 +25,27 @@ const isPublicRoute = createRouteMatcher([
   "/super-admin/login",
 ]);
 
+// Locale middleware setup
+const intlMiddleware = createIntlMiddleware({
+  locales: ["en", "bn", "es", "la"],
+  defaultLocale: "en",
+  localeDetection: true,
+});
+
 export default clerkMiddleware(async (auth, req: NextRequest) => {
   const { sessionClaims } = await auth();
 
   const roles: Roles[] = sessionClaims?.metadata?.roles as Roles[] | [];
 
-  if (process.env.NODE_ENV === "production") {
-    // Protect all routes starting with `/super-admin/dashboard`
-    if (isAdminRoute(req) && !roles?.includes("super-admin")) {
-      const url = new URL("/sign-in", req.url);
-      return NextResponse.redirect(url);
-    }
+  // ✅ First, run locale handling
+  const intlResponse = intlMiddleware(req);
+  if (intlResponse) return intlResponse;
+
+  // Protect all routes starting with `/super-admin/dashboard`
+  // if (isAdminRoute(req) && !roles?.includes("super-admin")) {
+  //   const url = new URL("/sign-in", req.url);
+  //   return NextResponse.redirect(url);
+  // }
 
     if (!isPublicRoute(req)) {
       await auth.protect();

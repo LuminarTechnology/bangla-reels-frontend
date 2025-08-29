@@ -1,23 +1,34 @@
+"use client";
+
 import { Globe } from "lucide-react";
 import { Button } from "../../ui/button";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../../ui/hover-card";
-import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale } from "@/src/app/LocaleProvider";
 
-const LanguagePopup = () => {
+const LanguagePopup = ({ currentLang }: { currentLang: string }) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const { changeLang } = useLocale();
+
   const languages = [
     { id: 1, name: "English", code: "en" },
-    { id: 2, name: "Português", code: "pt" },
-    { id: 3, name: "Español", code: "es" },
-    { id: 4, name: "Deutsch", code: "de" },
-    { id: 5, name: "Français", code: "fr" },
-    { id: 6, name: "日本語 (Japanese)", code: "ja" },
-    { id: 7, name: "한국어 (Korean)", code: "ko" },
-    { id: 8, name: "ภาษาไทย (Thai)", code: "th" },
-    { id: 9, name: "Русскⷣ (Russian)", code: "ru" },
-    { id: 10, name: "Bahasa Indonesia", code: "id" },
-    { id: 11, name: "繁體中文 (Traditional Chinese)", code: "zh-TW" },
-    { id: 12, name: "العربية (Arabic)", code: "ar" },
+    { id: 2, name: "Español", code: "es" },
+    { id: 3, name: "Latin", code: "la" },
+    { id: 4, name: "বাংলা (Bengali)", code: "bn" },
   ];
+
+  const handleLanguageChange = (code: string) => {
+    const segments = pathname.split("/").filter(Boolean);
+    if (segments.length > 0 && languages.some((l) => l.code === segments[0])) {
+      segments[0] = code;
+    } else {
+      segments.unshift(code);
+    }
+    const newPath = "/" + segments.join("/");
+    router.push(newPath);
+    changeLang(code);
+  };
 
   return (
     <HoverCard openDelay={100} closeDelay={300}>
@@ -27,7 +38,7 @@ const LanguagePopup = () => {
           className="gap-1 text-white hover:bg-transparent hover:text-gray-100"
         >
           <Globe className="size-4" />
-          English
+          {languages.find((l) => l.code === currentLang)?.name || "English"}
         </Button>
       </HoverCardTrigger>
       <HoverCardContent
@@ -37,13 +48,13 @@ const LanguagePopup = () => {
       >
         <div className="py-2">
           {languages.map((language) => (
-            <Link
+            <button
               key={language.id}
-              href=""
-              className="block px-4 py-3 text-sm text-white transition-colors hover:bg-gray-800"
+              onClick={() => handleLanguageChange(language.code)}
+              className="w-full cursor-pointer px-4 py-3 text-left text-sm text-white transition-colors hover:bg-gray-800"
             >
               {language.name}
-            </Link>
+            </button>
           ))}
         </div>
       </HoverCardContent>

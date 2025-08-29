@@ -1,0 +1,32 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "categories": "Categories",
+    "fandom": "Fandom",
+    "contest": "Contest",
+    "history": "History",
+    "app": "App"
+  },
+  "Footer": {
+    "community": "Community",
+    "download": "Download",
+    "about": "About",
+    "support": "Support",
+    "terms-service": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "contact-us": "Contact Us",
+    "feedback": "Feedback",
+    "media-relation": "Media and Public Relation",
+    "copyright": "Copyright © 2025 Crazy Maple Studio Inc. All rights reserved."
+  },
+  "HomePage": {
+    "topPicks": "Top Picks",
+    "new-release": "New Release",
+    "love-at-first-side": "Love at First Side",
+    "tortured-love": "Tortured Love",
+    "second-chance": "Second Chance",
+    "btn": "View All",
+    "play": "Play",
+    "bannerBtn": "Watch Now"
+  }
+}

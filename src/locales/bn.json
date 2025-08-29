@@ -1,0 +1,32 @@
+{
+  "Navbar": {
+    "home": "হোম",
+    "categories": "ক্যাটেগরিজ",
+    "fandom": "ফ্যানডম",
+    "contest": "প্রতিযোগিতা",
+    "history": "ইতিহাস",
+    "app": "অ্যাপ"
+  },
+  "Footer": {
+    "community": "কমিউনিটি",
+    "download": "ডাউনলোড",
+    "about": "সম্পর্কে",
+    "support": "সহায়তা",
+    "terms-service": "সেবার শর্তাবলী",
+    "privacy": "গোপনীয়তা নীতি",
+    "contact-us": "যোগাযোগ করুন",
+    "feedback": "প্রতিক্রিয়া",
+    "media-relation": "মিডিয়া ও জনসংযোগ",
+    "copyright": "স্বত্ব © ২০২৫ ক্রেজি মেপল স্টুডিও ইনক। সর্বস্বত্ব সংরক্ষিত।"
+  },
+  "HomePage": {
+    "topPicks": "সেরা পছন্দসমূহ",
+    "new-release": "নতুন রিলিজ",
+    "love-at-first-side": "প্রথম দৃষ্টিতে ভালোবাসা",
+    "tortured-love": "যন্ত্রণা ভরা ভালোবাসা",
+    "second-chance": "দ্বিতীয় সুযোগ",
+    "btn": "সব দেখুন",
+    "play": "চলুন দেখুন",
+    "bannerBtn": "এখনই দেখুন"
+  }
+}

@@ -4,7 +4,6 @@ import React from "react";
 import { Search, Bell } from "lucide-react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { MobileSidebarTrigger } from "./DashboardSidebar";
 import { SuperAdminSidebarItems } from "@/src/constants/DashboardSidebarItems";

@@ -14,6 +14,7 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { LocaleProvider } from "./LocaleProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -37,7 +38,7 @@ export default function RootLayout({ children }: Props) {
         baseTheme: dark,
       }}
     >
-      <html lang="en" suppressHydrationWarning={true}>
+      <html suppressHydrationWarning={true}>
         <body className={cn("min-h-screen", fontSans.variable)} suppressHydrationWarning>
           <StoreProvider>{children}</StoreProvider>
         </body>

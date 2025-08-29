@@ -141,7 +141,7 @@ const columns: TableColumn<EpisodeListData>[] = [
   {
     key: "videoImage",
     label: "Video Image",
-    width: "w-28",
+    width: "w-28 text-start",
     render: (value) => (
       <div className="h-12 w-12 flex-shrink-0">
         <img

@@ -1,0 +1,32 @@
+{
+  "Navbar": {
+    "home": "Domus",
+    "categories": "Categoriae",
+    "fandom": "Studium",
+    "contest": "Certamen",
+    "history": "Historia",
+    "app": "Applicatio"
+  },
+  "Footer": {
+    "community": "Communitas",
+    "download": "Depone",
+    "about": "De",
+    "support": "Auxilium",
+    "terms-service": "Termini Servitii",
+    "privacy": "Consilium de Secretis",
+    "contact-us": "Nobis Contactum",
+    "feedback": "Responsio",
+    "media-relation": "Media et Publica Relatio",
+    "copyright": "Ius © 2025 Crazy Maple Studio Inc. Omnia iura reservata."
+  },
+  "HomePage": {
+    "topPicks": "Top Picks",
+    "new-release": "New Release",
+    "love-at-first-side": "Love at First Side",
+    "tortured-love": "Tortured Love",
+    "second-chance": "Second Chance",
+    "btn": "View All",
+    "play": "Play",
+    "bannerBtn": "Spectare Nunc"
+  }
+}
