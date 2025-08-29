@@ -1,15 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../../ui/hover-card";
 import { Button } from "../../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../../ui/avatar";
 import { User } from "lucide-react";
 import { Separator } from "../../ui/separator";
 import Link from "next/link";
-import LoginModal from "../../modals/LoginModal";
 import { useUser } from "@clerk/nextjs";
 
 const UserButton = () => {
-  const [loginDialogOpen, setLoginDialogOpen] = useState(false);
   const { user, isSignedIn } = useUser();
   return (
     <div>
