@@ -1,7 +1,5 @@
 import React from "react";
-
 import Image from "next/image";
-
 import { Eye, Heart, MessageSquare } from "lucide-react";
 import { entriesData } from "@/src/constants/contestEntries";
 
