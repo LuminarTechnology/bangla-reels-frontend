@@ -1,32 +1,45 @@
 "use client";
 
+import { useLocale } from "@/src/app/LocaleProvider";
+import { SignIn } from "@clerk/nextjs";
 import React from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/src/components/ui/button";
-import { LoginFormData, loginSchema } from "@/src/schema/loginSchema.schema";
-import { FormInputField } from "@/src/components/forms/FormInputField";
+// import { useForm } from "react-hook-form";
+// import { zodResolver } from "@hookform/resolvers/zod";
+// import { Button } from "@/src/components/ui/button";
+// import { LoginFormData, loginSchema } from "@/src/schema/loginSchema.schema";
+// import { FormInputField } from "@/src/components/forms/FormInputField";
 
 export default function SuperAdminDashboard() {
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-    control,
-  } = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
-    mode: "onChange",
-  });
+  const { lang } = useLocale();
+  // const {
+  //   handleSubmit,
+  //   formState: { isSubmitting },
+  //   control,
+  // } = useForm<LoginFormData>({
+  //   resolver: zodResolver(loginSchema),
+  //   mode: "onChange",
+  // });
 
   // ✅ Submit handler
-  const onSubmit = (data: LoginFormData) => {
-    // console.log("Login Data:", data);
-    // 🔐 here you will call API for super admin login
-  };
+  // const onSubmit = (data: LoginFormData) => {
+  //   // console.log("Login Data:", data);
+  //   // 🔐 here you will call API for super admin login
+  // };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
+      <SignIn
+        path={`/${lang}/super-admin/login`}
+        routing="path"
+        signUpUrl={`/${lang}/sign-up`}
+        afterSignInUrl={`/${lang}/super-admin/dashboard`}
+        fallbackRedirectUrl={`/${lang}/super-admin/dashboard`}
+        appearance={{
+          elements: { card: "shadow-none border-none" },
+        }}
+      />
       {/* Login Card */}
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
+      {/* <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-lg">
         <div className="mb-6 space-y-2">
           <h1 className="text-center text-2xl font-bold text-gray-950">Sign in as a Super Admin</h1>
           <p className="text-center text-sm text-gray-700">
@@ -35,7 +48,7 @@ export default function SuperAdminDashboard() {
         </div>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Email */}
-          <FormInputField
+      {/* <FormInputField
             name="email"
             control={control}
             label="Email"
@@ -53,10 +66,10 @@ export default function SuperAdminDashboard() {
               label: "text-gray-700",
               description: "text-gray-500",
             }}
-          />
+          /> */}
 
-          {/* Password */}
-          <FormInputField
+      {/* Password */}
+      {/* <FormInputField
             name="password"
             control={control}
             label="Password"
@@ -75,13 +88,13 @@ export default function SuperAdminDashboard() {
               label: "text-gray-700",
               description: "text-gray-500",
             }}
-          />
-          {/* Submit Button */}
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+          /> */}
+      {/* Submit Button */}
+      {/* <Button type="submit" className="w-full" disabled={isSubmitting}>
             {isSubmitting ? "Logging in..." : "Login"}
           </Button>
         </form>
-      </div>
+      </div> */}
     </div>
   );
 }
