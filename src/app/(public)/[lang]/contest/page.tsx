@@ -1,6 +1,6 @@
 import ContestBanner from "@/src/components/pages/contest/ContestBanner";
 import ContestOverview from "@/src/components/pages/contest/ContestOverview";
-import GalleryofEntries from "@/src/components/pages/contest/GalleryofEntries";
+import GalleryofEntries from "@/src/components/pages/contest/GalleryOfEntries";
 import MyVideos from "@/src/components/pages/contest/MyVideos";
 import TopVideo from "@/src/components/pages/contest/TopVideo";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
@@ -11,9 +11,8 @@ export default function ContestPage() {
   return (
     <div className="my-4 md:my-8">
       <ContestBanner />
-      <div className="flex flex-col lg:flex-row items-start justify-center gap-8">
-        
-        <Tabs defaultValue="overview" className="w-full lg:w-3/4 rounded-xl bg-black p-5">
+      <div className="flex flex-col items-start justify-center gap-8 lg:flex-row">
+        <Tabs defaultValue="overview" className="w-full rounded-xl bg-black p-5 lg:w-3/4">
           <TabsList className="relative grid w-full grid-cols-3 bg-transparent">
             {tabsList.map((tab) => (
               <TabsTrigger

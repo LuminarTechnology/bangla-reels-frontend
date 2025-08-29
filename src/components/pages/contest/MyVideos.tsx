@@ -1,5 +1,5 @@
 import React from "react";
-import MyEntryCard from "../../ui/MyEntryCard";
+import MyEntryCard from "../../common/MyEntryCard";
 import { Plus } from "lucide-react";
 import myEntriesData from "@/src/constants/MyEntries"
 
