@@ -29,6 +29,7 @@ const isPublicRoute = createRouteMatcher([
 const intlMiddleware = createIntlMiddleware({
   locales: ["en", "bn", "es", "la"],
   defaultLocale: "en",
+  localeDetection: true,
 });
 
 export default clerkMiddleware(async (auth, req: NextRequest) => {

@@ -1,4 +1,4 @@
-import { TBanner, TStreamingData, TTopPick } from "../types/globals";
+import { TBanner, TTopPick } from "../types/home";
 
 export const topPicksData: TTopPick[] = [
   {

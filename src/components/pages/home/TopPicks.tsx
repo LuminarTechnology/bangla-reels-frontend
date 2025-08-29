@@ -7,7 +7,7 @@ import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "../..
 import { Button } from "../../ui/button";
 import { cn } from "@/src/lib/utils";
 import { PosterCard } from "../../common/PosterCard";
-import { useLocale } from "@/src/hooks/useLocale";
+import { useLocale } from "@/src/app/LocaleProvider";
 import { topPicksData } from "@/src/constants/homePage";
 import { TLang } from "@/src/types/globals";
 
@@ -19,7 +19,7 @@ type MovieSectionProps = {
 export function TopPicksSlider({ sectionTitle, buttonText }: MovieSectionProps) {
   const [api, setApi] = useState<CarouselApi>();
 
-  const { locale } = useLocale() as { locale: TLang };
+  const { lang } = useLocale() as { lang: TLang };
 
   const autoplayPlugin = Autoplay({
     delay: 3000,
@@ -88,9 +88,9 @@ export function TopPicksSlider({ sectionTitle, buttonText }: MovieSectionProps) 
             >
               <PosterCard
                 key={idx}
-                title={item.title[locale]}
+                title={item.title[lang]}
                 posterImage={item.image}
-                category={item.category[locale]}
+                category={item.category[lang]}
               />
             </CarouselItem>
           ))}

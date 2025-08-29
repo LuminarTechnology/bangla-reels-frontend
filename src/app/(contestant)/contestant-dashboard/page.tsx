@@ -1,9 +1,5 @@
-import React from "react";
+import { redirect } from "next/navigation";
 
-export default function ContesterDashboard() {
-  return (
-    <div>
-      <h1>This is contestant dashboard</h1>
-    </div>
-  );
+export default function ContestantDashboardPage() {
+  redirect("/");
 }
