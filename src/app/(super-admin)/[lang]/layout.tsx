@@ -1,6 +1,7 @@
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import React, { ReactNode } from "react";
+import { LocaleProvider } from "../../LocaleProvider";
 
 interface Props {
   readonly children: ReactNode;
@@ -18,7 +19,9 @@ export default async function SuperAdminLayout({ children, params }: Props) {
   }
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
-      <main>{children}</main>
+      <LocaleProvider routeLang={lang}>
+        <main>{children}</main>
+      </LocaleProvider>
     </NextIntlClientProvider>
   );
 }

@@ -5,6 +5,7 @@ import UserDashboardSidebar from "@/src/components/common/UserDashboardSidebar";
 import { NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { ReactNode } from "react";
+import { LocaleProvider } from "../../LocaleProvider";
 
 interface Props {
   readonly children: ReactNode;
@@ -22,28 +23,30 @@ export default async function DashboardLayout({ children, params }: Props) {
   }
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
-      <div className="gradient-background">
-        <div>
-          <Navbar
-            mobileDashboard={<UserDashboardSidebar background="bg-transparent md:hidden block" />}
-            currentLang={lang}
-          />
-        </div>
-        <ContainerWrapper>
-          <div className="flex h-[calc(100vh-64px)] gap-5 text-white">
-            {/* Sidebar */}
-            <div className="hidden sm:block">
-              <UserDashboardSidebar />
-            </div>
-
-            {/* Main Content */}
-            <main className="w-full flex-1 space-y-8 overflow-y-auto rounded-2xl bg-[#0B0000] p-6 sm:p-8">
-              {children}
-            </main>
+      <LocaleProvider routeLang={lang}>
+        <div className="gradient-background">
+          <div>
+            <Navbar
+              mobileDashboard={<UserDashboardSidebar background="bg-transparent md:hidden block" />}
+              currentLang={lang}
+            />
           </div>
-        </ContainerWrapper>
-        <Footer />
-      </div>
+          <ContainerWrapper>
+            <div className="flex h-[calc(100vh-64px)] gap-5 text-white">
+              {/* Sidebar */}
+              <div className="hidden sm:block">
+                <UserDashboardSidebar />
+              </div>
+
+              {/* Main Content */}
+              <main className="w-full flex-1 space-y-8 overflow-y-auto rounded-2xl bg-[#0B0000] p-6 sm:p-8">
+                {children}
+              </main>
+            </div>
+          </ContainerWrapper>
+          <Footer />
+        </div>
+      </LocaleProvider>
     </NextIntlClientProvider>
   );
 }

@@ -19,12 +19,11 @@ const LanguagePopup = ({ currentLang }: { currentLang: string }) => {
   ];
 
   const handleLanguageChange = (code: string) => {
-    // replace the current lang in the path with the selected lang
-    const segments = pathname.split("/").filter(Boolean); // ["en", "dashboard", ...]
+    const segments = pathname.split("/").filter(Boolean);
     if (segments.length > 0 && languages.some((l) => l.code === segments[0])) {
-      segments[0] = code; // replace existing lang
+      segments[0] = code;
     } else {
-      segments.unshift(code); // no lang in path yet
+      segments.unshift(code);
     }
     const newPath = "/" + segments.join("/");
     router.push(newPath);
@@ -52,7 +51,7 @@ const LanguagePopup = ({ currentLang }: { currentLang: string }) => {
             <button
               key={language.id}
               onClick={() => handleLanguageChange(language.code)}
-              className="w-full px-4 py-3 text-left text-sm text-white transition-colors hover:bg-gray-800"
+              className="w-full cursor-pointer px-4 py-3 text-left text-sm text-white transition-colors hover:bg-gray-800"
             >
               {language.name}
             </button>

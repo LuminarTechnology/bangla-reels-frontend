@@ -40,9 +40,7 @@ export default function RootLayout({ children }: Props) {
     >
       <html suppressHydrationWarning={true}>
         <body className={cn("min-h-screen", fontSans.variable)} suppressHydrationWarning>
-          <StoreProvider>
-            <LocaleProvider>{children}</LocaleProvider>
-          </StoreProvider>
+          <StoreProvider>{children}</StoreProvider>
         </body>
       </html>
     </ClerkProvider>

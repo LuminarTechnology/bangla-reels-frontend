@@ -30,9 +30,9 @@ const LanguageDropdown = ({ currentLang }: { currentLang: string }) => {
     const segments = pathname.split("/").filter(Boolean);
 
     if (segments.length > 0 && languages.some((l) => l.code === segments[0])) {
-      segments[0] = code; // replace current lang
+      segments[0] = code;
     } else {
-      segments.unshift(code); // add lang if missing
+      segments.unshift(code);
     }
 
     const newPath = "/" + segments.join("/");
@@ -53,7 +53,7 @@ const LanguageDropdown = ({ currentLang }: { currentLang: string }) => {
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.id}
-            className="text-white hover:bg-transparent hover:text-gray-100"
+            className="cursor-pointer text-white hover:bg-transparent hover:text-gray-100"
             onClick={() => handleLanguageChange(language.code)}
           >
             {language.name}
