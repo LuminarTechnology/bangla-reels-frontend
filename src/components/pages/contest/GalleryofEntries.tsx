@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Eye, Heart, MessageSquare } from "lucide-react";
 import { entriesData } from "@/src/constants/contestEntries";
 
-const GalleryofEntries = () => {
+const GalleryOfEntries = () => {
   return (
     <div>
       <h2 className="mb-6 text-2xl font-bold text-white">Recently Updated</h2>
@@ -83,4 +83,4 @@ const GalleryofEntries = () => {
   );
 };
 
-export default GalleryofEntries;
+export default GalleryOfEntries;

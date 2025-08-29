@@ -1,6 +1,6 @@
 import ContestBanner from "@/src/components/pages/contest/ContestBanner";
 import ContestOverview from "@/src/components/pages/contest/ContestOverview";
-import GalleryofEntries from "@/src/components/pages/contest/GalleryOfEntries";
+import GalleryOfEntries from "@/src/components/pages/contest/GalleryOfEntries";
 import MyVideos from "@/src/components/pages/contest/MyVideos";
 import TopVideo from "@/src/components/pages/contest/TopVideo";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
@@ -31,7 +31,7 @@ export default function ContestPage() {
           </TabsContent>
           <TabsContent value="gallery-of-entries" className="mt-4">
             {/* Gallery Of Entries component */}
-            <GalleryofEntries />
+            <GalleryOfEntries />
           </TabsContent>
           <TabsContent value="my-videos" className="mt-4">
             {/* My Video */}
