@@ -1,5 +1,7 @@
 "use client";
+
 import { createContext, useContext, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type LocaleContextType = {
   lang: string;
@@ -8,23 +10,36 @@ type LocaleContextType = {
 
 const LocaleContext = createContext<LocaleContextType | null>(null);
 
-export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState("en");
+export function LocaleProvider({
+  children,
+  routeLang,
+}: {
+  children: React.ReactNode;
+  routeLang?: string;
+}) {
+  const router = useRouter();
+  const [lang, setLang] = useState(routeLang || "en");
 
+  // 1. Sync route param -> localStorage
   useEffect(() => {
     const stored = localStorage.getItem("locale");
-    if (stored) {
-      setLang(stored);
-    } else {
-      const browserLang = navigator.language.split("-")[0];
-      setLang(browserLang);
-      localStorage.setItem("locale", browserLang);
-    }
-  }, []);
 
+    if (!stored) {
+      // first time, store the routeLang
+      localStorage.setItem("locale", routeLang || "en");
+    } else if (stored !== routeLang) {
+      // if mismatch, prefer routeLang (since user may have typed URL)
+      localStorage.setItem("locale", routeLang || "en");
+    }
+
+    setLang(routeLang || "en");
+  }, [routeLang]);
+
+  // 2. Change lang from UI
   const changeLang = (newLocale: string) => {
     setLang(newLocale);
     localStorage.setItem("locale", newLocale);
+    router.push(`/${newLocale}`); // navigate to new route
   };
 
   return <LocaleContext.Provider value={{ lang, changeLang }}>{children}</LocaleContext.Provider>;
