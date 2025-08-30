@@ -12,7 +12,7 @@ export default function ContestPage() {
     <div className="my-4 md:my-8">
       <ContestBanner />
       <div className="flex flex-col items-start justify-center gap-8 lg:flex-row">
-        <Tabs defaultValue="overview" className="w-full rounded-xl bg-black p-5 lg:w-3/4">
+        <Tabs defaultValue="overview" className="w-full rounded-xl bg-[#0F0828] p-5 lg:w-3/4">
           <TabsList className="relative grid w-full grid-cols-3 bg-transparent">
             {tabsList.map((tab) => (
               <TabsTrigger
