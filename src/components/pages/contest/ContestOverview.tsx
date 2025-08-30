@@ -43,7 +43,7 @@ const ContestOverview = () => {
         </div>
       </div>
 
-      {/* Contest awards */}
+      {/* Contest main theme */}
       <div className="space-y-6">
         <OverviewHeader title={'Main Theme'} />
         <div className="flex flex-wrap justify-center gap-4">
@@ -53,7 +53,7 @@ const ContestOverview = () => {
         </div>
       </div>
 
-      {/* Contest awards */}
+      {/* Contest details */}
       <div>
         <OverviewHeader title={'Get Started'} />
         <div className="space-y-6 max-w-[34rem] mx-auto mt-10">
