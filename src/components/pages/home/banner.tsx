@@ -11,10 +11,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import Link from "next/link";
-import { banners } from "@/src/constants/HomePage";
 import { useLocale } from "@/src/app/LocaleProvider";
 import { TLang } from "@/src/types/globals";
 import { useTranslations } from "next-intl";
+import { banners } from "@/src/constants/homeData";
 
 const Banner: React.FC = () => {
   const { lang } = useLocale() as { lang: TLang };

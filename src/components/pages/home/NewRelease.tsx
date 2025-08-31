@@ -2,7 +2,7 @@ import React from "react";
 import { StreamingCard } from "../../common/StreamingCard";
 import { useLocale } from "@/src/app/LocaleProvider";
 import { TLang } from "@/src/types/globals";
-import { StreamingData } from "@/src/constants/HomePage";
+import { StreamingData } from "@/src/constants/homeData";
 
 type NewReleaseProps = {
   sectionTitle: string;

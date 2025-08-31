@@ -8,7 +8,7 @@ import { Button } from "../../ui/button";
 import { cn } from "@/src/lib/utils";
 import { PosterCard } from "../../common/PosterCard";
 import { useLocale } from "@/src/app/LocaleProvider";
-import { topPicksData } from "@/src/constants/HomePage";
+import { topPicksData } from "@/src/constants/homeData";
 import { TLang } from "@/src/types/globals";
 
 type MovieSectionProps = {
