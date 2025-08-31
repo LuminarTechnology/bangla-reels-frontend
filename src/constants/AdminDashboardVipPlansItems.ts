@@ -22,7 +22,7 @@ export const initialVipPlanListData: VipPlanListData[] = [
     validity: "1 Month",
     validityType: "Months",
     date: "2025-08-01",
-    isActive: true
+    isActive: true,
   },
   {
     id: "02",
@@ -34,7 +34,7 @@ export const initialVipPlanListData: VipPlanListData[] = [
     validity: "1 Month",
     validityType: "Months",
     date: "2025-08-01",
-    isActive: true
+    isActive: true,
   },
   {
     id: "03",
@@ -46,7 +46,7 @@ export const initialVipPlanListData: VipPlanListData[] = [
     validity: "1 Month",
     validityType: "Months",
     date: "2025-08-01",
-    isActive: true
+    isActive: true,
   },
   {
     id: "04",
@@ -58,7 +58,7 @@ export const initialVipPlanListData: VipPlanListData[] = [
     validity: "1 Month",
     validityType: "Months",
     date: "2025-08-01",
-    isActive: true
+    isActive: true,
   },
   {
     id: "05",
@@ -70,7 +70,7 @@ export const initialVipPlanListData: VipPlanListData[] = [
     validity: "1 Month",
     validityType: "Months",
     date: "2025-08-01",
-    isActive: true
+    isActive: true,
   },
   {
     id: "06",
@@ -82,7 +82,7 @@ export const initialVipPlanListData: VipPlanListData[] = [
     validity: "1 Month",
     validityType: "Months",
     date: "2025-08-01",
-    isActive: true
+    isActive: true,
   },
   {
     id: "07",
@@ -94,7 +94,7 @@ export const initialVipPlanListData: VipPlanListData[] = [
     validity: "1 Month",
     validityType: "Months",
     date: "2025-08-01",
-    isActive: true
+    isActive: true,
   },
   {
     id: "08",
@@ -106,7 +106,7 @@ export const initialVipPlanListData: VipPlanListData[] = [
     validity: "1 Month",
     validityType: "Months",
     date: "2025-08-01",
-    isActive: true
+    isActive: true,
   },
   {
     id: "09",
@@ -118,7 +118,7 @@ export const initialVipPlanListData: VipPlanListData[] = [
     validity: "1 Month",
     validityType: "Months",
     date: "2025-08-01",
-    isActive: true
+    isActive: true,
   },
   {
     id: "10",
@@ -130,6 +130,6 @@ export const initialVipPlanListData: VipPlanListData[] = [
     validity: "1 Month",
     validityType: "Months",
     date: "2025-08-01",
-    isActive: true
-  }
-]
+    isActive: true,
+  },
+];

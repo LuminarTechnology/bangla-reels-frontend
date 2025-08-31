@@ -4,7 +4,7 @@ import GalleryOfEntriesVideos from "@/src/components/pages/contest/GalleryOfEntr
 import MyVideos from "@/src/components/pages/contest/MyVideos";
 import TopVideo from "@/src/components/pages/contest/TopVideo";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
-import { tabsList } from "@/src/constants/tabsItems";
+import { tabsList } from "@/src/constants/TabsItem";
 import React from "react";
 
 export default function ContestPage() {

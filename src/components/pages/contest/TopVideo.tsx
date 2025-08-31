@@ -1,8 +1,8 @@
 import React from "react";
 import { Button } from "@/src/components/ui/button";
-import { topVideosData } from "@/src/constants/contestTopVideosData";
+import { topVideosData } from "@/src/constants/ContestTopVideosData";
 import TopRankCard from "@/src/components/common/TopRankCard";
-import RankedListItem from "@/src/components/common/RankedListItem"; 
+import RankedListItem from "@/src/components/common/RankedListItem";
 
 const TopVideo = () => {
   return (

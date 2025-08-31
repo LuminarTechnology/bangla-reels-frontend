@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Eye, Heart, MessageSquare } from "lucide-react";
-import { Entry } from "@/src/constants/contestEntries";
+import { Entry } from "@/src/constants/ContestEntries";
 
 const EntryCard = ({
   title,
@@ -15,25 +15,18 @@ const EntryCard = ({
   comments,
 }: Entry) => {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 rounded-xl border border-white/10 bg-[#1C162E] p-4">
-      
+    <div className="flex flex-col gap-4 rounded-xl border border-white/10 bg-[#1C162E] p-4 sm:flex-row">
       {/* Left Column: Poster Image */}
-      <div className="relative w-full sm:w-2/5 flex-shrink-0 aspect-[3/4]">
-        <Image
-          src={poster}
-          alt={title}
-          fill
-          className="rounded-lg object-cover"
-        />
+      <div className="relative aspect-[3/4] w-full flex-shrink-0 sm:w-2/5">
+        <Image src={poster} alt={title} fill className="rounded-lg object-cover" />
       </div>
 
       {/* Right Column: Card Content */}
-      <div className="flex w-full sm:w-3/5 flex-col justify-between">
-        
+      <div className="flex w-full flex-col justify-between sm:w-3/5">
         {/* Top section of text content */}
         <div className="flex flex-col gap-4">
           <div className="lg:space-y-3">
-            <h3 className="text-lg font-bold leading-tight text-white">{title}</h3>
+            <h3 className="text-lg leading-tight font-bold text-white">{title}</h3>
             <p className="text-sm text-gray-400">{tags}</p>
           </div>
 

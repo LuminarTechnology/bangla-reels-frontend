@@ -8,7 +8,7 @@ import { Button } from "../../ui/button";
 import { cn } from "@/src/lib/utils";
 import { PosterCard } from "../../common/PosterCard";
 import { useLocale } from "@/src/app/LocaleProvider";
-import { topPicksData } from "@/src/constants/homePage";
+import { topPicksData } from "@/src/constants/HomePage";
 import { TLang } from "@/src/types/globals";
 
 type MovieSectionProps = {
@@ -40,7 +40,7 @@ export function TopPicksSlider({ sectionTitle, buttonText }: MovieSectionProps) 
   }, [api, autoplayPlugin]);
 
   return (
-    <div className="my-10">
+    <div className="my-4 md:my-8">
       {/* Header */}
       <div className="mb-8 flex items-center justify-between">
         <h2 className="text-2xl font-bold text-white">{sectionTitle}</h2>

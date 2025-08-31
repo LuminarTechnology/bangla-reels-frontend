@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { Eye } from "lucide-react";
-import { type TopVideo } from "@/src/constants/contestTopVideosData";
+import { type TopVideo } from "@/src/constants/ContestTopVideosData";
 
 const TopRankCard = ({ rank, poster, title, views }: TopVideo) => {
   return (
