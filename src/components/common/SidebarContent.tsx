@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogOut, ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/src/lib/utils";
-import { SidebarItem } from "@/src/types/dashboardSidebarItems";
+import { SidebarItem } from "@/src/types/dashboardItems";
 import { SignOutButton } from "@clerk/nextjs";
 
 type SidebarContentProps = {
