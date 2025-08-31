@@ -6,7 +6,7 @@ import RankedListItem from "@/src/components/common/RankedListItem";
 
 const TopVideo = () => {
   return (
-    <div className="w-full rounded-xl bg-black p-4 md:p-5 lg:w-1/4">
+    <div className="w-full rounded-xl bg-[#0F0828] p-4 md:p-5 lg:w-1/4">
       {/* Header Section */}
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-lg font-bold text-white md:text-xl">Top List</h2>

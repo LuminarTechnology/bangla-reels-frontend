@@ -34,7 +34,7 @@ const FandomSidebar = () => {
   return (
     <div className="space-y-6">
       {/* Download Section */}
-      <div className="rounded-lg bg-black p-6 shadow-sm">
+      <div className="rounded-lg bg-[#0F0828] p-6 shadow-sm">
         <h3 className="mb-4 text-center text-lg font-bold text-gray-100">DOWNLOAD</h3>
         <div className="mb-4 flex justify-center">
           <div className="flex h-32 w-32 items-center justify-center rounded-lg bg-gray-900">
@@ -68,7 +68,7 @@ const FandomSidebar = () => {
       </div> */}
 
       {/* Recent Posts */}
-      <div className="rounded-lg bg-black p-6 shadow-sm">
+      <div className="rounded-lg bg-[#0F0828] p-6 shadow-sm">
         <h3 className="mb-4 text-lg font-bold text-gray-100">Recent Posts</h3>
         <div className="space-y-4">
           {recentPosts.map((post) => (

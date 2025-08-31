@@ -159,8 +159,9 @@ const AddAndEditVipPlanModal: React.FC<VipPlanModalProps> = ({
               control={control}
               name="validityType"
               label="Validity Type"
-              placeholder="Months"
+              placeholder="Weeks"
               options={[
+                { label: "Weeks", value: "weeks" },
                 { label: "Months", value: "months" },
                 { label: "Year", value: "year" },
                 { label: "Life time", value: "lifeTime" },
@@ -176,12 +177,12 @@ const AddAndEditVipPlanModal: React.FC<VipPlanModalProps> = ({
             labelClassName="w-1/2 flex-row-reverse justify-between"
           />
 
-          <div className="flex gap-3 pt-4">
+          <div className="flex justify-between gap-3 pt-4">
             <Button
               type="button"
               variant="outline"
               onClick={handleCancel}
-              className="rounded-3xl border-black border-2 text-black bg-[#E7E6E6] hover:bg-gray-50 p-5"
+              className="rounded-3xl flex-1 border-black border-2 text-black bg-[#E7E6E6] hover:bg-gray-50 p-5"
               disabled={isLoading}
             >
               Cancel
@@ -190,7 +191,7 @@ const AddAndEditVipPlanModal: React.FC<VipPlanModalProps> = ({
             <Button
               type="button"
               onClick={handleSubmit(handleFormSubmit)}
-              className="rounded-3xl bg-black text-white hover:bg-gray-900 disabled:opacity-50 px-6 py-[22px]"
+              className="rounded-3xl flex-1 bg-black text-white hover:bg-gray-900 disabled:opacity-50 px-6 py-[22px]"
               disabled={isLoading || (!isDirty && mode === 'edit')}
             >
               {isLoading ? (

@@ -45,4 +45,5 @@ export interface ReusableTableProps<T = any> {
   searchValue?: string;
   onSearchChange?: (value: string) => void;
   onDateFilterClick?: () => void;
+  showDirectDelete?: boolean;
 }

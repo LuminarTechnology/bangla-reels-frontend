@@ -22,7 +22,7 @@ interface EpisodeAndTransactionTableProps {
 export function EpisodeAndTransactionTable({ columns, data, className = "" }: EpisodeAndTransactionTableProps) {
   return (
     <div className="overflow-x-auto">
-      <Table className={`mt-5 rounded-lg bg-[#16151A] ${className}`}>
+      <Table className={`mt-5 ${className}`}>
         <TableHeader>
           <TableRow className="border-[#0B0000] hover:bg-gray-800">
             {columns.map((column) => (

@@ -16,6 +16,7 @@ const ReusableTable = <T,>({
   searchValue,
   onSearchChange,
   onDateFilterClick,
+  showDirectDelete = false,
 }: ReusableTableProps<T>) => {
   return (
     <div className={`mx-auto rounded-2xl bg-white shadow-sm ${className}`}>
@@ -54,6 +55,7 @@ const ReusableTable = <T,>({
                 columns={columns}
                 actions={actions}
                 onRowClick={onRowClick}
+                showDirectDelete={showDirectDelete}
               />
             ))}
           </tbody>
