@@ -3,7 +3,7 @@ import ThumbnailCard from './ThumbnailCard';
 
 const YouMayLike = () => {
     return (
-        <div className='bg-[#16151A] w-full p-4 rounded-2xl mt-6'>
+        <div className='bg-[#0F0828] w-full p-4 rounded-2xl mt-6'>
             <h1 className="text-white text-2xl font-semibold mb-6">You may like</h1>
 
             <div className="flex flex-col gap-4 ">

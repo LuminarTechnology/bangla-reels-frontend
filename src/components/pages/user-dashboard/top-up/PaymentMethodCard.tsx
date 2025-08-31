@@ -19,7 +19,7 @@ const PaymentMethodCard: React.FC<PaymentMethodCardProps> = ({
 }) => {
   return (
     <div 
-      className={`border-[#7A7A7A] hover:border-primary-rose bg-[#0B0000] flex w-64 items-center justify-center gap-2 rounded-2xl border py-5 text-white cursor-pointer hover:bg-[#7e00000c] transition-colors ${className} ${isSelected ? "border-primary-rose bg-[#7e00000c]" : ""}`}
+      className={`border-[#7A7A7A] hover:border-primary-rose bg-[#0F0828] flex w-64 items-center justify-center gap-2 rounded-2xl border py-5 text-white cursor-pointer hover:bg-[#7e00000c] transition-colors ${className} ${isSelected ? "border-primary-rose bg-[#7e00000c]" : ""}`}
       onClick={onClick}
     >
       <Image src={icon} alt={iconAlt} width={24} height={24} />

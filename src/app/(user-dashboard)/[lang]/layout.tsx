@@ -39,7 +39,7 @@ export default async function DashboardLayout({ children, params }: Props) {
               </div>
 
               {/* Main Content */}
-              <main className="w-full flex-1 space-y-8 overflow-y-auto rounded-2xl bg-[#0B0000] p-6 sm:p-8">
+              <main className="w-full flex-1 space-y-8 overflow-y-auto rounded-2xl bg-[#0F0828] p-6 sm:p-8">
                 {children}
               </main>
             </div>

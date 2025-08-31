@@ -23,7 +23,7 @@ export default function SubscriptionRewards() {
   ];
   return (
     <>
-      <Card className="mb-5 rounded-2xl border-0 bg-[#16151A] p-6 text-white">
+      <Card className="mb-5 rounded-2xl bg-[#0F0828] border-2 border-[#D7D7D740] p-6 text-white">
         <h3 className="text-2xl font-bold">My Wallet</h3>
         <div className="flex items-center justify-between pl-6">
           <p className="text-base font-semibold">
@@ -65,33 +65,35 @@ export default function SubscriptionRewards() {
           </Button>
         </div>
       </Card>
-      <Tabs defaultValue="transactions">
-        <TabsList className="bg-[#111111]">
-          <TabsTrigger
-            value="transactions"
-            className="data-[state=active]:text-primary-rose rounded-lg px-4 py-6 text-base font-semibold text-white data-[state=active]:bg-[#E83A5714]"
-          >
-            Transaction History
-          </TabsTrigger>
-          <Separator orientation="vertical" className="mx-3 h-4 bg-[#2D2B33]" />
-          <TabsTrigger
-            value="episodes"
-            className="data-[state=active]:text-primary-rose rounded-lg px-4 py-6 text-base font-semibold text-white data-[state=active]:bg-[#E83A5714]"
-          >
-            Episodes Unlocked
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="transactions" className="mt-0">
-          <div className="overflow-x-auto">
-            <EpisodeAndTransactionTable columns={transactionColumns} data={transactions} />
-          </div>
-        </TabsContent>
-        <TabsContent value="episodes" className="mt-0">
-          <div className="overflow-x-auto">
-            <EpisodeAndTransactionTable columns={episodeColumns} data={episodes} />
-          </div>
-        </TabsContent>
-      </Tabs>
+      <div className="border-2 border-[#D7D7D740] rounded-2xl py-5 px-3">
+        <Tabs defaultValue="transactions">
+          <TabsList className="bg-[#0F0828]">
+            <TabsTrigger
+              value="transactions"
+              className="data-[state=active]:text-primary-rose rounded-lg px-4 py-6 text-base font-semibold text-white data-[state=active]:bg-[#E83A5714]"
+            >
+              Transaction History
+            </TabsTrigger>
+            <Separator orientation="vertical" className="mx-3 h-4 bg-[#2D2B33]" />
+            <TabsTrigger
+              value="episodes"
+              className="data-[state=active]:text-primary-rose rounded-lg px-4 py-6 text-base font-semibold text-white data-[state=active]:bg-[#E83A5714]"
+            >
+              Episodes Unlocked
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="transactions" className="mt-0">
+            <div className="overflow-x-auto">
+              <EpisodeAndTransactionTable columns={transactionColumns} data={transactions} />
+            </div>
+          </TabsContent>
+          <TabsContent value="episodes" className="mt-0">
+            <div className="overflow-x-auto">
+              <EpisodeAndTransactionTable columns={episodeColumns} data={episodes} />
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
     </>
   );
 }

@@ -18,7 +18,7 @@ interface UserDashboardSidebarProps {
 }
 
 const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
-  background = "bg-[#111]",
+  background = "bg-[#0F0828]",
   setIsOpen,
 }) => {
   const pathname = usePathname();
@@ -28,7 +28,7 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
   return (
     <aside
       className={cn(
-        "h-full w-80 flex-col rounded-xl p-4 sm:border-r sm:border-gray-800",
+        "h-full w-80 flex-col rounded-xl p-4",
         background,
         "flex"
       )}

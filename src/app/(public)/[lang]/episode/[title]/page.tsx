@@ -19,7 +19,7 @@ const EpisodePage = () => {
   return (
     <div className="my-4 flex h-screen flex-col gap-4 md:my-8 md:flex-row">
       {/* Video Player */}
-      <div className="group relative flex-1 bg-black">
+      <div className="group relative flex-1 bg-[#0F0828]">
         <div className="absolute top-3 -left-1 z-10 hidden group-hover:block group-hover:delay-1000">
           <button className="flex cursor-pointer items-center text-3xl font-semibold text-white">
             <ChevronLeft size={32} className="mr-1 text-3xl" />
