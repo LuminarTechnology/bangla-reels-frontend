@@ -11,10 +11,8 @@ import StepIndicator from "./StepIndicator";
 import { MoveRight } from "lucide-react";
 import FilmDetails from "./FilmDetails";
 import { defaultFormData, FilmFormData, filmSchema } from "./Film.schema";
-import { VideoUploadComponent } from "./VideoUpload";
-import { BulkVideoUploadField } from "@/src/components/forms/DragDropVideoUpload";
-import { FormInputField } from "@/src/components/forms/FormInputField";
-import { EditDetails } from "./EditDetails";
+import { VideoUploadComponent } from "./video-upload/VideoUpload";
+import { EditDetails } from "./edit-details/EditDetails";
 import Confirmation from "./Confirmation"
 
 interface FilmModalProps {

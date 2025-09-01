@@ -1,5 +1,5 @@
 import { useSortable } from "@dnd-kit/sortable";
-import { VideoFileData } from "./Film.schema";
+import { VideoFileData } from ".././Film.schema";
 import { Card } from "@/src/components/ui/card";
 import { Button } from "@/src/components/ui/button";
 import { Menu, RotateCcw, X } from "lucide-react";

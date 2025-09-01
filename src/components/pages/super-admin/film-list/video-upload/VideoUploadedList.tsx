@@ -1,5 +1,5 @@
 import React from "react";
-import { VideoFileData } from "./Film.schema";
+import { VideoFileData } from ".././Film.schema";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import SortableVideoCard from "./SortableVideoCard";
 

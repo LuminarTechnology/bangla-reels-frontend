@@ -5,9 +5,12 @@ import { Button } from "@/src/components/ui/button";
 import { X, Menu } from "lucide-react";
 import Image from "next/image";
 import { type Control, useFieldArray, useWatch } from "react-hook-form";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { FormInputField } from "@/src/components/forms/FormInputField";
-import { editDetailsData, FilmFormData, VideoFileData } from "./Film.schema";
+import { editDetailsData, FilmFormData, VideoFileData } from ".././Film.schema";
+import { closestCorners, DndContext } from "@dnd-kit/core";
+import VideosList from "./VideosList";
+import { arrayMove } from "@dnd-kit/sortable";
 
 interface EditDetailsProps {
   control: Control<any>;
@@ -15,12 +18,14 @@ interface EditDetailsProps {
 
 export function EditDetails({ control }: EditDetailsProps) {
   const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(0);
+  const [isProcessingDuplicates, setIsProcessingDuplicates] = useState(false);
 
   const {
     fields: editFields,
     append: appendEdit,
     remove: removeEdit,
     update: updateEdit,
+    replace,
   } = useFieldArray<FilmFormData, "editDetails">({
     control,
     name: "editDetails",
@@ -78,40 +83,84 @@ export function EditDetails({ control }: EditDetailsProps) {
       duplicateIndices.reverse().forEach((index) => {
         removeEdit(index);
       });
+
+      setTimeout(() => {
+        setIsProcessingDuplicates(false);
+      }, 0);
     }
   }, [editFields, removeEdit]);
+
+  const currentEditDetail = selectedVideoIndex !== null ? editFields[selectedVideoIndex] : null;
+  const currentVideo = currentEditDetail
+    ? videos.find((video: VideoFileData) => video.id === currentEditDetail.videoId)
+    : null;
+  const currentEditIndex = selectedVideoIndex;
+  console.log(currentEditDetail, currentVideo, currentEditIndex);
+
+  const handleRemoveVideo = (editDetailIndex: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    removeEdit(editDetailIndex);
+
+    // Update selected index
+    if (selectedVideoIndex === editDetailIndex) {
+      setSelectedVideoIndex(null);
+    } else if (selectedVideoIndex !== null && selectedVideoIndex > editDetailIndex) {
+      setSelectedVideoIndex(selectedVideoIndex - 1);
+    }
+  };
+
+  const getVideoPos = useCallback(
+    (videoId: string) => {
+      return editFields.findIndex((field) => field.videoId === videoId);
+    },
+    [editFields]
+  );
+
+  const handleDragEnd = useCallback(
+    (event: any) => {
+      const { active, over } = event;
+
+      if (!over || active.id === over.id) return;
+
+      const originalPos = getVideoPos(active.id);
+      const newPos = getVideoPos(over.id);
+
+      if (originalPos === -1 || newPos === -1) return;
+
+      // Move both editDetails and update the videos order reference
+      const reorderedEditDetails = arrayMove([...editFields], originalPos, newPos);
+      replace(reorderedEditDetails);
+
+      // Also update the selected index if needed
+      if (selectedVideoIndex === originalPos) {
+        setSelectedVideoIndex(newPos);
+      } else if (selectedVideoIndex === newPos) {
+        setSelectedVideoIndex(originalPos);
+      } else if (selectedVideoIndex !== null) {
+        if (
+          originalPos < newPos &&
+          selectedVideoIndex > originalPos &&
+          selectedVideoIndex <= newPos
+        ) {
+          setSelectedVideoIndex(selectedVideoIndex - 1);
+        } else if (
+          originalPos > newPos &&
+          selectedVideoIndex >= newPos &&
+          selectedVideoIndex < originalPos
+        ) {
+          setSelectedVideoIndex(selectedVideoIndex + 1);
+        }
+      }
+    },
+    [getVideoPos, editFields, replace, selectedVideoIndex]
+  );
 
   if (!control) {
     return <div>Error: Form control is required</div>;
   }
 
-  const currentVideo = selectedVideoIndex !== null ? videos[selectedVideoIndex] : null;
-  const currentEditIndex = currentVideo
-    ? editFields.findIndex((field) => field.videoId === currentVideo.id)
-    : -1;
-
-  const handleRemoveVideo = (videoIndex: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-
-    const videoToRemove = videos[videoIndex];
-    if (!videoToRemove) return;
-
-    // Find and remove corresponding editDetail
-    const editDetailIndex = editFields.findIndex((field) => field.videoId === videoToRemove.id);
-    if (editDetailIndex !== -1) {
-      removeEdit(editDetailIndex);
-    }
-
-    // Update selected index
-    if (selectedVideoIndex === videoIndex) {
-      setSelectedVideoIndex(null);
-    } else if (selectedVideoIndex !== null && selectedVideoIndex > videoIndex) {
-      setSelectedVideoIndex(selectedVideoIndex - 1);
-    }
-  };
-
   return (
-    <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 h-full pb-6">
+    <div className="grid h-full grid-cols-1 gap-6 pb-6 lg:grid-cols-2">
       {/* Left Panel - Edit Form */}
       <Card className="h-full p-0">
         <CardContent className="space-y-6 p-4">
@@ -127,7 +176,10 @@ export function EditDetails({ control }: EditDetailsProps) {
             </div>
           ) : (
             <>
-              <div key={`edit-form-${selectedVideoIndex}-${currentVideo?.id}`} className="space-y-4">
+              <div
+                // key={`edit-form-${selectedVideoIndex}-${currentVideo?.id}`}
+                className="space-y-4"
+              >
                 <FormInputField
                   name={`editDetails.${currentEditIndex}.title`}
                   control={control}
@@ -201,89 +253,23 @@ export function EditDetails({ control }: EditDetailsProps) {
       </Card>
 
       {/* Right Panel - Episode List */}
-      <Card className="h-full p-0 gap-0">
+      <Card className="h-full gap-0 p-0">
         <CardHeader className="p-4 pb-0">
           <CardTitle className="text-lg font-medium">List of Episodes</CardTitle>
         </CardHeader>
         <CardContent className="p-4 pt-0">
           <div className="space-y-3">
-            {videos.map((video: VideoFileData, index: number) => {
-              const editDetail = editFields.find((field) => field.videoId === video.id);
-              const isSelected = selectedVideoIndex === index;
-
-              return (
-                <div
-                  key={video.id}
-                  onClick={() => setSelectedVideoIndex(index)}
-                  className={`flex cursor-pointer items-center gap-4 rounded-lg border p-4 transition-colors ${
-                    isSelected ? "bg-primary/10 border-primary/20" : "bg-muted/50 hover:bg-muted/70"
-                  }`}
-                >
-                  <div className="w-8 flex-shrink-0 text-center">
-                    <span className="text-muted-foreground text-lg font-medium">{index + 1}</span>
-                  </div>
-
-                  <div className="flex-shrink-0">
-                    <Image
-                      src={
-                        video.thumbnail ||
-                        "/placeholder.svg?height=60&width=60&query=video thumbnail"
-                      }
-                      alt={`Episode ${index + 1}`}
-                      width={60}
-                      height={60}
-                      className="rounded-md object-cover"
-                    />
-                  </div>
-
-                  <div className="min-w-0 flex-1">
-                    <h3 className="truncate text-sm font-medium">
-                      {editDetail?.title || `Episode ${index + 1}`}
-                    </h3>
-                    <p className="text-muted-foreground truncate text-sm">
-                      {video.resolution} • {video.duration}
-                    </p>
-                    <div className="mt-1 flex items-center gap-2">
-                      <div
-                        className={`h-2 w-2 rounded-full ${
-                          video.status === "completed"
-                            ? "bg-green-500"
-                            : video.status === "processing"
-                              ? "bg-yellow-500"
-                              : "bg-gray-400"
-                        }`}
-                      />
-                      <span className="text-muted-foreground text-xs capitalize">
-                        {video.status}
-                      </span>
-                      {video.progress > 0 && video.status === "processing" && (
-                        <span className="text-muted-foreground text-xs">({video.progress}%)</span>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={(e) => handleRemoveVideo(index, e)}
-                      className="hover:bg-destructive/10 hover:text-destructive h-8 w-8 p-0"
-                      aria-label={`Remove Episode ${index + 1}`}
-                    >
-                      <X className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 w-8 p-0"
-                      aria-label={`Reorder Episode ${index + 1}`}
-                    >
-                      <Menu className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              );
-            })}
+            <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
+              {!isProcessingDuplicates && (
+                <VideosList
+                  videos={videos}
+                  handleRemoveVideo={handleRemoveVideo}
+                  selectedVideoIndex={selectedVideoIndex}
+                  setSelectedVideoIndex={setSelectedVideoIndex}
+                  editFields={editFields}
+                />
+              )}
+            </DndContext>
 
             {videos.length === 0 && (
               <div className="py-8 text-center">
