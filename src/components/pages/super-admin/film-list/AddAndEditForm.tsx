@@ -135,6 +135,9 @@ const AddAndEditForm = ({ open, mode, onOpenChange, onSave, initialData }: FilmM
     setCurrentStep(0);
     setPreviousStep(0);
   }
+  const doNothing = () => {
+
+  }
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -149,7 +152,7 @@ const AddAndEditForm = ({ open, mode, onOpenChange, onSave, initialData }: FilmM
         </DialogHeader>
 
         {/* Form Container */}
-        <form onSubmit={handleSubmit(processForm)} className="flex min-h-0 flex-1 flex-col">
+        <form onSubmit={handleSubmit(doNothing)} className="flex min-h-0 flex-1 flex-col">
           {/* Scrollable Step Content */}
           <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 sm:px-6">
             {currentStep === 0 && <FilmDetails control={control} />}

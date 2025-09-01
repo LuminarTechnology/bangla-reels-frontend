@@ -11,6 +11,9 @@ import { cn } from "@/src/lib/utils";
 import { FilmFormData, VideoFileData } from "./Film.schema";
 import { RulesComponent } from "./RulesFormat";
 import { filmListformatData, filmListrulesData } from "@/src/constants/filmListRulesFormat";
+import { closestCorners, DndContext } from "@dnd-kit/core";
+import VideoUploadedList from "./VideoUploadedList";
+import { arrayMove } from "@dnd-kit/sortable";
 
 interface VideoUploadComponentProps {
   control: Control<FilmFormData>;
@@ -21,7 +24,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { fields, append, remove, update } = useFieldArray({
+  const { fields, append, remove, update, replace, move } = useFieldArray({
     name: "videos",
     control,
   });
@@ -233,9 +236,38 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
     return Number.parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
   }, []);
 
+  const getVideoPos = useCallback(
+    (videoId: string) => {
+      return fields.findIndex((field) => field.id === videoId);
+    },
+    [fields]
+  );
+
+  const handleDragEnd = useCallback(
+    (event: any) => {
+      const { active, over } = event;
+
+      if (!over || active.id === over.id) return;
+
+      const originalPos = getVideoPos(active.id);
+      const newPos = getVideoPos(over.id);
+
+      if (originalPos === -1 || newPos === -1) return;
+      
+      console.log("Moving from position", originalPos, "to position", newPos);
+      console.log("Active ID:", active.id, "Over ID:", over.id);
+      
+      const result = arrayMove([...fields], originalPos, newPos);
+    
+      console.log(fields, result);
+      replace(result);
+    },
+    [getVideoPos]
+  );
+
   return (
     <div className="flex-1 overflow-auto">
-      <Card className="mx-auto w-full border-none shadow-none p-0">
+      <Card className="mx-auto w-full border-none p-0 shadow-none">
         {errors && (
           <div className="rounded-md border border-red-200 bg-red-50 p-3">
             <p className="text-sm text-red-600">{errors.message}</p>
@@ -248,7 +280,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
             <h3 className="text-lg font-medium">Add Video</h3>
             <div
               className={cn(
-                "rounded-lg border-2 border-dashed p-12 mb-4 text-center transition-colors",
+                "mb-4 rounded-lg border-2 border-dashed p-12 text-center transition-colors",
                 isDragOver ? "border-blue-400 bg-blue-50" : "border-gray-300"
               )}
               onDragOver={handleDragOver}
@@ -268,7 +300,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
               </p>
             </div>
 
-            <RulesComponent rules={filmListrulesData} formatItems={filmListformatData}/>
+            <RulesComponent rules={filmListrulesData} formatItems={filmListformatData} />
 
             <input
               ref={fileInputRef}
@@ -296,101 +328,14 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
             </div>
 
             <div className="space-y-4">
-              {fields.map((video, index) => (
-                <Card key={video.id} className="p-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-8 text-2xl font-bold text-gray-400">{index + 1}</div>
-
-                    <div className="h-12 w-20 flex-shrink-0 overflow-hidden rounded bg-gray-200">
-                      {video.thumbnail ? (
-                        <img
-                          src={video.thumbnail}
-                          alt="Video thumbnail"
-                          className="h-full w-full object-cover"
-                        />
-                      ) : (
-                        <div className="h-full w-full bg-gray-300" />
-                      )}
-                    </div>
-
-                    <div className="min-w-0 flex-1">
-                      <h4 className="truncate font-medium text-gray-900">{video.file.name}</h4>
-
-                      {video.status === "unsupported" && (
-                        <div className="mt-1 flex items-center gap-1 text-sm text-red-500">
-                          <div className="flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                            !
-                          </div>
-                          Unsupported file format
-                        </div>
-                      )}
-
-                      {video.status === "error" && (
-                        <div className="mt-1 flex items-center gap-1 text-sm text-red-500">
-                          <div className="flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-                            !
-                          </div>
-                          {video.error}
-                        </div>
-                      )}
-
-                      {video.status === "uploading" && (
-                        <div className="mt-1 text-sm text-blue-500">Uploading...</div>
-                      )}
-
-                      {video.status === "completed" && (
-                        <div className="mt-1 text-sm text-green-500">Upload completed</div>
-                      )}
-
-                      <div className="mt-1 flex items-center gap-4 text-sm text-gray-500">
-                        <span>{video.file.type.split("/")[1].toUpperCase()}</span>
-                        <span>•</span>
-                        <span>{formatFileSize(video.file.size)}</span>
-                        {video.duration && (
-                          <>
-                            <span>•</span>
-                            <span>{video.duration}</span>
-                          </>
-                        )}
-                        {video.resolution && (
-                          <>
-                            <span>•</span>
-                            <span className="text-red-500">{video.resolution}</span>
-                          </>
-                        )}
-                      </div>
-
-                      {video.status === "uploading" && (
-                        <div className="mt-2 flex items-center gap-2">
-                          <div className="h-2 flex-1 rounded-full bg-gray-200">
-                            <div
-                              className="h-2 rounded-full bg-blue-600 transition-all duration-300"
-                              style={{ width: `${video.progress}%` }}
-                            />
-                          </div>
-                          <span className="min-w-[3ch] text-sm text-gray-500">
-                            {Math.round(video.progress)}%
-                          </span>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      {video.status === "error" && (
-                        <Button variant="ghost" size="icon" onClick={() => retryUpload(video.id)}>
-                          <RotateCcw className="h-4 w-4" />
-                        </Button>
-                      )}
-                      <Button variant="ghost" size="icon" onClick={() => removeVideo(video.id)}>
-                        <X className="h-4 w-4" />
-                      </Button>
-                      <Button variant="ghost" size="icon">
-                        <Menu className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
-              ))}
+              <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
+                <VideoUploadedList
+                  videos={fields}
+                  formatFileSize={formatFileSize}
+                  retryUpload={retryUpload}
+                  removeVideo={removeVideo}
+                />
+              </DndContext>
             </div>
 
             <input
