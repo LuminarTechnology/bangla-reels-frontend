@@ -13,7 +13,7 @@ export default function ContestPage() {
       <ContestBanner />
       <div className="flex flex-col items-start justify-center gap-8 lg:flex-row">
         <Tabs defaultValue="overview" className="w-full rounded-xl bg-[#0F0828] p-5 lg:w-3/4">
-          <TabsList className="relative grid w-full grid-cols-3 bg-transparent">
+          <TabsList className="relative grid w-full grid-cols-2 bg-transparent">
             {tabsList.map((tab) => (
               <TabsTrigger
                 value={tab.label}
@@ -33,10 +33,9 @@ export default function ContestPage() {
             {/* Gallery Of Entries component */}
             <GalleryOfEntriesVideos />
           </TabsContent>
-          <TabsContent value="my-videos" className="mt-4">
-            {/* My Video */}
+          {/* <TabsContent value="my-videos" className="mt-4">
             <MyVideos />
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
 
         {/* Sidebar */}

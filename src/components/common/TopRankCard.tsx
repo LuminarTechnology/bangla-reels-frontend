@@ -17,9 +17,9 @@ const TopRankCard = ({ rank, poster, title, views }: TopVideo) => {
           </span>
           <h3 className="font-semibold">{title}</h3>
         </div>
-        <div className="mt-1 ml-12 flex items-center gap-1 text-xs text-gray-300">
-          <Eye className="size-4" />
-          <span>{views}</span>
+        <div className="group mt-1 ml-12 flex cursor-pointer items-center gap-1 text-xs text-gray-300">
+          <Eye className="size-4 transition-colors group-hover:text-red-500" />
+          <span className="transition-colors group-hover:text-red-500">{views}</span>
         </div>
       </div>
     </div>

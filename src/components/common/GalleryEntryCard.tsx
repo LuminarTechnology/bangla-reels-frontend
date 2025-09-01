@@ -46,17 +46,19 @@ const EntryCard = ({
 
         {/* Bottom section: Stats */}
         <div className="mt-2 flex items-center gap-4 border-t border-white/10 pt-2 text-gray-400">
-          <div className="flex items-center gap-1.5">
-            <Eye className="size-4" />
-            <span className="text-xs">{views}</span>
+          <div className="group flex cursor-pointer items-center gap-1.5">
+            <Eye className="size-4 transition-colors group-hover:text-red-500" />
+            <span className="text-xs transition-colors group-hover:text-red-500">{views}</span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <Heart className="size-4" />
-            <span className="text-xs">{likes}</span>
+
+          <div className="group flex cursor-pointer items-center gap-1.5">
+            <Heart className="size-4 transition-colors group-hover:text-red-500" />
+            <span className="text-xs transition-colors group-hover:text-red-500">{likes}</span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <MessageSquare className="size-4" />
-            <span className="text-xs">{comments}</span>
+
+          <div className="group flex cursor-pointer items-center gap-1.5">
+            <MessageSquare className="size-4 transition-colors group-hover:text-red-500" />
+            <span className="text-xs transition-colors group-hover:text-red-500">{comments}</span>
           </div>
         </div>
       </div>

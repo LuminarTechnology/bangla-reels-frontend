@@ -18,9 +18,9 @@ const RankedListItem = ({ rank, poster, title, views, status }: TopVideo) => {
       />
       <div className="flex-1">
         <h3 className="text-sm font-semibold text-white">{title}</h3>
-        <div className="mt-1 flex items-center gap-1 text-xs text-gray-400">
-          <Eye className="size-3" />
-          <span>{views}</span>
+        <div className="group mt-1 flex cursor-pointer items-center gap-1 text-xs text-gray-400">
+          <Eye className="size-3 transition-colors group-hover:text-red-500" />
+          <span className="transition-colors group-hover:text-red-500">{views}</span>
         </div>
       </div>
       {status === "up" && <ArrowUp className="size-5 text-green-500" />}
