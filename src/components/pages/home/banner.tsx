@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay, Thumbs } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
@@ -15,6 +15,8 @@ import { useLocale } from "@/src/app/LocaleProvider";
 import { TLang } from "@/src/types/globals";
 import { useTranslations } from "next-intl";
 import { banners } from "@/src/constants/homeData";
+import { useAuth, useUser } from "@clerk/nextjs";
+import moment from "moment";
 
 const Banner: React.FC = () => {
   const { lang } = useLocale() as { lang: TLang };
@@ -22,6 +24,43 @@ const Banner: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const mainSwiperRef = useRef<{ swiper: SwiperType } | null>(null);
+
+  const { user } = useUser();
+  const { getToken } = useAuth();
+
+  useEffect(() => {
+    if (!user) return;
+
+    const createdAt = moment(user.createdAt);
+    const now = moment();
+
+    // Check if user created within last 1 minute
+    const diffInMinutes = now.diff(createdAt, "minutes");
+
+    const handleAfterSignUp = async (user: any) => {
+      try {
+        const token = await getToken();
+
+        await fetch(`http://localhost:5000/api/v1/auth/signup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            email: user.emailAddresses[0].emailAddress,
+            name: user.firstName + user.lastName,
+            avatar: user.imageUrl,
+          }),
+        });
+      } catch (err) {
+        console.error("Error syncing user with backend:", err);
+      }
+    };
+    if (diffInMinutes <= 2) {
+      handleAfterSignUp(user);
+    }
+  }, [user, getToken]);
 
   return (
     <div className="relative h-[350px] overflow-hidden bg-gray-900 sm:h-[420px] md:h-[500px] lg:h-[550px]">

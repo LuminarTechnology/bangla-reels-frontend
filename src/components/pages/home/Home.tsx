@@ -10,14 +10,14 @@ const Home = () => {
   const t = useTranslations("HomePage");
 
   return (
-    <div>
+    <>
       <Banner />
       <TopPicksSlider sectionTitle={t("topPicks")} buttonText={t("btn")} />
       <NewRelease sectionTitle={t("new-release")} play={t("play")} />
       <TopPicksSlider sectionTitle={t("love-at-first-side")} buttonText={t("btn")} />
       <TopPicksSlider sectionTitle={t("tortured-love")} buttonText={t("btn")} />
       <TopPicksSlider sectionTitle={t("second-chance")} buttonText={t("btn")} />
-    </div>
+    </>
   );
 };
 
