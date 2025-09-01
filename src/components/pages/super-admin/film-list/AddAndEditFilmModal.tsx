@@ -12,6 +12,8 @@ import { FormInputField } from "@/src/components/forms/FormInputField";
 import { FormToggleSwitchField } from "@/src/components/forms/FormToggleSwitchField";
 import { FormSelectField } from "@/src/components/forms/FormSelectField";
 import { FormFileUploadField } from "@/src/components/forms/FormFileUploadField";
+import StepIndicator from "./StepIndicator";
+import { defaultFormData, FilmFormData, filmSchema } from "./Film.schema";
 
 interface FilmModalProps {
   open: boolean;
@@ -21,46 +23,44 @@ interface FilmModalProps {
   initialData?: FilmFormData;
 }
 
+// const filmSchema = z.object({
+//   type: z.enum(["WEB SERIES", "MOVIES"]),
+//   name: z.string().min(1, "Name is required"),
+//   category: z.string().min(1, "Category is required"),
+//   description: z.string().min(1, "Description is required"),
+//   maxAdsForFreeView: z.string().min(1, "Max ads for free view is required"),
+//   poster: z.any().nullable(),
+//   banner: z.any().nullable(),
+//   isBanner: z.boolean(),
+//   isTrending: z.boolean(),
+//   isActive: z.boolean(),
+// });
 
-
-const filmSchema = z.object({
-  type: z.enum(["WEB SERIES", "MOVIES"]),
-  name: z.string().min(1, "Name is required"),
-  category: z.string().min(1, "Category is required"),
-  description: z.string().min(1, "Description is required"),
-  maxAdsForFreeView: z.string().min(1, "Max ads for free view is required"),
-  poster: z.any().nullable(),
-  banner: z.any().nullable(),
-  isBanner: z.boolean(),
-  isTrending: z.boolean(),
-  isActive: z.boolean(),
-});
-
-export interface FilmFormData {
-  id?: string;
-  type: "WEB SERIES" | "MOVIES";
-  name: string;
-  category: string;
-  description: string;
-  maxAdsForFreeView: string;
-  poster: File | null;
-  banner: File | null;
-  isBanner: boolean;
-  isTrending: boolean;
-  isActive: boolean;
-}
-const defaultFormData: FilmFormData = {
-  type: "WEB SERIES",
-  name: "",
-  category: "",
-  description: "",
-  maxAdsForFreeView: "",
-  poster: null,
-  banner: null,
-  isBanner: true,
-  isTrending: true,
-  isActive: true,
-};
+// export interface FilmFormData {
+//   id?: string;
+//   type: "WEB SERIES" | "MOVIES";
+//   name: string;
+//   category: string;
+//   description: string;
+//   maxAdsForFreeView: string;
+//   poster: File | null;
+//   banner: File | null;
+//   isBanner: boolean;
+//   isTrending: boolean;
+//   isActive: boolean;
+// }
+// const defaultFormData: FilmFormData = {
+//   type: "WEB SERIES",
+//   name: "",
+//   category: "",
+//   description: "",
+//   maxAdsForFreeView: "",
+//   poster: null,
+//   banner: null,
+//   isBanner: true,
+//   isTrending: true,
+//   isActive: true,
+// };
 
 const AddAndEditFilmModal = ({ open, mode, onOpenChange, onSave, initialData }: FilmModalProps) => {
   const {
@@ -96,19 +96,27 @@ const AddAndEditFilmModal = ({ open, mode, onOpenChange, onSave, initialData }: 
     }
   };
 
+  const steps = [
+    { label: "Film Details", id: "film-details" },
+    { label: "Upload Episodes", id: "upload-episodes" },
+    { label: "Edit Details", id: "edit-details" },
+    { label: "Confirmation", id: "confirmation" },
+  ]
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="m-4 flex h-[90vh] max-h-[600px] w-3xl flex-col p-0 sm:max-w-[800px] [&>button]:rounded-full [&>button]:border-2 [&>button]:border-gray-800 [&>button]:p-[2px]">
-        <DialogHeader className="flex-shrink-0 px-4 py-4 sm:px-6">
+        <DialogHeader className="flex-shrink-0 px-4 pt-4 sm:px-6">
           <div className="flex items-center justify-between">
             <DialogTitle className="text-lg font-medium">
               {mode === "add" ? "Add Film List" : "Edit Film List"}
             </DialogTitle>
           </div>
+          <StepIndicator steps={steps} currentStepIndex={2}/>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex min-h-0 flex-1 flex-col">
-          <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 py-4 sm:space-y-6 sm:px-6">
+          <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 pt-2 pb-4 sm:space-y-6 sm:px-6">
             <FormRadioGroupField
               name="type"
               control={control}

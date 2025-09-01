@@ -5,7 +5,8 @@ import { Switch } from "@/src/components/ui/switch";
 import { TableAction, TableColumn, TableHeaderConfig } from "@/src/types/reusableTable";
 import { Plus } from "lucide-react";
 import React, { useState } from "react";
-import AddAndEditFilmModal, { FilmFormData } from "./AddAndEditFilmModal";
+import AddAndEditForm from "./AddAndEditForm";
+import { FilmFormData } from "./Film.schema";
 interface FilmData {
   id: string;
   no: string;
@@ -164,7 +165,7 @@ const FilmTable = () => {
   // const [episodesData, setEpisodesData] = useState<FilmData[]>(initialFilmsData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState<"add" | "edit">("add");
-  const [editingEpisode, setEditingEpisode] = useState<FilmData | null>(null);
+  const [editingEpisode, setEditingEpisode] = useState<FilmFormData | null>(null);
 
   const handleNewClick = () => {
     setModalMode("add");
@@ -183,7 +184,7 @@ const FilmTable = () => {
     setEditingEpisode(null);
   };
 
-  const handleEditEpisode = (episode: FilmData) => {
+  const handleEditEpisode = (episode: FilmFormData) => {
     setEditingEpisode(episode);
     setModalMode("edit");
     setIsModalOpen(true);
@@ -312,7 +313,7 @@ const FilmTable = () => {
     ],
   };
 
-  const actions: TableAction<FilmData>[] = [
+  const actions: TableAction<FilmFormData>[] = [
     {
       label: "Edit",
       onClick: handleEditEpisode,
@@ -332,18 +333,41 @@ const FilmTable = () => {
 
     return {
       id: editingEpisode.id,
-      type: "WEB SERIES",
-      name: editingEpisode.name,
-      category: editingEpisode.category,
-      description: editingEpisode.description,
-      maxAdsForFreeView: editingEpisode.maxAdsForFreeView.toString(),
+      type: editingEpisode.type ?? "WEB SERIES",
+      name: editingEpisode.name ?? "",
+      category: editingEpisode.category ?? "",
+      description: editingEpisode.description ?? "",
+      maxAdsForFreeView: editingEpisode.maxAdsForFreeView?.toString() ?? "0",
       poster: null,
       banner: null,
-      isBanner: editingEpisode.isBanner,
-      isTrending: editingEpisode.isTrending,
-      isActive: editingEpisode.isActive,
+      isBanner: editingEpisode.isBanner ?? false,
+      isTrending: editingEpisode.isTrending ?? false,
+      isActive: editingEpisode.isActive ?? true,
+
+      // Initialize videos if they exist, otherwise empty array
+      videos:
+        editingEpisode.videos?.map((v: any) => ({
+          id: v.id,
+          file: v.file ?? new File([], ""), // fallback empty file
+          status: v.status,
+          progress: v.progress ?? 0,
+          error: v.error,
+          thumbnail: v.thumbnail,
+          duration: v.duration,
+          resolution: v.resolution,
+        })) ?? [],
+
+      // Initialize editDetails if they exist, otherwise empty array
+      editDetails:
+        editingEpisode.editDetails?.map((d: any) => ({
+          videoId: d.videoId,
+          title: d.title ?? "",
+          description: d.description ?? "",
+          tags: d.tags ?? "",
+        })) ?? [],
     };
   };
+
   return (
     <div>
       <ReusableTable
@@ -353,7 +377,7 @@ const FilmTable = () => {
         actions={actions}
       />
 
-      <AddAndEditFilmModal
+      <AddAndEditForm
         open={isModalOpen}
         onOpenChange={setIsModalOpen}
         onSave={handleAddFilm}
