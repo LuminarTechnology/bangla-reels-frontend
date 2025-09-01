@@ -8,6 +8,7 @@ import NewRelease from "./NewRelease";
 
 const Home = () => {
   const t = useTranslations("HomePage");
+
   return (
     <div>
       <Banner />
