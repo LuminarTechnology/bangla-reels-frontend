@@ -48,7 +48,7 @@ const Banner: React.FC = () => {
       signUpToBackend(payload, token!);
     };
 
-    if (diffInMinutes <= 2) {
+    if (diffInMinutes < 1) {
       handleAfterSignUp();
     }
   }, [user, getToken]);
