@@ -17,6 +17,7 @@ import { useTranslations } from "next-intl";
 import { banners } from "@/src/constants/homeData";
 import { useAuth, useUser } from "@clerk/nextjs";
 import moment from "moment";
+import { signUpToBackend } from "@/src/services/auth/authService";
 
 const Banner: React.FC = () => {
   const { lang } = useLocale() as { lang: TLang };
@@ -37,30 +38,20 @@ const Banner: React.FC = () => {
     const diffInMinutes = now.diff(createdAt, "minutes");
 
     const handleAfterSignUp = async () => {
-      try {
-        const token = await getToken({ template: "backend" });
+      const token = await getToken({ template: "backend" });
+      const payload = {
+        email: user.emailAddresses[0].emailAddress!,
+        name: user.firstName + (user.lastName || " ")!,
+        avatar: user.imageUrl!,
+      };
 
-        await fetch(`http://localhost:5000/api/v1/auth/signup`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            email: user.emailAddresses[0].emailAddress,
-            name: user.firstName + (user.lastName || " "),
-            avatar: user.imageUrl,
-          }),
-        });
-      } catch (err) {
-        console.error("Error syncing user with backend:", err);
-      }
+      signUpToBackend(payload, token!);
     };
 
     if (diffInMinutes <= 2) {
       handleAfterSignUp();
     }
-  }, [user]);
+  }, [user, getToken]);
 
   return (
     <div className="relative h-[350px] overflow-hidden bg-gray-900 sm:h-[420px] md:h-[500px] lg:h-[550px]">

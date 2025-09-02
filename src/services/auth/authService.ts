@@ -2,12 +2,9 @@
 import { fetcher } from "@/src/lib/fetcher";
 
 export interface BackendUser {
-  id: string;
   name: string;
   email: string;
-  clerkId: string;
   avatar?: string;
-  roles?: string[];
 }
 
 export async function signInToBackend(token: string) {
@@ -37,7 +34,6 @@ export async function signUpToBackend(payload: BackendUser, token: string) {
       body: JSON.stringify({
         email: payload.email,
         name: payload.name,
-        avatar: payload.avatar,
       }),
     });
 
