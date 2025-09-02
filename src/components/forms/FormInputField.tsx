@@ -34,7 +34,6 @@ type FormInputFieldProps = {
   className?: string;
   colorScheme?: ColorScheme;
   defaultValue?: string | number | undefined;
-  error?: string;
 };
 
 export function FormInputField({
@@ -89,7 +88,6 @@ export function FormInputField({
                 placeholder={placeholder}
                 disabled={disabled}
                 {...field}
-                rows={3}
                 className={cn(
                   "h-32 w-full resize-none rounded-lg px-3 py-4 focus:outline-none",
                   className,
