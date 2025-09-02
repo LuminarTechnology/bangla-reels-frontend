@@ -1,7 +1,6 @@
 import ContestBanner from "@/src/components/pages/contest/ContestBanner";
 import ContestOverview from "@/src/components/pages/contest/ContestOverview";
 import GalleryOfEntriesVideos from "@/src/components/pages/contest/GalleryOfEntriesVideos";
-import MyVideos from "@/src/components/pages/contest/MyVideos";
 import TopVideo from "@/src/components/pages/contest/TopVideo";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
 import { tabsList } from "@/src/constants/TabsItem";
