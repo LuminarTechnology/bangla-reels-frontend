@@ -3,15 +3,10 @@
 import React from "react";
 import { FormInputField } from "@/src/components/forms/FormInputField";
 import { useFormContext } from "react-hook-form";
-import { FormData } from "@/src/types/superAdminSettings";
 import { FormToggleSwitchField } from "@/src/components/forms/FormToggleSwitchField";
 
 export default function PaymentTab() {
-
-  const {
-    control,
-    formState: { errors },
-  } = useFormContext<FormData>();
+  const methods = useFormContext();
 
   return (
     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-4">
@@ -22,14 +17,14 @@ export default function PaymentTab() {
           <h1 className="text-lg md:text-xl font-semibold pb-2.5 border-b">Razor Pay Setting</h1>
           <FormToggleSwitchField
             name="razorPay"
-            control={control}
+            control={methods.control}
             label="Razor Pay (enable/disable for payment in app)"
             labelClassName="flex-row-reverse justify-between py-5 mb-5 border-b"
             labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424]"
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 justify-center items-center gap-2">
             <FormInputField
-              control={control}
+              control={methods.control}
               name="razorPayId"
               label="Razor Pay ID"
               placeholder="Razor Pay ID"
@@ -47,7 +42,7 @@ export default function PaymentTab() {
               }}
             />
             <FormInputField
-              control={control}
+              control={methods.control}
               name="razorSecretKey"
               label="Razor Secret Key"
               placeholder="jduhbf_rhj_dfoigjfio"
@@ -72,14 +67,14 @@ export default function PaymentTab() {
           <h1 className="text-lg md:text-xl font-semibold pb-2.5 border-b">Stripe Pay Setting</h1>
           <FormToggleSwitchField
             name="srtipePay"
-            control={control}
+            control={methods.control}
             label="Stripe Pay (enable/disable for payment in app)"
             labelClassName="flex-row-reverse justify-between py-5 mb-5 border-b"
             labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424]"
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 justify-center items-center gap-2">
             <FormInputField
-              control={control}
+              control={methods.control}
               name="stripePublishableKey"
               label="Stripe Publishable Key"
               placeholder="fojkgpodfljkmg-dgfjkom-ad"
@@ -97,7 +92,7 @@ export default function PaymentTab() {
               }}
             />
             <FormInputField
-              control={control}
+              control={methods.control}
               name="stripeSecretKey"
               label="Stripe Secret Key"
               placeholder="jduhbf_rhj_dfoigjfio"
@@ -126,7 +121,7 @@ export default function PaymentTab() {
           <h1 className="text-lg md:text-xl font-semibold pb-2.5 border-b">Google Pay Setting</h1>
           <FormToggleSwitchField
             name="googlePay"
-            control={control}
+            control={methods.control}
             label="Google Pay (enable/disable for payment in app)"
             labelClassName="flex-row-reverse justify-between pt-5"
             labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424]"
@@ -138,13 +133,13 @@ export default function PaymentTab() {
           <h1 className="text-lg md:text-xl font-semibold pb-2.5 border-b">Flutter Wave Setting</h1>
           <FormToggleSwitchField
             name="flutterWave"
-            control={control}
+            control={methods.control}
             label="Flutter Wave (enable/disable for payment in app)"
             labelClassName="flex-row-reverse justify-between py-5 mb-5 border-b"
             labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424]"
           />
           <FormInputField
-            control={control}
+            control={methods.control}
             name="flutterWaveId"
             label="Flutter Wave ID"
             placeholder="fojkgpodfljkmg-dgfjkom-ad"

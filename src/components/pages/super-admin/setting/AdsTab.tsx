@@ -1,17 +1,10 @@
 "use client";
-
 import React from "react";
 import { FormInputField } from "@/src/components/forms/FormInputField";
 import { useFormContext } from "react-hook-form";
-import { FormData } from "@/src/types/superAdminSettings";
-import { FormToggleSwitchField } from "@/src/components/forms/FormToggleSwitchField";
 
 export default function AdsTab() {
-
-  const {
-    control,
-    formState: { errors },
-  } = useFormContext<FormData>();
+  const methods = useFormContext();
 
   return (
     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-4">
@@ -21,7 +14,7 @@ export default function AdsTab() {
         <div className="flex-1 bg-white p-3 sm:p-6 shadow-sm">
           <h1 className="text-lg md:text-xl font-semibold pb-2.5 mb-2.5 border-b">Android</h1>
           <FormInputField
-            control={control}
+            control={methods.control}
             name="androidGoogleReward"
             label="Android Google Reward"
             placeholder="ca-app-pub-1234567890/abcd1234"
@@ -39,7 +32,7 @@ export default function AdsTab() {
             }}
           />
           <FormInputField
-            control={control}
+            control={methods.control}
             name="androidGoogleNative"
             label="Android Google Native"
             placeholder="ca-app-pub-1234567890/abcd1234"
@@ -65,7 +58,7 @@ export default function AdsTab() {
         <div className="flex-1 bg-white p-3 sm:p-6 shadow-sm">
           <h1 className="text-lg md:text-xl font-semibold pb-2.5 mb-2.5 border-b">ISO</h1>
           <FormInputField
-            control={control}
+            control={methods.control}
             name="isoGoogleReward"
             label="ISO Google Reward"
             placeholder="ca-app-pub-1234567890/abcd1234"
@@ -83,7 +76,7 @@ export default function AdsTab() {
             }}
           />
           <FormInputField
-            control={control}
+            control={methods.control}
             name="isoGoogleNative"
             label="ISO Google Native"
             placeholder="ca-app-pub-1234567890/abcd1234"
