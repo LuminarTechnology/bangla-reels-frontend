@@ -31,7 +31,7 @@ export async function signInToBackend(token: string) {
 }
 export async function signUpToBackend(payload: BackendUser, token: string) {
   try {
-    const response = await fetcher(`/auth/signin`, {
+    const response = await fetcher(`/auth/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       body: JSON.stringify({

@@ -15,7 +15,7 @@ import { useLocale } from "@/src/app/LocaleProvider";
 import { TLang } from "@/src/types/globals";
 import { useTranslations } from "next-intl";
 import { banners } from "@/src/constants/homeData";
-import { useUser } from "@clerk/nextjs";
+import { useAuth, useUser } from "@clerk/nextjs";
 import moment from "moment";
 
 const Banner: React.FC = () => {
@@ -25,6 +25,7 @@ const Banner: React.FC = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const mainSwiperRef = useRef<{ swiper: SwiperType } | null>(null);
   const { user } = useUser();
+  const { getToken } = useAuth();
 
   useEffect(() => {
     if (!user) return;
@@ -35,9 +36,9 @@ const Banner: React.FC = () => {
     // Check if user created within last 1 minute
     const diffInMinutes = now.diff(createdAt, "minutes");
 
-    const handleAfterSignUp = async (user: any) => {
+    const handleAfterSignUp = async () => {
       try {
-        const token = await user.getToken({ template: "backend" });
+        const token = await getToken({ template: "backend" });
 
         await fetch(`http://localhost:5000/api/v1/auth/signup`, {
           method: "POST",
@@ -47,7 +48,7 @@ const Banner: React.FC = () => {
           },
           body: JSON.stringify({
             email: user.emailAddresses[0].emailAddress,
-            name: user.firstName + user.lastName,
+            name: user.firstName + (user.lastName || " "),
             avatar: user.imageUrl,
           }),
         });
@@ -55,8 +56,9 @@ const Banner: React.FC = () => {
         console.error("Error syncing user with backend:", err);
       }
     };
+
     if (diffInMinutes <= 2) {
-      handleAfterSignUp(user);
+      handleAfterSignUp();
     }
   }, [user]);
 
