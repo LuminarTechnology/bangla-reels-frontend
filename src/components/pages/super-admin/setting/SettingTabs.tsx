@@ -1,38 +1,43 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
 import { Separator } from "@/src/components/ui/separator";
-import SettingContent from "./SettingContent";
+import GeneralTab from "./GeneralTab";
+import PaymentTab from "./PaymentTab";
+import AdsTab from "./AdsTab";
+import ReportTab from "./ReportTab";
+import CurrencyTab from "./CurrencyTab";
+
 const tabs = [
   {
-    name: "Setting",
-    value: "setting",
-    content: <SettingContent/>,
+    name: "General",
+    value: "general",
+    content: <GeneralTab />,
   },
   {
-    name: "Payment Setting",
-    value: "payment-setting",
-    content: "Payment tab content",
+    name: "Payment",
+    value: "payment",
+    content: <PaymentTab />,
   },
   {
-    name: "Ads Setting",
-    value: "ads-setting",
-    content: "Ads tab content",
+    name: "Ads",
+    value: "ads",
+    content: <AdsTab />,
   },
   {
-    name: "Report Setting",
-    value: "report-setting",
-    content: "Report tab content"
+    name: "Report",
+    value: "report",
+    content: <ReportTab />
   },
   {
-    name: "Currency Setting",
-    value: "currency-setting",
-    content: "Currency tab content"
+    name: "Currency",
+    value: "currency",
+    content: <CurrencyTab />
   }
 ];
 export default function SettingTabs() {
   return (
     <Tabs defaultValue={tabs[0].value} className="w-full relative">
       <Separator className="absolute top-9 -inset-x-8 !w-[104.4%]" />
-      <TabsList className="w-fit justify-start gap-1 rounded-none border-b p-0">
+      <TabsList className="w-fit justify-start gap-4 rounded-none border-b p-0">
         {tabs.map((tab) => (
           <TabsTrigger
             key={tab.value}
