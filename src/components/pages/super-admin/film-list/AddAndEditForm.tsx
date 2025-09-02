@@ -13,7 +13,7 @@ import FilmDetails from "./FilmDetails";
 import { defaultFormData, FilmFormData, filmSchema } from "./Film.schema";
 import { VideoUploadComponent } from "./video-upload/VideoUpload";
 import { EditDetails } from "./edit-details/EditDetails";
-import Confirmation from "./Confirmation"
+import Confirmation from "./Confirmation";
 
 interface FilmModalProps {
   open: boolean;
@@ -52,11 +52,9 @@ const steps = [
 const AddAndEditForm = ({ open, mode, onOpenChange, onSave, initialData }: FilmModalProps) => {
   const [previousStep, setPreviousStep] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
-  const delta = currentStep - previousStep;
 
   const {
     control,
-    watch,
     handleSubmit,
     reset,
     trigger,
@@ -80,6 +78,8 @@ const AddAndEditForm = ({ open, mode, onOpenChange, onSave, initialData }: FilmM
     onOpenChange(false);
     if (mode === "add") {
       reset(defaultFormData);
+      setCurrentStep(0);
+      setPreviousStep(0);
     }
   };
 
@@ -103,8 +103,9 @@ const AddAndEditForm = ({ open, mode, onOpenChange, onSave, initialData }: FilmM
     }
 
     const fields = steps[currentStep].fields;
+    console.log(fields);
     const output = await trigger(fields as FieldName[], { shouldFocus: true });
-    console.log(output);
+    console.log(output, errors);
     if (!output) return;
     console.log("here");
     if (currentStep < steps.length - 1) {
@@ -122,23 +123,33 @@ const AddAndEditForm = ({ open, mode, onOpenChange, onSave, initialData }: FilmM
 
   const onBackToDashboard = () => {
     onOpenChange(false);
-    if(mode==="add"){
+    if (mode === "add") {
       reset(defaultFormData);
       setCurrentStep(0);
       setPreviousStep(0);
     }
-  }
+  };
   const onUploadAnother = () => {
     reset(defaultFormData);
     setCurrentStep(0);
     setPreviousStep(0);
-  }
-  const doNothing = () => {
-
-  }
+  };
+  const doNothing = () => {};
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
+    <Dialog
+      open={open}
+      onOpenChange={(isOpen) => {
+        if (!isOpen) {
+          if (mode === "add") {
+            reset(defaultFormData);
+            setCurrentStep(0);
+            setPreviousStep(0);
+          }
+        }
+        onOpenChange(isOpen);
+      }}
+    >
       <DialogContent className="m-4 flex h-[90vh] max-h-[1050px] w-3xl flex-col p-0 sm:max-w-[978px] [&>button]:rounded-full [&>button]:border-2 [&>button]:border-gray-800 [&>button]:p-[2px]">
         <DialogHeader className="flex-shrink-0 px-4 pt-4 sm:px-6">
           <div className="flex items-center justify-between">
@@ -156,11 +167,18 @@ const AddAndEditForm = ({ open, mode, onOpenChange, onSave, initialData }: FilmM
             {currentStep === 0 && <FilmDetails control={control} />}
             {currentStep === 1 && <VideoUploadComponent control={control} errors={errors.videos} />}
             {currentStep === 2 && <EditDetails control={control} />}
-            {currentStep === 3 && <Confirmation onBackToDashboard={onBackToDashboard} onUploadAnother={onUploadAnother}/>}
+            {currentStep === 3 && (
+              <Confirmation
+                onBackToDashboard={onBackToDashboard}
+                onUploadAnother={onUploadAnother}
+              />
+            )}
           </div>
 
           {/* Bottom Actions */}
-          <div className={`mt-auto flex flex-shrink-0 flex-col gap-3 border-t px-4 py-4 sm:flex-row sm:px-6 ${currentStep === steps.length-1 ? "hidden" : ""}`}>
+          <div
+            className={`mt-auto flex flex-shrink-0 flex-col gap-3 border-t px-4 py-4 sm:flex-row sm:px-6 ${currentStep === steps.length - 1 ? "hidden" : ""}`}
+          >
             {currentStep === 0 && (
               <Button
                 type="button"

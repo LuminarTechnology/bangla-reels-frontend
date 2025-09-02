@@ -10,12 +10,13 @@ const VideosList = ({
   setSelectedVideoIndex,
   editFields,
 }: any) => {
-  console.log(videos);
+  // console.table(videos);
+  // console.table(editFields);
   const sortableItems = editFields.map((field: editDetailsData) => field.videoId);
   return (
     <SortableContext items={sortableItems} strategy={verticalListSortingStrategy}>
       {editFields.map((editDetail: editDetailsData, index: number) => {
-        const video = videos.find((v:VideoFileData) => v.id === editDetail.videoId)
+        const video = videos.find((v:VideoFileData) => v.videoId === editDetail.videoId)
         if(!video) return null;
         const isSelected = selectedVideoIndex === index;
 
@@ -23,7 +24,7 @@ const VideosList = ({
           <VideoCard
             index={index}
             video={video}
-            key={video.id}
+            key={video.videoId}
             handleRemoveVideo={handleRemoveVideo}
             setSelectedVideoIndex={setSelectedVideoIndex}
             isSelected={isSelected}

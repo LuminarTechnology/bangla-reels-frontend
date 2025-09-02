@@ -24,11 +24,11 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const { fields, append, remove, update, replace, move } = useFieldArray({
+  const { fields, append, remove, update, replace } = useFieldArray({
     name: "videos",
     control,
   });
-
+  console.log(fields);
   // Supported video formats
   const supportedFormats = ["video/mp4", "video/webm", "video/ogg", "video/avi", "video/mov"];
 
@@ -95,6 +95,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
         const isSupported = supportedFormats.includes(file.type);
         const videoFile: VideoFileData = {
           id: Math.random().toString(36).substr(2, 9),
+          videoId: crypto.randomUUID(),
           file,
           status: isSupported ? "pending" : "unsupported",
           progress: 0,

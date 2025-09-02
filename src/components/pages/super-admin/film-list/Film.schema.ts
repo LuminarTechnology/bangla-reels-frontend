@@ -25,6 +25,7 @@ export const videoStatusSchema = z.enum([
 
 export const videoFileSchema = z.object({
   id: z.string(),
+  videoId: z.string(),
   file: z.instanceof(File),
   status: videoStatusSchema,
   progress: z.number(),

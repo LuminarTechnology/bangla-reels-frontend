@@ -14,17 +14,18 @@ const VideoCard = ({
   editDetail,
 }: any) => {
   const { attributes, listeners, setNodeRef, setActivatorNodeRef, transform, transition } =
-    useSortable({ id: video.id });
+    useSortable({ id: video.videoId });
 
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
   };
+  // console.log(editDetail);
   return (
     <div
       ref={setNodeRef}
       style={style}
-      key={video.id}
+      key={video.videoId}
       onClick={() => setSelectedVideoIndex(index)}
       className={`flex cursor-pointer items-center gap-4 rounded-lg border p-4 transition-colors ${
         isSelected ? "bg-primary/10 border-primary/20" : "bg-muted/50 hover:bg-muted/70"

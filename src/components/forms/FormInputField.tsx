@@ -34,6 +34,8 @@ type FormInputFieldProps = {
   className?: string;
   colorScheme?: ColorScheme;
   defaultValue?: string | number | undefined;
+  onChange?: (value: string) => void;
+  value?: string;
 };
 
 export function FormInputField({
@@ -59,6 +61,8 @@ export function FormInputField({
     errorBorder: "border-red-500",
     errorText: "text-red-400",
   },
+  onChange,
+  value = ""
 }: FormInputFieldProps) {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -76,7 +80,9 @@ export function FormInputField({
             >
               <p className="relative inline">
                 {label}
-                {required && <span className="absolute -right-2 -top-1 text-base text-red-500">*</span>}
+                {required && (
+                  <span className="absolute -top-1 -right-2 text-base text-red-500">*</span>
+                )}
               </p>
             </Label>
           )}
@@ -88,6 +94,11 @@ export function FormInputField({
                 placeholder={placeholder}
                 disabled={disabled}
                 {...field}
+                onChange={(e) => {
+                  field.onChange(e);
+                  onChange?.(e.target.value);
+                }}
+                value={value !== "" ? value : field.value}
                 className={cn(
                   "h-32 w-full resize-none rounded-lg px-3 py-4 focus:outline-none",
                   className,
@@ -106,6 +117,11 @@ export function FormInputField({
                 type={type === "password" ? (showPassword ? "text" : "password") : type}
                 disabled={disabled}
                 {...field}
+                onChange={(e) => {
+                  field.onChange(e);
+                  onChange?.(e.target.value);
+                }}
+                value={value !== "" ? value : field.value}
                 className={cn(
                   "w-full rounded-lg px-3 py-5 focus:outline-none",
                   className,

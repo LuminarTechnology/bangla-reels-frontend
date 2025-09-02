@@ -1,142 +1,103 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/src/components/ui/card";
-import { Button } from "@/src/components/ui/button";
-import { X, Menu } from "lucide-react";
-import Image from "next/image";
-import { type Control, useFieldArray, useWatch } from "react-hook-form";
+import { type Control } from "react-hook-form";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { FormInputField } from "@/src/components/forms/FormInputField";
-import { editDetailsData, FilmFormData, VideoFileData } from ".././Film.schema";
 import { closestCorners, DndContext } from "@dnd-kit/core";
 import VideosList from "./VideosList";
-import { arrayMove } from "@dnd-kit/sortable";
+import { useVideoEditManager } from "./useVideoEditManager";
+import EditForm from "./EditForm";
 
 interface EditDetailsProps {
   control: Control<any>;
 }
 
 export function EditDetails({ control }: EditDetailsProps) {
-  const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(0);
-  const [isProcessingDuplicates, setIsProcessingDuplicates] = useState(false);
+  const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(null);
 
-  const {
-    fields: editFields,
-    append: appendEdit,
-    remove: removeEdit,
-    update: updateEdit,
-    replace,
-  } = useFieldArray<FilmFormData, "editDetails">({
-    control,
-    name: "editDetails",
-  });
+  const { videos, editDetails, removeVideo, reorderVideos, updateEditDetail } =
+    useVideoEditManager(control);
+  // console.table(videos);
+  // console.table(editDetails);
 
-  const watchedVideos = useWatch({ control, name: "videos" });
-  const videos = useMemo(() => watchedVideos || [], [watchedVideos]);
-
-  // Sync editDetails with videos
+  // Auto-select first video when videos are loaded and none is selected (delayed to prevent validation errors)
   useEffect(() => {
-    if (videos.length === 0) return;
-
-    // Add editDetails for new videos
-    videos.forEach((video: VideoFileData, index: number) => {
-      const existingEditDetail = editFields.find((field) => field.videoId === video.id);
-
-      if (!existingEditDetail) {
-        console.log("Putting new details");
-        appendEdit({
-          videoId: video.id,
-          title: `Episode ${index + 1}`,
-          description: "",
-          tags: "",
-        });
-      }
-    });
-
-    // Remove orphaned editDetails (videos that no longer exist)
-    editFields.forEach((editField, index) => {
-      const videoExists = videos.some((video: VideoFileData) => video.id === editField.videoId);
-      if (!videoExists) {
-        removeEdit(index);
-      }
-    });
-  }, [videos, appendEdit, removeEdit]);
-
-  // Add this useEffect to remove duplicates
-  useEffect(() => {
-    if (editFields.length <= 1) return; // No duplicates possible with 0 or 1 items
-
-    const seenVideoIds = new Set<string>();
-    const duplicateIndices: number[] = [];
-
-    editFields.forEach((editField, index) => {
-      if (seenVideoIds.has(editField.videoId)) {
-        duplicateIndices.push(index);
-      } else {
-        seenVideoIds.add(editField.videoId);
-      }
-    });
-
-    // Remove duplicates in reverse order to maintain correct indices
-    if (duplicateIndices.length > 0) {
-      console.log(`Removing ${duplicateIndices.length} duplicate editDetails`);
-      duplicateIndices.reverse().forEach((index) => {
-        removeEdit(index);
-      });
-
-      setTimeout(() => {
-        setIsProcessingDuplicates(false);
-      }, 0);
-    }
-  }, [editFields, removeEdit]);
-
-  const currentEditDetail = selectedVideoIndex !== null ? editFields[selectedVideoIndex] : null;
-  const currentVideo = currentEditDetail
-    ? videos.find((video: VideoFileData) => video.id === currentEditDetail.videoId)
-    : null;
-  const currentEditIndex = selectedVideoIndex;
-  console.log(currentEditDetail, currentVideo, currentEditIndex);
-
-  const handleRemoveVideo = (editDetailIndex: number, e: React.MouseEvent) => {
-    e.stopPropagation();
-    removeEdit(editDetailIndex);
-
-    // Update selected index
-    if (selectedVideoIndex === editDetailIndex) {
+    if (videos.length > 0 && selectedVideoIndex === null) {
+      // Delay selection to prevent initial validation errors
+      const timer = setTimeout(() => {
+        setSelectedVideoIndex(0);
+      }, 100);
+      return () => clearTimeout(timer);
+    } else if (videos.length === 0) {
       setSelectedVideoIndex(null);
-    } else if (selectedVideoIndex !== null && selectedVideoIndex > editDetailIndex) {
-      setSelectedVideoIndex(selectedVideoIndex - 1);
+    } else if (selectedVideoIndex !== null && selectedVideoIndex >= videos.length) {
+      // If selected index is out of bounds, select the last available video
+      setSelectedVideoIndex(videos.length - 1);
     }
-  };
+  }, [videos.length, selectedVideoIndex]);
 
-  const getVideoPos = useCallback(
-    (videoId: string) => {
-      return editFields.findIndex((field) => field.videoId === videoId);
+  // Memoized current edit data for better performance
+  const currentEditData = useMemo(() => {
+    if (selectedVideoIndex === null || selectedVideoIndex >= editDetails.length) {
+      return null;
+    }
+
+    const editDetail = editDetails[selectedVideoIndex];
+    const video = videos.find((v) => v.videoId === editDetail?.videoId);
+
+    return {
+      editDetail,
+      video,
+      editIndex: selectedVideoIndex,
+      isValid: !!editDetail && !!video,
+    };
+  }, [selectedVideoIndex, editDetails, videos]);
+
+  const handleRemoveVideo = useCallback(
+    (editDetailIndex: number, e: React.MouseEvent) => {
+      e.stopPropagation();
+
+      const editDetail = editDetails[editDetailIndex];
+      if (!editDetail?.videoId) return;
+
+      removeVideo(editDetail.videoId);
+
+      // Smart selection update
+      if (selectedVideoIndex === editDetailIndex) {
+        // If removing selected video, select the next one or previous one
+        const newIndex =
+          editDetailIndex > 0 ? editDetailIndex - 1 : editDetails.length > 1 ? 0 : null;
+        setSelectedVideoIndex(newIndex);
+      } else if (selectedVideoIndex !== null && selectedVideoIndex > editDetailIndex) {
+        // If removing a video before selected one, adjust index
+        setSelectedVideoIndex(selectedVideoIndex - 1);
+      }
     },
-    [editFields]
+    [editDetails, removeVideo, selectedVideoIndex]
   );
 
   const handleDragEnd = useCallback(
     (event: any) => {
       const { active, over } = event;
-
       if (!over || active.id === over.id) return;
 
-      const originalPos = getVideoPos(active.id);
-      const newPos = getVideoPos(over.id);
+      const originalPos = editDetails.findIndex((field) => field.videoId === active.id);
+      const newPos = editDetails.findIndex((field) => field.videoId === over.id);
 
       if (originalPos === -1 || newPos === -1) return;
 
-      // Move both editDetails and update the videos order reference
-      const reorderedEditDetails = arrayMove([...editFields], originalPos, newPos);
-      replace(reorderedEditDetails);
+      reorderVideos(originalPos, newPos);
 
-      // Also update the selected index if needed
+      // Update selected index after reordering
       if (selectedVideoIndex === originalPos) {
         setSelectedVideoIndex(newPos);
       } else if (selectedVideoIndex === newPos) {
-        setSelectedVideoIndex(originalPos);
+        setSelectedVideoIndex(
+          originalPos > newPos ? selectedVideoIndex + 1 : selectedVideoIndex - 1
+        );
       } else if (selectedVideoIndex !== null) {
+        // Adjust selected index based on the move direction
         if (
           originalPos < newPos &&
           selectedVideoIndex > originalPos &&
@@ -152,102 +113,28 @@ export function EditDetails({ control }: EditDetailsProps) {
         }
       }
     },
-    [getVideoPos, editFields, replace, selectedVideoIndex]
+    [editDetails, reorderVideos, selectedVideoIndex]
   );
 
   if (!control) {
     return <div>Error: Form control is required</div>;
   }
+  console.log(selectedVideoIndex);
 
+  // console.table(videos);
+  // console.table(editDetails);
   return (
     <div className="grid h-full grid-cols-1 gap-6 pb-6 lg:grid-cols-2">
       {/* Left Panel - Edit Form */}
       <Card className="h-full p-0">
         <CardContent className="space-y-6 p-4">
-          {selectedVideoIndex === null || videos.length === 0 ? (
-            <div className="py-8 text-center">
-              <p className="text-muted-foreground">
-                Select a video from the list to edit its details
-              </p>
-            </div>
-          ) : currentEditIndex === -1 ? (
-            <div className="py-8 text-center">
-              <p className="text-muted-foreground">Loading episode details...</p>
-            </div>
-          ) : (
-            <>
-              <div
-                // key={`edit-form-${selectedVideoIndex}-${currentVideo?.id}`}
-                className="space-y-4"
-              >
-                <FormInputField
-                  name={`editDetails.${currentEditIndex}.title`}
-                  control={control}
-                  label="Title"
-                  placeholder="Enter episode title"
-                  required
-                  colorScheme={{
-                    background: "bg-white",
-                    text: "text-black",
-                    placeholder: "placeholder-gray-500",
-                    border: "border-gray-300",
-                    focusBorder: "focus:border-black",
-                    focusRing: "focus:ring-1 focus:ring-black",
-                    label: "text-black",
-                    errorBorder: "border-red-500",
-                    errorText: "text-red-500",
-                  }}
-                />
-
-                <FormInputField
-                  name={`editDetails.${currentEditIndex}.description`}
-                  control={control}
-                  label="Description"
-                  placeholder="Write here..."
-                  as="textarea"
-                  required
-                  colorScheme={{
-                    background: "bg-white",
-                    text: "text-black",
-                    placeholder: "placeholder-gray-500",
-                    border: "border-gray-300",
-                    focusBorder: "focus:border-black",
-                    focusRing: "focus:ring-1 focus:ring-black",
-                    label: "text-black",
-                    errorBorder: "border-red-500",
-                    errorText: "text-red-500",
-                  }}
-                />
-
-                <FormInputField
-                  name={`editDetails.${currentEditIndex}.tags`}
-                  control={control}
-                  label="Tags/keywords"
-                  placeholder="Film, Movie"
-                  required
-                  colorScheme={{
-                    background: "bg-white",
-                    text: "text-black",
-                    placeholder: "placeholder-gray-500",
-                    border: "border-gray-300",
-                    focusBorder: "focus:border-black",
-                    focusRing: "focus:ring-1 focus:ring-black",
-                    label: "text-black",
-                    errorBorder: "border-red-500",
-                    errorText: "text-red-500",
-                  }}
-                />
-
-                {/* {currentVideo && (
-                  <div className="border-t pt-4">
-                    <p className="text-muted-foreground text-sm">
-                      Editing: {currentVideo.resolution} • {currentVideo.duration} •{" "}
-                      {currentVideo.status}
-                    </p>
-                  </div>
-                )} */}
-              </div>
-            </>
+          {(videos.length > 0 && currentEditData !== null && selectedVideoIndex !== null) && (
+            <EditForm
+              control={control}
+              currentEditData={currentEditData}
+              selectedVideoIndex={selectedVideoIndex}
+              updateEditDetail={updateEditDetail}
+            />
           )}
         </CardContent>
       </Card>
@@ -255,23 +142,23 @@ export function EditDetails({ control }: EditDetailsProps) {
       {/* Right Panel - Episode List */}
       <Card className="h-full gap-0 p-0">
         <CardHeader className="p-4 pb-0">
-          <CardTitle className="text-lg font-medium">List of Episodes</CardTitle>
+          <CardTitle className="text-lg font-medium">
+            List of Episodes {videos.length > 0 && `(${videos.length})`}
+          </CardTitle>
         </CardHeader>
         <CardContent className="p-4 pt-0">
           <div className="space-y-3">
-            <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
-              {!isProcessingDuplicates && (
+            {videos.length > 0 ? (
+              <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
                 <VideosList
                   videos={videos}
                   handleRemoveVideo={handleRemoveVideo}
                   selectedVideoIndex={selectedVideoIndex}
                   setSelectedVideoIndex={setSelectedVideoIndex}
-                  editFields={editFields}
+                  editFields={editDetails}
                 />
-              )}
-            </DndContext>
-
-            {videos.length === 0 && (
+              </DndContext>
+            ) : (
               <div className="py-8 text-center">
                 <p className="text-muted-foreground">No videos uploaded yet</p>
               </div>
