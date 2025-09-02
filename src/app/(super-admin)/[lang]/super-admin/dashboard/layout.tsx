@@ -11,7 +11,7 @@ interface Props {
 
 export default async function SuperAdminDashboardLayout({ children }: Props) {
   // Protect the page from users who are not admins
-  // const isAdmin = await hasRole("super-admin");
+  // const isAdmin = await hasRole("superAdmin");
   // if (!isAdmin) {
   //   redirect("/sign-in");
   // }

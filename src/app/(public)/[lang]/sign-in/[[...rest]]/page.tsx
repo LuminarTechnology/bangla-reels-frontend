@@ -15,9 +15,9 @@ export default function SignInPage() {
     const sync = async () => {
       setLoading(true);
       try {
-        const token = await getToken({ template: "backend-jwt" }); // fetches a fresh token
+        const token = await getToken({ template: "backend" });
         if (!token) return;
-        const user = await signInToBackend(token);
+        await signInToBackend(token);
       } catch (err) {
         console.error(err);
       } finally {

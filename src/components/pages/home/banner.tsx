@@ -15,7 +15,7 @@ import { useLocale } from "@/src/app/LocaleProvider";
 import { TLang } from "@/src/types/globals";
 import { useTranslations } from "next-intl";
 import { banners } from "@/src/constants/homeData";
-import { useAuth, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import moment from "moment";
 
 const Banner: React.FC = () => {
@@ -24,9 +24,7 @@ const Banner: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
   const mainSwiperRef = useRef<{ swiper: SwiperType } | null>(null);
-
   const { user } = useUser();
-  const { getToken } = useAuth();
 
   useEffect(() => {
     if (!user) return;
@@ -39,7 +37,7 @@ const Banner: React.FC = () => {
 
     const handleAfterSignUp = async (user: any) => {
       try {
-        const token = await getToken();
+        const token = await user.getToken({ template: "backend" });
 
         await fetch(`http://localhost:5000/api/v1/auth/signup`, {
           method: "POST",
@@ -60,7 +58,7 @@ const Banner: React.FC = () => {
     if (diffInMinutes <= 2) {
       handleAfterSignUp(user);
     }
-  }, [user, getToken]);
+  }, [user]);
 
   return (
     <div className="relative h-[350px] overflow-hidden bg-gray-900 sm:h-[420px] md:h-[500px] lg:h-[550px]">

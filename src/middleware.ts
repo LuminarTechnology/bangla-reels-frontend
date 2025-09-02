@@ -42,7 +42,7 @@ export default clerkMiddleware(async (auth, req: NextRequest) => {
   if (intlResponse) return intlResponse;
 
   // Protect all routes starting with `/super-admin/dashboard`
-  if (isAdminRoute(req) && !roles?.includes("super-admin")) {
+  if (isAdminRoute(req) && !roles?.includes("superAdmin")) {
     const url = new URL(`/${lang}/super-admin/login`, req.url);
     return NextResponse.redirect(url);
   }
