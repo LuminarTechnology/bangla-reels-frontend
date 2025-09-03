@@ -4,9 +4,10 @@ import { FormInputField } from "@/src/components/forms/FormInputField";
 import { useFormContext } from "react-hook-form";
 // import { FormData } from "@/src/types/superAdminSettings";
 import { FormToggleSwitchField } from "@/src/components/forms/FormToggleSwitchField";
+import { AdminSettingsType } from "@/src/schema/adminSettings.schema";
 
 export default function GeneralTab() {
-  const methods = useFormContext();
+  const methods = useFormContext<AdminSettingsType>();
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 mt-4">

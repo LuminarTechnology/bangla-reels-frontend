@@ -4,9 +4,10 @@ import React from "react";
 import { FormInputField } from "@/src/components/forms/FormInputField";
 import { useFormContext } from "react-hook-form";
 import { FormToggleSwitchField } from "@/src/components/forms/FormToggleSwitchField";
+import { AdminSettingsType } from "@/src/schema/adminSettings.schema";
 
 export default function PaymentTab() {
-  const methods = useFormContext();
+  const methods = useFormContext<AdminSettingsType>();
 
   return (
     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-4">
@@ -20,7 +21,7 @@ export default function PaymentTab() {
             control={methods.control}
             label="Razor Pay (enable/disable for payment in app)"
             labelClassName="flex-row-reverse justify-between py-5 mb-5 border-b"
-            labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424]"
+            labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424] mr-4"
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 justify-center items-center gap-2">
             <FormInputField
@@ -70,7 +71,7 @@ export default function PaymentTab() {
             control={methods.control}
             label="Stripe Pay (enable/disable for payment in app)"
             labelClassName="flex-row-reverse justify-between py-5 mb-5 border-b"
-            labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424]"
+            labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424] mr-4"
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 justify-center items-center gap-2">
             <FormInputField
@@ -124,7 +125,7 @@ export default function PaymentTab() {
             control={methods.control}
             label="Google Pay (enable/disable for payment in app)"
             labelClassName="flex-row-reverse justify-between pt-5"
-            labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424]"
+            labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424] mr-4"
           />
         </div>
 
@@ -136,7 +137,7 @@ export default function PaymentTab() {
             control={methods.control}
             label="Flutter Wave (enable/disable for payment in app)"
             labelClassName="flex-row-reverse justify-between py-5 mb-5 border-b"
-            labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424]"
+            labelSpanClassName="bg-[#F0F0F0] p-1 font-semibold text-[#242424] mr-4"
           />
           <FormInputField
             control={methods.control}

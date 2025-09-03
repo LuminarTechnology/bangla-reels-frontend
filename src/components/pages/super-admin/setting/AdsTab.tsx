@@ -2,9 +2,10 @@
 import React from "react";
 import { FormInputField } from "@/src/components/forms/FormInputField";
 import { useFormContext } from "react-hook-form";
+import { AdminSettingsType } from "@/src/schema/adminSettings.schema";
 
 export default function AdsTab() {
-  const methods = useFormContext();
+const methods = useFormContext<AdminSettingsType>();
 
   return (
     <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-4">
