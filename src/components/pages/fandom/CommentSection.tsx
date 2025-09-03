@@ -99,12 +99,14 @@ const CommentSection = () => {
         </div>
 
         {/* Submit */}
-        <button
-          type="submit"
-          className="rounded-md bg-red-500 px-8 py-3 font-medium text-white transition-colors duration-200 hover:bg-red-600"
-        >
-          Post Comment
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="rounded-md bg-red-500 px-8 py-3 font-medium text-white transition-colors duration-200 hover:bg-red-600"
+          >
+            Post Comment
+          </button>
+        </div>
       </form>
     </div>
   );

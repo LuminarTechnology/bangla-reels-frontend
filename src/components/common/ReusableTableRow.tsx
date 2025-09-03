@@ -49,8 +49,9 @@ export const ReusableTableRow = <T,>({
                     e.stopPropagation();
                     action.onClick(row);
                   }}
+                  className="group inline-flex cursor-pointer items-center justify-center size-9 rounded-full transition-colors hover:bg-black"
                 >
-                  <Trash2 className="size-5"/>
+                  <Trash2 className="size-5  transition-colors group-hover:text-white" />
                 </span>
               ))
           ) : (
