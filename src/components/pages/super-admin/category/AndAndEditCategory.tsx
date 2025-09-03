@@ -109,7 +109,6 @@ const AddAndEditCategoryModal: React.FC<AddAndEditCategoryModalProps> = ({
             control={control}
             name="description"
             label="Description"
-            required={true}
             placeholder="Write here..."
             className="rounded-2xl"
             colorScheme={inputColorScheme}
