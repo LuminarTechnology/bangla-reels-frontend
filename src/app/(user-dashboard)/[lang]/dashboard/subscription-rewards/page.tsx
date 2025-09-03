@@ -6,8 +6,10 @@ import Image from "next/image";
 import { transactions, episodes } from "@/src/constants/SubscriptionItems";
 import { EpisodeAndTransactionTable } from "@/src/components/pages/user-dashboard/subscription-rewards/EpisodeAndTransactionTable";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 
 export default function SubscriptionRewards() {
+  const lang = useLocale();
   const transactionColumns = [
     { key: "amount", label: "Amount" },
     { key: "coins", label: "Coins" },
@@ -21,9 +23,10 @@ export default function SubscriptionRewards() {
     { key: "unlockedAt", label: "Unlocked at" },
     { key: "status", label: "Status" },
   ];
+
   return (
     <>
-      <Card className="mb-5 rounded-2xl bg-[#0F0828] border-2 border-[#D7D7D740] p-6 text-white">
+      <Card className="mb-5 rounded-2xl border-2 border-[#D7D7D740] bg-[#0F0828] p-6 text-white">
         <h3 className="text-2xl font-bold">My Wallet</h3>
         <div className="flex items-center justify-between pl-6">
           <p className="text-base font-semibold">
@@ -32,7 +35,7 @@ export default function SubscriptionRewards() {
           <p className="text-base font-semibold">
             <span className="text-2xl">0</span> Reward Coins
           </p>
-          <Link href="/dashboard/top-up">
+          <Link href={`/${lang}/dashboard/top-up`}>
             <Button variant="danger" className="rounded-2xl p-6 text-base font-semibold" size="sm">
               <p>Top Up</p>
             </Button>
@@ -65,7 +68,7 @@ export default function SubscriptionRewards() {
           </Button>
         </div>
       </Card>
-      <div className="border-2 border-[#D7D7D740] rounded-2xl py-5 px-3">
+      <div className="rounded-2xl border-2 border-[#D7D7D740] px-3 py-5">
         <Tabs defaultValue="transactions">
           <TabsList className="bg-[#0F0828]">
             <TabsTrigger

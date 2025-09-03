@@ -6,6 +6,7 @@ import { LogOut, ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/src/lib/utils";
 import { SidebarItem } from "@/src/types/dashboardItems";
 import { SignOutButton } from "@clerk/nextjs";
+import { useLocale } from "@/src/app/LocaleProvider";
 
 type SidebarContentProps = {
   sidebarItems: SidebarItem[];
@@ -14,6 +15,7 @@ type SidebarContentProps = {
 
 export function SidebarContent({ sidebarItems, onItemClick }: SidebarContentProps) {
   const pathname = usePathname();
+  const { lang } = useLocale();
   const strippedPath = pathname.replace(/^\/(en|bn|es|la)(?=\/|$)/, "") || "/";
   const [openMenus, setOpenMenus] = useState<{ [key: string]: boolean }>({});
 
@@ -68,7 +70,7 @@ export function SidebarContent({ sidebarItems, onItemClick }: SidebarContentProp
                       return (
                         <Link
                           key={child.href}
-                          href={child.href}
+                          href={`/${lang}${child.href}`}
                           onClick={handleItemClick}
                           className={cn(
                             "block px-3 py-3 text-sm transition-colors hover:bg-[#080200]",
@@ -90,7 +92,7 @@ export function SidebarContent({ sidebarItems, onItemClick }: SidebarContentProp
           return (
             <Link
               key={item.href}
-              href={item.href!}
+              href={`/${lang}${item.href}`}
               onClick={handleItemClick}
               className={cn(
                 "flex items-center space-x-3 px-3 py-3 text-sm font-medium transition-colors hover:bg-[#080200]",

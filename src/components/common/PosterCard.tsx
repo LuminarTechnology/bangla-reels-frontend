@@ -3,6 +3,7 @@ import { Card } from "../ui/card";
 import { cn } from "@/src/lib/utils";
 import Link from "next/link";
 import { Play } from "lucide-react";
+import { useLocale } from "next-intl";
 
 interface PosterCardProps {
   title: string;
@@ -25,6 +26,7 @@ export function PosterCard({
   className = "",
   link = "episode",
 }: PosterCardProps) {
+  const lang = useLocale();
   return (
     <Card
       className={cn(
@@ -32,7 +34,7 @@ export function PosterCard({
         className
       )}
     >
-      <Link href={`/${link}/${title}`}>
+      <Link href={`/${lang}/${link}/${title}`}>
         <div className="relative aspect-[4/5] cursor-pointer overflow-hidden rounded-[8px]">
           <Image src={posterImage} alt={title} fill className="object-cover" />
           <div className="absolute inset-0 flex items-center justify-center bg-black/60 text-lg font-bold text-white opacity-0 transition-opacity group-hover:opacity-100">
