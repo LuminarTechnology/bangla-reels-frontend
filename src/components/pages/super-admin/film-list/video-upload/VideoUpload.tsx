@@ -3,12 +3,12 @@
 import type React from "react";
 
 import { useState, useCallback, useRef, useEffect } from "react";
-import { Control, useController, useFieldArray } from "react-hook-form";
+import { Control, useFieldArray } from "react-hook-form";
 import { Button } from "@/src/components/ui/button";
 import { Card } from "@/src/components/ui/card";
-import { X, Upload, RotateCcw, Menu } from "lucide-react";
+import { Upload } from "lucide-react";
 import { cn } from "@/src/lib/utils";
-import { FilmFormData, VideoFileData } from ".././Film.schema";
+import { FilmFormData, VideoFileData } from "@/src/schema/FilmList.schema";
 import { RulesComponent } from ".././RulesFormat";
 import { filmListformatData, filmListrulesData } from "@/src/constants/filmListRulesFormat";
 import { closestCorners, DndContext } from "@dnd-kit/core";
@@ -23,14 +23,20 @@ interface VideoUploadComponentProps {
 export function VideoUploadComponent({ control, errors }: VideoUploadComponentProps) {
   const [isDragOver, setIsDragOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [showRules, setShowRules] = useState(false);
 
   const { fields, append, remove, update, replace } = useFieldArray({
     name: "videos",
     control,
   });
-  console.log(fields);
+
+  const videosRef = useRef<VideoFileData[]>([]);
+  useEffect(() => {
+    videosRef.current = fields;
+  }, [fields]);
+
   // Supported video formats
-  const supportedFormats = ["video/mp4", "video/webm", "video/ogg", "video/avi", "video/mov"];
+  const supportedFormats = ["video/mp4", "video/mov"];
 
   const generateThumbnail = useCallback((file: File): Promise<string> => {
     return new Promise((resolve) => {
@@ -38,24 +44,27 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
 
+      video.preload = "metadata"; // optional, speeds up loading
+      video.src = URL.createObjectURL(file);
+
       video.onloadedmetadata = () => {
         canvas.width = 120;
         canvas.height = 68;
-        video.currentTime = 1; // Get frame at 1 second
+        video.currentTime = Math.min(1, video.duration / 2); // safe time within video
       };
 
-      video.oncanplay = () => {
+      video.onseeked = () => {
         if (ctx) {
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
           resolve(canvas.toDataURL());
+          URL.revokeObjectURL(video.src); // cleanup
         }
       };
 
       video.onerror = () => {
         resolve(""); // Return empty string on error
+        URL.revokeObjectURL(video.src);
       };
-
-      video.src = URL.createObjectURL(file);
     });
   }, []);
 
@@ -75,16 +84,60 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
     });
   }, []);
 
-  const updateVideoFields = useCallback(
-    (updates: { id: string; patch: Partial<VideoFileData> }[]) => {
-      fields.forEach((field, index) => {
-        const updateItem = updates.find((u) => u.id === field.id);
-        if (updateItem) {
-          update(index, { ...field, ...updateItem.patch });
+  const getVideoResolution = (file: File): Promise<{ width: number; height: number }> => {
+    return new Promise((resolve, reject) => {
+      const video = document.createElement("video");
+      video.preload = "metadata";
+
+      video.onloadedmetadata = () => {
+        resolve({ width: video.videoWidth, height: video.videoHeight });
+        URL.revokeObjectURL(video.src);
+      };
+
+      video.onerror = () => {
+        reject(new Error("Failed to load video metadata"));
+        URL.revokeObjectURL(video.src);
+      };
+
+      video.src = URL.createObjectURL(file);
+    });
+  };
+
+  const updateVideoFields = (videoId: string, patch: Partial<VideoFileData>) => {
+    const index = videosRef.current.findIndex((v) => v.videoId === videoId);
+    if (index === -1) return;
+    const current = videosRef.current[index];
+    update(index, { ...current, ...patch });
+  };
+
+  const simulateUpload = useCallback(
+    (videoId: string) => {
+      console.log(fields);
+      console.log("simulate upload function start", videoId);
+      // Set initial status → uploading
+      updateVideoFields(videoId, { status: "uploading" });
+
+      let currentProgress = 0;
+
+      // Simulate upload progress
+      const interval = setInterval(() => {
+        currentProgress = Math.min(currentProgress + Math.random() * 20, 100);
+
+        if (currentProgress >= 100) {
+          clearInterval(interval);
+
+          const isSuccess = Math.random() > 0.2; // 80% success chance
+          updateVideoFields(videoId, {
+            progress: 100,
+            status: isSuccess ? "completed" : "error",
+            error: isSuccess ? undefined : "Network error. Please try again",
+          });
+        } else {
+          updateVideoFields(videoId, { progress: currentProgress });
         }
-      });
+      }, 500);
     },
-    [fields, update] // dependencies
+    [updateVideoFields]
   );
 
   const processFiles = useCallback(
@@ -94,7 +147,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
       for (const file of files) {
         const isSupported = supportedFormats.includes(file.type);
         const videoFile: VideoFileData = {
-          id: Math.random().toString(36).substr(2, 9),
+          id: crypto.randomUUID(),
           videoId: crypto.randomUUID(),
           file,
           status: isSupported ? "pending" : "unsupported",
@@ -104,9 +157,14 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
 
         if (isSupported) {
           try {
-            videoFile.thumbnail = await generateThumbnail(file);
-            videoFile.duration = await getVideoDuration(file);
-            videoFile.resolution = "1920x1080"; // You can implement actual resolution detection
+            const [thumbnail, duration, resolution] = await Promise.all([
+              generateThumbnail(file),
+              getVideoDuration(file),
+              getVideoResolution(file),
+            ]);
+            videoFile.thumbnail = thumbnail;
+            videoFile.duration = duration;
+            videoFile.resolution = `${resolution.width}PX x ${resolution.height}PX`;
           } catch (error) {
             console.error("Error processing video:", error);
           }
@@ -117,48 +175,16 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
       }
 
       // Start upload simulation for supported files
-      newVideos.forEach((video) => {
-        if (video.status === "pending") {
-          simulateUpload(video.id);
-        }
-      });
-    },
-    [generateThumbnail, getVideoDuration, supportedFormats, updateVideoFields]
-  );
-
-  const simulateUpload = useCallback(
-    (videoId: string) => {
-      // Set initial status → uploading
-      updateVideoFields([{ id: videoId, patch: { status: "uploading" } }]);
-
-      // Simulate upload progress
-      const interval = setInterval(() => {
-        fields.forEach((field) => {
-          if (field.id === videoId && field.status === "uploading") {
-            const newProgress = Math.min(field.progress + Math.random() * 20, 100);
-
-            if (newProgress >= 100) {
-              clearInterval(interval);
-
-              const isSuccess = Math.random() > 0.2; // 80% success chance
-              updateVideoFields([
-                {
-                  id: videoId,
-                  patch: {
-                    progress: 100,
-                    status: isSuccess ? "completed" : "error",
-                    error: isSuccess ? undefined : "Network error. Please try again",
-                  },
-                },
-              ]);
-            } else {
-              updateVideoFields([{ id: videoId, patch: { progress: newProgress } }]);
-            }
+      setTimeout(() => {
+        newVideos.forEach((video) => {
+          if (video.status === "pending") {
+            console.log("Starting delayed simulation for:", video.videoId);
+            simulateUpload(video.videoId);
           }
         });
-      }, 500);
+      }, 100);
     },
-    [fields, updateVideoFields]
+    [simulateUpload, generateThumbnail, getVideoDuration, supportedFormats, append]
   );
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -215,7 +241,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
   const retryUpload = useCallback(
     (videoId: string) => {
       fields.forEach((field, index) => {
-        if (field.id === videoId) {
+        if (field.videoId === videoId) {
           update(index, {
             ...field,
             status: "pending",
@@ -228,14 +254,6 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
     },
     [fields, update, simulateUpload]
   );
-
-  const formatFileSize = useCallback((bytes: number) => {
-    if (bytes === 0) return "0 Bytes";
-    const k = 1024;
-    const sizes = ["Bytes", "KB", "MB", "GB"];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return Number.parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
-  }, []);
 
   const getVideoPos = useCallback(
     (videoId: string) => {
@@ -254,12 +272,12 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
       const newPos = getVideoPos(over.id);
 
       if (originalPos === -1 || newPos === -1) return;
-      
+
       console.log("Moving from position", originalPos, "to position", newPos);
       console.log("Active ID:", active.id, "Over ID:", over.id);
-      
+
       const result = arrayMove([...fields], originalPos, newPos);
-    
+
       console.log(fields, result);
       replace(result);
     },
@@ -301,7 +319,20 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
               </p>
             </div>
 
-            <RulesComponent rules={filmListrulesData} formatItems={filmListformatData} />
+            {!showRules && (
+              <Button
+                onClick={() => setShowRules(true)}
+                variant="outline"
+                className="border-red-200 bg-transparent text-red-500"
+              >
+                Rules & Format
+              </Button>
+            )}
+            <RulesComponent
+              showRules={showRules}
+              rules={filmListrulesData}
+              formatItems={filmListformatData}
+            />
 
             <input
               ref={fileInputRef}
@@ -318,7 +349,11 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
             <div className="flex items-center justify-between">
               <h3 className="text-lg font-medium">Upload List</h3>
               <div className="flex gap-2">
-                <Button variant="outline" className="border-red-200 bg-transparent text-red-500">
+                <Button
+                  onClick={() => setShowRules((prev) => !prev)}
+                  variant="outline"
+                  className="border-red-200 bg-transparent text-red-500"
+                >
                   Rules & Format
                 </Button>
                 <Button onClick={handleUploadMore} className="bg-black text-white">
@@ -327,12 +362,16 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
                 </Button>
               </div>
             </div>
+            <RulesComponent
+              showRules={showRules}
+              rules={filmListrulesData}
+              formatItems={filmListformatData}
+            />
 
             <div className="space-y-4">
               <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
                 <VideoUploadedList
                   videos={fields}
-                  formatFileSize={formatFileSize}
                   retryUpload={retryUpload}
                   removeVideo={removeVideo}
                 />

@@ -62,7 +62,7 @@ export function FormInputField({
     errorText: "text-red-400",
   },
   onChange,
-  value = ""
+  value
 }: FormInputFieldProps) {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -98,7 +98,7 @@ export function FormInputField({
                   field.onChange(e);
                   onChange?.(e.target.value);
                 }}
-                value={value !== "" ? value : field.value}
+                value={value !== undefined ? value : field.value}
                 className={cn(
                   "h-32 w-full resize-none rounded-lg px-3 py-4 focus:outline-none",
                   className,
@@ -121,7 +121,7 @@ export function FormInputField({
                   field.onChange(e);
                   onChange?.(e.target.value);
                 }}
-                value={value !== "" ? value : field.value}
+                value={value !== undefined ? value : field.value}
                 className={cn(
                   "w-full rounded-lg px-3 py-5 focus:outline-none",
                   className,

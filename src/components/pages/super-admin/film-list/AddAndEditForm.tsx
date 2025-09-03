@@ -10,7 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import StepIndicator from "./StepIndicator";
 import { MoveRight } from "lucide-react";
 import FilmDetails from "./FilmDetails";
-import { defaultFormData, FilmFormData, filmSchema } from "./Film.schema";
+import { defaultFormData, FilmFormData, filmSchema } from "@/src/schema/FilmList.schema";
 import { VideoUploadComponent } from "./video-upload/VideoUpload";
 import { EditDetails } from "./edit-details/EditDetails";
 import Confirmation from "./Confirmation";
@@ -134,7 +134,6 @@ const AddAndEditForm = ({ open, mode, onOpenChange, onSave, initialData }: FilmM
     setCurrentStep(0);
     setPreviousStep(0);
   };
-  const doNothing = () => {};
 
   return (
     <Dialog
@@ -161,7 +160,7 @@ const AddAndEditForm = ({ open, mode, onOpenChange, onSave, initialData }: FilmM
         </DialogHeader>
 
         {/* Form Container */}
-        <form onSubmit={handleSubmit(doNothing)} className="flex min-h-0 flex-1 flex-col">
+        <form onSubmit={handleSubmit(processForm)} className="flex min-h-0 flex-1 flex-col">
           {/* Scrollable Step Content */}
           <div className="min-h-0 flex-1 space-y-4 overflow-y-auto px-4 sm:px-6">
             {currentStep === 0 && <FilmDetails control={control} />}
@@ -174,47 +173,40 @@ const AddAndEditForm = ({ open, mode, onOpenChange, onSave, initialData }: FilmM
               />
             )}
           </div>
-
-          {/* Bottom Actions */}
-          <div
-            className={`mt-auto flex flex-shrink-0 flex-col gap-3 border-t px-4 py-4 sm:flex-row sm:px-6 ${currentStep === steps.length - 1 ? "hidden" : ""}`}
-          >
-            {currentStep === 0 && (
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={handleCancel}
-                className="order-2 flex-1 rounded-2xl border sm:order-1"
-              >
-                Cancel
-              </Button>
-            )}
-            {currentStep !== 0 && (
-              <Button
-                type="button"
-                variant="ghost"
-                onClick={prev}
-                className="order-2 flex-1 rounded-2xl border sm:order-1"
-              >
-                Back
-              </Button>
-            )}
-            <Button
-              type={currentStep === steps.length - 2 ? "submit" : "button"}
-              onClick={next}
-              className="order-1 flex-1 rounded-2xl bg-black hover:bg-gray-800 sm:order-2"
-            >
-              {mode === "add"
-                ? currentStep === steps.length - 1
-                  ? "Save"
-                  : "Continue"
-                : currentStep === steps.length - 1
-                  ? "Update"
-                  : "Continue"}
-              <MoveRight />
-            </Button>
-          </div>
         </form>
+        {/* Bottom Actions */}
+        <div
+          className={`mt-auto flex flex-shrink-0 flex-col gap-3 border-t px-4 py-4 sm:flex-row sm:px-6 ${currentStep === steps.length - 1 ? "hidden" : ""}`}
+        >
+          {currentStep === 0 && (
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={handleCancel}
+              className="order-2 flex-1 rounded-2xl border sm:order-1"
+            >
+              Cancel
+            </Button>
+          )}
+          {currentStep !== 0 && (
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={prev}
+              className="order-2 flex-1 rounded-2xl border sm:order-1"
+            >
+              Back
+            </Button>
+          )}
+          <Button
+            type="button"
+            onClick={next}
+            className="order-1 flex-1 rounded-2xl bg-black hover:bg-gray-800 sm:order-2"
+          >
+            Continue
+            <MoveRight />
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
   );

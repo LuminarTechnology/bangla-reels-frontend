@@ -3,9 +3,20 @@ import { FormInputField } from "@/src/components/forms/FormInputField";
 import { FormRadioGroupField } from "@/src/components/forms/FormRadioGroupField";
 import { FormSelectField } from "@/src/components/forms/FormSelectField";
 import { FormToggleSwitchField } from "@/src/components/forms/FormToggleSwitchField";
+import { FilmFormData } from "@/src/schema/FilmList.schema";
 import React from "react";
+import { Control, useWatch } from "react-hook-form";
 
-const FilmDetails = ({control}: any) => {
+interface FilmDetailsProps{
+  control: Control<FilmFormData>
+}
+
+const FilmDetails = ({control}:FilmDetailsProps) => {
+  const isBanner = useWatch({
+    control,
+    name: "isBanner",
+    defaultValue: true,
+  })
   return (
     <div className="min-h-0 flex-1 space-y-2 overflow-y-auto pt-2 pb-4 sm:space-y-4 px-1">
       <FormRadioGroupField
@@ -24,7 +35,7 @@ const FilmDetails = ({control}: any) => {
           name="name"
           control={control}
           label="Name"
-          placeholder="Enter name"
+          placeholder="Name"
           className="rounded-2xl"
           colorScheme={{
             background: "bg-white",
@@ -49,7 +60,7 @@ const FilmDetails = ({control}: any) => {
             { label: "Drama", value: "drama" },
             { label: "Comedy", value: "comedy" },
           ]}
-          className="rounded-2xl py-5"
+          className="rounded-2xl py-5 border-gray-300"
         />
       </div>
 
@@ -57,7 +68,7 @@ const FilmDetails = ({control}: any) => {
         name="description"
         control={control}
         label="Description"
-        placeholder="Enter description"
+        placeholder="Write here..."
         as="textarea"
         colorScheme={{
           background: "bg-white",
@@ -101,14 +112,19 @@ const FilmDetails = ({control}: any) => {
           buttonText="Choose File"
           placeholder="No file chosen"
         />
-        <FormFileUploadField
+        {isBanner && <FormFileUploadField
           name="banner"
           control={control}
           label="Banner"
           accept="image/*"
           buttonText="Choose File"
           placeholder="No file chosen"
-        />
+        />}
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 -mt-4 text-[#A9A9A9]">
+        <p>JPG only, 1080 x  1440, max 5MB</p>
+        {isBanner && <p>JPG only, 1080 x  1440, max 5MB</p>}
       </div>
 
       <div className="space-y-4">

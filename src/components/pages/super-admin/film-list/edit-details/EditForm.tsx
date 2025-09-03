@@ -30,7 +30,6 @@ function EditForm({
         label="Title"
         placeholder="Enter episode title"
         value={currentEditData.editDetail.title}
-        required = {false}
         onChange={(value) => updateEditDetail(editIndex, { title: value })}
         colorScheme={{
           background: "bg-white",
@@ -51,7 +50,6 @@ function EditForm({
         label="Description"
         placeholder="Write here..."
         as="textarea"
-        required = {false}
         value={currentEditData.editDetail.description}
         onChange={(value) => updateEditDetail(editIndex, { description: value })}
         colorScheme={{

@@ -15,31 +15,20 @@ type FormatItem = {
 };
 
 interface RulesComponentProps {
-  title?: string;
+  showRules: boolean;
   rules: Rule[];
   formatItems: FormatItem[];
 }
 
 export function RulesComponent({ 
-  title = "Rules & Format", 
+  showRules,
   rules, 
   formatItems 
 }: RulesComponentProps) {
-  const [showRules, setShowRules] = useState(false);
 
   return (
     <div className="mx-auto w-full max-w-4xl">
-      {!showRules ? (
-        <div className="flex justify-center">
-          <Button
-            onClick={() => setShowRules(true)}
-            variant="outline"
-            className="border-red-200 bg-transparent text-red-500"
-          >
-            {title}
-          </Button>
-        </div>
-      ) : (
+      {showRules && (
         <div className="animate-in fade-in-0 slide-in-from-top-4 duration-500">
           <div className="grid gap-4 md:grid-cols-2">
             {/* Rules Section */}

@@ -16,7 +16,7 @@ export default function StepIndicator({ steps, currentStepIndex, className }: St
   return (
     <div className="mx-auto flex w-full max-w-4xl items-center mt-2">
       {steps.map((step, index) => {
-        const isCompleted = index < currentStepIndex;
+        const isCompleted = index < currentStepIndex || currentStepIndex === steps.length - 1;
         const isCurrent = index === currentStepIndex;
         const isUpcoming = index > currentStepIndex;
 

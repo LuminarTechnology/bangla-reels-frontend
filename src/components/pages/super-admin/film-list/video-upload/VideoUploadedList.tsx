@@ -1,11 +1,12 @@
 import React from "react";
-import { VideoFileData } from ".././Film.schema";
+import { VideoFileData } from "@/src/schema/FilmList.schema";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import SortableVideoCard from "./SortableVideoCard";
 
-const VideoUploadedList = ({ videos, formatFileSize, retryUpload, removeVideo }: any) => {
+const VideoUploadedList = ({ videos, retryUpload, removeVideo }: any) => {
+  console.log(videos);
   return (
-    <div>
+    <div className="space-y-6">
       <SortableContext
         items={videos.map((v: VideoFileData) => v.id)}
         strategy={verticalListSortingStrategy}
@@ -15,7 +16,6 @@ const VideoUploadedList = ({ videos, formatFileSize, retryUpload, removeVideo }:
             index={index}
             video={video}
             key={video.id}
-            formatFileSize={formatFileSize}
             retryUpload={retryUpload}
             removeVideo={removeVideo}
           />
