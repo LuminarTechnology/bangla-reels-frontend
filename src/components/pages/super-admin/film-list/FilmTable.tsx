@@ -6,7 +6,7 @@ import { TableAction, TableColumn, TableHeaderConfig } from "@/src/types/reusabl
 import { Plus } from "lucide-react";
 import React, { useState } from "react";
 import AddAndEditForm from "./AddAndEditForm";
-import { FilmFormData } from "./Film.schema";
+import { FilmFormData } from "@/src/schema/FilmList.schema";
 interface FilmData {
   id: string;
   no: string;
@@ -348,6 +348,7 @@ const FilmTable = () => {
       videos:
         editingEpisode.videos?.map((v: any) => ({
           id: v.id,
+          videoId: v.videoId,
           file: v.file ?? new File([], ""), // fallback empty file
           status: v.status,
           progress: v.progress ?? 0,

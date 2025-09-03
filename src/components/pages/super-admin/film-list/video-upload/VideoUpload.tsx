@@ -35,9 +35,6 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
     videosRef.current = fields;
   }, [fields]);
 
-  // Supported video formats
-  const supportedFormats = ["video/mp4", "video/mov"];
-
   const generateThumbnail = useCallback((file: File): Promise<string> => {
     return new Promise((resolve) => {
       const video = document.createElement("video");
@@ -143,7 +140,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
   const processFiles = useCallback(
     async (files: File[]) => {
       const newVideos: VideoFileData[] = [];
-
+      const supportedFormats = ["video/mp4", "video/mov"];
       for (const file of files) {
         const isSupported = supportedFormats.includes(file.type);
         const videoFile: VideoFileData = {
@@ -184,7 +181,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
         });
       }, 100);
     },
-    [simulateUpload, generateThumbnail, getVideoDuration, supportedFormats, append]
+    [simulateUpload, generateThumbnail, getVideoDuration, append]
   );
 
   const handleDragOver = useCallback((e: React.DragEvent) => {

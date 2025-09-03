@@ -11,7 +11,8 @@ import StepIndicator from "./StepIndicator";
 import { MoveRight } from "lucide-react";
 import FilmDetails from "./FilmDetails";
 import { defaultFormData, FilmFormData, filmSchema } from "@/src/schema/FilmList.schema";
-import { VideoUploadComponent } from "./video-upload/VideoUpload";
+// import { VideoUploadComponent } from "./video-upload/VideoUpload";
+import { VideoUploadComponent } from "./video-upload/VideoUploadNew";
 import { EditDetails } from "./edit-details/EditDetails";
 import Confirmation from "./Confirmation";
 
@@ -88,7 +89,9 @@ const AddAndEditForm = ({ open, mode, onOpenChange, onSave, initialData }: FilmM
 
   const processForm: SubmitHandler<Inputs> = (data) => {
     console.log("here");
-    console.log("Form submitter with data: ", data);
+    console.table(data);
+    console.table(data.videos);
+    console.table(data.editDetails);
     onSave(data);
     return true;
   };

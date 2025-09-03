@@ -47,9 +47,10 @@ export const filmSchema = filmDetailsSchema.extend({
   editDetails: z.array(editDetailsSchema),
 });
 
-export type FilmFormData = z.infer<typeof filmSchema>;
+export type filmDetailsSchema = z.infer<typeof filmDetailsSchema>;
 export type VideoFileData = z.infer<typeof videoFileSchema>;
 export type editDetailsData = z.infer<typeof editDetailsSchema>;
+export type FilmFormData = z.infer<typeof filmSchema>;
 
 export const defaultFormData: FilmFormData = {
   id: "",
