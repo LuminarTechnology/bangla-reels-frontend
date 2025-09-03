@@ -58,7 +58,7 @@ export default function OverviewPage() {
       {/* Stats Section */}
       <div className="flex flex-col sm:flex-row gap-4 justify-between">
         {stats.map((stat, i) => (
-          <div key={i} className="w-full relative rounded-2xl bg-[#16151A] px-6 py-7">
+          <div key={i} className="w-full relative rounded-2xl border-2 border-[#D7D7D740] px-6 py-7">
             <div className="flex flex-col gap-3 justify-between">
               <div className="bg-[#E83A57] w-fit p-1.5 rounded-md">
                 <stat.icon strokeWidth="1.25" className="size-7 text-[#FFFAFA]" />
@@ -98,7 +98,7 @@ export default function OverviewPage() {
       </div>
 
       {/* Recent Activity */}
-      <div className="mt-2 rounded-2xl bg-[#16151A] p-6">
+      <div className="mt-2 rounded-2xl p-6 border-2 border-[#D7D7D740]">
         <div className="mb-6 flex items-center justify-between">
           <h3 className="text-2xl font-semibold text-[#FFFAFA]">Recent Activity</h3>
           <button className="text-xs text-primary-rose cursor-pointer active:underline">

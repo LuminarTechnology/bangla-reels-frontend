@@ -1,10 +1,9 @@
 import ContestBanner from "@/src/components/pages/contest/ContestBanner";
 import ContestOverview from "@/src/components/pages/contest/ContestOverview";
 import GalleryOfEntriesVideos from "@/src/components/pages/contest/GalleryOfEntriesVideos";
-import MyVideos from "@/src/components/pages/contest/MyVideos";
 import TopVideo from "@/src/components/pages/contest/TopVideo";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
-import { tabsList } from "@/src/constants/tabsItems";
+import { tabsList } from "@/src/constants/TabsItem";
 import React from "react";
 
 export default function ContestPage() {
@@ -12,8 +11,8 @@ export default function ContestPage() {
     <div className="my-4 md:my-8">
       <ContestBanner />
       <div className="flex flex-col items-start justify-center gap-8 lg:flex-row">
-        <Tabs defaultValue="overview" className="w-full rounded-xl bg-black p-5 lg:w-3/4">
-          <TabsList className="relative grid w-full grid-cols-3 bg-transparent">
+        <Tabs defaultValue="overview" className="w-full rounded-xl bg-[#0F0828] p-5 lg:w-3/4">
+          <TabsList className="relative grid w-full grid-cols-2 bg-transparent">
             {tabsList.map((tab) => (
               <TabsTrigger
                 value={tab.label}
@@ -33,10 +32,9 @@ export default function ContestPage() {
             {/* Gallery Of Entries component */}
             <GalleryOfEntriesVideos />
           </TabsContent>
-          <TabsContent value="my-videos" className="mt-4">
-            {/* My Video */}
+          {/* <TabsContent value="my-videos" className="mt-4">
             <MyVideos />
-          </TabsContent>
+          </TabsContent> */}
         </Tabs>
 
         {/* Sidebar */}

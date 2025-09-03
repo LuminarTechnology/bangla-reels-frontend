@@ -15,7 +15,7 @@ const DetailsCard = ({ description, genres }: { description: string; genres: str
     <div className="mt-8">
       <ThumbnailCard genres={genres} isShowRightIcon />
       {/* Description */}
-      <div className="mt-6 w-full rounded-2xl bg-[#16151A] p-4">
+      <div className="mt-6 w-full rounded-2xl bg-[#0F0828] p-4">
         <h3 className="mb-2 text-xl font-semibold text-white">Description</h3>
         <p className="text-sm text-[#B3B1B0]">{displayText}</p>
 

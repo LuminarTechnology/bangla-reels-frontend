@@ -2,6 +2,7 @@ import { cn } from "@/src/lib/utils";
 import { Card, CardContent } from "../../ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 
 interface FandomCardProps {
   backgroundImage: string;
@@ -22,9 +23,10 @@ const FandomCard = ({
   description,
   className,
 }: FandomCardProps) => {
+  const lang = useLocale();
   return (
-    <Link href={`/fandom/${title}`}>
-      <Card className={cn("w-full max-w-sm overflow-hidden border-0 bg-[#0B0000] p-0", className)}>
+    <Link href={`${lang}/fandom/${title}`}>
+      <Card className={cn("w-full max-w-sm overflow-hidden border-0 bg-[#0F0828] p-0", className)}>
         <div className="relative aspect-square overflow-hidden rounded-t-xl">
           <Image src={backgroundImage} fill alt={title} className="h-full w-full object-center" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />

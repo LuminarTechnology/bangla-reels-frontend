@@ -38,7 +38,7 @@ const CommentSection = () => {
   };
 
   return (
-    <div className="mt-8 rounded-lg bg-black p-6 shadow-sm">
+    <div className="mt-8 rounded-lg bg-[#0F0828] p-6 shadow-sm">
       <h3 className="mb-6 flex items-center text-xl font-bold text-gray-50">
         <MessageCircle className="mr-2 h-5 w-5" />
         Leave a Reply
@@ -99,12 +99,14 @@ const CommentSection = () => {
         </div>
 
         {/* Submit */}
-        <button
-          type="submit"
-          className="rounded-md bg-red-500 px-8 py-3 font-medium text-white transition-colors duration-200 hover:bg-red-600"
-        >
-          Post Comment
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="rounded-md bg-red-500 px-8 py-3 font-medium text-white transition-colors duration-200 hover:bg-red-600"
+          >
+            Post Comment
+          </button>
+        </div>
       </form>
     </div>
   );

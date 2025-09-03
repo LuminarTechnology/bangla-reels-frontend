@@ -1,7 +1,5 @@
 "use client";
 import ReusableTable from "@/src/components/common/ReusableTable";
-import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
-import { Button } from "@/src/components/ui/button";
 import { Switch } from "@/src/components/ui/switch";
 import { TableAction, TableColumn, TableHeaderConfig } from "@/src/types/reusableTable";
 import { Plus } from "lucide-react";
@@ -10,106 +8,94 @@ import { useMemo, useState } from "react";
 interface UserData {
   no: string;
   id: string;
-  name: string;
-  avatar: string;
-  coins: number;
-  plan: string;
+  categoryName: string;
+  totalMovies: string;
   date: string;
-  isBlocked: boolean;
+  isActive: boolean;
 }
 
 const userData: UserData[] = [
   {
-    no: "01",
-    id: "612651",
-    name: "Eleanor Pena",
-    avatar: "/professional-woman.png",
-    coins: 5296,
-    plan: "A",
-    date: "31/12/2024",
-    isBlocked: true,
+    "no": "001",
+    "id": "USR001",
+    "categoryName": "love",
+    "totalMovies": "5",
+    "date": "31/12/2024",
+    "isActive": true
   },
   {
-    no: "02",
-    id: "612651",
-    name: "Guy Hawkins",
-    avatar: "/professional-man.png",
-    coins: 5296,
-    plan: "A",
-    date: "31/12/2024",
-    isBlocked: false,
+    "no": "002",
+    "id": "USR002",
+    "categoryName": "crime",
+    "totalMovies": "8",
+    "date": "15/11/2024",
+    "isActive": false
   },
   {
-    no: "03",
-    id: "612651",
-    name: "Courtney Henry",
-    avatar: "/business-woman.png",
-    coins: 5296,
-    plan: "A",
-    date: "31/12/2024",
-    isBlocked: true,
+    "no": "003",
+    "id": "USR003",
+    "categoryName": "drama",
+    "totalMovies": "3",
+    "date": "20/10/2024",
+    "isActive": true
   },
   {
-    no: "04",
-    id: "612651",
-    name: "Dianne Russell",
-    avatar: "/casual-woman.png",
-    coins: 5296,
-    plan: "A",
-    date: "31/12/2024",
-    isBlocked: false,
+    "no": "004",
+    "id": "USR004",
+    "categoryName": "action",
+    "totalMovies": "6",
+    "date": "05/09/2024",
+    "isActive": true
   },
   {
-    no: "05",
-    id: "612651",
-    name: "Darrell Steward",
-    avatar: "/casual-man.png",
-    coins: 5296,
-    plan: "A",
-    date: "31/12/2024",
-    isBlocked: false,
+    "no": "005",
+    "id": "USR005",
+    "categoryName": "comedy",
+    "totalMovies": "4",
+    "date": "10/12/2024",
+    "isActive": false
   },
   {
-    no: "07",
-    id: "612651",
-    name: "Albert Flores",
-    avatar: "/business-man.png",
-    coins: 5296,
-    plan: "A",
-    date: "31/12/2024",
-    isBlocked: false,
+    "no": "006",
+    "id": "USR006",
+    "categoryName": "thriller",
+    "totalMovies": "7",
+    "date": "25/11/2024",
+    "isActive": true
   },
   {
-    no: "08",
-    id: "612651",
-    name: "Ronald Richards",
-    avatar: "/professional-man-glasses.png",
-    coins: 5296,
-    plan: "A",
-    date: "31/12/2024",
-    isBlocked: false,
+    "no": "007",
+    "id": "USR007",
+    "categoryName": "horror",
+    "totalMovies": "2",
+    "date": "30/09/2024",
+    "isActive": false
   },
   {
-    no: "09",
-    id: "612651",
-    name: "Jacob Jones",
-    avatar: "/young-man.png",
-    coins: 5296,
-    plan: "A",
-    date: "31/12/2024",
-    isBlocked: false,
+    "no": "008",
+    "id": "USR008",
+    "categoryName": "romance",
+    "totalMovies": "9",
+    "date": "15/12/2024",
+    "isActive": true
   },
   {
-    no: "10",
-    id: "612651",
-    name: "Darlene Robertson",
-    avatar: "/professional-woman-smile.png",
-    coins: 5296,
-    plan: "A",
-    date: "31/12/2024",
-    isBlocked: false,
+    "no": "009",
+    "id": "USR009",
+    "categoryName": "sci-fi",
+    "totalMovies": "5",
+    "date": "01/11/2024",
+    "isActive": true
   },
-];
+  {
+    "no": "010",
+    "id": "USR010",
+    "categoryName": "adventure",
+    "totalMovies": "6",
+    "date": "20/12/2024",
+    "isActive": false
+  }
+]
 
 const getInitials = (name: string) => {
   return name
@@ -123,70 +109,36 @@ const columns: TableColumn<UserData>[] = [
   {
     key: "no",
     label: "No",
-    width: "w-16",
+    width: "w-fit",
   },
   {
     key: "id",
     label: "Unique ID",
-    width: "w-30",
+    width: "w-fit",
     render: (value) => <span className="text-gray-500">{value}</span>,
   },
   {
-    key: "name",
-    label: "User Name",
-    width: "w-48 text-start",
-    render: (value, row) => (
-      <div className="flex items-center">
-        <Avatar className="mr-3 h-8 w-8">
-          <AvatarImage src={row.avatar || "/placeholder.svg"} alt={row.name} />
-          <AvatarFallback className="text-xs">{getInitials(row.name)}</AvatarFallback>
-        </Avatar>
-        <span className="text-sm font-medium text-[#242424]">{value}</span>
-      </div>
-    ),
+    key: "categoryName",
+    label: "Category Name",
+    width: "w-fit",
   },
   {
-    key: "coins",
-    label: "Coins",
-    width: "w-20",
-  },
-  {
-    key: "plan",
-    label: "Plan",
-    width: "w-16",
+    key: "totalMovies",
+    label: "Total Movies",
+    width: "w-fit",
   },
   {
     key: "date",
     label: "Date",
-    width: "w-24",
+    width: "w-fit",
     render: (value) => <span className="text-gray-500">{value}</span>,
   },
   {
     key: "isBlocked",
-    label: "Is Block",
-    width: "w-26",
+    label: "Is Active",
+    width: "w-fit",
     render: (value) => <Switch checked={value} className="data-[state=checked]:bg-black" />,
-  },
-  {
-    key: "info",
-    label: "Info",
-    width: "w-16",
-    render: () => (
-      <Button variant="ghost" size="sm" className="hover:text-blue-800">
-        View
-      </Button>
-    ),
-  },
-  {
-    key: "history",
-    label: "History",
-    width: "w-16",
-    render: () => (
-      <Button variant="ghost" size="sm" className="hover:text-blue-800">
-        View
-      </Button>
-    ),
-  },
+  }
 ];
 
 const headerConfig: TableHeaderConfig = {
@@ -227,7 +179,7 @@ export function CategoriesTable() {
     if (searchValue.trim()) {
       filtered = filtered.filter(
         (user) =>
-          user.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+          user.categoryName.toLowerCase().includes(searchValue.toLowerCase()) ||
           user.id.includes(searchValue) ||
           user.no.includes(searchValue)
       );

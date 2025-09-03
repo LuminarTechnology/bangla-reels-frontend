@@ -11,10 +11,10 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import Link from "next/link";
-import { banners } from "@/src/constants/homePage";
 import { useLocale } from "@/src/app/LocaleProvider";
 import { TLang } from "@/src/types/globals";
 import { useTranslations } from "next-intl";
+import { banners } from "@/src/constants/homeData";
 
 const Banner: React.FC = () => {
   const { lang } = useLocale() as { lang: TLang };
@@ -43,7 +43,7 @@ const Banner: React.FC = () => {
         {banners.map((movie, index) => (
           <SwiperSlide key={movie.id}>
             {/* Background */}
-            <Link href="episode/john-wick-4">
+            <Link href={`/${lang}/episode/john-wick-4`}>
               <div className="relative h-full w-full">
                 <Image
                   src={movie.image}

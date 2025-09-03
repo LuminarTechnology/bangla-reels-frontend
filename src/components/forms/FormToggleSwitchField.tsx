@@ -9,6 +9,7 @@ type FormToggleSwitchFieldProps = {
   label?: string;
   disabled?: boolean;
   labelClassName?:string
+  labelSpanClassName?:string
 };
 
 export function FormToggleSwitchField({
@@ -17,6 +18,7 @@ export function FormToggleSwitchField({
   label,
   disabled,
   labelClassName,
+  labelSpanClassName,
 }: FormToggleSwitchFieldProps) {
   return (
     <Controller
@@ -31,7 +33,7 @@ export function FormToggleSwitchField({
               disabled={disabled}
               onCheckedChange={field.onChange}
             />
-            {label && <span>{label}</span>}
+            {label && <span className={labelSpanClassName}>{label}</span>}
           </label>
           {error && <p className="text-sm text-red-500">{error.message}</p>}
         </div>

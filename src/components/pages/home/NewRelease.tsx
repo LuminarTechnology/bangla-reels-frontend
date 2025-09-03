@@ -2,7 +2,7 @@ import React from "react";
 import { StreamingCard } from "../../common/StreamingCard";
 import { useLocale } from "@/src/app/LocaleProvider";
 import { TLang } from "@/src/types/globals";
-import { StreamingData } from "@/src/constants/homePage";
+import { StreamingData } from "@/src/constants/homeData";
 
 type NewReleaseProps = {
   sectionTitle: string;
@@ -13,9 +13,9 @@ const NewRelease: React.FC<NewReleaseProps> = ({ sectionTitle, play }) => {
   const { lang } = useLocale() as { lang: TLang };
 
   return (
-    <div className="my-10">
+    <div className="my-4 md:my-8">
       <h2 className="text-2xl font-bold text-white">{sectionTitle}</h2>
-      <div className="my-10 grid items-center justify-between gap-5 xl:grid-cols-3">
+      <div className="my-4 grid items-center justify-between gap-5 md:my-8 xl:grid-cols-3">
         {StreamingData.map((newData, i) => (
           <StreamingCard
             key={i}

@@ -20,7 +20,7 @@ export default async function SuperAdminLayout({ children, params }: Props) {
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
       <LocaleProvider routeLang={lang}>
-        <main>{children}</main>
+        <main className="scrollbar-admin">{children}</main>
       </LocaleProvider>
     </NextIntlClientProvider>
   );

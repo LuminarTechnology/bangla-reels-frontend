@@ -20,7 +20,7 @@ export function DashboardHeader() {
           <Button
             variant="outline"
             size="sm"
-            className="rounded-2xl border-black bg-black text-white hover:bg-gray-800"
+            className="rounded-2xl border-black bg-black text-white hover:bg-black hover:text-white"
           >
             Today
             <CalendarCheck />

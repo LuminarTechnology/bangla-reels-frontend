@@ -40,4 +40,4 @@ const myEntriesData: MyEntryCardProps[] = [
   },
 ];
 
-export default myEntriesData;   
+export default myEntriesData;

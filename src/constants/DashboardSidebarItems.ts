@@ -28,9 +28,9 @@ export const SuperAdminSidebarItems = [
     title: "Film Management",
     icon: FileText,
     children: [
-      { title: "Film Category", href: "/super-admin/dashboard/category", icon: <List /> },
-      { title: "Film List", href: "/super-admin/dashboard/film-list", icon: <FilePlay /> },
-      { title: "Episode List", href: "/super-admin/dashboard/episode-list", icon: <Video /> },
+      { title: "Film Category", href: "/super-admin/dashboard/category", icon: List },
+      { title: "Film List", href: "/super-admin/dashboard/film-list", icon: FilePlay },
+      { title: "Episode List", href: "/super-admin/dashboard/episode-list", icon: Video },
     ],
   },
   {
@@ -38,7 +38,7 @@ export const SuperAdminSidebarItems = [
     icon: Package,
     children: [
       { title: "Coin Plan", href: "/super-admin/dashboard/coin-plan" },
-      {title: "VIP Plan", href: "/super-admin/dashboard/vip-plan"},
+      { title: "VIP Plan", href: "/super-admin/dashboard/vip-plan" },
       { title: "Order History", href: "/super-admin/dashboard/order-history" },
     ],
   },

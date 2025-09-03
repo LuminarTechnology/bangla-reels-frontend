@@ -20,12 +20,13 @@ import LanguagePopup from "../pages/home/LanguagePopup";
 import UserButton from "../pages/home/UserButton";
 import SearchBarPopup from "../pages/home/SearchBarPopup";
 import AppDownloadPopup from "../pages/home/AppDownloadPopup";
+import { useLocale } from "@/src/app/LocaleProvider";
 
 const UserDashboardNavbar = () => {
   const pathname = usePathname();
   const strippedPath = pathname.replace(/^\/(en|bn|es|la)(?=\/|$)/, "") || "/";
   const [isOpen, setIsOpen] = useState(false);
-
+  const { lang } = useLocale();
   const navItems = [
     { name: "Home", href: "/" },
     { name: "Categories", href: "/categories" },
@@ -53,6 +54,7 @@ const UserDashboardNavbar = () => {
                     <CategoryPopup
                       key={item.name}
                       itemName={item.name}
+                      lang={lang}
                       isCategory={strippedPath === item.href}
                     />
                   );

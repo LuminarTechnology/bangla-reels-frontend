@@ -6,8 +6,10 @@ import Image from "next/image";
 import { transactions, episodes } from "@/src/constants/SubscriptionItems";
 import { EpisodeAndTransactionTable } from "@/src/components/pages/user-dashboard/subscription-rewards/EpisodeAndTransactionTable";
 import Link from "next/link";
+import { useLocale } from "next-intl";
 
 export default function SubscriptionRewards() {
+  const lang = useLocale();
   const transactionColumns = [
     { key: "amount", label: "Amount" },
     { key: "coins", label: "Coins" },
@@ -21,9 +23,10 @@ export default function SubscriptionRewards() {
     { key: "unlockedAt", label: "Unlocked at" },
     { key: "status", label: "Status" },
   ];
+
   return (
     <>
-      <Card className="mb-5 rounded-2xl border-0 bg-[#16151A] p-6 text-white">
+      <Card className="mb-5 rounded-2xl border-2 border-[#D7D7D740] bg-[#0F0828] p-6 text-white">
         <h3 className="text-2xl font-bold">My Wallet</h3>
         <div className="flex items-center justify-between pl-6">
           <p className="text-base font-semibold">
@@ -32,7 +35,7 @@ export default function SubscriptionRewards() {
           <p className="text-base font-semibold">
             <span className="text-2xl">0</span> Reward Coins
           </p>
-          <Link href="/dashboard/top-up">
+          <Link href={`/${lang}/dashboard/top-up`}>
             <Button variant="danger" className="rounded-2xl p-6 text-base font-semibold" size="sm">
               <p>Top Up</p>
             </Button>
@@ -65,33 +68,35 @@ export default function SubscriptionRewards() {
           </Button>
         </div>
       </Card>
-      <Tabs defaultValue="transactions">
-        <TabsList className="bg-[#111111]">
-          <TabsTrigger
-            value="transactions"
-            className="data-[state=active]:text-primary-rose rounded-lg px-4 py-6 text-base font-semibold text-white data-[state=active]:bg-[#E83A5714]"
-          >
-            Transaction History
-          </TabsTrigger>
-          <Separator orientation="vertical" className="mx-3 h-4 bg-[#2D2B33]" />
-          <TabsTrigger
-            value="episodes"
-            className="data-[state=active]:text-primary-rose rounded-lg px-4 py-6 text-base font-semibold text-white data-[state=active]:bg-[#E83A5714]"
-          >
-            Episodes Unlocked
-          </TabsTrigger>
-        </TabsList>
-        <TabsContent value="transactions" className="mt-0">
-          <div className="overflow-x-auto">
-            <EpisodeAndTransactionTable columns={transactionColumns} data={transactions} />
-          </div>
-        </TabsContent>
-        <TabsContent value="episodes" className="mt-0">
-          <div className="overflow-x-auto">
-            <EpisodeAndTransactionTable columns={episodeColumns} data={episodes} />
-          </div>
-        </TabsContent>
-      </Tabs>
+      <div className="rounded-2xl border-2 border-[#D7D7D740] px-3 py-5">
+        <Tabs defaultValue="transactions">
+          <TabsList className="bg-[#0F0828]">
+            <TabsTrigger
+              value="transactions"
+              className="data-[state=active]:text-primary-rose rounded-lg px-4 py-6 text-base font-semibold text-white data-[state=active]:bg-[#E83A5714]"
+            >
+              Transaction History
+            </TabsTrigger>
+            <Separator orientation="vertical" className="mx-3 h-4 bg-[#2D2B33]" />
+            <TabsTrigger
+              value="episodes"
+              className="data-[state=active]:text-primary-rose rounded-lg px-4 py-6 text-base font-semibold text-white data-[state=active]:bg-[#E83A5714]"
+            >
+              Episodes Unlocked
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="transactions" className="mt-0">
+            <div className="overflow-x-auto">
+              <EpisodeAndTransactionTable columns={transactionColumns} data={transactions} />
+            </div>
+          </TabsContent>
+          <TabsContent value="episodes" className="mt-0">
+            <div className="overflow-x-auto">
+              <EpisodeAndTransactionTable columns={episodeColumns} data={episodes} />
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
     </>
   );
 }

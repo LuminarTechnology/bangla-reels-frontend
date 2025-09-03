@@ -1,7 +1,7 @@
 "use client";
 
 import { TableAction, TableColumn } from "@/src/types/reusableTable";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Trash2 } from "lucide-react";
 import React from "react";
 import { Button } from "../ui/button";
 import {
@@ -16,11 +16,13 @@ export const ReusableTableRow = <T,>({
   columns,
   actions,
   onRowClick,
+  showDirectDelete = false,
 }: {
   row: T;
   columns: TableColumn<T>[];
   actions?: TableAction<T>[];
   onRowClick?: (row: T) => void;
+  showDirectDelete?: boolean;
 }) => {
   return (
     <tr
@@ -36,28 +38,45 @@ export const ReusableTableRow = <T,>({
         </td>
       ))}
       {actions && actions.length > 0 && (
-        <td className="px-6 py-4 whitespace-nowrap">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {actions.map((action, index) => (
-                <DropdownMenuItem
+        <td className="px-6 py-4 whitespace-nowrap text-center">
+          {showDirectDelete && actions.some(action => action.label === "Delete") ? (
+            actions
+              .filter(action => action.label === "Delete")
+              .map((action, index) => (
+                <span
                   key={index}
                   onClick={(e) => {
                     e.stopPropagation();
                     action.onClick(row);
                   }}
-                  className={action.variant === "destructive" ? "text-red-600" : ""}
+                  className="group inline-flex cursor-pointer items-center justify-center size-9 rounded-full transition-colors hover:bg-black"
                 >
-                  {action.label}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+                  <Trash2 className="size-5  transition-colors group-hover:text-white" />
+                </span>
+              ))
+          ) : (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="h-8 w-8 p-0">
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {actions.map((action, index) => (
+                  <DropdownMenuItem
+                    key={index}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      action.onClick(row);
+                    }}
+                    className={action.variant === "destructive" ? "text-red-600" : ""}
+                  >
+                    {action.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </td>
       )}
     </tr>
