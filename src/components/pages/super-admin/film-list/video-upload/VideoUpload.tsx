@@ -15,14 +15,17 @@ import { closestCorners, DndContext } from "@dnd-kit/core";
 import VideoUploadedList from "./VideoUploadedList";
 import { arrayMove } from "@dnd-kit/sortable";
 
+// Import your custom hooks
+import { useVideoFileHandling } from "./hooks/useVideoFileHandling";
+import { useVideoUploadSimulation } from "./hooks/useVideoUploadSimulation";
+import { useVideoDragDrop } from "./hooks/useVideoDragDrop";
+
 interface VideoUploadComponentProps {
   control: Control<FilmFormData>;
   errors: any;
 }
 
 export function VideoUploadComponent({ control, errors }: VideoUploadComponentProps) {
-  const [isDragOver, setIsDragOver] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const [showRules, setShowRules] = useState(false);
 
   const { fields, append, remove, update, replace } = useFieldArray({
@@ -35,200 +38,30 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
     videosRef.current = fields;
   }, [fields]);
 
-  const generateThumbnail = useCallback((file: File): Promise<string> => {
-    return new Promise((resolve) => {
-      const video = document.createElement("video");
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
+  // Initialize upload simulation hook
+  const { simulateUpload, updateVideoFields } = useVideoUploadSimulation({
+    videosRef,
+    updateFieldArray: update,
+  });
 
-      video.preload = "metadata"; // optional, speeds up loading
-      video.src = URL.createObjectURL(file);
+  // Initialize file handling hook
+  const { processFiles, handleFileSelect, handleDrop, fileInputRef } = useVideoFileHandling({
+    appendToFieldArray: append,
+    onUploadStart: simulateUpload,
+  });
 
-      video.onloadedmetadata = () => {
-        canvas.width = 120;
-        canvas.height = 68;
-        video.currentTime = Math.min(1, video.duration / 2); // safe time within video
-      };
-
-      video.onseeked = () => {
-        if (ctx) {
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          resolve(canvas.toDataURL());
-          URL.revokeObjectURL(video.src); // cleanup
-        }
-      };
-
-      video.onerror = () => {
-        resolve(""); // Return empty string on error
-        URL.revokeObjectURL(video.src);
-      };
-    });
-  }, []);
-
-  const getVideoDuration = useCallback((file: File): Promise<string> => {
-    return new Promise((resolve) => {
-      const video = document.createElement("video");
-      video.onloadedmetadata = () => {
-        const duration = video.duration;
-        const minutes = Math.floor(duration / 60);
-        const seconds = Math.floor(duration % 60);
-        resolve(`${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`);
-      };
-      video.onerror = () => {
-        resolve("00:00");
-      };
-      video.src = URL.createObjectURL(file);
-    });
-  }, []);
-
-  const getVideoResolution = (file: File): Promise<{ width: number; height: number }> => {
-    return new Promise((resolve, reject) => {
-      const video = document.createElement("video");
-      video.preload = "metadata";
-
-      video.onloadedmetadata = () => {
-        resolve({ width: video.videoWidth, height: video.videoHeight });
-        URL.revokeObjectURL(video.src);
-      };
-
-      video.onerror = () => {
-        reject(new Error("Failed to load video metadata"));
-        URL.revokeObjectURL(video.src);
-      };
-
-      video.src = URL.createObjectURL(file);
-    });
-  };
-
-  const updateVideoFields = (videoId: string, patch: Partial<VideoFileData>) => {
-    const index = videosRef.current.findIndex((v) => v.videoId === videoId);
-    if (index === -1) return;
-    const current = videosRef.current[index];
-    update(index, { ...current, ...patch });
-  };
-
-  const simulateUpload = useCallback(
-    (videoId: string) => {
-      console.log(fields);
-      console.log("simulate upload function start", videoId);
-      // Set initial status → uploading
-      updateVideoFields(videoId, { status: "uploading" });
-
-      let currentProgress = 0;
-
-      // Simulate upload progress
-      const interval = setInterval(() => {
-        currentProgress = Math.min(currentProgress + Math.random() * 20, 100);
-
-        if (currentProgress >= 100) {
-          clearInterval(interval);
-
-          const isSuccess = Math.random() > 0.2; // 80% success chance
-          updateVideoFields(videoId, {
-            progress: 100,
-            status: isSuccess ? "completed" : "error",
-            error: isSuccess ? undefined : "Network error. Please try again",
-          });
-        } else {
-          updateVideoFields(videoId, { progress: currentProgress });
-        }
-      }, 500);
-    },
-    [updateVideoFields]
-  );
-
-  const processFiles = useCallback(
-    async (files: File[]) => {
-      const newVideos: VideoFileData[] = [];
-      const supportedFormats = ["video/mp4", "video/mov"];
-      for (const file of files) {
-        const isSupported = supportedFormats.includes(file.type);
-        const videoFile: VideoFileData = {
-          id: crypto.randomUUID(),
-          videoId: crypto.randomUUID(),
-          file,
-          status: isSupported ? "pending" : "unsupported",
-          progress: 0,
-          error: isSupported ? undefined : "Unsupported file format",
-        };
-
-        if (isSupported) {
-          try {
-            const [thumbnail, duration, resolution] = await Promise.all([
-              generateThumbnail(file),
-              getVideoDuration(file),
-              getVideoResolution(file),
-            ]);
-            videoFile.thumbnail = thumbnail;
-            videoFile.duration = duration;
-            videoFile.resolution = `${resolution.width}PX x ${resolution.height}PX`;
-          } catch (error) {
-            console.error("Error processing video:", error);
-          }
-        }
-
-        newVideos.push(videoFile);
-        append(videoFile);
-      }
-
-      // Start upload simulation for supported files
-      setTimeout(() => {
-        newVideos.forEach((video) => {
-          if (video.status === "pending") {
-            console.log("Starting delayed simulation for:", video.videoId);
-            simulateUpload(video.videoId);
-          }
-        });
-      }, 100);
-    },
-    [simulateUpload, generateThumbnail, getVideoDuration, append]
-  );
-
-  const handleDragOver = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  }, []);
-
-  const handleDragLeave = useCallback((e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-  }, []);
-
-  const handleDrop = useCallback(
-    (e: React.DragEvent) => {
-      e.preventDefault();
-      setIsDragOver(false);
-
-      const files = Array.from(e.dataTransfer.files).filter((file) =>
-        file.type.startsWith("video/")
-      );
-
-      if (files.length > 0) {
-        processFiles(files);
-      }
-    },
-    [processFiles]
-  );
-
-  const handleFileSelect = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const files = Array.from(e.target.files || []);
-      if (files.length > 0) {
-        processFiles(files);
-      }
-    },
-    [processFiles]
-  );
+  // Initialize drag and drop hook
+  const { isDragOver, handleDragOver, handleDragLeave, handleDragEnd: handleDragEndDrop } = useVideoDragDrop(handleDrop);
 
   const handleUploadMore = useCallback(() => {
     fileInputRef.current?.click();
-  }, []);
+  }, [fileInputRef]);
 
   const removeVideo = useCallback(
     (videoId: string) => {
       fields.forEach((field, index) => {
         if (field.id === videoId) {
-          remove(index); // ✅ from useFieldArray
+          remove(index);
         }
       });
     },
@@ -259,7 +92,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
     [fields]
   );
 
-  const handleDragEnd = useCallback(
+  const handleDragEndReorder = useCallback(
     (event: any) => {
       const { active, over } = event;
 
@@ -278,7 +111,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
       console.log(fields, result);
       replace(result);
     },
-    [getVideoPos]
+    [getVideoPos, fields, replace]
   );
 
   return (
@@ -301,7 +134,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
               )}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
+              onDrop={handleDragEndDrop}
             >
               <Upload className="mx-auto mb-4 h-8 w-8 text-gray-400" />
               <p className="mb-2 text-gray-600">
@@ -366,7 +199,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
             />
 
             <div className="space-y-4">
-              <DndContext onDragEnd={handleDragEnd} collisionDetection={closestCorners}>
+              <DndContext onDragEnd={handleDragEndReorder} collisionDetection={closestCorners}>
                 <VideoUploadedList
                   videos={fields}
                   retryUpload={retryUpload}
