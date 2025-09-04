@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,6 +7,7 @@ import { z } from "zod";
 import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
 import { Button } from "@/src/components/ui/button";
 import { FormInputField } from "@/src/components/forms/FormInputField";
+import AvatarUpload from "@/src/components/common/AvatarUpload";
 
 const profileSchema = z
   .object({
@@ -61,16 +62,17 @@ export default function ProfilePage() {
     
   };
 
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
 
   return (
     <div className="w-full text-white">
       {/* --- Avatar Section --- */}
       <div className="mb-8 flex flex-col items-center gap-4">
-        <Avatar className="size-24 border-2 border-red-500">
-          <AvatarImage src={user?.imageUrl} alt={user?.fullName || "User"} />
-          <AvatarFallback>{user?.fullName?.charAt(0)}</AvatarFallback>
-        </Avatar>
-        <Button variant="danger">Change Avatar</Button>
+        <AvatarUpload
+            onAvatarChange={(file) => setAvatarFile(file)}
+            size="lg"
+            bgColor="bg-primary-rose hover:bg-[#e92747]"
+          />
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
