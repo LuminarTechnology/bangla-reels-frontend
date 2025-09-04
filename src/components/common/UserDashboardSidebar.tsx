@@ -61,13 +61,17 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
       <nav className="mt-6 flex flex-col gap-2">
         {UserDashboardSidebarItems.map((item) => {
           const Icon = item.icon;
+          const isActive =
+            strippedPath === item.href ||
+            (item.href === "/dashboard/subscription-rewards" &&
+              strippedPath === "/dashboard/top-up");
           return (
             <Link
               key={item.name}
               href={`/${lang}${item.href}`}
               className={cn(
                 "flex w-[90%] items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-500 sm:w-full",
-                strippedPath === item.href && "bg-[#e83a570f] text-red-500"
+                isActive && "bg-[#e83a570f] text-red-500"
               )}
               onClick={() => setIsOpen && setIsOpen(false)}
             >

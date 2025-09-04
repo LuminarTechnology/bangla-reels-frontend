@@ -12,67 +12,8 @@ const intlMiddleware = createIntlMiddleware({
   localeDetection: true,
 });
 
-const isAdminRoute = createRouteMatcher(["/en/super-admin/(.*)"]);
-
-const isPublicRoute = createRouteMatcher([
-  "/en/sign-in(.*)",
-  "/bn/sign-in(.*)",
-  "/es/sign-in(.*)",
-  "/la/sign-in(.*)",
-  "/en/sign-up(.*)",
-  "/bn/sign-up(.*)",
-  "/es/sign-up(.*)",
-  "/la/sign-up(.*)",
-  "/es",
-  "/en",
-  "/bn",
-  "/la",
-  "/en/categories(.*)",
-  "/bn/categories(.*)",
-  "/es/categories(.*)",
-  "/la/categories(.*)",
-  "/en/fandom(.*)",
-  "/bn/fandom(.*)",
-  "/es/fandom(.*)",
-  "/la/fandom(.*)",
-  "/en/contest",
-  "/bn/contest",
-  "/es/contest",
-  "/la/contest",
-  "/en/contact-us",
-  "/bn/contact-us",
-  "/es/contact-us",
-  "/la/contact-us",
-  "/en/episode(.*)",
-  "/bn/episode(.*)",
-  "/es/episode(.*)",
-  "/la/episode(.*)",
-  "/en/movie(.*)",
-  "/bn/movie(.*)",
-  "/es/movie(.*)",
-  "/la/movie(.*)",
-  "/en/privacy-policy",
-  "/bn/privacy-policy",
-  "/es/privacy-policy",
-  "/la/privacy-policy",
-  "/terms-service",
-  "/en/dashboard",
-  "/bn/dashboard",
-  "/es/dashboard",
-  "/la/dashboard",
-  "/en/dashboard/my-list",
-  "/bn/dashboard/my-list",
-  "/es/dashboard/my-list",
-  "/la/dashboard/my-list",
-  "/es/dashboard/history",
-  "/en/dashboard/history",
-  "/bn/dashboard/history",
-  "/la/dashboard/history",
-  "/en/dashboard/subscription-rewards",
-  "/bn/dashboard/subscription-rewards",
-  "/es/dashboard/subscription-rewards",
-  "/la/dashboard/subscription-rewards",
-]);
+const isAdminRoute = createRouteMatcher(["/:locale/super-admin(.*)"]);
+const isTopUpRoute = createRouteMatcher(["/:locale/dashboard/top-up"]);
 
 //  Auth Middleware
 const authHandler = clerkMiddleware(async (auth, req: NextRequest) => {
@@ -82,6 +23,10 @@ const authHandler = clerkMiddleware(async (auth, req: NextRequest) => {
 
   const roles: Roles[] = (sessionClaims?.metadata?.roles as Roles[]) || [];
 
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL(`/${lang}`, req.url));
+  }
+
   if (process.env.NODE_ENV !== "development") {
     // Admin route protection
     if (isAdminRoute(req) && !roles.includes("superAdmin")) {
@@ -89,15 +34,9 @@ const authHandler = clerkMiddleware(async (auth, req: NextRequest) => {
       return NextResponse.redirect(url);
     }
 
-    // Non-public route protection
-    if (!isPublicRoute(req) && roles.length === 0) {
-      const url = new URL(`/${lang}/sign-in`, req.url);
-      return NextResponse.redirect(url);
+    if (isTopUpRoute(req) && roles.length === 0) {
+      return NextResponse.redirect(new URL(`/${lang}/sign-in`, req.url));
     }
-  }
-
-  if (pathname === "/") {
-    return NextResponse.redirect(new URL(`/${lang}`, req.url));
   }
 
   return NextResponse.next();
@@ -105,21 +44,17 @@ const authHandler = clerkMiddleware(async (auth, req: NextRequest) => {
 
 //  Compose Middleware
 export async function middleware(req: NextRequest, event: NextFetchEvent) {
-  // Auth + Role check
-  const authResponse = await authHandler(req, event);
-  if (authResponse) return authResponse;
-
   //Locale handling
   const intlResponse = intlMiddleware(req);
   if (intlResponse) return intlResponse;
 
+  // Auth + Role check
+  const authResponse = await authHandler(req, event);
+  if (authResponse) return authResponse;
+
   return NextResponse.next();
 }
 
-//  Middleware Config
 export const config = {
-  matcher: [
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    "/(api|trpc)(.*)",
-  ],
+  matcher: ["/((?!_next|.*\\..*).*)"],
 };
