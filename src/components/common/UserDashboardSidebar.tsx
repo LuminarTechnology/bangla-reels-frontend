@@ -30,7 +30,7 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
     <aside className={cn("h-full w-80 flex-col rounded-xl p-4", background, "flex")}>
       <div className="flex items-center gap-3 p-3">
         {isSignedIn ? (
-          <Link href={`/${lang}/profile`}>
+          <Link href={`/${lang}/dashboard/profile`}>
             <img src={user.imageUrl} alt="Profile" className="h-12 w-12 rounded-full border" />
           </Link>
         ) : (
