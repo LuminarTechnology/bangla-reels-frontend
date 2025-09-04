@@ -6,6 +6,9 @@ import { notFound } from "next/navigation";
 import React, { ReactNode } from "react";
 import { Toaster } from "sonner";
 import { LocaleProvider } from "../../LocaleProvider";
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
+import { bnIN, enUS, esES } from "@clerk/localizations";
 
 interface Props {
   readonly children: ReactNode;
@@ -21,20 +24,28 @@ export default async function UserLayout({ children, params }: Props) {
   } catch {
     notFound();
   }
+  const lnLN = lang === "en" ? enUS : lang === "es" ? esES : bnIN;
 
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
       <LocaleProvider routeLang={lang}>
-        <div className="gradient-background">
-          <Toaster position="top-right" richColors />
-          <Navbar currentLang={lang} />
-          <ContainerWrapper>
-            <NextIntlClientProvider locale={lang} messages={messages}>
-              {children}
-            </NextIntlClientProvider>
-          </ContainerWrapper>
-          <Footer />
-        </div>
+        <ClerkProvider
+          appearance={{
+            baseTheme: dark,
+          }}
+          localization={lnLN}
+        >
+          <div className="gradient-background">
+            <Toaster position="top-right" richColors />
+            <Navbar currentLang={lang} />
+            <ContainerWrapper>
+              <NextIntlClientProvider locale={lang} messages={messages}>
+                {children}
+              </NextIntlClientProvider>
+            </ContainerWrapper>
+            <Footer />
+          </div>
+        </ClerkProvider>
       </LocaleProvider>
     </NextIntlClientProvider>
   );
