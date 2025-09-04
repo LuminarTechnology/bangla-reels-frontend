@@ -16,7 +16,7 @@ export default async function SuperAdminDashboardLayout({ children }: Props) {
   //   redirect("/sign-in");
   // }
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen max-h-screen bg-gray-50">
       {/* Sidebar */}
       <DashboardSidebar sidebarItems={SuperAdminSidebarItems} />
 
