@@ -4,7 +4,7 @@ import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import SortableVideoCard from "./SortableVideoCard";
 
 const VideoUploadedList = ({ videos, retryUpload, removeVideo }: any) => {
-  console.log(videos);
+  // console.log(videos);
   return (
     <div className="space-y-6">
       <SortableContext

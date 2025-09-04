@@ -12,8 +12,12 @@ const FilmForm = () => {
     <div className='rounded-2xl bg-[#F3F4F6] p-2 md:px-9 md:py-6'>
         <FilmFormPage 
             mode={mode}
-            onSave={() => {console.log("on save invoked")}}
-            onCancel={() => {console.log("on cancel invoked")}}
+            onSave={() => {
+              // console.log("on save invoked")
+            }}
+            onCancel={() => {
+              // console.log("on cancel invoked")
+            }}
         />
     </div>
   )

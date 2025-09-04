@@ -119,7 +119,7 @@ export function EditDetails({ control }: EditDetailsProps) {
   if (!control) {
     return <div>Error: Form control is required</div>;
   }
-  console.log(selectedVideoIndex);
+  // console.log(selectedVideoIndex);
 
   // console.table(videos);
   // console.table(editDetails);

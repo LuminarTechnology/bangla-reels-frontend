@@ -34,7 +34,7 @@ export function useVideoUploadSimulation({
 
   const simulateUpload = useCallback(
     (videoId: string) => {
-      console.log("Starting upload simulation for:", videoId);
+      // console.log("Starting upload simulation for:", videoId);
       
       // Clear any existing interval for this video
       const existingInterval = activeUploads.current.get(videoId);

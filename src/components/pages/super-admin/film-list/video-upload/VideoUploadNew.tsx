@@ -110,7 +110,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
 
       if (originalPos === -1 || newPos === -1) return;
 
-      console.log("Moving from position", originalPos, "to position", newPos);
+      // console.log("Moving from position", originalPos, "to position", newPos);
       const result = arrayMove([...fields], originalPos, newPos);
       replace(result);
     },

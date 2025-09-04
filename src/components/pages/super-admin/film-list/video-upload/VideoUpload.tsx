@@ -103,12 +103,12 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
 
       if (originalPos === -1 || newPos === -1) return;
 
-      console.log("Moving from position", originalPos, "to position", newPos);
-      console.log("Active ID:", active.id, "Over ID:", over.id);
+      // console.log("Moving from position", originalPos, "to position", newPos);
+      // console.log("Active ID:", active.id, "Over ID:", over.id);
 
       const result = arrayMove([...fields], originalPos, newPos);
 
-      console.log(fields, result);
+      // console.log(fields, result);
       replace(result);
     },
     [getVideoPos, fields, replace]

@@ -61,7 +61,7 @@ export function useVideoFileHandling({
       setTimeout(() => {
         processedVideos.forEach((video) => {
           if (video.status === "pending") {
-            console.log("Starting delayed simulation for:", video.videoId);
+            // console.log("Starting delayed simulation for:", video.videoId);
             onUploadStart(video.videoId);
           }
         });

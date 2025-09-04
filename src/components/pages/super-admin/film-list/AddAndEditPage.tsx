@@ -88,29 +88,29 @@ const FilmFormPage = ({ mode, onSave, initialData, onCancel }: FilmFormPageProps
   type FieldName = keyof Inputs;
 
   const processForm: SubmitHandler<Inputs> = (data) => {
-    console.log("here");
-    console.table(data);
-    console.table(data.videos);
-    console.table(data.editDetails);
+    // console.log("here");
+    // console.table(data);
+    // console.table(data.videos);
+    // console.table(data.editDetails);
     onSave(data);
     return true;
   };
 
   const next = async () => {
     const allValues = getValues();
-    console.log(currentStep, allValues);
+    // console.log(currentStep, allValues);
     if (currentStep === steps.length - 2) {
-      console.log("here to submit");
+      // console.log("here to submit");
       handleSubmit(processForm)();
-      console.log("after form submit");
+      // console.log("after form submit");
     }
 
     const fields = steps[currentStep].fields;
-    console.log(fields);
+    // console.log(fields);
     const output = await trigger(fields as FieldName[], { shouldFocus: true });
-    console.log(output, errors);
+    // console.log(output, errors);
     if (!output) return;
-    console.log("here");
+    // console.log("here");
     if (currentStep < steps.length - 1) {
       setPreviousStep(currentStep);
       setCurrentStep((step) => step + 1);

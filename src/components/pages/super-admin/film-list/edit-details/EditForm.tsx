@@ -13,7 +13,7 @@ function EditForm({
   selectedVideoIndex: number | null;
   updateEditDetail: (index: number, data: any) => void;
 }) {
-  console.log("EditForm render", { currentEditData, selectedVideoIndex });
+  // console.log("EditForm render", { currentEditData, selectedVideoIndex });
   if (selectedVideoIndex === null) {
     return <p>Select a video first</p>;
   }

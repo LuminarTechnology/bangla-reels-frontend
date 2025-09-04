@@ -2,7 +2,7 @@
 import { useCallback, useEffect } from "react";
 import { Control, useFieldArray } from "react-hook-form";
 import { arrayMove } from "@dnd-kit/sortable";
-import { editDetailsData, FilmFormData, VideoFileData } from "../Film.schema";
+import { editDetailsData, FilmFormData, VideoFileData } from "@/src/schema/FilmList.schema";
 
 interface VideoEditManager {
   videos: VideoFileData[];
@@ -88,10 +88,10 @@ export function useVideoEditManager(control: Control<FilmFormData>): VideoEditMa
       });
 
     if (needsUpdate) {
-      console.log("🔄 Syncing editDetails with videos:", {
-        videos: videoFields.length,
-        editDetails: syncedEditDetails.length,
-      });
+      // console.log("🔄 Syncing editDetails with videos:", {
+      //   videos: videoFields.length,
+      //   editDetails: syncedEditDetails.length,
+      // });
       replaceEditDetails(syncedEditDetails);
     }
     // console.table(videoFields);
@@ -142,7 +142,7 @@ export function useVideoEditManager(control: Control<FilmFormData>): VideoEditMa
 
   const updateEditDetail = useCallback(
     (index: number, data: Partial<editDetailsData>) => {
-      console.log(data);
+      // console.log(data);
       const existing = editFields[index];
       if (!existing) return;
       update(index, { ...existing, ...data });
