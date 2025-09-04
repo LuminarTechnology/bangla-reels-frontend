@@ -88,7 +88,7 @@ const VideoCard = ({
           {...attributes}
           {...listeners}
         >
-          <Menu className="h-4 w-4" />
+          <Image src="/icons/menu-09.svg" alt="drag" width={24} height={24} />
         </Button>
       </div>
     </div>

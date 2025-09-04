@@ -1,4 +1,5 @@
 import { FormInputField } from "@/src/components/forms/FormInputField";
+import { FormSelectField } from "@/src/components/forms/FormSelectField";
 import React, { useEffect, useRef, useState } from "react";
 
 function EditForm({
@@ -42,6 +43,7 @@ function EditForm({
           errorBorder: "border-red-500",
           errorText: "text-red-500",
         }}
+        required
       />
 
       <FormInputField
@@ -63,26 +65,24 @@ function EditForm({
           errorBorder: "border-red-500",
           errorText: "text-red-500",
         }}
+        required
       />
 
-      <FormInputField
+      <FormSelectField
         name={`editDetails.${editIndex}.tags`}
         control={control}
         label="Tags/keywords"
-        placeholder="Film, Movie"
+        placeholder="Select a genre"
         value={currentEditData.editDetail.tags}
         onChange={(value) => updateEditDetail(editIndex, { tags: value })}
-        colorScheme={{
-          background: "bg-white",
-          text: "text-black",
-          placeholder: "placeholder-gray-500",
-          border: "border-gray-300",
-          focusBorder: "focus:border-black",
-          focusRing: "focus:ring-1 focus:ring-black",
-          label: "text-black",
-          errorBorder: "border-red-500",
-          errorText: "text-red-500",
-        }}
+        options={[
+          { label: "Action", value: "action" },
+          { label: "Drama", value: "drama" },
+          { label: "Comedy", value: "comedy" },
+          { label: "Funny", value: "funny" },
+        ]}
+        className="border-gray-300 bg-white text-black placeholder-gray-500 focus:border-black focus:ring-1 focus:ring-black"
+        required
       />
 
       {/* Optional: Show current video info */}

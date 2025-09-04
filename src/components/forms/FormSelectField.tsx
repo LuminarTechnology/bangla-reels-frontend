@@ -14,6 +14,8 @@ type FormSelectFieldProps = {
   disabled?: boolean;
   className?: string;
   required?: boolean;
+  value?: string | number;
+  onChange?: (value: string) => void;
 };
 
 export function FormSelectField({
@@ -25,6 +27,8 @@ export function FormSelectField({
   disabled,
   className,
   required,
+  value,
+  onChange
 }: FormSelectFieldProps) {
   return (
     <Controller
@@ -49,7 +53,7 @@ export function FormSelectField({
               </p>
             </Label>
           )}
-          <Select value={field.value} onValueChange={field.onChange} disabled={disabled}>
+          <Select value={value !== undefined ? value : field.value} onValueChange={onChange || field.onChange} disabled={disabled}>
             <SelectTrigger className={`w-full ${className} ${error ? "border-red-500" : ""}`}>
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
