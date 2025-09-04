@@ -47,7 +47,7 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard, currentLang }) => {
           {navItems.map((item) => (
             <Link
               key={item.key}
-              href={item.href}
+              href={`/${currentLang}${item.href}`}
               className="px-4 text-white transition-colors duration-200"
               onClick={() => setIsOpen(false)}
             >
@@ -72,7 +72,7 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard, currentLang }) => {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <div className="flex items-center justify-between space-x-16">
-            <Link href={"/"}>
+            <Link href={`/${currentLang}`}>
               <h1 className="text-2xl font-bold text-white">ReelShort</h1>
             </Link>
 
@@ -84,6 +84,7 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard, currentLang }) => {
                     <CategoryPopup
                       key={item.key}
                       itemName={t(item.key)}
+                      lang={currentLang}
                       isCategory={strippedPath === item.href}
                     />
                   );
@@ -91,7 +92,7 @@ const Navbar: React.FC<NavbarProps> = ({ mobileDashboard, currentLang }) => {
                 return (
                   <Link
                     key={item.key}
-                    href={item.href}
+                    href={`/${currentLang}${item.href}`}
                     className={cn(
                       "flex flex-col items-center text-base font-medium duration-200",
                       strippedPath === item.href ? "text-primary-rose" : "text-white"

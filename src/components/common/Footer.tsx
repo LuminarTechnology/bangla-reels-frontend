@@ -5,9 +5,11 @@ import ContainerWrapper from "./ContainerWrapper";
 import { Facebook, Instagram, Linkedin, QrCode, Youtube } from "lucide-react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { useLocale } from "@/src/app/LocaleProvider";
 
 const Footer = () => {
   const t = useTranslations("Footer");
+  const { lang } = useLocale();
   return (
     <footer className="footer-gradient-background mt-auto text-white">
       <ContainerWrapper>
@@ -18,7 +20,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <Link
-                  href="/terms-service"
+                  href={`/${lang}/terms-service`}
                   className="text-gray-300 transition-colors hover:text-white"
                 >
                   {t("terms-service")}
@@ -26,7 +28,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/privacy-policy"
+                  href={`/${lang}/privacy-policy`}
                   className="text-gray-300 transition-colors hover:text-white"
                 >
                   {t("privacy")}
@@ -34,7 +36,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/contact-us"
+                  href={`/${lang}//contact-us`}
                   className="text-gray-300 transition-colors hover:text-white"
                 >
                   {t("contact-us")}
@@ -48,12 +50,18 @@ const Footer = () => {
             <h3 className="mb-4 text-2xl font-semibold">{t("support")}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-gray-300 transition-colors hover:text-white">
+                <Link
+                  href={`/${lang}/#`}
+                  className="text-gray-300 transition-colors hover:text-white"
+                >
                   {t("feedback")}
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-300 transition-colors hover:text-white">
+                <Link
+                  href={`/${lang}/#`}
+                  className="text-gray-300 transition-colors hover:text-white"
+                >
                   {t("media-relation")}
                 </Link>
               </li>
@@ -64,25 +72,40 @@ const Footer = () => {
           <div>
             <h3 className="mb-4 text-2xl font-semibold">{t("community")}</h3>
             <div className="flex space-x-4">
-              <Link href="#" className="text-gray-300 transition-colors hover:text-white">
+              <Link
+                href={`/${lang}/#`}
+                className="text-gray-300 transition-colors hover:text-white"
+              >
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
-              <Link href="#" className="text-gray-300 transition-colors hover:text-white">
+              <Link
+                href={`/${lang}/#`}
+                className="text-gray-300 transition-colors hover:text-white"
+              >
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
                 <span className="sr-only">X (Twitter)</span>
               </Link>
-              <Link href="#" className="text-gray-300 transition-colors hover:text-white">
+              <Link
+                href={`/${lang}/#`}
+                className="text-gray-300 transition-colors hover:text-white"
+              >
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </Link>
-              <Link href="#" className="text-gray-300 transition-colors hover:text-white">
+              <Link
+                href={`/${lang}/#`}
+                className="text-gray-300 transition-colors hover:text-white"
+              >
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="#" className="text-gray-300 transition-colors hover:text-white">
+              <Link
+                href={`/${lang}/#`}
+                className="text-gray-300 transition-colors hover:text-white"
+              >
                 <Youtube className="h-5 w-5" />
                 <span className="sr-only">YouTube</span>
               </Link>

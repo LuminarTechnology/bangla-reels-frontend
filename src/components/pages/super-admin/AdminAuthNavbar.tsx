@@ -32,7 +32,7 @@ const AdminAuthNavbar = () => {
           <div className="">
             <div className="ml-4 flex items-center md:ml-6">
               <Link
-                href={"/super-admin"}
+                href={"/en/super-admin"}
                 className="flex items-center space-x-2 rounded-md bg-gray-800 px-3 py-2 text-sm font-medium text-gray-300 transition-colors duration-200 hover:bg-gray-700 hover:text-white"
               >
                 <User className="h-4 w-4" />
@@ -40,7 +40,6 @@ const AdminAuthNavbar = () => {
               </Link>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -51,7 +50,7 @@ const AdminAuthNavbar = () => {
 
           {/* Mobile Login */}
           <Link
-            href={"/super-admin/login"}
+            href={"/en/super-admin/login"}
             className="block w-full items-center space-x-2 rounded-md px-3 py-2 text-left text-base font-medium text-gray-300 transition-colors duration-200 hover:bg-gray-700 hover:text-white"
           >
             <User className="h-4 w-4" />

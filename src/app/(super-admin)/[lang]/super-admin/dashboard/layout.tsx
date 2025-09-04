@@ -1,8 +1,8 @@
 import DashboardNavbar from "@/src/components/common/DashboardNavbar";
 import DashboardSidebar from "@/src/components/common/DashboardSidebar";
 import { SuperAdminSidebarItems } from "@/src/constants/DashboardSidebarItems";
-// import { hasRole } from "@/src/utils/roles";
-// import { redirect } from "next/navigation";
+import { hasRole } from "@/src/utils/roles";
+import { redirect } from "next/navigation";
 import React, { ReactNode } from "react";
 
 interface Props {

@@ -73,7 +73,7 @@ const Banner: React.FC = () => {
         {banners.map((movie, index) => (
           <SwiperSlide key={movie.id}>
             {/* Background */}
-            <Link href="episode/john-wick-4">
+            <Link href={`/${lang}/episode/john-wick-4`}>
               <div className="relative h-full w-full">
                 <Image
                   src={movie.image}

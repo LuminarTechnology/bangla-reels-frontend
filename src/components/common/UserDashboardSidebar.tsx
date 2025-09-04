@@ -9,6 +9,7 @@ import { UserDashboardSidebarItems } from "@/src/constants/UserDashboardSidebarI
 import { SignOutButton, useUser } from "@clerk/nextjs";
 import { Button } from "../ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useLocale } from "@/src/app/LocaleProvider";
 // import LoginModal from "../modals/LoginModal";
 // import { Button } from "../ui/button";
 
@@ -24,18 +25,12 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
   const pathname = usePathname();
   const strippedPath = pathname.replace(/^\/(en|bn|es|la)(?=\/|$)/, "") || "/";
   const { user, isSignedIn } = useUser();
-
+  const { lang } = useLocale();
   return (
-    <aside
-      className={cn(
-        "h-full w-80 flex-col rounded-xl p-4",
-        background,
-        "flex"
-      )}
-    >
+    <aside className={cn("h-full w-80 flex-col rounded-xl p-4", background, "flex")}>
       <div className="flex items-center gap-3 p-3">
         {isSignedIn ? (
-          <Link href={"/profile"}>
+          <Link href={`/${lang}/profile`}>
             <img src={user.imageUrl} alt="Profile" className="h-12 w-12 rounded-full border" />
           </Link>
         ) : (
@@ -55,7 +50,7 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
           </div>
         )}
         {!isSignedIn && (
-          <Link href={"/sign-in"}>
+          <Link href={`/${lang}/sign-in`}>
             <Button variant="outline" size="sm" className="text-xs">
               Log in
             </Button>
@@ -69,7 +64,7 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
           return (
             <Link
               key={item.name}
-              href={item.href}
+              href={`/${lang}${item.href}`}
               className={cn(
                 "flex w-[90%] items-center gap-3 rounded-xl px-3 py-3 transition hover:bg-[#e83a570f] hover:text-red-500 sm:w-full",
                 strippedPath === item.href && "bg-[#e83a570f] text-red-500"
@@ -94,10 +89,10 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
         /> */}
         <SignOutButton
           children={
-            <button className="bg-primary-rose hover:bg-primary-rose-hover flex w-[90%] cursor-pointer items-center gap-3 rounded-xl px-3 py-3 transition sm:w-full">
+            <Button className="bg-primary-rose hover:bg-primary-rose-hover flex w-[90%] cursor-pointer items-center gap-3 rounded-xl px-3 py-3 transition sm:w-full">
               <LogOut className="h-5 w-5" />
               Log Out
-            </button>
+            </Button>
           }
         />
       </div>

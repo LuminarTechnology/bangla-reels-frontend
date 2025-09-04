@@ -1,64 +1,121 @@
+import { NextRequest, NextResponse, NextFetchEvent } from "next/server";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
-import { Roles } from "./types/globals";
 import createIntlMiddleware from "next-intl/middleware";
+import { Roles } from "./types/globals";
 
-const isAdminRoute = createRouteMatcher(["/super-admin/dashboard(.*)"]);
+const LOCALES = ["en", "bn", "es", "la"];
+const DEFAULT_LOCALE = "en";
 
-const isPublicRoute = createRouteMatcher([
-  "/sign-in(.*)",
-  "/sign-up(.*)",
-  "/",
-  "/categories(.*)",
-  "/fandom(.*)",
-  "/contest",
-  "/contact-us",
-  "/episode(.*)",
-  "/movie(.*)",
-  "/privacy-policy",
-  "/terms-service",
-  "/dashboard",
-  "/dashboard/my-list",
-  "/dashboard/history",
-  "/dashboard/subscriptions-rewards",
-  "/super-admin/login",
-]);
-
-// Locale middleware setup
 const intlMiddleware = createIntlMiddleware({
-  locales: ["en", "bn", "es", "la"],
-  defaultLocale: "en",
+  locales: LOCALES,
+  defaultLocale: DEFAULT_LOCALE,
   localeDetection: true,
 });
 
-export default clerkMiddleware(async (auth, req: NextRequest) => {
+const isAdminRoute = createRouteMatcher(["/en/super-admin/dashboard(.*)"]);
+
+const isPublicRoute = createRouteMatcher([
+  "/en/sign-in(.*)",
+  "/bn/sign-in(.*)",
+  "/es/sign-in(.*)",
+  "/la/sign-in(.*)",
+  "/en/sign-up(.*)",
+  "/bn/sign-up(.*)",
+  "/es/sign-up(.*)",
+  "/la/sign-up(.*)",
+  "/es",
+  "/en",
+  "/bn",
+  "/la",
+  "/en/categories(.*)",
+  "/bn/categories(.*)",
+  "/es/categories(.*)",
+  "/la/categories(.*)",
+  "/en/fandom(.*)",
+  "/bn/fandom(.*)",
+  "/es/fandom(.*)",
+  "/la/fandom(.*)",
+  "/en/contest",
+  "/bn/contest",
+  "/es/contest",
+  "/la/contest",
+  "/en/contact-us",
+  "/bn/contact-us",
+  "/es/contact-us",
+  "/la/contact-us",
+  "/en/episode(.*)",
+  "/bn/episode(.*)",
+  "/es/episode(.*)",
+  "/la/episode(.*)",
+  "/en/movie(.*)",
+  "/bn/movie(.*)",
+  "/es/movie(.*)",
+  "/la/movie(.*)",
+  "/en/privacy-policy",
+  "/bn/privacy-policy",
+  "/es/privacy-policy",
+  "/la/privacy-policy",
+  "/terms-service",
+  "/en/dashboard",
+  "/bn/dashboard",
+  "/es/dashboard",
+  "/la/dashboard",
+  "/en/dashboard/my-list",
+  "/bn/dashboard/my-list",
+  "/es/dashboard/my-list",
+  "/la/dashboard/my-list",
+  "/es/dashboard/history",
+  "/en/dashboard/history",
+  "/bn/dashboard/history",
+  "/la/dashboard/history",
+  "/en/dashboard/subscription-rewards",
+  "/bn/dashboard/subscription-rewards",
+  "/es/dashboard/subscription-rewards",
+  "/la/dashboard/subscription-rewards",
+  "/en/super-admin/login",
+  "/en/super-admin/dashboard(.*)",
+]);
+
+//  Auth Middleware
+const authHandler = clerkMiddleware(async (auth, req: NextRequest) => {
   const { sessionClaims } = await auth();
-  const lang = req.cookies.get("locale")?.value || "en";
-  const roles: Roles[] = sessionClaims?.metadata?.roles as Roles[] | [];
 
-  // ✅ First, run locale handling
-  const intlResponse = intlMiddleware(req);
-  if (intlResponse) return intlResponse;
+  const roles: Roles[] = (sessionClaims?.metadata?.roles as Roles[]) || [];
 
-  // Protect all routes starting with `/super-admin/dashboard`
-  if (isAdminRoute(req) && !roles?.includes("superAdmin")) {
-    const url = new URL(`/${lang}/super-admin/login`, req.url);
-    return NextResponse.redirect(url);
-  }
+  // Admin route protection
+  // if (isAdminRoute(req) && !roles.includes("superAdmin")) {
+  //   const lang = req.cookies.get("locale")?.value || DEFAULT_LOCALE;
+  //   const url = new URL(`/${lang}/super-admin/login`, req.url);
+  //   return NextResponse.redirect(url);
+  // }
 
-  if (!isPublicRoute(req)) {
-    await auth.protect();
-  }
+  // Non-public route protection
+  // if (!isPublicRoute(req)) {
+  //   const lang = req.cookies.get("locale")?.value || DEFAULT_LOCALE;
+  //   const url = new URL(`/${lang}/sign-in`, req.url);
+  //   return NextResponse.redirect(url);
+  // }
 
   return NextResponse.next();
 });
 
+//  Compose Middleware
+export async function middleware(req: NextRequest, event: NextFetchEvent) {
+  // Auth + Role check
+  const authResponse = await authHandler(req, event);
+  if (authResponse) return authResponse;
+
+  //Locale handling
+  const intlResponse = intlMiddleware(req);
+  if (intlResponse) return intlResponse;
+
+  return NextResponse.next();
+}
+
+//  Middleware Config
 export const config = {
   matcher: [
-    // Match everything under a language prefix
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes (without lang prefix, or you can duplicate if you want /en/api too)
     "/(api|trpc)(.*)",
   ],
 };
