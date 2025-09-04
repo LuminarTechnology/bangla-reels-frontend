@@ -15,10 +15,6 @@ const headerConfig: TableHeaderConfig = {
 
 const actions: TableAction<UserData>[] = [
   {
-    label: "Edit",
-    onClick: (row) => console.warn("Edit", row),
-  },
-  {
     label: "Delete",
     onClick: (row) => console.warn("Delete", row),
     variant: "destructive",
@@ -139,6 +135,7 @@ export function UsersTable() {
         searchValue={searchValue}
         onSearchChange={setSearchValue}
         onDateFilterClick={handleDateFilterClick}
+        showDirectDelete={true}
       />
     </div>
   );

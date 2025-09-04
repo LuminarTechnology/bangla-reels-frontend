@@ -8,7 +8,7 @@ const FandomDetailsPage = () => {
     <div className="my-4 grid grid-cols-1 gap-8 md:my-8 lg:grid-cols-3">
       {/* Main Content */}
       <div className="lg:col-span-2">
-        <article className="overflow-hidden rounded-lg bg-black shadow-sm">
+        <article className="overflow-hidden rounded-lg bg-[#0F0828] shadow-sm">
           {/* Header */}
           <div className="border-b border-gray-200 p-6">
             <div className="mb-3 text-sm font-medium text-red-500">Top Movie Stories</div>
@@ -35,7 +35,7 @@ const FandomDetailsPage = () => {
               alt="Reborn To Love Mr Right Movie"
               className="h-64 w-full object-cover lg:h-80"
             />
-            <div className="bg-opacity-20 absolute inset-0 bg-black"></div>
+            <div className="bg-opacity-20 absolute inset-0 bg-[#0F0828]"></div>
             <div className="absolute right-4 bottom-4 left-4">
               <div className="text-4xl font-bold tracking-wider text-white lg:text-6xl">REBORN</div>
               <div className="text-2xl font-bold text-white lg:text-3xl">TO LOVE</div>

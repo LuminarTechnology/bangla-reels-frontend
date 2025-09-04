@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { Menu } from "lucide-react";
-import { SidebarItem } from "@/src/types/DashboardSidebarItems";
+import { SidebarItem } from "@/src/types/dashboardItems";
 import {
   Sheet,
   SheetContent,

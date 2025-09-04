@@ -19,7 +19,7 @@ const SearchBarPopup = () => {
                 <Search className="h-4 w-4" />
               </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-96  border-none bg-[#16151A] p-0 shadow-xl before:absolute before:-top-2 before:right-1 before:h-0 before:w-0 before:-translate-x-1/2 before:border-r-8 before:border-b-8 before:border-l-8 before:border-r-transparent before:border-b-[#16151A] before:border-l-transparent before:content-['']" align="end" sideOffset={8}>
+            <PopoverContent className="w-96  border-none bg-[#0F0828] shadow-lg shadow-black p-0 before:absolute before:-top-2 before:right-1 before:h-0 before:w-0 before:-translate-x-1/2 before:border-r-8 before:border-b-8 before:border-l-8 before:border-r-transparent before:border-b-[#16151A] before:border-l-transparent before:content-['']" align="end" sideOffset={8}>
               <div className="p-4 space-y-4">
                 {/* Search Input */}
                 <div className="relative">

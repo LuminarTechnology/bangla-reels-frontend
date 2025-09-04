@@ -42,16 +42,16 @@ const LanguagePopup = ({ currentLang }: { currentLang: string }) => {
         </Button>
       </HoverCardTrigger>
       <HoverCardContent
-        className="relative w-70 rounded-2xl border-none bg-[#16151A] p-0 shadow-xl before:absolute before:-top-2 before:left-1/2 before:h-0 before:w-0 before:-translate-x-1/2 before:border-r-8 before:border-b-8 before:border-l-8 before:border-r-transparent before:border-b-[#16151A] before:border-l-transparent before:content-['']"
+        className="relative overflow-hidden w-70 rounded-2xl border-none bg-[#0F0828] p-0 shadow-lg shadow-black before:absolute before:-top-2 before:left-1/2 before:h-0 before:w-0 before:-translate-x-1/2 before:border-r-8 before:border-b-8 before:border-l-8 before:border-r-transparent before:border-b-[#16151A] before:border-l-transparent before:content-['']"
         align="center"
         sideOffset={8}
       >
-        <div className="py-2">
+        <div>
           {languages.map((language) => (
             <button
               key={language.id}
               onClick={() => handleLanguageChange(language.code)}
-              className="w-full cursor-pointer px-4 py-3 text-left text-sm text-white transition-colors hover:bg-gray-800"
+              className="w-full cursor-pointer px-4 py-3 text-left text-sm text-white transition-colors hover:bg-[#080414]"
             >
               {language.name}
             </button>

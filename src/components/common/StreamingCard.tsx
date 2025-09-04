@@ -21,7 +21,7 @@ export function StreamingCard({
   play,
 }: StreamingCardProps) {
   return (
-    <div className="relative flex w-full gap-4 overflow-hidden rounded-2xl border bg-white/10 p-4 shadow-2xl backdrop-blur-sm">
+    <div className="relative flex w-full gap-4 overflow-hidden rounded-2xl bg-[#0F0828] p-4 shadow-2xl">
       {/* Poster Image */}
       <div className="relative w-3/7">
         <Image

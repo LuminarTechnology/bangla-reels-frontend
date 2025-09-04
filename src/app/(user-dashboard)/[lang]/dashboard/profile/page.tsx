@@ -1,0 +1,128 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { Avatar, AvatarFallback, AvatarImage } from "@/src/components/ui/avatar";
+import { Button } from "@/src/components/ui/button";
+import { FormInputField } from "@/src/components/forms/FormInputField";
+import AvatarUpload from "@/src/components/common/AvatarUpload";
+
+const profileSchema = z
+  .object({
+    name: z.string().min(1, "Name is required"),
+    phone: z.string().optional(),
+    email: z.string().email(),
+    oldPassword: z.string().optional(),
+    newPassword: z.string().optional(),
+    confirmPassword: z.string().optional(),
+  })
+  .refine(
+    (data) => {
+      if (data.newPassword && data.newPassword !== data.confirmPassword) {
+        return false;
+      }
+      return true;
+    },
+    {
+      message: "New passwords do not match",
+      path: ["confirmPassword"],
+    }
+  );
+type ProfileFormData = z.infer<typeof profileSchema>;
+
+export default function ProfilePage() {
+  const { user } = useUser();
+
+  const { control, handleSubmit, reset } = useForm<ProfileFormData>({
+    resolver: zodResolver(profileSchema),
+    defaultValues: {
+      name: "",
+
+      phone: "",
+      email: "",
+      oldPassword: "",
+      newPassword: "",
+      confirmPassword: "",
+    },
+  });
+  useEffect(() => {
+    if (user) {
+      reset({
+        name: user.fullName || "",
+        email: user.emailAddresses[0]?.emailAddress || "",
+        phone: user.phoneNumbers?.[0]?.phoneNumber || "",
+      });
+    }
+  }, [user, reset]);
+
+  const onSubmit = (data: ProfileFormData) => {
+    // console.log("Form Submitted", data);
+    
+  };
+
+  const [avatarFile, setAvatarFile] = useState<File | null>(null);
+
+  return (
+    <div className="w-full text-white">
+      {/* --- Avatar Section --- */}
+      <div className="mb-8 flex flex-col items-center gap-4">
+        <AvatarUpload
+            onAvatarChange={(file) => setAvatarFile(file)}
+            size="lg"
+            bgColor="bg-primary-rose hover:bg-[#e92747]"
+          />
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
+        {/* --- Personal Details Section --- */}
+        <fieldset className="space-y-6">
+          <h2 className="text-2xl font-bold">Personal Details</h2>
+          <div>
+            <FormInputField name="name" control={control} label="Name" />
+          </div>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <FormInputField name="email" control={control} label="Email" disabled />
+            <FormInputField name="phone" control={control} label="Phone Number" />
+          </div>
+        </fieldset>
+
+        {/* --- Change Password Section --- */}
+        <fieldset className="space-y-6">
+          <h2 className="text-2xl font-bold">Change Password</h2>
+          <FormInputField
+            name="oldPassword"
+            control={control}
+            label="Old Password"
+            type="password"
+            placeholder="********"
+          />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            <FormInputField
+              name="newPassword"
+              control={control}
+              label="New Password"
+              type="password"
+              placeholder="New Password"
+            />
+            <FormInputField
+              name="confirmPassword"
+              control={control}
+              label="Confirm Password"
+              type="password"
+              placeholder="Confirm Password"
+            />
+          </div>
+        </fieldset>
+
+        {/* --- Save Button --- */}
+        <div className="flex justify-center">
+          <Button type="submit" variant="danger" size="lg" className="px-10">
+            Save
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
+}

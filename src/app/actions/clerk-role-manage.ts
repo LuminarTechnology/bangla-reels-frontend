@@ -7,7 +7,7 @@ export async function setRole(formData: FormData) {
   const client = await clerkClient();
 
   // Check that the user trying to set the role is an admin
-  if (!hasRole("super-admin")) {
+  if (!hasRole("superAdmin")) {
     return { message: "Not Authorized" };
   }
 
@@ -30,7 +30,7 @@ export async function removeRole(formData: FormData) {
   // assert that roles is Roles[]
   const roles = (user.publicMetadata.roles as Roles[] | undefined) || [];
 
-  const updatedRoles = roles.filter((r) => r !== "super-admin");
+  const updatedRoles = roles.filter((r) => r !== "superAdmin");
   // remove role
   try {
     const res = await client.users.updateUserMetadata(formData.get("id") as string, {

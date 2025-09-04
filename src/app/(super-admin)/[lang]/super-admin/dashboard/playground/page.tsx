@@ -7,7 +7,7 @@ import { removeRole, setRole } from "@/src/app/actions/clerk-role-manage";
 export default async function AdminDashboard(params: {
   searchParams: Promise<{ search?: string }>;
 }) {
-  if (!hasRole("super-admin")) {
+  if (!hasRole("superAdmin")) {
     redirect("/sign-in");
   }
 

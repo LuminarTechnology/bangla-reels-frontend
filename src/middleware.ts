@@ -1,64 +1,60 @@
+import { NextRequest, NextResponse, NextFetchEvent } from "next/server";
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextRequest } from "next/server";
-import { NextResponse } from "next/server";
-import { Roles } from "./types/globals";
 import createIntlMiddleware from "next-intl/middleware";
+import { Roles } from "./types/globals";
 
-const isAdminRoute = createRouteMatcher(["/super-admin/dashboard(.*)"]);
+const LOCALES = ["en", "bn", "es", "la"];
+const DEFAULT_LOCALE = "en";
 
-const isPublicRoute = createRouteMatcher([
-  "/sign-in(.*)",
-  "/sign-up(.*)",
-  "/",
-  "/categories(.*)",
-  "/fandom(.*)",
-  "/contest",
-  "/contact-us",
-  "/episode(.*)",
-  "/movie(.*)",
-  "/privacy-policy",
-  "/terms-service",
-  "/dashboard",
-  "/dashboard/my-list",
-  "/dashboard/history",
-  "/dashboard/subscriptions-rewards",
-  "/super-admin/login",
-]);
-
-// Locale middleware setup
 const intlMiddleware = createIntlMiddleware({
-  locales: ["en", "bn", "es", "la"],
-  defaultLocale: "en",
+  locales: LOCALES,
+  defaultLocale: DEFAULT_LOCALE,
   localeDetection: true,
 });
 
-export default clerkMiddleware(async (auth, req: NextRequest) => {
+const isAdminRoute = createRouteMatcher(["/:locale/super-admin(.*)"]);
+const isTopUpRoute = createRouteMatcher(["/:locale/dashboard/top-up"]);
+
+//  Auth Middleware
+const authHandler = clerkMiddleware(async (auth, req: NextRequest) => {
+  const { pathname } = req.nextUrl;
   const { sessionClaims } = await auth();
-  const lang = req.cookies.get("locale")?.value || "en";
-  const roles: Roles[] = sessionClaims?.metadata?.roles as Roles[] | [];
+  const lang = req.cookies.get("locale")?.value || DEFAULT_LOCALE;
 
-  // ✅ First, run locale handling
-  const intlResponse = intlMiddleware(req);
-  if (intlResponse) return intlResponse;
+  const roles: Roles[] = (sessionClaims?.metadata?.roles as Roles[]) || [];
 
-  // Protect all routes starting with `/super-admin/dashboard`
-  if (isAdminRoute(req) && !roles?.includes("super-admin")) {
-    const url = new URL(`/${lang}/super-admin/login`, req.url);
-    return NextResponse.redirect(url);
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL(`/${lang}`, req.url));
   }
 
-  if (!isPublicRoute(req)) {
-    await auth.protect();
+  if (process.env.NODE_ENV !== "development") {
+    // Admin route protection
+    if (isAdminRoute(req) && !roles.includes("superAdmin")) {
+      const url = new URL(`/${lang}/sign-in`, req.url);
+      return NextResponse.redirect(url);
+    }
+
+    if (isTopUpRoute(req) && roles.length === 0) {
+      return NextResponse.redirect(new URL(`/${lang}/sign-in`, req.url));
+    }
   }
 
   return NextResponse.next();
 });
 
+//  Compose Middleware
+export async function middleware(req: NextRequest, event: NextFetchEvent) {
+  //Locale handling
+  const intlResponse = intlMiddleware(req);
+  if (intlResponse) return intlResponse;
+
+  // Auth + Role check
+  const authResponse = await authHandler(req, event);
+  if (authResponse) return authResponse;
+
+  return NextResponse.next();
+}
+
 export const config = {
-  matcher: [
-    // Match everything under a language prefix
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes (without lang prefix, or you can duplicate if you want /en/api too)
-    "/(api|trpc)(.*)",
-  ],
+  matcher: ["/((?!_next|.*\\..*).*)"],
 };

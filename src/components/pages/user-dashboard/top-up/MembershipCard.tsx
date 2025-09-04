@@ -31,7 +31,7 @@ const MembershipCard = ({
   return (
     <Card 
       onClick={onClick}
-      className={`cursor-pointer hover:border-primary-rose relative border border-[#7A7A7A] bg-[#0B0000] px-6 py-5 text-white hover:bg-[#7e00000c] ${className} ${isSelected ? "border-primary-rose bg-[#7e00000c" : ""}`}>
+      className={`cursor-pointer hover:border-primary-rose relative border border-[#7A7A7A] bg-[#0F0828] px-6 py-5 text-white hover:bg-[#7e00000c] ${className} ${isSelected ? "border-primary-rose bg-[#7e00000c]" : ""}`}>
       {showBadge && badge && (
         <p className="text-primary-rose absolute top-0 right-0 rounded-tr-lg rounded-bl-lg bg-[#F8C2CB] px-2 py-1 text-xs font-semibold">
           {badge}

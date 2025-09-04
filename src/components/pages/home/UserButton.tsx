@@ -6,14 +6,16 @@ import { User } from "lucide-react";
 import { Separator } from "../../ui/separator";
 import Link from "next/link";
 import { useUser } from "@clerk/nextjs";
+import { useLocale } from "next-intl";
 
 const UserButton = () => {
   const { user, isSignedIn } = useUser();
+  const lang = useLocale();
   return (
     <div>
       <HoverCard openDelay={0} closeDelay={100}>
         <HoverCardTrigger asChild>
-          <Link href={"/dashboard"} className="flex items-center space-x-4">
+          <Link href={`/${lang}/dashboard`} className="flex items-center space-x-4">
             <Button variant="ghost" size="sm" className="relative size-8 rounded-full">
               <Avatar className="size-8">
                 <AvatarImage src={user?.imageUrl} alt={user?.fullName || "user"} />
@@ -25,7 +27,7 @@ const UserButton = () => {
           </Link>
         </HoverCardTrigger>
         <HoverCardContent
-          className="w-64 border-none bg-[#16151A] p-0 shadow-xl before:absolute before:-top-2 before:right-1 before:h-0 before:w-0 before:-translate-x-1/2 before:border-r-8 before:border-b-8 before:border-l-8 before:border-r-transparent before:border-b-[#16151A] before:border-l-transparent before:content-['']"
+          className="w-64 border-none bg-[#0F0828] p-0 shadow-lg shadow-black before:absolute before:-top-2 before:right-1 before:h-0 before:w-0 before:-translate-x-1/2 before:border-r-8 before:border-b-8 before:border-l-8 before:border-r-transparent before:border-b-[#16151A] before:border-l-transparent before:content-['']"
           align="end"
           sideOffset={8}
         >
@@ -44,7 +46,7 @@ const UserButton = () => {
                 </div>
               </div>
               {!isSignedIn && (
-                <Link href={"/sign-in"}>
+                <Link href={`/${lang}/sign-in`}>
                   <Button variant="outline" size="sm" className="text-xs">
                     Log in
                   </Button>
@@ -65,7 +67,7 @@ const UserButton = () => {
             </div>
 
             {/* Top Up Button */}
-            <Link href={"/dashboard/top-up"}>
+            <Link href={`/${lang}/dashboard/top-up`}>
               <Button variant="danger" className="w-full" size="sm">
                 Top Up
               </Button>

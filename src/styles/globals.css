@@ -19,7 +19,7 @@
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-muted-foreground: oklch(0.707 0.022 261.325);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
@@ -78,6 +78,7 @@
   --sidebar-ring: oklch(0.707 0.022 261.325);
   --primary-rose: #e83a57;
   --primary-rose-hover: #d12847;
+  --track-color: #f3f4f6;
 }
 
 .dark {
@@ -145,6 +146,78 @@
   }
 }
 
+html,
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-rose) var(--track-color);
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: var(--track-color);
+}
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: var(--primary-rose);
+  border-radius: 9999px;
+  border: 2px solid var(--track-color);
+}
+html:hover::-webkit-scrollbar-thumb,
+body:hover::-webkit-scrollbar-thumb {
+  background: var(--primary-rose-hover);
+}
+html:active::-webkit-scrollbar-thumb,
+body:active::-webkit-scrollbar-thumb {
+  background: var(--primary-rose-hover);
+}
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner {
+  background: var(--track-color);
+}
+
+@layer utilities {
+  /* -------- Admin (Black & White) -------- */
+  .scrollbar-admin {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #000 #fff;
+  }
+  /* iOS/macOS/Chromium (WebKit) */
+  .scrollbar-admin::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  .scrollbar-admin::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+  .scrollbar-admin::-webkit-scrollbar-thumb {
+    background: #000000;
+    border-radius: 9999px;
+    border: 2px solid #ffffff;
+  }
+  .scrollbar-admin:hover::-webkit-scrollbar-thumb {
+    background: #111111;
+  }
+  .scrollbar-admin:active::-webkit-scrollbar-thumb {
+    background: #000000;
+  }
+  .scrollbar-admin::-webkit-scrollbar-corner {
+    background: #ffffff;
+  }
+
+  /* High-contrast/Windows accessibility fallback */
+  @media (forced-colors: active) {
+    .scrollbar-admin {
+      scrollbar-color: CanvasText Canvas !important;
+    }
+  }
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.7s ease-in-out;
 }
@@ -162,14 +235,11 @@
   display: none;
 }
 
-
 /* Mux Player Styles */
 mux-player {
   --seek-backward-button: none;
   --seek-forward-button: none;
-  
 }
-
 
 mux-player::part(video) {
   -webkit-text-fill-color: red;
@@ -179,8 +249,7 @@ mux-player::part(video) {
 mux-player::part(title) {
   font-size: 30px;
   font-weight: 600;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   margin-left: 14px;
-  margin-top:8px
+  margin-top: 8px;
 }
-

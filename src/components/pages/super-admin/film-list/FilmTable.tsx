@@ -5,188 +5,27 @@ import { Switch } from "@/src/components/ui/switch";
 import { TableAction, TableColumn, TableHeaderConfig } from "@/src/types/reusableTable";
 import { Plus } from "lucide-react";
 import React, { useState } from "react";
-import AddAndEditFilmModal, { FilmFormData } from "./AddAndEditFilmModal";
-interface FilmData {
-  id: string;
-  no: string;
-  image: string;
-  category: string;
-  name: string;
-  description: string;
-  date: string;
-  totalEpisodes: number;
-  maxAdsForFreeView: number;
-  isBanner: boolean;
-  isTrending: boolean;
-  isActive: boolean;
-  episodes: string;
-}
+import { useRouter } from "next/navigation";
+import { FilmData, initialFilmsData } from "@/src/schema/filmData";
 
-const initialFilmsData: FilmData[] = [
-  {
-    id: "1",
-    no: "01",
-    image: "/images/Poster 4.png",
-    category: "Love",
-    name: "Lover",
-    description: "No Description",
-    date: "31/12/2025",
-    totalEpisodes: 24,
-    maxAdsForFreeView: 5,
-    isBanner: true,
-    isTrending: false,
-    isActive: true,
-    episodes: "View",
-  },
-  {
-    id: "2",
-    no: "01",
-    image: "/images/Poster 4.png",
-    category: "Love",
-    name: "Lover",
-    description: "No Description",
-    date: "31/12/2025",
-    totalEpisodes: 24,
-    maxAdsForFreeView: 5,
-    isBanner: true,
-    isTrending: false,
-    isActive: true,
-    episodes: "View",
-  },
-  {
-    id: "3",
-    no: "01",
-    image: "/images/Poster 4.png",
-    category: "Love",
-    name: "Lover",
-    description: "No Description",
-    date: "31/12/2025",
-    totalEpisodes: 24,
-    maxAdsForFreeView: 5,
-    isBanner: true,
-    isTrending: false,
-    isActive: true,
-    episodes: "View",
-  },
-  {
-    id: "4",
-    no: "01",
-    image: "/images/Poster 4.png",
-    category: "Love",
-    name: "Lover",
-    description: "No Description",
-    date: "31/12/2025",
-    totalEpisodes: 24,
-    maxAdsForFreeView: 5,
-    isBanner: true,
-    isTrending: false,
-    isActive: true,
-    episodes: "View",
-  },
-  {
-    id: "5",
-    no: "01",
-    image: "/images/Poster 4.png",
-    category: "Love",
-    name: "Lover",
-    description: "No Description",
-    date: "31/12/2025",
-    totalEpisodes: 24,
-    maxAdsForFreeView: 5,
-    isBanner: true,
-    isTrending: false,
-    isActive: true,
-    episodes: "View",
-  },
-  {
-    id: "6",
-    no: "01",
-    image: "/images/Poster 4.png",
-    category: "Love",
-    name: "Lover",
-    description: "No Description",
-    date: "31/12/2025",
-    totalEpisodes: 24,
-    maxAdsForFreeView: 5,
-    isBanner: true,
-    isTrending: false,
-    isActive: true,
-    episodes: "View",
-  },
-  {
-    id: "7",
-    no: "01",
-    image: "/images/Poster 4.png",
-    category: "Love",
-    name: "Lover",
-    description: "No Description",
-    date: "31/12/2025",
-    totalEpisodes: 24,
-    maxAdsForFreeView: 5,
-    isBanner: true,
-    isTrending: false,
-    isActive: true,
-    episodes: "View",
-  },
-  {
-    id: "8",
-    no: "01",
-    image: "/images/Poster 4.png",
-    category: "Love",
-    name: "Lover",
-    description: "No Description",
-    date: "31/12/2025",
-    totalEpisodes: 24,
-    maxAdsForFreeView: 5,
-    isBanner: true,
-    isTrending: false,
-    isActive: true,
-    episodes: "View",
-  },
-  {
-    id: "9",
-    no: "01",
-    image: "/images/Poster 4.png",
-    category: "Love",
-    name: "Lover",
-    description: "No Description",
-    date: "31/12/2025",
-    totalEpisodes: 24,
-    maxAdsForFreeView: 5,
-    isBanner: true,
-    isTrending: false,
-    isActive: true,
-    episodes: "View",
-  },
-];
 
 const FilmTable = () => {
+  const router = useRouter();
   // const [episodesData, setEpisodesData] = useState<FilmData[]>(initialFilmsData);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalMode, setModalMode] = useState<"add" | "edit">("add");
   const [editingEpisode, setEditingEpisode] = useState<FilmData | null>(null);
 
   const handleNewClick = () => {
-    setModalMode("add");
-    setEditingEpisode(null);
-    setIsModalOpen(true);
+    router.push("/en/super-admin/dashboard/film-list/film-form?mode=add");
   };
 
-  const handleAddFilm = (filmData: FilmFormData) => {
-    if (modalMode === "add") {
-      // Set Film Data
-      // TODO: handle letter
-    } else if (modalMode === "edit" && editingEpisode) {
-      // update film data
-      // TODO: handle letter
-    }
-    setEditingEpisode(null);
-  };
+  const handleEditFilm = (formData: FilmData) => {
+    const params = new URLSearchParams({
+      initialData: ""
+    })
 
-  const handleEditEpisode = (episode: FilmData) => {
-    setEditingEpisode(episode);
-    setModalMode("edit");
-    setIsModalOpen(true);
+    router.push(
+      `/en/super-admin/dashboard/film-list/film-form?mode=edit&data=${params}`
+    );
   };
   const columns: TableColumn<FilmData>[] = [
     {
@@ -315,7 +154,7 @@ const FilmTable = () => {
   const actions: TableAction<FilmData>[] = [
     {
       label: "Edit",
-      onClick: handleEditEpisode,
+      onClick: handleEditFilm,
     },
     {
       label: "Delete",
@@ -327,23 +166,6 @@ const FilmTable = () => {
     },
   ];
 
-  const getInitialFormData = (): FilmFormData | undefined => {
-    if (!editingEpisode) return undefined;
-
-    return {
-      id: editingEpisode.id,
-      type: "WEB SERIES",
-      name: editingEpisode.name,
-      category: editingEpisode.category,
-      description: editingEpisode.description,
-      maxAdsForFreeView: editingEpisode.maxAdsForFreeView.toString(),
-      poster: null,
-      banner: null,
-      isBanner: editingEpisode.isBanner,
-      isTrending: editingEpisode.isTrending,
-      isActive: editingEpisode.isActive,
-    };
-  };
   return (
     <div>
       <ReusableTable
@@ -351,14 +173,6 @@ const FilmTable = () => {
         columns={columns}
         headerConfig={headerConfig}
         actions={actions}
-      />
-
-      <AddAndEditFilmModal
-        open={isModalOpen}
-        onOpenChange={setIsModalOpen}
-        onSave={handleAddFilm}
-        mode={modalMode}
-        initialData={getInitialFormData()}
       />
     </div>
   );

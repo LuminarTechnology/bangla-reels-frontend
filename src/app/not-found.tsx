@@ -1,20 +1,53 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/src/components/ui/button";
 
-export default function NotFound() {
+interface NotFoundProps {
+  title?: string;
+  message?: string;
+  showButton?: boolean;
+  buttonText?: string;
+  buttonLink?: string;
+  className?: string;
+}
+
+export default function NotFound({
+  title,
+  message,
+  showButton = true,
+  buttonText = "Go back home",
+  buttonLink = "/",
+  className,
+}: NotFoundProps) {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100">
-      <h1 className="mb-4 text-6xl font-bold text-gray-800">404</h1>
-      <h2 className="mb-6 text-2xl font-semibold text-gray-600">Page Not Found</h2>
-      <p className="mb-8 text-center text-gray-500">
-        The page you are looking for doesn't exist or has been moved.
-      </p>
-      <Link
-        href="/"
-        className="rounded-md bg-red-500 px-6 py-3 text-white transition-colors hover:bg-red-600"
-      >
-        Go back home
-      </Link>
+    <div
+      className={`flex flex-col items-center justify-center gap-6 p-8 text-center ${className}`}
+    >
+      <Image
+        src="/images/404NotFound.png"
+        alt="Not Found Illustration"
+        width={400}
+        height={300}
+        className="max-w-xs md:max-w-sm"
+      />
+
+      {title && (
+        <h2 className="text-2xl font-semibold text-gray-800">{title}</h2>
+      )}
+      {message && (
+        <p className="max-w-md text-gray-500">
+          {message}
+        </p>
+      )}
+
+      {showButton && (
+        <Link href={buttonLink}>
+          <Button variant="danger" size="lg">
+            {buttonText}
+          </Button>
+        </Link>
+      )}
     </div>
   );
 }

@@ -55,7 +55,7 @@ export default function EpisodeSelection({
     onAutoPlayToggle?.(checked);
   };
   return (
-    <div className="mt-10 rounded-lg bg-[#16151A] p-6">
+    <div className="mt-10 rounded-lg bg-[#0F0828] p-6">
       {/* Header */}
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-xl font-semibold text-white">Selections</h3>
