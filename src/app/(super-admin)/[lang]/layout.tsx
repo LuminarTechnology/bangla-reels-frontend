@@ -19,7 +19,7 @@ export default async function SuperAdminLayout({ children, params }: Props) {
   } catch {
     notFound();
   }
-  const lnLN = lang === "en" ? enUS : lang === "es" ? esES : bnIN;
+  const lnLN = lang === "bn" ? bnIN : lang === "es" ? esES : enUS;
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
       <LocaleProvider routeLang={lang}>
