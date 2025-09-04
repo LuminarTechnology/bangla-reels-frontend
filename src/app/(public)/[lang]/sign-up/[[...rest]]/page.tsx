@@ -12,6 +12,7 @@ export default function SignUpPage() {
         routing="path"
         signInUrl={`/${lang}/sign-in`}
         afterSignUpUrl={`/${lang}`}
+        afterSignOutUrl={`/${lang}`}
         fallbackRedirectUrl={`/${lang}`}
         appearance={{
           elements: { card: "shadow-none border-none" },
