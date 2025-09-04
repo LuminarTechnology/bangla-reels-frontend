@@ -12,7 +12,7 @@ export default function SignUpPage() {
         routing="path"
         signInUrl={`/${lang}/sign-in`}
         afterSignUpUrl={`/${lang}`}
-        // fallbackRedirectUrl={`/${lang}`}
+        fallbackRedirectUrl={`/${lang}`}
         appearance={{
           elements: { card: "shadow-none border-none" },
         }}

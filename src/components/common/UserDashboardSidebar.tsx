@@ -88,6 +88,7 @@ const UserDashboardSidebar: React.FC<UserDashboardSidebarProps> = ({
           }
         /> */}
         <SignOutButton
+          redirectUrl={`/${lang}`}
           children={
             <Button className="bg-primary-rose hover:bg-primary-rose-hover flex w-[90%] cursor-pointer items-center gap-3 rounded-xl px-3 py-3 transition sm:w-full">
               <LogOut className="h-5 w-5" />

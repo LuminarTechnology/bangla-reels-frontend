@@ -111,6 +111,7 @@ export function SidebarContent({ sidebarItems, onItemClick }: SidebarContentProp
       {/* Sign Out (fixed bottom) */}
       <div className="p-3">
         <SignOutButton
+          redirectUrl={`/${lang}`}
           children={
             <button className="flex w-full cursor-pointer items-center space-x-3 rounded-lg px-3 py-3 text-sm font-medium text-red-400 transition-colors hover:bg-red-600 hover:text-white">
               <LogOut className="h-5 w-5" />
