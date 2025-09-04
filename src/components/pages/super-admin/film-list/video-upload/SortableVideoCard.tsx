@@ -37,11 +37,13 @@ export default function SortableVideoCard({
   };
 
   return (
-    <Card ref={setNodeRef} style={style} className="p-4 shadow-none rounded-2xl">
-      <div className="flex items-center gap-4">
-        <div className="w-8 text-2xl font-bold">{index + 1}</div>
+    <Card ref={setNodeRef} style={style} className="rounded-2xl p-2 shadow-none md:p-4">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center md:gap-4">
+        {/* Index number (hidden on mobile, shown on sm+) */}
+        <div className="hidden w-4 text-2xl font-bold text-gray-500 sm:block">{index + 1}</div>
 
-        <div className="h-[125px] w-20 flex-shrink-0 overflow-hidden rounded-2xl bg-gray-200">
+        {/* Thumbnail */}
+        <div className="h-40 w-full flex-shrink-0 overflow-hidden rounded-2xl bg-gray-200 sm:h-[125px] sm:w-24">
           {video.thumbnail ? (
             <img
               src={video.thumbnail}
@@ -53,30 +55,22 @@ export default function SortableVideoCard({
           )}
         </div>
 
+        {/* Content */}
         <div className="min-w-0 flex-1">
+          {/* File name */}
           <h4 className="truncate font-medium text-gray-900">{video.file?.name ?? "Untitled"}</h4>
 
           {/* Status messages */}
           {video.status === "unsupported" && (
             <div className="mt-1 flex items-center gap-1 text-sm text-red-500">
-              <Image
-                src={"/icons/information-square.png"}
-                alt="information-square"
-                width={24}
-                height={24}
-              />
+              <Image src="/icons/information-square.png" alt="" width={20} height={20} />
               Unsupported file format
             </div>
           )}
 
           {video.status === "error" && (
             <div className="mt-1 flex items-center gap-1 text-sm text-red-500">
-              <Image
-                src={"/icons/information-square.svg"}
-                alt="information-square"
-                width={24}
-                height={24}
-              />
+              <Image src="/icons/information-square.svg" alt="" width={20} height={20} />
               {video.error}
             </div>
           )}
@@ -90,20 +84,19 @@ export default function SortableVideoCard({
           )}
 
           {/* File info */}
-          <div className="mt-1 flex items-center gap-4 text-sm text-[#B3B1B0]">
+          <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-[#B3B1B0] sm:text-sm">
             <span>{video.file?.type?.split?.("/")?.[1]?.toUpperCase?.() ?? "N/A"}</span>
             <span>•</span>
             <span>{formatFileSize(video.file?.size ?? 0)}</span>
-          </div>
-          <div className="mt-1 flex items-center gap-4 text-sm text-[#B3B1B0]">
             {video.duration && (
               <>
+                <span>•</span>
                 <span>{video.duration}</span>
               </>
             )}
             {video.resolution && (
               <>
-                <span className="text-red-500">•</span>
+                <span>•</span>
                 <span className="text-red-500">{video.resolution}</span>
               </>
             )}
@@ -118,34 +111,23 @@ export default function SortableVideoCard({
                   style={{ width: `${video.progress}%` }}
                 />
               </div>
-              <span className="min-w-[3ch] text-sm text-gray-500">
+              <span className="min-w-[3ch] text-xs text-gray-500 sm:text-sm">
                 {Math.round(video.progress)}%
               </span>
             </div>
           )}
         </div>
 
-        {/* Actions */}
-        <div className="flex items-center gap-2">
+        {/* Actions (move to bottom row on mobile) */}
+        <div className="mt-2 flex flex-row gap-2">
           {video.status === "error" && (
             <Button variant="ghost" size="icon" onClick={() => retryUpload(video.videoId)}>
-              <Image
-                src={"/icons/ArrowCounterClockwise.svg"}
-                alt="retry-icon"
-                width={30}
-                height={30}
-              />
+              <Image src="/icons/ArrowCounterClockwise.svg" alt="retry" width={24} height={24} />
             </Button>
           )}
           <Button variant="ghost" size="icon" onClick={() => removeVideo(video.id)}>
-            <Image
-                src={"/icons/cancel-square.svg"}
-                alt="information-square"
-                width={30}
-                height={30}
-              />
+            <Image src="/icons/cancel-square.svg" alt="delete" width={24} height={24} />
           </Button>
-          {/* Drag handle */}
           <Button
             variant="ghost"
             size="icon"
@@ -153,12 +135,7 @@ export default function SortableVideoCard({
             {...attributes}
             {...listeners}
           >
-            <Image
-              src={"/icons/menu-09.svg"}
-              alt="drag icon"
-              width={30}
-              height={30}
-            />
+            <Image src="/icons/menu-09.svg" alt="drag" width={24} height={24} />
           </Button>
         </div>
       </div>

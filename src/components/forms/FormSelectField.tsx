@@ -12,7 +12,8 @@ type FormSelectFieldProps = {
   options: { label: string; value: string | number }[];
   placeholder?: string;
   disabled?: boolean;
-  className?:string
+  className?: string;
+  required?: boolean;
 };
 
 export function FormSelectField({
@@ -23,14 +24,31 @@ export function FormSelectField({
   placeholder,
   disabled,
   className,
+  required,
 }: FormSelectFieldProps) {
   return (
     <Controller
       name={name}
       control={control}
+      rules={{
+        required: required
+          ? typeof required === "string"
+            ? required
+            : "This field is required"
+          : false,
+      }}
       render={({ field, fieldState: { error } }) => (
         <div className="space-y-4">
-          {label && <Label htmlFor={name}>{label}</Label>}
+          {label && (
+            <Label htmlFor={name}>
+              <p className="relative inline">
+                {label}
+                {required && (
+                  <span className="absolute -top-1 -right-2 text-base text-red-500">*</span>
+                )}
+              </p>
+            </Label>
+          )}
           <Select value={field.value} onValueChange={field.onChange} disabled={disabled}>
             <SelectTrigger className={`w-full ${className} ${error ? "border-red-500" : ""}`}>
               <SelectValue placeholder={placeholder} />

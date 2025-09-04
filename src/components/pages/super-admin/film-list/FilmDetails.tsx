@@ -7,18 +7,18 @@ import { FilmFormData } from "@/src/schema/FilmList.schema";
 import React from "react";
 import { Control, useWatch } from "react-hook-form";
 
-interface FilmDetailsProps{
-  control: Control<FilmFormData>
+interface FilmDetailsProps {
+  control: Control<FilmFormData>;
 }
 
-const FilmDetails = ({control}:FilmDetailsProps) => {
+const FilmDetails = ({ control }: FilmDetailsProps) => {
   const isBanner = useWatch({
     control,
     name: "isBanner",
     defaultValue: true,
-  })
+  });
   return (
-    <div className="min-h-0 flex-1 space-y-2 overflow-y-auto pt-2 pb-4 sm:space-y-4 px-1">
+    <div className="min-h-0 flex-1 space-y-2 overflow-y-auto px-1 pt-2 pb-4 sm:space-y-4">
       <FormRadioGroupField
         name="type"
         control={control}
@@ -48,6 +48,7 @@ const FilmDetails = ({control}:FilmDetailsProps) => {
             errorBorder: "border-red-500",
             errorText: "text-red-500",
           }}
+          required
         />
 
         <FormSelectField
@@ -60,7 +61,8 @@ const FilmDetails = ({control}:FilmDetailsProps) => {
             { label: "Drama", value: "drama" },
             { label: "Comedy", value: "comedy" },
           ]}
-          className="rounded-2xl py-5 border-gray-300"
+          className="rounded-2xl border-gray-300 py-5"
+          required
         />
       </div>
 
@@ -81,6 +83,7 @@ const FilmDetails = ({control}:FilmDetailsProps) => {
           errorBorder: "border-red-500",
           errorText: "text-red-500",
         }}
+        required
       />
 
       <FormInputField
@@ -101,30 +104,34 @@ const FilmDetails = ({control}:FilmDetailsProps) => {
           errorBorder: "border-red-500",
           errorText: "text-red-500",
         }}
+        required
       />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <FormFileUploadField
-          name="poster"
-          control={control}
-          label="Poster"
-          accept="image/*"
-          buttonText="Choose File"
-          placeholder="No file chosen"
-        />
-        {isBanner && <FormFileUploadField
-          name="banner"
-          control={control}
-          label="Banner"
-          accept="image/*"
-          buttonText="Choose File"
-          placeholder="No file chosen"
-        />}
-      </div>
-
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 -mt-4 text-[#A9A9A9]">
-        <p>JPG only, 1080 x  1440, max 5MB</p>
-        {isBanner && <p>JPG only, 1080 x  1440, max 5MB</p>}
+        <div>
+          <FormFileUploadField
+            name="poster"
+            control={control}
+            label="Poster"
+            accept="image/*"
+            buttonText="Choose File"
+            placeholder="No file chosen"
+          />
+          <p className="text-gray-400">JPG only, 1080 x 1440, max 5MB</p>
+        </div>
+        {isBanner && (
+          <div>
+            <FormFileUploadField
+              name="banner"
+              control={control}
+              label="Banner"
+              accept="image/*"
+              buttonText="Choose File"
+              placeholder="No file chosen"
+            />
+            {isBanner && <p className="text-gray-400">JPG only, 1080 x 1440, max 5MB</p>}
+          </div>
+        )}
       </div>
 
       <div className="space-y-4">
