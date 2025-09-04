@@ -16,7 +16,6 @@ export default function SignInPage() {
       setLoading(true);
       try {
         const token = await getToken({ template: "backend" });
-        console.log("token", token);
         if (!token) return;
         await signInToBackend(token);
       } catch (err) {
