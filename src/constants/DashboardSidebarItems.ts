@@ -54,7 +54,7 @@ export const SuperAdminSidebarItems = [
   },
   {
     title: "Profile",
-    href: "/profile",
+    href: "/super-admin/dashboard/profile",
     icon: User,
   },
   {

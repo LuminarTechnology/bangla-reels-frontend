@@ -1,44 +1,13 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/src/components/ui/tabs";
 import { Separator } from "@/src/components/ui/separator";
-import GeneralTab from "./GeneralTab";
-import PaymentTab from "./PaymentTab";
-import AdsTab from "./AdsTab";
-import ReportTab from "./ReportTab";
-import CurrencyTab from "./CurrencyTab";
+import { settingTabs } from "@/src/constants/AdminSettingsItems";
 
-const tabs = [
-  {
-    name: "General",
-    value: "general",
-    content: <GeneralTab />,
-  },
-  {
-    name: "Payment",
-    value: "payment",
-    content: <PaymentTab />,
-  },
-  {
-    name: "Ads",
-    value: "ads",
-    content: <AdsTab />,
-  },
-  {
-    name: "Report",
-    value: "report",
-    content: <ReportTab />
-  },
-  {
-    name: "Currency",
-    value: "currency",
-    content: <CurrencyTab />
-  }
-];
 export default function SettingTabs() {
   return (
-    <Tabs defaultValue={tabs[0].value} className="w-full relative">
+    <Tabs defaultValue={settingTabs[0].value} className="w-full relative">
       <Separator className="absolute top-9 -inset-x-8 !w-[104.4%]" />
-      <TabsList className="w-fit justify-start gap-4 rounded-none border-b p-0">
-        {tabs.map((tab) => (
+      <TabsList className="w-fit justify-start gap-1 sm:gap-4 rounded-none border-b p-0">
+        {settingTabs.map((tab) => (
           <TabsTrigger
             key={tab.value}
             value={tab.value}
@@ -48,7 +17,7 @@ export default function SettingTabs() {
           </TabsTrigger>
         ))}
       </TabsList>
-      {tabs.map((tab) => (
+      {settingTabs.map((tab) => (
         <TabsContent key={tab.value} value={tab.value}>
           {tab.content}
         </TabsContent>
