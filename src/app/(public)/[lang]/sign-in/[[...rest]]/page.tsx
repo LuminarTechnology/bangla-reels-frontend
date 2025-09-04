@@ -10,8 +10,9 @@ export default function SignInPage() {
         path={`/${lang}/sign-in`}
         routing="path"
         signUpUrl={`/${lang}/sign-up`}
+        afterSignInUrl={`/${lang}`}
+        afterSignOutUrl={`/${lang}`}
         afterSignUpUrl={`/${lang}`}
-        fallbackRedirectUrl={`/${lang}`}
         appearance={{
           elements: { card: "shadow-none border-none" },
         }}
