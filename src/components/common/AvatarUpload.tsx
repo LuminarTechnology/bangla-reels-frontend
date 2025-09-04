@@ -7,11 +7,13 @@ import { useUser } from '@clerk/nextjs';
 interface AvatarUploadProps {
   onAvatarChange: (file: File) => void;
   size?: 'sm' | 'md' | 'lg';
+  bgColor?: string;
 }
 
 const AvatarUpload: React.FC<AvatarUploadProps> = ({
   onAvatarChange,
   size = 'lg',
+  bgColor
 }) => {
   const [isUploading, setIsUploading] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
@@ -90,7 +92,7 @@ const AvatarUpload: React.FC<AvatarUploadProps> = ({
       {/* Upload Button */}
       <Button
         onClick={() => fileInputRef.current?.click()}
-        className="bg-[#141414] hover:bg-black text-white px-6 py-5 rounded-xl"
+        className={`${bgColor ? bgColor : 'bg-[#141414] hover:bg-black'} text-white px-6 py-5 rounded-xl`}
       >
         Change Avatar
       </Button>
