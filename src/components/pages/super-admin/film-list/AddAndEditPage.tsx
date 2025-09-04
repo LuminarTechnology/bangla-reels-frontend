@@ -142,7 +142,7 @@ const FilmFormPage = ({ mode, onSave, initialData, onCancel }: FilmFormPageProps
   };
 
   return (
-    <div className="mx-auto max-w-[1056px] md:p-4">
+    <div className="mx-auto w-full">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">
@@ -154,7 +154,7 @@ const FilmFormPage = ({ mode, onSave, initialData, onCancel }: FilmFormPageProps
       </div>
 
       {/* Form Container */}
-      <div className="min-h-[600px] rounded-lg border bg-white shadow-sm">
+      <div className="rounded-lg border bg-white shadow-sm">
         <form onSubmit={handleSubmit(processForm)} className="flex h-full flex-col">
           {/* Form Content */}
           <div className="flex-1 space-y-4 p-3 md:p-6">

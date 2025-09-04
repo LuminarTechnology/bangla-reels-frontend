@@ -18,7 +18,7 @@ const FilmDetails = ({ control }: FilmDetailsProps) => {
     defaultValue: true,
   });
   return (
-    <div className="min-h-0 flex-1 space-y-2 overflow-y-auto px-1 pt-2 pb-4 sm:space-y-4">
+    <div className="space-y-2 md:space-y-3">
       <FormRadioGroupField
         name="type"
         control={control}
