@@ -78,23 +78,29 @@ const isPublicRoute = createRouteMatcher([
 
 //  Auth Middleware
 const authHandler = clerkMiddleware(async (auth, req: NextRequest) => {
+  const { pathname } = req.nextUrl;
   const { sessionClaims } = await auth();
+  const lang = req.cookies.get("locale")?.value || DEFAULT_LOCALE;
 
   const roles: Roles[] = (sessionClaims?.metadata?.roles as Roles[]) || [];
 
   // Admin route protection
   // if (isAdminRoute(req) && !roles.includes("superAdmin")) {
-  //   const lang = req.cookies.get("locale")?.value || DEFAULT_LOCALE;
+
   //   const url = new URL(`/${lang}/super-admin/login`, req.url);
   //   return NextResponse.redirect(url);
   // }
 
   // Non-public route protection
   // if (!isPublicRoute(req)) {
-  //   const lang = req.cookies.get("locale")?.value || DEFAULT_LOCALE;
+
   //   const url = new URL(`/${lang}/sign-in`, req.url);
   //   return NextResponse.redirect(url);
   // }
+
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL(`/${lang}`, req.url));
+  }
 
   return NextResponse.next();
 });
