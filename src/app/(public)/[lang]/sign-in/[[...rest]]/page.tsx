@@ -1,32 +1,8 @@
-"use client";
-import { useLocale } from "@/src/app/LocaleProvider";
-import { signInToBackend } from "@/src/services/auth/authService";
-import { SignIn, useAuth } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
+import { SignIn } from "@clerk/nextjs";
+import { useLocale } from "next-intl";
 
 export default function SignInPage() {
-  const { lang } = useLocale();
-  const [loading, setLoading] = useState(false);
-  const { getToken, isSignedIn } = useAuth();
-
-  useEffect(() => {
-    if (!isSignedIn) return;
-
-    const sync = async () => {
-      setLoading(true);
-      try {
-        const token = await getToken({ template: "backend" });
-        if (!token) return;
-        await signInToBackend(token);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    sync();
-  }, [isSignedIn, getToken]);
+  const lang = useLocale();
 
   return (
     <div className="my-4 flex min-h-screen items-center justify-center md:my-8">

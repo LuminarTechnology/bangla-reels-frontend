@@ -8,7 +8,7 @@ import { ReactNode } from "react";
 import { LocaleProvider } from "../../LocaleProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-import { frFR } from "@clerk/localizations";
+import { enUS, bnIN, esES } from "@clerk/localizations";
 interface Props {
   readonly children: ReactNode;
   readonly params: Promise<{ lang: string }>;
@@ -23,6 +23,7 @@ export default async function DashboardLayout({ children, params }: Props) {
   } catch {
     notFound();
   }
+  const lnLN = lang === "bn" ? bnIN : lang === "es" ? esES : enUS;
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
       <LocaleProvider routeLang={lang}>
@@ -30,7 +31,7 @@ export default async function DashboardLayout({ children, params }: Props) {
           appearance={{
             baseTheme: dark,
           }}
-          localization={frFR}
+          localization={lnLN}
         >
           <div className="gradient-background">
             <div>

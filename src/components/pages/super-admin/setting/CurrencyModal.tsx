@@ -90,9 +90,7 @@ const CurrencyModal: React.FC<CurrencyModalProps> = ({
                 options={[
                   { label: "Taka", value: "taka" },
                   { label: "Dollar", value: "dollar" },
-                  { label: "Euro", value: "euro" },
-                  { label: "Pound", value: "pound" },
-                  { label: "Yen", value: "yen" }
+                  { label: "Euro", value: "euro" }
                 ]}
                 className="rounded-3xl py-5 border-gray-300"
               />
@@ -104,9 +102,7 @@ const CurrencyModal: React.FC<CurrencyModalProps> = ({
                 options={[
                   { label: "BDT", value: "taka" },
                   { label: "USD", value: "dollar" },
-                  { label: "EUR", value: "euro" },
-                  { label: "GBP", value: "pound" },
-                  { label: "JPY", value: "yen" }
+                  { label: "EUR", value: "euro" }
                 ]}
                 className="rounded-3xl py-5 border-gray-300"
               />
@@ -121,9 +117,7 @@ const CurrencyModal: React.FC<CurrencyModalProps> = ({
                 options={[
                   { label: "৳", value: "taka" },
                   { label: "$", value: "dollar" },
-                  { label: "€", value: "euro" },
-                  { label: "£", value: "pound" },
-                  { label: "¥", value: "yen" }
+                  { label: "€", value: "euro" }
                 ]}
                 className="rounded-3xl py-5 border-gray-300"
               />
@@ -135,9 +129,7 @@ const CurrencyModal: React.FC<CurrencyModalProps> = ({
                 options={[
                   { label: "BD", value: "taka" },
                   { label: "USA", value: "dollar" },
-                  { label: "EU", value: "euro" },
-                  { label: "GB", value: "pound" },
-                  { label: "JP", value: "yen" }
+                  { label: "EU", value: "euro" }
                 ]}
                 className="rounded-3xl py-5 border-gray-300"
               />
