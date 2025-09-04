@@ -42,7 +42,6 @@ const Banner: React.FC = () => {
       const payload = {
         email: user.emailAddresses[0].emailAddress!,
         name: user.firstName + (user.lastName || " ")!,
-        avatar: user.imageUrl!,
       };
 
       signUpToBackend(payload, token!);
