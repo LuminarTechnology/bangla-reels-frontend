@@ -39,7 +39,6 @@ export function LocaleProvider({
   const changeLang = (newLocale: string) => {
     setLang(newLocale);
     localStorage.setItem("locale", newLocale);
-    router.push(`/${newLocale}`); // navigate to new route
   };
 
   return <LocaleContext.Provider value={{ lang, changeLang }}>{children}</LocaleContext.Provider>;
