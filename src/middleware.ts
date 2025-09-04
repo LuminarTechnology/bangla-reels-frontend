@@ -12,7 +12,7 @@ const intlMiddleware = createIntlMiddleware({
   localeDetection: true,
 });
 
-const isAdminRoute = createRouteMatcher(["/en/super-admin/dashboard(.*)"]);
+const isAdminRoute = createRouteMatcher(["/en/super-admin/(.*)"]);
 
 const isPublicRoute = createRouteMatcher([
   "/en/sign-in(.*)",
@@ -72,8 +72,6 @@ const isPublicRoute = createRouteMatcher([
   "/bn/dashboard/subscription-rewards",
   "/es/dashboard/subscription-rewards",
   "/la/dashboard/subscription-rewards",
-  "/en/super-admin/login",
-  "/en/super-admin/dashboard(.*)",
 ]);
 
 //  Auth Middleware
@@ -84,19 +82,19 @@ const authHandler = clerkMiddleware(async (auth, req: NextRequest) => {
 
   const roles: Roles[] = (sessionClaims?.metadata?.roles as Roles[]) || [];
 
-  // Admin route protection
-  // if (isAdminRoute(req) && !roles.includes("superAdmin")) {
+  if (process.env.NODE_ENV !== "development") {
+    // Admin route protection
+    if (isAdminRoute(req) && !roles.includes("superAdmin")) {
+      const url = new URL(`/${lang}/sign-in`, req.url);
+      return NextResponse.redirect(url);
+    }
 
-  //   const url = new URL(`/${lang}/super-admin/login`, req.url);
-  //   return NextResponse.redirect(url);
-  // }
-
-  // Non-public route protection
-  // if (!isPublicRoute(req)) {
-
-  //   const url = new URL(`/${lang}/sign-in`, req.url);
-  //   return NextResponse.redirect(url);
-  // }
+    // Non-public route protection
+    if (!isPublicRoute(req) && roles.length === 0) {
+      const url = new URL(`/${lang}/sign-in`, req.url);
+      return NextResponse.redirect(url);
+    }
+  }
 
   if (pathname === "/") {
     return NextResponse.redirect(new URL(`/${lang}`, req.url));
