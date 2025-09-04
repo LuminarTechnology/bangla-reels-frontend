@@ -216,7 +216,7 @@ const CoinPlanTable = () => {
 
   const handleModalSubmit = (data: any) => {
     if (modalMode === "add") {
-        console.log(data);
+        // console.log(data);
       // TODO: handle letter
     } else if (modalMode === "edit" && selectedPlan) {
       // TODO: handle letter
