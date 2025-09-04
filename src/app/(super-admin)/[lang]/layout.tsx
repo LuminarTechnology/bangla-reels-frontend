@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 import { LocaleProvider } from "../../LocaleProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-import { frFR } from "@clerk/localizations";
+import { enUS, esES, bnIN } from "@clerk/localizations";
 interface Props {
   readonly children: ReactNode;
   readonly params: Promise<{ lang: string }>;
@@ -19,6 +19,7 @@ export default async function SuperAdminLayout({ children, params }: Props) {
   } catch {
     notFound();
   }
+  const lnLN = lang === "en" ? enUS : lang === "es" ? esES : bnIN;
   return (
     <NextIntlClientProvider locale={lang} messages={messages}>
       <LocaleProvider routeLang={lang}>
@@ -26,7 +27,7 @@ export default async function SuperAdminLayout({ children, params }: Props) {
           appearance={{
             baseTheme: dark,
           }}
-          localization={frFR}
+          localization={lnLN}
         >
           <main className="scrollbar-admin">{children}</main>
         </ClerkProvider>
