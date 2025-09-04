@@ -32,7 +32,7 @@ const profileSchema = z
 type ProfileFormData = z.infer<typeof profileSchema>;
 
 export default function ProfilePage() {
-  const { user, isLoaded } = useUser();
+  const { user } = useUser();
 
   const { control, handleSubmit, reset } = useForm<ProfileFormData>({
     resolver: zodResolver(profileSchema),
@@ -61,9 +61,6 @@ export default function ProfilePage() {
     
   };
 
-  if (!isLoaded) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div className="w-full text-white">
