@@ -5,5 +5,6 @@ export const UserDashboardSidebarItems = [
   { name: "Subscription & Rewards", href: "/dashboard/subscription-rewards", icon: AwardIcon },
   { name: "My List", href: "/dashboard/my-list", icon: SquarePlay },
   { name: "History", href: "/dashboard/history", icon: ClockFading },
+  { name: "Analytics", href: "/dashboard/analytics", icon: ClockFading },
   { name: "Feedback", href: "/dashboard/feedback", icon: MailOpen },
 ];
