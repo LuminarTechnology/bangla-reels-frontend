@@ -5,6 +5,7 @@ import DetailsCard from "@/src/components/pages/episodes/DetailsCard";
 import EpisodeSelection from "@/src/components/pages/episodes/EpisodeSelection";
 import YouMayLike from "@/src/components/pages/episodes/YouMayLike";
 import ReusableBreadcrumb from "@/src/components/common/ReusableBreadcrumb";
+import { useLocale } from "next-intl";
 
 const defaultVideo = {
   title: "The Island",
@@ -16,6 +17,7 @@ const defaultVideo = {
 };
 
 const EpisodePage = () => {
+  const lang = useLocale();
   return (
     <div className="my-4 flex h-screen flex-col gap-4 md:my-8 md:flex-row">
       {/* Video Player */}
@@ -53,7 +55,7 @@ const EpisodePage = () => {
         <ReusableBreadcrumb
           items={[
             { label: "Home", href: "/" },
-            { label: "Collateral Hearts", href: "/movie/Collateral Hearts" },
+            { label: "Collateral Hearts", href: `/${lang}/movie/Collateral Hearts` },
             { label: "Episode" },
           ]}
         />
