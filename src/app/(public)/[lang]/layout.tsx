@@ -9,6 +9,7 @@ import { LocaleProvider } from "../../LocaleProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { bnIN, enUS, esES } from "@clerk/localizations";
+import { AuthTokenProvider } from "@/src/lib/AuthTokenProvider";
 
 interface Props {
   readonly children: ReactNode;
@@ -35,6 +36,7 @@ export default async function UserLayout({ children, params }: Props) {
           }}
           localization={lnLN}
         >
+          <AuthTokenProvider />
           <div className="gradient-background">
             <Toaster position="top-right" richColors />
             <Navbar currentLang={lang} />

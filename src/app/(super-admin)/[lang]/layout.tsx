@@ -5,6 +5,7 @@ import { LocaleProvider } from "../../LocaleProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import { enUS, esES, bnIN } from "@clerk/localizations";
+import { AuthTokenProvider } from "@/src/lib/AuthTokenProvider";
 interface Props {
   readonly children: ReactNode;
   readonly params: Promise<{ lang: string }>;
@@ -29,6 +30,7 @@ export default async function SuperAdminLayout({ children, params }: Props) {
           }}
           localization={lnLN}
         >
+          <AuthTokenProvider />
           <main className="scrollbar-admin">{children}</main>
         </ClerkProvider>
       </LocaleProvider>
