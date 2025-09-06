@@ -1,4 +1,5 @@
 import StatsCard, { StatsCardProps } from "@/src/components/common/StatsCard";
+import AnalyticsChart from "@/src/components/pages/user-dashboard/analytics/AnalyticsChart";
 import { Eye, Clock, PlayCircle } from "lucide-react";
 
 const statsData : StatsCardProps[]= [
@@ -30,12 +31,15 @@ const statsData : StatsCardProps[]= [
 
 export default async function AnalyticsPage() {
   return (
-    <div className="">
+    <div className="space-y-6">
       <div className="flex flex-col justify-between gap-4 sm:flex-row">
         {statsData.map((stat, i) => (
           <StatsCard key={i} stat={stat} />
         ))}
       </div>
+
+      {/* Analytics Component */}
+      <AnalyticsChart/>
     </div>
   );
 }
