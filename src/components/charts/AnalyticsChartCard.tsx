@@ -75,7 +75,7 @@ const AnalyticsChartCard = ({title, strokeColor, id}: {title:string, strokeColor
   const chartHeight = 250;
   return (
     <div className="w-full rounded-2xl border border-[#595756] p-4">
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col md:flex-row md:items-start justify-between">
         <div>
           <h2 className="mb-1 text-2xl font-semibold text-[#FFFAFA]">{title}</h2>
           <p className="text-xs text-[#A9A9A9]">

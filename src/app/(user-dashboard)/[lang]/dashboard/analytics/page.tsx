@@ -1,6 +1,7 @@
 import StatsCard, { StatsCardProps } from "@/src/components/common/StatsCard";
 import AnalyticsChart from "@/src/components/pages/user-dashboard/analytics/AnalyticsChart";
-import { Eye, Clock, PlayCircle } from "lucide-react";
+import VideoPerformanceTable from "@/src/components/pages/user-dashboard/analytics/VideoPerformanceTable";
+import { Eye, Clock, PlayCircle, Video } from "lucide-react";
 
 const statsData : StatsCardProps[]= [
   {
@@ -40,6 +41,9 @@ export default async function AnalyticsPage() {
 
       {/* Analytics Component */}
       <AnalyticsChart/>
+
+      {/* Video Performance Table */}
+      <VideoPerformanceTable/>
     </div>
   );
 }
