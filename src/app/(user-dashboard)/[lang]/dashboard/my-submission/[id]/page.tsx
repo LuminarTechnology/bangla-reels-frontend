@@ -2,14 +2,13 @@ import EntryDetail from '@/src/components/pages/user-dashboard/my-submission/Ent
 import myEntriesData from '@/src/constants/MyEntries';
 import { notFound } from 'next/navigation';
 
-interface SubmissionDetailPageProps {
-  params: {
-    id: string;
-  };
-}
-
-export default function SubmissionDetailPage({ params }: SubmissionDetailPageProps) {
-  const entry = myEntriesData.find(entry => entry.id === params.id);
+export default async function SubmissionDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const entry = myEntriesData.find(entry => entry.id === id);
 
   if (!entry) {
     notFound();
