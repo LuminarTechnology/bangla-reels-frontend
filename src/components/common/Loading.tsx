@@ -23,7 +23,7 @@ const Loading = () => {
     <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-black text-white">
       {/* Animated background glow */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-rose-600/20 via-purple-700/20 to-black blur-3xl"
+        className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-700/20 to-black blur-3xl"
         animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         style={{ backgroundSize: "300% 300%" }}

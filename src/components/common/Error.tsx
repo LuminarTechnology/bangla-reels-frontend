@@ -2,13 +2,14 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { Button } from "../ui/button";
 
 const Error: React.FC = () => {
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-red-500/20 px-4 text-white">
+    <div className="gradient-background relative flex min-h-screen items-center justify-center overflow-hidden px-4 text-white">
       {/* Background animation */}
       <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-rose-600/20 via-red-500/10 to-black blur-3xl"
+        className="gradient-background absolute inset-0 blur-3xl"
         animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         style={{ backgroundSize: "300% 300%" }}
@@ -72,19 +73,19 @@ const Error: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
-          <button
+          <Button
             onClick={() => window.location.reload()}
             className="w-full rounded-lg bg-rose-500 px-6 py-3 font-semibold text-white shadow-md transition hover:bg-rose-600 focus:ring-2 focus:ring-rose-400 focus:ring-offset-2 focus:ring-offset-black focus:outline-none"
           >
             Try Again
-          </button>
+          </Button>
 
-          <button
+          <Button
             onClick={() => (window.location.href = "/")}
-            className="w-full rounded-lg bg-gray-800 px-6 py-3 font-semibold text-gray-300 transition hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-black focus:outline-none"
+            className="w-full cursor-pointer rounded-lg bg-gray-800 px-6 py-3 font-semibold text-gray-300 transition hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-black focus:outline-none"
           >
             Go Home
-          </button>
+          </Button>
         </motion.div>
 
         {/* Help text */}
