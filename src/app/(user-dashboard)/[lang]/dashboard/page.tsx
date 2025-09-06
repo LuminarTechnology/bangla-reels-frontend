@@ -1,12 +1,12 @@
 import { PosterCard } from "@/src/components/common/PosterCard";
+import StatsCard, { StatsCardProps } from "@/src/components/common/StatsCard";
 import { Wallet, ClockFading, BookmarkPlus } from "lucide-react";
 
-const stats = [
+const stats: StatsCardProps[] = [
   {
     title: "Wallet Balance",
     value: "1,200",
     unit: "Coins",
-    color: "bg-gradient-to-r from-yellow-400 to-orange-500",
     icon: Wallet,
     change: "+12%",
     changeType: "positive",
@@ -15,7 +15,6 @@ const stats = [
     title: "Watch History",
     value: "45",
     unit: "Episodes",
-    color: "bg-gradient-to-r from-blue-400 to-rose-500",
     icon: ClockFading,
     change: "+8 this week",
     changeType: "neutral",
@@ -24,7 +23,6 @@ const stats = [
     title: "My Watchlist",
     value: "12",
     unit: "Saved",
-    color: "bg-gradient-to-r from-rose-400 to-emerald-500",
     icon: BookmarkPlus,
     change: "+3 recently",
     changeType: "positive",
@@ -58,25 +56,7 @@ export default function OverviewPage() {
       {/* Stats Section */}
       <div className="flex flex-col sm:flex-row gap-4 justify-between">
         {stats.map((stat, i) => (
-          <div key={i} className="w-full relative rounded-2xl border-2 border-[#D7D7D740] px-6 py-7">
-            <div className="flex flex-col gap-3 justify-between">
-              <div className="bg-[#E83A57] w-fit p-1.5 rounded-md">
-                <stat.icon strokeWidth="1.25" className="size-7 text-[#FFFAFA]" />
-              </div>
-              <div className="flex items-baseline space-x-2">
-                <span className="text-3xl font-semibold text-[#FFFAFA]">{stat.value}</span>
-                <span className="text-sm text-[#B3B1B0]">{stat.unit}</span>
-              </div>
-              <div className="space-y-1">
-                <p className="text-sm text-[#B3B1B0]">{stat.title}</p>
-              </div>
-            </div>
-            <div
-              className="absolute top-2.5 right-2.5 bg-[#B3B1B033] text-xs text-white rounded-md px-2 py-1"
-            >
-              {stat.change}
-            </div>
-          </div>
+          <StatsCard key={i} stat={stat}/>
         ))}
       </div>
 

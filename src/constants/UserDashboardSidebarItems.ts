@@ -1,4 +1,12 @@
-import {  AwardIcon, LaptopMinimal, SquarePlay, MailOpen, ClockFading, FolderUp  } from "lucide-react";
+import {
+  AwardIcon,
+  LaptopMinimal,
+  SquarePlay,
+  MailOpen,
+  ClockFading,
+  ChartNoAxesCombined,
+  FolderUp,
+} from "lucide-react";
 
 export const UserDashboardSidebarItems = [
   { name: "Overview", href: "/dashboard", icon: LaptopMinimal },
@@ -6,5 +14,6 @@ export const UserDashboardSidebarItems = [
   { name: "My List", href: "/dashboard/my-list", icon: SquarePlay },
   { name: "History", href: "/dashboard/history", icon: ClockFading },
   { name: "My Submission", href: "/dashboard/my-submission", icon: FolderUp },
+  { name: "Analytics", href: "/dashboard/analytics", icon: ChartNoAxesCombined },
   { name: "Feedback", href: "/dashboard/feedback", icon: MailOpen },
 ];
