@@ -1,4 +1,5 @@
 export interface MyEntryCardProps {
+  id?: string;
   title: string;
   poster: string;
   status: "Approved" | "Pending" | "Rejected";
@@ -13,6 +14,7 @@ export interface MyEntryCardProps {
 
 const myEntriesData: MyEntryCardProps[] = [
   {
+    id: '3',
     title: "Entry 3 - Haunted Streets",
     poster: "/images/contest/GalleryofContestcardPoster.png",
     status: "Pending",
@@ -21,6 +23,7 @@ const myEntriesData: MyEntryCardProps[] = [
     reviewTimeLeft: "24 hour",
   },
   {
+    id: '2',
     title: "Entry 2 - Summer Nights",
     poster: "/images/contest/GalleryofContestcardPoster.png",
     status: "Approved",
@@ -31,6 +34,7 @@ const myEntriesData: MyEntryCardProps[] = [
     shares: "866k",
   },
   {
+    id: '1',
     title: "Entry 1 - Haunted Streets",
     poster: "/images/contest/GalleryofContestcardPoster.png",
     status: "Rejected",

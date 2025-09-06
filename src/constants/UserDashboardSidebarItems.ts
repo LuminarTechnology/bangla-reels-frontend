@@ -5,6 +5,7 @@ import {
   MailOpen,
   ClockFading,
   ChartNoAxesCombined,
+  FolderUp,
 } from "lucide-react";
 
 export const UserDashboardSidebarItems = [
@@ -12,6 +13,7 @@ export const UserDashboardSidebarItems = [
   { name: "Subscription & Rewards", href: "/dashboard/subscription-rewards", icon: AwardIcon },
   { name: "My List", href: "/dashboard/my-list", icon: SquarePlay },
   { name: "History", href: "/dashboard/history", icon: ClockFading },
+  { name: "My Submission", href: "/dashboard/my-submission", icon: FolderUp },
   { name: "Analytics", href: "/dashboard/analytics", icon: ChartNoAxesCombined },
   { name: "Feedback", href: "/dashboard/feedback", icon: MailOpen },
 ];
