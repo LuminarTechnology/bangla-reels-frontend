@@ -3,7 +3,7 @@
 import type React from "react";
 
 import { useState, useCallback, useRef, useEffect } from "react";
-import { Control, useFieldArray } from "react-hook-form";
+import { ArrayPath, Control, FieldPath, useFieldArray } from "react-hook-form";
 import { Button } from "@/src/components/ui/button";
 import { Card } from "@/src/components/ui/card";
 import { Upload } from "lucide-react";
@@ -20,25 +20,29 @@ import { useVideoFileHandling } from "./hooks/useVideoFileHandling";
 import { useVideoUploadSimulation } from "./hooks/useVideoUploadSimulation";
 import { useVideoDragDrop } from "./hooks/useVideoDragDrop";
 import { ContestData } from "@/src/schema/contest.schema";
+type FormDataWithVideos = {
+  videos: VideoFileData[];
+  [key: string]: any;
+};
 
-interface VideoUploadComponentProps {
-  control: Control<FilmFormData | ContestData>;
+interface VideoUploadComponentProps<T extends FormDataWithVideos> {
+  control: Control<T>;
   errors: any;
   theme: "dashboard" | "contest";
 }
 
-export function VideoUploadComponent({ control, errors, theme }: VideoUploadComponentProps) {
+export function VideoUploadComponent<T extends FormDataWithVideos>({ control, errors, theme }: VideoUploadComponentProps<T>) {
   const [showRules, setShowRules] = useState(false);
 
   const { fields, append, remove, update, replace } = useFieldArray({
-    name: "videos",
+    name: "videos" as ArrayPath<T>,
     control,
   });
 
   const videosRef = useRef<VideoFileData[]>([]);
   
   useEffect(() => {
-    videosRef.current = fields;
+    videosRef.current = fields as unknown as VideoFileData[];
   }, [fields]);
 
   // Initialize upload simulation hook
@@ -49,7 +53,7 @@ export function VideoUploadComponent({ control, errors, theme }: VideoUploadComp
 
   // Initialize file handling hook
   const { handleFileSelect, handleDrop, fileInputRef } = useVideoFileHandling({
-    appendToFieldArray: append,
+    appendToFieldArray: append as any,
     onUploadStart: simulateUpload,
   });
 
@@ -79,7 +83,7 @@ export function VideoUploadComponent({ control, errors, theme }: VideoUploadComp
   const retryUpload = useCallback(
     (videoId: string) => {
       fields.forEach((field, index) => {
-        if (field.videoId === videoId) {
+        if ((field as any).videoId === videoId) {
           update(index, {
             ...field,
             status: "pending",

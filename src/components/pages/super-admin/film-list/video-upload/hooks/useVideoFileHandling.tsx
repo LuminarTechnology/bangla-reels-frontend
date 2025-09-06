@@ -4,7 +4,7 @@ import { VideoFileData, FilmFormData } from "@/src/schema/FilmList.schema";
 import { useVideoProcessing } from "./useVideoProcessing";
 
 interface UseVideoFileHandlingProps {
-  appendToFieldArray: UseFieldArrayAppend<FilmFormData, "videos">;
+  appendToFieldArray: (value: VideoFileData | VideoFileData[]) => void;
   onUploadStart: (videoId: string) => void;
 }
 

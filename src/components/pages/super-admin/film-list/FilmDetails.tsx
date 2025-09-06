@@ -134,7 +134,7 @@ const FilmDetails = ({ control }: FilmDetailsProps) => {
         )}
       </div>
 
-      <div className="space-y-4">
+      {/* <div className="space-y-4">
         <FormToggleSwitchField
           name="isBanner"
           control={control}
@@ -153,7 +153,7 @@ const FilmDetails = ({ control }: FilmDetailsProps) => {
           label="Is Active"
           labelClassName="flex-row-reverse justify-between"
         />
-      </div>
+      </div> */}
     </div>
   );
 };

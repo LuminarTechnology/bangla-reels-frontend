@@ -1,10 +1,10 @@
 import { useCallback, useRef, MutableRefObject } from "react";
-import { UseFieldArrayUpdate } from "react-hook-form";
+import { ArrayPath, UseFieldArrayUpdate } from "react-hook-form";
 import { VideoFileData, FilmFormData } from "@/src/schema/FilmList.schema";
 
 interface UseVideoUploadSimulationProps <T extends {videos: VideoFileData[]}>{
   videosRef: MutableRefObject<VideoFileData[]>;
-  updateFieldArray: UseFieldArrayUpdate<T, "videos">;
+  updateFieldArray: UseFieldArrayUpdate<T, ArrayPath<T>>;
 }
 
 interface UseVideoUploadSimulationReturn {
@@ -27,7 +27,7 @@ export function useVideoUploadSimulation <T extends {videos: VideoFileData[]}>({
       const current = videosRef.current[index];
       const updated = { ...current, ...patch };
       
-      updateFieldArray(index, updated);
+      updateFieldArray(index, updated as any);
     },
     [videosRef, updateFieldArray]
   );
