@@ -25,7 +25,7 @@ const FandomCard = ({
 }: FandomCardProps) => {
   const lang = useLocale();
   return (
-    <Link href={`${lang}/fandom/${title}`}>
+    <Link href={`/${lang}/fandom/${title}`}>
       <Card className={cn("w-full max-w-sm overflow-hidden border-0 bg-[#0F0828] p-0", className)}>
         <div className="relative aspect-square overflow-hidden rounded-t-xl">
           <Image src={backgroundImage} fill alt={title} className="h-full w-full object-center" />
