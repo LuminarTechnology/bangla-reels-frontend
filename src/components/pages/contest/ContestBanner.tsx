@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Button } from "@/src/components/ui/button";
 import { ChevronsRight, Info, Share, ListFilter } from "lucide-react";
 
-const ContestBanner = () => {
+const ContestBanner = ({form}: {form?:boolean}) => {
   return (
     <section className="relative mb-6 h-64 w-full overflow-hidden rounded-xl sm:h-80 md:mb-8 lg:h-96">
       <Image
@@ -16,7 +16,7 @@ const ContestBanner = () => {
 
       <div className="absolute inset-0 bg-black/10" />
 
-      <div className="relative z-10 flex h-full items-end p-4 md:p-6">
+      {!form &&<div className="relative z-10 flex h-full items-end p-4 md:p-6">
         <div className="flex w-full items-center justify-between">
           <Button variant="danger" size="lg">
             <span>Enter the Contest</span>
@@ -35,7 +35,7 @@ const ContestBanner = () => {
             </Button>
           </div>
         </div>
-      </div>
+      </div>}
     </section>
   );
 };

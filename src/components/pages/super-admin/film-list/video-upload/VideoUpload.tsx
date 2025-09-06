@@ -19,13 +19,15 @@ import { arrayMove } from "@dnd-kit/sortable";
 import { useVideoFileHandling } from "./hooks/useVideoFileHandling";
 import { useVideoUploadSimulation } from "./hooks/useVideoUploadSimulation";
 import { useVideoDragDrop } from "./hooks/useVideoDragDrop";
+import { ContestData } from "@/src/schema/contest.schema";
 
 interface VideoUploadComponentProps {
-  control: Control<FilmFormData>;
+  control: Control<FilmFormData | ContestData>;
   errors: any;
+  theme: "dashboard" | "contest";
 }
 
-export function VideoUploadComponent({ control, errors }: VideoUploadComponentProps) {
+export function VideoUploadComponent({ control, errors, theme }: VideoUploadComponentProps) {
   const [showRules, setShowRules] = useState(false);
 
   const { fields, append, remove, update, replace } = useFieldArray({
@@ -34,24 +36,30 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
   });
 
   const videosRef = useRef<VideoFileData[]>([]);
+  
   useEffect(() => {
     videosRef.current = fields;
   }, [fields]);
 
   // Initialize upload simulation hook
-  const { simulateUpload, updateVideoFields } = useVideoUploadSimulation({
+  const { simulateUpload } = useVideoUploadSimulation({
     videosRef,
     updateFieldArray: update,
   });
 
   // Initialize file handling hook
-  const { processFiles, handleFileSelect, handleDrop, fileInputRef } = useVideoFileHandling({
+  const { handleFileSelect, handleDrop, fileInputRef } = useVideoFileHandling({
     appendToFieldArray: append,
     onUploadStart: simulateUpload,
   });
 
   // Initialize drag and drop hook
-  const { isDragOver, handleDragOver, handleDragLeave, handleDragEnd: handleDragEndDrop } = useVideoDragDrop(handleDrop);
+  const {
+    isDragOver,
+    handleDragOver,
+    handleDragLeave,
+    handleDragEnd: handleDragEndDrop,
+  } = useVideoDragDrop(handleDrop);
 
   const handleUploadMore = useCallback(() => {
     fileInputRef.current?.click();
@@ -116,7 +124,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
 
   return (
     <div className="flex-1 overflow-auto">
-      <Card className="mx-auto w-full border-none p-0 shadow-none">
+      <Card className="mx-auto w-full border-none p-0 shadow-none bg-transparent">
         {errors && (
           <div className="rounded-md border border-red-200 bg-red-50 p-3">
             <p className="text-sm text-red-600">{errors.message}</p>
@@ -125,12 +133,16 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
 
         {fields.length === 0 ? (
           // Initial empty state
-          <div className="space-y-2">
-            <h3 className="text-lg font-medium">Add Video</h3>
+          <div className="space-y-2 bg-[#0F0828] p-6">
+            <h3 className="text-lg font-medium text-white">Add Video</h3>
             <div
               className={cn(
                 "mb-4 rounded-lg border-2 border-dashed p-12 text-center transition-colors",
-                isDragOver ? "border-blue-400 bg-blue-50" : "border-gray-300"
+                isDragOver
+                  ? "border-blue-400 bg-blue-50"
+                  : theme === "contest"
+                    ? "border-[#595756]"
+                    : "border-gray-300"
               )}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
@@ -141,7 +153,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
                 Drop your entry here, or{" "}
                 <button
                   onClick={() => fileInputRef.current?.click()}
-                  className="font-medium text-black underline"
+                  className={`font-medium underline ${theme === "contest" ? "text-primary-rose" : "text-black"}`}
                 >
                   browse
                 </button>{" "}
@@ -162,6 +174,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
               showRules={showRules}
               rules={filmListrulesData}
               formatItems={filmListformatData}
+              theme={theme}
             />
 
             <input
@@ -175,9 +188,9 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
           </div>
         ) : (
           // Populated state with video list
-          <div className="space-y-6">
+          <div className="space-y-6 bg-[#0F0828]">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium">Upload List</h3>
+              <h3 className="text-lg font-medium text-white">Upload List</h3>
               <div className="flex gap-2">
                 <Button
                   onClick={() => setShowRules((prev) => !prev)}
@@ -196,6 +209,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
               showRules={showRules}
               rules={filmListrulesData}
               formatItems={filmListformatData}
+              theme={theme}
             />
 
             <div className="space-y-4">
@@ -204,6 +218,7 @@ export function VideoUploadComponent({ control, errors }: VideoUploadComponentPr
                   videos={fields}
                   retryUpload={retryUpload}
                   removeVideo={removeVideo}
+                  theme={theme}
                 />
               </DndContext>
             </div>

@@ -10,11 +10,12 @@ interface StepperProps {
   steps: Step[];
   currentStepIndex: number;
   className?: string;
+  theme?: "dashboard" | "contest";
 }
 
-export default function StepIndicator({ steps, currentStepIndex, className }: StepperProps) {
+export default function StepIndicator({ steps, currentStepIndex, className, theme }: StepperProps) {
   return (
-    <div className="mx-auto flex w-full max-w-4xl items-center mt-2">
+    <div className="mx-auto mt-2 flex w-full items-center">
       {steps.map((step, index) => {
         const isCompleted = index < currentStepIndex || currentStepIndex === steps.length - 1;
         const isCurrent = index === currentStepIndex;
@@ -25,8 +26,12 @@ export default function StepIndicator({ steps, currentStepIndex, className }: St
             {/* Left line (including before first step) */}
             <div
               className={cn(
-                "absolute top-3 md:top-4 left-0 h-0.5 w-1/2 border-t-2 border-dotted",
-                index <= currentStepIndex ? "border-black" : "border-gray-300"
+                "absolute top-3 left-0 h-0.5 w-1/2 border-t-2 border-dotted md:top-4",
+                index <= currentStepIndex
+                  ? theme === "contest"
+                    ? "border-primary-rose"
+                    : "border-black"
+                  : "border-gray-300"
               )}
               style={{ width: "calc(50% - 16px)" }}
             />
@@ -34,26 +39,35 @@ export default function StepIndicator({ steps, currentStepIndex, className }: St
             {/* Right line (including after last step) */}
             <div
               className={cn(
-                "absolute top-3 md:top-4 right-0 h-0.5 w-1/2 border-t-2 border-dotted",
-                index < currentStepIndex ? "border-black" : "border-gray-300"
+                "absolute top-3 right-0 h-0.5 w-1/2 border-t-2 border-dotted md:top-4",
+                index <= currentStepIndex
+                  ? theme === "contest"
+                    ? "border-primary-rose"
+                    : "border-black"
+                  : "border-gray-300"
               )}
               style={{ width: "calc(50% - 16px)" }}
             />
 
             {/* Step Circle */}
             <div
-              className={cn("z-10 flex h-6 w-6 md:h-8 md:w-8 items-center justify-center rounded-full border-2", {
-                "border-black bg-black text-white": isCompleted || isCurrent,
-                "border-gray-400 bg-gray-400 text-white": isUpcoming,
-              })}
+              className={cn(
+                "z-10 flex h-6 w-6 items-center justify-center rounded-full border-2 md:h-8 md:w-8",
+                {
+                  [theme === "contest"
+                    ? "border-primary-rose bg-primary-rose text-white"
+                    : "border-black bg-black text-white"]: isCompleted || isCurrent,
+                  "border-gray-400 bg-gray-400 text-white": isUpcoming,
+                }
+              )}
             >
-              <Check className={`${isCompleted ? "text-white" : "text-transparent"}`}/>
+              <Check className={`${isCompleted ? "text-white" : "text-transparent"}`} />
             </div>
 
             {/* Label */}
             <span
-              className={cn("mt-1 md:mt-2 text-sm md:text-base font-medium whitespace-nowrap", {
-                "text-black": isCompleted || isCurrent,
+              className={cn("mt-1 text-sm font-medium whitespace-nowrap md:mt-2 md:text-base", {
+                [theme === "contest" ? "text-primary-rose" :"text-black"]: isCompleted || isCurrent,
                 "text-gray-400": isUpcoming,
               })}
             >

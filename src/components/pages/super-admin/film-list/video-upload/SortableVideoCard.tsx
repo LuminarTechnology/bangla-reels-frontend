@@ -5,17 +5,20 @@ import { Button } from "@/src/components/ui/button";
 import { Menu, RotateCcw, SquareX } from "lucide-react";
 import { CSS } from "@dnd-kit/utilities";
 import Image from "next/image";
+import { cn } from "@/src/lib/utils";
 
 export default function SortableVideoCard({
   video,
   index,
   retryUpload,
   removeVideo,
+  theme,
 }: {
   video: VideoFileData;
   index: number;
   retryUpload: (id: string) => void;
   removeVideo: (id: string) => void;
+  theme: "dashboard" | "contest";
 }) {
   const { attributes, listeners, setNodeRef, setActivatorNodeRef, transform, transition } =
     useSortable({ id: video.id });
@@ -37,7 +40,11 @@ export default function SortableVideoCard({
   };
 
   return (
-    <Card ref={setNodeRef} style={style} className="rounded-2xl p-2 shadow-none md:p-4">
+    <Card
+      ref={setNodeRef}
+      style={style}
+      className="bg-transparents rounded-2xl p-2 shadow-none md:p-4"
+    >
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center md:gap-4">
         {/* Index number (hidden on mobile, shown on sm+) */}
         <div className="hidden w-4 text-2xl font-bold text-gray-500 sm:block">{index + 1}</div>
@@ -58,7 +65,11 @@ export default function SortableVideoCard({
         {/* Content */}
         <div className="min-w-0 flex-1">
           {/* File name */}
-          <h4 className="truncate font-medium text-gray-900">{video.file?.name ?? "Untitled"}</h4>
+          <h4
+            className={`truncate font-medium ${theme === "contest" ? "text-white" : "text-gray-900"}`}
+          >
+            {video.file?.name ?? "Untitled"}
+          </h4>
 
           {/* Status messages */}
           {video.status === "unsupported" && (
@@ -121,12 +132,32 @@ export default function SortableVideoCard({
         {/* Actions (move to bottom row on mobile) */}
         <div className="mt-2 flex flex-row gap-2">
           {video.status === "error" && (
-            <Button variant="ghost" size="icon" onClick={() => retryUpload(video.videoId)}>
-              <Image src="/icons/ArrowCounterClockwise.svg" alt="retry" width={24} height={24} />
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => retryUpload(video.videoId)}
+              className={cn(theme === "contest" ? "hover:bg-[#080417]" : "")}
+            >
+              <Image
+                src={`${theme === "contest" ? "/icons/ArrowCounterClockwise.png" : "/icons/ArrowCounterClockwise.svg"}`}
+                alt="retry"
+                width={24}
+                height={24}
+              />
             </Button>
           )}
-          <Button variant="ghost" size="icon" onClick={() => removeVideo(video.id)}>
-            <Image src="/icons/cancel-square.svg" alt="delete" width={24} height={24} />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => removeVideo(video.id)}
+            className={cn(theme === "contest" ? "hover:bg-[#080417]" : "")}
+          >
+            <Image
+              src={`${theme === "contest" ? "/icons/cancel-square.png" : "/icons/cancel-square.svg"}`}
+              alt="delete"
+              width={24}
+              height={24}
+            />
           </Button>
           <Button
             variant="ghost"
@@ -134,8 +165,14 @@ export default function SortableVideoCard({
             ref={setActivatorNodeRef}
             {...attributes}
             {...listeners}
+            className={cn(theme === "contest" ? "hover:bg-[#080417]" : "")}
           >
-            <Image src="/icons/menu-09.svg" alt="drag" width={24} height={24} />
+            <Image
+              src={`${theme === "contest" ? "/icons/menu-09.png" : "/icons/menu-09.svg"}`}
+              alt="drag"
+              width={24}
+              height={24}
+            />
           </Button>
         </div>
       </div>

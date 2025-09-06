@@ -2,9 +2,9 @@ import { useCallback, useRef, MutableRefObject } from "react";
 import { UseFieldArrayUpdate } from "react-hook-form";
 import { VideoFileData, FilmFormData } from "@/src/schema/FilmList.schema";
 
-interface UseVideoUploadSimulationProps {
+interface UseVideoUploadSimulationProps <T extends {videos: VideoFileData[]}>{
   videosRef: MutableRefObject<VideoFileData[]>;
-  updateFieldArray: UseFieldArrayUpdate<FilmFormData, "videos">;
+  updateFieldArray: UseFieldArrayUpdate<T, "videos">;
 }
 
 interface UseVideoUploadSimulationReturn {
@@ -12,10 +12,10 @@ interface UseVideoUploadSimulationReturn {
   updateVideoFields: (videoId: string, patch: Partial<VideoFileData>) => void;
 }
 
-export function useVideoUploadSimulation({
+export function useVideoUploadSimulation <T extends {videos: VideoFileData[]}>({
   videosRef,
   updateFieldArray,
-}: UseVideoUploadSimulationProps): UseVideoUploadSimulationReturn {
+}: UseVideoUploadSimulationProps<T>): UseVideoUploadSimulationReturn {
   // Store active intervals to allow cleanup if needed
   const activeUploads = useRef<Map<string, NodeJS.Timeout>>(new Map());
 
